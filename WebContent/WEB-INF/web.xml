@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>moneyWatch</display-name>
+  <welcome-file-list>
+    <welcome-file>index.mw</welcome-file>
+  </welcome-file-list>
+  
+	<filter>								
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>	<!-- 인코딩 처리작업 -->
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>	<!-- "UTF-8"로 인코딩 -->
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>		<!-- 조건없이 인코딩 우선처리(강제처리) -->
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>		<!-- 요청되는 모든 경로주소에 대해 'filter'호출 -->
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>moneyWatch</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/controller/root-servlet.xml
+				/WEB-INF/controller/main-servlet.xml
+				/WEB-INF/controller/aop-servlet.xml	
+				/WEB-INF/controller/member-servlet.xml			
+			</param-value>
+		</init-param>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>moneyWatch</servlet-name>
+		<url-pattern>*.mw</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
