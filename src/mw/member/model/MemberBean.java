@@ -10,15 +10,14 @@ import mw.member.model.MemberDAO;
 @Controller
 public class MemberBean {
 	
-/*
-	@Autowired
-	private MemberDAO dao = null;
+	//@Autowired
+	//private MemberDAO dao = null;
 	
 	@RequestMapping("registerForm.mw")	
 	public String registerForm() {
 		return "/member/registerForm";
 	}
-*/	
+
 	
 	
 	
