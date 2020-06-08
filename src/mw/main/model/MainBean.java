@@ -21,10 +21,5 @@ public class MainBean {
 		return "/main/main";
 	}
 	
-	@RequestMapping("Calendar.mw")
-	public String cal() {
-
-		return "/calendar/calendar";
-	}
 	
 }

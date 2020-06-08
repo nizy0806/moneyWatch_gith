@@ -32,7 +32,8 @@
 				/WEB-INF/controller/root-servlet.xml
 				/WEB-INF/controller/main-servlet.xml
 				/WEB-INF/controller/aop-servlet.xml	
-				/WEB-INF/controller/member-servlet.xml			
+				/WEB-INF/controller/member-servlet.xml
+				/WEB-INF/controller/calendar-servlet.xml			
 			</param-value>
 		</init-param>
 	</servlet>
