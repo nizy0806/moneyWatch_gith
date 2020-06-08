@@ -27,7 +27,7 @@
 			return false;
 		}
 	}
-	/* function confirmId(userinput){
+	function confirmId(userinput){
 		if(userinput.id.value==""){
 			alert("아이디를 입력하세요 ...");
 			return;
@@ -35,7 +35,7 @@
 		url = "/moneyWatch/member/confirmId.mw?id="+userinput.id.value;
 		
 		open(url,"confirm","toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300, height=200")
-	} */
+	} 
 </script>
 
 	<body bgcolor="">
@@ -55,9 +55,22 @@
 			<td width="300"> ID </td>
 			<td width="300">
 				<input type="text" name="id" size="10" maxlength="12">
-				<!-- <input type="butten" name="confirm_id" value="ID중복확인"
-					onclick="confirmId(this.form)"> -->
+			    <input type="button" name="confirm_id" value="ID중복확인"
+					onclick="confirmId(this.form)">
 			</td>
+		
+		
+		
+		</tr>
+			<td width="300"> PW </td>
+			<td width="300">
+				<input type="pw" name="pw" size="15" maxlength="12">
+			</td>
+		<tr>
+		
+		
+		
+		
 		</tr>
 			<td width="300"> PW 확인 </td>
 			<td width="300">

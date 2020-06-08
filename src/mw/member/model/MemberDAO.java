@@ -4,7 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 public class MemberDAO {
 	
-/*	
+	
 	private SqlSessionTemplate sqlSession = null;
 	
 	public MemberDAO(SqlSessionTemplate sqlSession) {	// »ý¼ºÀÚ
@@ -26,7 +26,7 @@ public class MemberDAO {
 		
 		return check;
 	}
-*/	
+	
 	
 	
 	
