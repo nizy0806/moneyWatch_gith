@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 public class MemberDTO {
 	
-/*	
 	private String id;		// 회원ID
 	private String pw;		// 회원PW
 	private String name;	// 이름
@@ -22,6 +21,6 @@ public class MemberDTO {
 	private String email1;	// 이메일ID
 	private String email2;	// 이메일주소
 	private Timestamp reg;	// 가입날짜및시간
-*/	
+
 	
 }

@@ -87,8 +87,8 @@
  			<td width="300">
  			<script language="javascript">
 				var today = new Date();
-				var toyear = parseInt(today.getYear());
-				var start = toyear - 5
+				var toyear = parseInt(today.getFullYear());
+				var start = toyear;
 				var end = toyear - 70;
 				
 				document.write("<font size=2><select name=birth_y>");
@@ -111,8 +111,6 @@
 			<input type="submit" name="confirm" value="등록">
 			<input type="reset" name="reset" value="다시입력">
 			
-			
-
 	</table>
 	</body>
 	</head>
