@@ -4,5 +4,5 @@
 <script>
 	
 	alert("가입을 축하드립니다");
-	window.location='/moneyWatch/main.mw';
+	window.location='/moneyWatch/index.mw';
 </script>

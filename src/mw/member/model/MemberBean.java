@@ -19,7 +19,10 @@ public class MemberBean {
 		return "/member/registerForm";
 	}
 	@RequestMapping("registerPro.mw")	
-	public String registerPro() {
+	public String registerPro(MemberDTO dto) {
+		
+		dao.insert(dto);
+		
 		return "/member/registerPro";
 	}
 	@RequestMapping("confirmId.mw")

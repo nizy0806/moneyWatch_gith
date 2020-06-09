@@ -143,8 +143,8 @@
 				</select>
 				
 				
-				<input type="text" name="phone2" size="10" maxlength="12">
-				<input type="text" name="phone3" size="10" maxlength="12">
+				<input type="text" name="phone2" size="10" maxlength="4">
+				<input type="text" name="phone3" size="10" maxlength="4">
 		</td>
 		</tr>			
 		
@@ -156,11 +156,19 @@
 		</tr>
 		
 		<tr>
-		<td width="300">상세주소</td>
+		<td width="300">주소</td>
 		<td width="300">
 				<input type="text" name="street" size="10" maxlength="12">
 		</td>
 		</tr>
+		
+		<tr>
+		<td width="300">상세주소</td>
+		<td width="300">
+				<input type="text" name="addr" size="10" maxlength="12">
+		</td>
+		</tr>
+		
 		
 		<tr>
 		<td width="300">이메일 ID</td>
@@ -171,12 +179,14 @@
 		</td>
 		</tr>
 		
-		
-		
+		<tr>
+		<td colspan="2" align="center">
 		
 			<input type="submit" name="confirm" value="등록">
 			<input type="reset" name="reset" value="다시입력">
-			
+		
+		</td>
+		</tr>	
 	</table>
 	</body>
 	</form>
