@@ -86,6 +86,7 @@
 				<input type="text" name="name" size="15" maxlength="10">
 			</td>
 		</tr>
+		
 		<tr>
 			<td width="300" >성별</td>
 			<td width="300">
@@ -95,6 +96,8 @@
 				</select>
 		</td>
 		</tr>
+		
+		
  		<tr>
  			<td width="300">생년월일</td>
  			<td width="300">
@@ -121,6 +124,56 @@
 			</script>
 		</td>
 		</tr>
+		
+		<tr>		
+		<td width="300"> 휴대폰 번호 </td>
+		<td width="300">
+				<select name="tel">
+				<option value="SKT">SKT</option>
+				<option value="KT">KT</option>
+				<option value="LGU+">LGU+</option>
+				<option value="알뜰폰">알뜰폰</option>			
+				</select>
+				
+				<select name="phone1">
+				<option value="010">010</option>
+				<option value="011">011</option>
+				<option value="016">016</option>
+				<option value="019">019</option>
+				</select>
+				
+				
+				<input type="text" name="phone2" size="10" maxlength="12">
+				<input type="text" name="phone3" size="10" maxlength="12">
+		</td>
+		</tr>			
+		
+		<tr>
+		<td width="300">우편번호</td>
+		<td width="300">
+				<input type="text" name="zon" size="10" maxlength="12">
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="300">상세주소</td>
+		<td width="300">
+				<input type="text" name="street" size="10" maxlength="12">
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="300">이메일 ID</td>
+		<td width="300">
+				<input type="text" name="email1" size="10" maxlength="12"><a>@</a>
+				<input type="text" name="email2" size="10" maxlength="12">
+		
+		</td>
+		</tr>
+		
+		
+		
+		
 			<input type="submit" name="confirm" value="등록">
 			<input type="reset" name="reset" value="다시입력">
 			

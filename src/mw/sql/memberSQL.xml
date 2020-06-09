@@ -9,7 +9,7 @@
 	</select>
 
 	<insert id="insert" parameterType="memberDTO">
-		insert into mwMember values(	)
+		insert into mwMember values(#{id},#{pw},#{name},#{gender},#{birth_y},#{birth_m},#{birth_d},#{tel},#{phone1},#{phone2},#{phone3},#{zon},#{street},#{addr},#{email1},#{email2},sysdate)
 	</insert>
 	
 	<select id="memberCheck" resultType="int" parameterType="String">
