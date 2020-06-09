@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/fullcalendar/main.css">
 
 </head>
 
@@ -28,10 +28,8 @@
         <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
                 style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">카테고리1</a></li>
-                <li><a tabindex="-1" href="#">카테고리2</a></li>
-                <li><a tabindex="-1" href="#">카테고리3</a></li>
-                <li><a tabindex="-1" href="#">카테고리4</a></li>
+                <li><a tabindex="-1" href="#">일정등록</a></li>
+                <li><a tabindex="-1" href="#">입/출금</a></li>
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
@@ -63,24 +61,41 @@
 
                         <div class="row">
                             <div class="col-xs-12">
+                               <!--  <label class="col-xs-4" for="edit-id">회원ID</label> -->
+                                <input class="inputId" type="hidden" name="edit-id" id="edit-id"
+                                    required="required" />
+                            </div>
+                        </div>
+                        			
+                        <div class="row">
+                            <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-title">일정명</label>
                                 <input class="inputModal" type="text" name="edit-title" id="edit-title"
                                     required="required" />
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-start">시작</label>
+                                <label class="col-xs-4" for="edit-place">장소	</label>
+                                <input class="inputPlace" type="text" name="edit-place" id="edit-place"/>
+                            </div>
+                        </div>     
+                                           
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-start">시작일</label>
                                 <input class="inputModal" type="text" name="edit-start" id="edit-start" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-end">끝</label>
+                                <label class="col-xs-4" for="edit-end">종료일</label>
                                 <input class="inputModal" type="text" name="edit-end" id="edit-end" />
                             </div>
                         </div>
-                        <div class="row">
+                        
+                        <!-- <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type">구분</label>
                                 <select class="inputModal" type="text" name="edit-type" id="edit-type">
@@ -90,7 +105,8 @@
                                     <option value="카테고리4">카테고리4</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
+                        
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-color">색상</label>
@@ -107,9 +123,10 @@
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-desc">설명</label>
+                                <label class="col-xs-4" for="edit-desc">메모</label>
                                 <textarea rows="4" cols="50" class="inputModal" name="edit-desc"
                                     id="edit-desc"></textarea>
                             </div>
