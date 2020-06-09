@@ -4,7 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 public class MemberDAO {
 	
-/*	
+	
 	private SqlSessionTemplate sqlSession = null;
 	
 	public MemberDAO(SqlSessionTemplate sqlSession) {	// »ý¼ºÀÚ
@@ -21,12 +21,11 @@ public class MemberDAO {
 		sqlSession.insert("member.insert", dto);
 	}
 	
-	public int confirmId(String id) {
-		int check = sqlSession.selectOne("member.confirmId", id);
-		
-		return check;
+	public int memberCheck(String id) {
+		int checker = sqlSession.selectOne("member.memberCheck", id);
+		return checker;
 	}
-*/	
+	
 	
 	
 	

@@ -11,11 +11,9 @@
 	   http://www.springframework.org/schema/aop
 	   http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
 >
-
-    <bean id="memberDAO" class="mw.member.model.MemberDAO">
-		<constructor-arg ref="sqlSession" />
-	</bean> 
-
-	<context:component-scan base-package="mw.member.model" />	
-
+	<bean id="mwscheduleDTO" class="mw.calendar.model.MwScheduleDTO" />
+	
+	
+	<context:component-scan base-package="mw.calendar.model" />
+	
 </beans>

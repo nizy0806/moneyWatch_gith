@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 
+ 
 <mapper namespace="member">
 		
 	<select id="loginCheck" resultType="int" parameterType="memberDTO">
@@ -9,10 +9,10 @@
 	</select>
 
 	<insert id="insert" parameterType="memberDTO">
-		insert into mwMember values(	)
+		insert into mwMember values(#{id},#{pw},#{name},#{gender},#{birth_y},#{birth_m},#{birth_d},#{tel},#{phone1},#{phone2},#{phone3},#{zon},#{street},#{addr},#{email1},#{email2},sysdate)
 	</insert>
 	
-	<select id="confirmId" resultType="int" parameterType="String">
+	<select id="memberCheck" resultType="int" parameterType="String">
 		select count(*) from mwMember where id = #{id}
 	</select>
 	
@@ -27,7 +27,7 @@
 	<delete id="deletePro" parameterType="memberDTO">
 		delete from mwMember where id=#{id} and pw=#{pw}
 	</delete>
-						
+				 		
 												
 	<select id="search" resultType="memberDTO" parameterType="hashmap">
 
@@ -36,5 +36,3 @@
 			
 																			
 </mapper>
-
- -->
