@@ -27,7 +27,7 @@
 	<delete id="deletePro" parameterType="memberDTO">
 		delete from mwMember where id=#{id} and pw=#{pw}
 	</delete>
-						
+				 		
 												
 	<select id="search" resultType="memberDTO" parameterType="hashmap">
 

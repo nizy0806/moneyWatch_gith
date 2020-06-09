@@ -22,7 +22,7 @@
 			return false;
 		}
 		if(userinput.pw.value != userinput.pw2.value)
-		{
+		{ 
 			alert("비밀번호가 같지 않습니다...");
 			return false;
 		}
