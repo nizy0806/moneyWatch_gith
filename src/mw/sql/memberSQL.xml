@@ -12,7 +12,7 @@
 		insert into mwMember values(	)
 	</insert>
 	
-	<select id="confirmId" resultType="int" parameterType="String">
+	<select id="memberCheck" resultType="int" parameterType="String">
 		select count(*) from mwMember where id = #{id}
 	</select>
 	

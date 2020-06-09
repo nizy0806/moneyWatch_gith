@@ -40,7 +40,7 @@
 
 	<!-- Mybatis / DB Mapping 작업 -->
  	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml" />	
 	</bean>

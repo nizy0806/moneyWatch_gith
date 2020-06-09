@@ -10,7 +10,7 @@
 <link href="" rel="" type="text/css">
 
 <script language="JavaScript">
-	function checkInfor(){
+	function checkIt(){
 		var userinput = eval("document.userinput");
 		if(!userinput.id.value){
 			alert("ID를 입력하세요...");
@@ -27,12 +27,12 @@
 			return false;
 		}
 	}
-	function confirmId(userinput){
+	function openConfirmId(userinput){
 		if(userinput.id.value==""){
 			alert("아이디를 입력하세요 ...");
 			return;
 		}
-		url = "/moneyWatch/member/confirmId.mw?id="+userinput.id.value;
+		url = "/moneyWatch/confirmId.mw?id="+userinput.id.value;
 		
 		open(url,"confirm","toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300, height=200")
 	} 
@@ -40,7 +40,7 @@
 
 	<body bgcolor="">
 	
-	<form method="post" action="registerPro.jsp" name="userinput" onSubmit="return checkinfor()"></form>
+	<form method="post" action="/moneyWatch/registerPro.mw" name="userinput" onSubmit="return checkIt()">
 	<table width="700" border="2" cellspacing="1" cellpadding="3" align="center">
 		<tr>
 		<td colspan="3" height="40" align="center" bgcolor="">
@@ -56,7 +56,7 @@
 			<td width="300">
 				<input type="text" name="id" size="10" maxlength="12">
 			    <input type="button" name="confirm_id" value="ID중복확인"
-					onclick="confirmId(this.form)">
+					Onclick="openConfirmId(this.form)">
 			</td>
 		
 		
@@ -64,7 +64,7 @@
 		</tr>
 			<td width="300"> PW </td>
 			<td width="300">
-				<input type="pw" name="pw" size="15" maxlength="12">
+				<input type="password" name="pw" size="15" maxlength="12">
 			</td>
 		<tr>
 		
@@ -74,7 +74,7 @@
 		</tr>
 			<td width="300"> PW 확인 </td>
 			<td width="300">
-				<input type="pw" name="pw2" size="15" maxlength="12">
+				<input type="password" name="pw2" size="15" maxlength="12">
 			</td>
 		<tr>
 			<td width="300" bgcolor=""><b>개인정보 입력</b></td>
@@ -126,5 +126,6 @@
 			
 	</table>
 	</body>
+	</form>
 	</head>
 </html>

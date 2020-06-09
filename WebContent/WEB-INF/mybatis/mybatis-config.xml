@@ -4,15 +4,15 @@
 <configuration>
 
 	<!-- 자주 사용하는 객체를 별칭 설정 -->
-<!-- 	
+	
 	<typeAliases>
-		<typeAlias type="mw.member.model.memberDTO" alias="memberDTO" /> 
+		<typeAlias type="mw.member.model.MemberDTO" alias="memberDTO" /> 
 	</typeAliases>
- -->	
+	
 	<!-- Mapper파일 Mapping -->
-<!-- 	
+	
 	<mappers>
-		<mapper resource="/sql/memberSQL.xml" />
+		<mapper resource="mw/sql/memberSQL.xml" />
 	</mappers>
- -->	
+	
 </configuration>
