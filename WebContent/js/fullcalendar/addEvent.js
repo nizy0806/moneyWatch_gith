@@ -1,13 +1,15 @@
 var eventModal = $('#eventModal');
 
 var modalTitle = $('.modal-title');
-var editAllDay = $('#edit-allDay');
-var editTitle = $('#edit-title');
-var editStart = $('#edit-start');
-var editEnd = $('#edit-end');
-var editType = $('#edit-type');
-var editColor = $('#edit-color');
-var editDesc = $('#edit-desc');
+var editAllDay = $('#edit-allDay'); //하루 종일
+var editId = $('#edit-id'); //회원ID
+var editTitle = $('#edit-title'); //일정명
+var editStart = $('#edit-start'); //시작일
+var editEnd = $('#edit-end'); //종료일
+var editPlace = $('#edit-place') //장소
+//var editType = $('#edit-type'); //구분
+var editColor = $('#edit-color'); //색상
+var editMemo = $('#edit-memo'); //메모
 
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
@@ -21,11 +23,12 @@ var newEvent = function (start, end, eventType) {
     $("#contextMenu").hide(); //메뉴 숨김
 
     modalTitle.html('새로운 일정');
-    editType.val(eventType).prop('selected', true);
+    //editType.val(eventType).prop('selected', true);
     editTitle.val('');
     editStart.val(start);
     editEnd.val(end);
-    editDesc.val('');
+    editMemo.val('');
+    editPlace.val('');
     
     addBtnContainer.show();
     modifyBtnContainer.hide();
@@ -40,13 +43,14 @@ var newEvent = function (start, end, eventType) {
     $('#save-event').on('click', function () {
 
         var eventData = {
-            _id: eventId,
-            title: editTitle.val(),
-            start: editStart.val(),
-            end: editEnd.val(),
-            description: editDesc.val(),
-            type: editType.val(),
-            username: '사나',
+            id: editId.val(), //회원ID
+            title: editTitle.val(), //일정명
+            start: editStart.val(), //시작일
+            end: editEnd.val(), //종료일
+            description: editMemo.val(), //메모
+            place: editPlace.val(), //장소
+            //type: editType.val(), //구분
+            //username: '사나',
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
             allDay: false
@@ -81,16 +85,26 @@ var newEvent = function (start, end, eventType) {
 
         //새로운 일정 저장
         $.ajax({
-            type: "get",
-            url: "",
+            type: "post",
+            url: "calendarCon.jsp",
             data: {
-                //.....
+            	id: editId.val(), //회원ID
+                title: editTitle.val(), //일정명
+                start: editStart.val(), //시작일
+                end: editEnd.val(), //종료일
+                description: editMemo.val(), //메모
+                place: editPlace.val(), //장소
+                //type: editType.val(), //구분
+                //username: '사나',
+                backgroundColor: editColor.val(),
+                textColor: '#ffffff',
             },
             success: function (response) {
                 //DB연동시 중복이벤트 방지를 위한
-                //$('#calendar').fullCalendar('removeEvents');
-                //$('#calendar').fullCalendar('refetchEvents');
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('refetchEvents');
             }
         });
+        
     });
 };

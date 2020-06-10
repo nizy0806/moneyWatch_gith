@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    pageEncoding="UTF-8"%><!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -18,6 +17,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="stylesheet" href="css/fullcalendar/main.css">
+    
 
 </head>
 
@@ -126,9 +126,9 @@
                         
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-desc">메모</label>
-                                <textarea rows="4" cols="50" class="inputModal" name="edit-desc"
-                                    id="edit-desc"></textarea>
+                                <label class="col-xs-4" for="edit-memo">메모</label>
+                                <textarea rows="4" cols="50" class="inputModal" name="edit-memo"
+                                    id="edit-memo"></textarea>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
 
             <div class="panel-body">
 
-                <div class="col-lg-6">
+           <!-- <div class="col-lg-6">
                     <label for="calendar_view">구분별</label>
                     <div class="input-group">
                         <select class="filter" id="type_filter" multiple="multiple">
@@ -163,7 +163,7 @@
                             <option value="카테고리4">카테고리4</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-lg-6">
                     <label for="calendar_view">등록자별</label>
