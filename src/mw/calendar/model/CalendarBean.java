@@ -9,6 +9,8 @@ public class CalendarBean {
 	
 	@Autowired
 	private MwScheduleDTO mwscheduleDTO = null;
+	
+	
 
 	@RequestMapping("Calendar.mw")
 	public String cal() {
