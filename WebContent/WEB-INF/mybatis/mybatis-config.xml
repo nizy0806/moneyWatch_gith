@@ -6,13 +6,15 @@
 	<!-- 자주 사용하는 객체를 별칭 설정 -->
 	
 	<typeAliases>
-		<typeAlias type="mw.member.model.MemberDTO" alias="memberDTO" /> 
+		<typeAlias type="mw.member.model.MemberDTO" alias="memberDTO" />
+		<typeAlias type="mw.calendar.model.MwScheduleDTO" alias="mwScheduleDTO"/> 
 	</typeAliases>
 	
 	<!-- Mapper파일 Mapping -->
 	
 	<mappers>
 		<mapper resource="mw/sql/memberSQL.xml" />
+		<mapper resource="mw/sql/calendarSQL.xml" />
 	</mappers>
 	
 </configuration>
