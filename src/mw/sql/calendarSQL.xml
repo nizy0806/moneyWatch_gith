@@ -1,1 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="calendar">
+
+	<!-- 일정 추가 DB insert -->
+	<insert id="schedule_insert" parameterType="mwScheduleDTO">
+		insert into mwSchedule values(schedule_seq.nextval,#{id},#{title},#{memo},#{start_time},#{end_time},#{place})	
+	</insert>
+
+</mapper>

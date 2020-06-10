@@ -86,8 +86,8 @@ var newEvent = function (start, end, eventType) {
         //새로운 일정 저장
         $.ajax({
             type: "post",
-            url: "Calendar.mw",
-            data: {
+            url: "Calendar.mw", // 클라이언트가 요청 보낼 서버의 url주소
+            data: { // Http요청과 함께 서버로 보낼 데이터
             	id: editId.val(), //회원ID
                 title: editTitle.val(), //일정명
                 start_time: editStart.val(), //시작일
@@ -99,7 +99,7 @@ var newEvent = function (start, end, eventType) {
                 backgroundColor: editColor.val(),
                 textColor: '#ffffff',
             },
-            success: function (response) {
+            success: function (data) {
                 //DB연동시 중복이벤트 방지를 위한
                 $('#calendar').fullCalendar('removeEvents');
                 $('#calendar').fullCalendar('refetchEvents');

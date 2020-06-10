@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CalendarBean {
 	
 	@Autowired
-	private MwScheduleDTO mwscheduleDTO = null;
+	private MwScheduleDAO mwscheduleDAO = null;
 	
-	
-
 	@RequestMapping("Calendar.mw")
-	public String cal() {
+	public String cal(MwScheduleDTO mwdto) {
+		mwscheduleDAO.schedule_insert(mwdto); //일정추가
 		return "/calendar/calendar";
 	}
+	
+	
+	
 }
