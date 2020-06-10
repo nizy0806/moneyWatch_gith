@@ -15,7 +15,7 @@
 	<form name="checkForm" method="post" action="/moneyWatch/confirmId.mw">
 	<table width="270" border="0" cellspacing="0" cellpadding="5">
 
-<tr> 
+<tr>
 	<td align="center">다른 아이디를 사용하세요 <p>
 	<input type="text" size="10" maxlength="12" name="id">
 	<input type="submit" value="ID중복확인" >
@@ -23,6 +23,7 @@
 </table>
 </form>
 </c:if>
+
 </head>
 
 <c:if test="${checker != 1}">
@@ -34,7 +35,6 @@
     </td>
   </tr>
 </table>
-
 </c:if>
 </html>
 
@@ -44,6 +44,7 @@
     {		
     	opener.document.userinput.id.value="${id}";
 		self.close();
-		}
+		
+	}
 
 </script>

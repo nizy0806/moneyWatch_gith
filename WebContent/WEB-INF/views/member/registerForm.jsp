@@ -10,24 +10,24 @@
 <link href="" rel="" type="text/css">
 
 <script language="JavaScript">
-	function checkIt(){
+	function checkIt(){ //ID 입력값확인하는 함수
 		var userinput = eval("document.userinput");
 		if(!userinput.id.value){
 			alert("ID를 입력하세요...");
 			return false;
 			
 		}
-		if(!userinput.pw.value){
+		if(!userinput.pw.value){ //PW 입력값확인하는 함수
 			alert("비밀번호를 입력하세요...");
 			return false;
 		}
-		if(userinput.pw.value != userinput.pw2.value)
+		if(userinput.pw.value != userinput.pw2.value) //PW와 PW확인값 비교
 		{ 
 			alert("비밀번호가 같지 않습니다...");
 			return false;
 		}
 	}
-	function openConfirmId(userinput){
+	function openConfirmId(userinput){ //ID
 		if(userinput.id.value==""){
 			alert("아이디를 입력하세요 ...");
 			return;
