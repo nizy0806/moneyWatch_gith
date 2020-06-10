@@ -45,9 +45,9 @@ var newEvent = function (start, end, eventType) {
         var eventData = {
             id: editId.val(), //회원ID
             title: editTitle.val(), //일정명
-            start: editStart.val(), //시작일
-            end: editEnd.val(), //종료일
-            description: editMemo.val(), //메모
+            start_time: editStart.val(), //시작일
+            end_time: editEnd.val(), //종료일
+            memo: editMemo.val(), //메모
             place: editPlace.val(), //장소
             //type: editType.val(), //구분
             //username: '사나',
@@ -56,7 +56,7 @@ var newEvent = function (start, end, eventType) {
             allDay: false
         };
 
-        if (eventData.start > eventData.end) {
+        if (eventData.start_time > eventData.end_time) {
             alert('끝나는 날짜가 앞설 수 없습니다.');
             return false;
         }
@@ -69,11 +69,11 @@ var newEvent = function (start, end, eventType) {
         var realEndDay;
 
         if (editAllDay.is(':checked')) {
-            eventData.start = moment(eventData.start).format('YYYY-MM-DD');
+            eventData.start_time = moment(eventData.start_time).format('YYYY-MM-DD');
             //render시 날짜표기수정
-            eventData.end = moment(eventData.end).add(1, 'days').format('YYYY-MM-DD');
+            eventData.end_time = moment(eventData.end_time).add(1, 'days').format('YYYY-MM-DD');
             //DB에 넣을때(선택)
-            realEndDay = moment(eventData.end).format('YYYY-MM-DD');
+            realEndDay = moment(eventData.end_time).format('YYYY-MM-DD');
 
             eventData.allDay = true;
         }
@@ -86,13 +86,13 @@ var newEvent = function (start, end, eventType) {
         //새로운 일정 저장
         $.ajax({
             type: "post",
-            url: "calendarCon.jsp",
+            url: "Calendar.mw",
             data: {
             	id: editId.val(), //회원ID
                 title: editTitle.val(), //일정명
-                start: editStart.val(), //시작일
-                end: editEnd.val(), //종료일
-                description: editMemo.val(), //메모
+                start_time: editStart.val(), //시작일
+                end_time: editEnd.val(), //종료일
+                memo: editMemo.val(), //메모
                 place: editPlace.val(), //장소
                 //type: editType.val(), //구분
                 //username: '사나',
