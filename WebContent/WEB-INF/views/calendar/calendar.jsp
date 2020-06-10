@@ -168,7 +168,8 @@
                 <div class="col-lg-6">
                     <label for="calendar_view">등록자별</label>
                     <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="정연"
+                        <label class="checkbox-inline"><input class='filter' type="checkb
+                        ox" value="정연"
                                 checked>정연</label>
                         <label class="checkbox-inline"><input class='filter' type="checkbox" value="다현"
                                 checked>다현</label>

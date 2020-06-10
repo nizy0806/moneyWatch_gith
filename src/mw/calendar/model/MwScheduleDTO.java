@@ -12,7 +12,7 @@ public class MwScheduleDTO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public void setId(String id) {
+	public void setId(String id) { 
 		this.id = id;
 	}
 	public void setTitle(String title) {

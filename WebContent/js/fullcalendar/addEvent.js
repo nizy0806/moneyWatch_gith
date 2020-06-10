@@ -41,7 +41,6 @@ var newEvent = function (start, end, eventType) {
     //새로운 일정 저장버튼 클릭
     $('#save-event').unbind();
     $('#save-event').on('click', function () {
-
         var eventData = {
             id: editId.val(), //회원ID
             title: editTitle.val(), //일정명
@@ -85,8 +84,8 @@ var newEvent = function (start, end, eventType) {
 
         //새로운 일정 저장
         $.ajax({
-            type: "post",
-            url: "Calendar.mw", // 클라이언트가 요청 보낼 서버의 url주소
+            type: "post", 
+            url: "Calendarinsert.mw", // 클라이언트가 요청 보낼 서버의 url주소
             data: { // Http요청과 함께 서버로 보낼 데이터
             	id: editId.val(), //회원ID
                 title: editTitle.val(), //일정명
@@ -100,8 +99,8 @@ var newEvent = function (start, end, eventType) {
                 textColor: '#ffffff',
             },
             success: function (data) {
-                //DB연동시 중복이벤트 방지를 위한
-                $('#calendar').fullCalendar('removeEvents');
+            	console.log(data);
+            	$('#calendar').fullCalendar('removeEvents');
                 $('#calendar').fullCalendar('refetchEvents');
             }
         });
