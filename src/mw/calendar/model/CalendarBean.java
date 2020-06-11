@@ -16,12 +16,12 @@ public class CalendarBean {
 		//mwscheduleDAO.schedule_insert(mwdto); //일정추가
 		return "/calendar/calendar";
 	}
-	@RequestMapping("Calendarinsert.mw")
-	public @ResponseBody String calinsert(MwScheduleDTO mwdto) {
-		//mwscheduleDAO.schedule_insert(mwdto); //일정추가
-		System.out.println("=============="+mwdto.getStart_time());
-		return "okok";
-	}
+	/*
+	 * @RequestMapping("Calendarinsert.mw") public @ResponseBody String
+	 * calinsert(MwScheduleDTO mwdto) { //mwscheduleDAO.schedule_insert(mwdto);
+	 * //일정추가 System.out.println("=============="+mwdto.getStart_time()); return
+	 * "okok"; }
+	 */
 	
 	
 }
