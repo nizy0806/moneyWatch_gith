@@ -24,11 +24,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
-				<h3>회원관리 (심수민)</h3>
+				<h3>회원관리 (심수민, 백종솔)</h3>
 				<br />
 				<li>회원가입</li> <br />
 				<li>로그인</li> <br />
-				<li>마이페이지 (together ^^)</li> <br />
+				<li>마이페이지</li> <br />
 				<li>회원탈퇴</li> <br />
 			</div>
 			<div class="col-sm-4">
@@ -55,7 +55,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
-				<h3>게시판 (심수민)</h3>
+				<h3>게시판</h3>
 				<br />
 				<li>금융상식</li> <br />
 				<li>챌린지</li> <br />
@@ -65,7 +65,7 @@
 				<h3>관리자</h3>
 				<br />
 				<li>게시판 관리 (전민기, 이수진)</li> <br />
-				<li>회원 관리 (심수민)</li> <br />
+				<li>회원 관리 (심수민, 백종솔)</li> <br />
 				<li>연령별 지출 관리 (together ^^)</li> <br />
 				<li>소비패턴 분석 관리 (together ^^)</li> <br />
 				<li>DB 챗봇 관리 (전민기, 이수진)</li> <br />

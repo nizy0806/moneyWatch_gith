@@ -33,7 +33,8 @@
 				/WEB-INF/controller/main-servlet.xml
 				/WEB-INF/controller/aop-servlet.xml	
 				/WEB-INF/controller/member-servlet.xml
-				/WEB-INF/controller/calendar-servlet.xml			
+				/WEB-INF/controller/calendar-servlet.xml
+				/WEB-INF/controller/moneyio-servlet.xml		
 			</param-value>
 		</init-param>
 	</servlet>

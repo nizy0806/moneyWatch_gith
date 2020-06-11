@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="moneyio">
+
+	<select id="bankName" resultType="moneyioDTO" parameterType="String">
+		select io_bank from mwMoneyio where id=#{id}
+	</select>
+	
+	<select id="bankAccount" resultType="String" parameterType="moneyioDTO">
+		select io_account from mwMoneyio where id=#{id} and io_bank=#{io_bank}
+	</select>
+
+	
+	<insert id="insert" parameterType="moneyioDTO">
+		insert into mwMoneyio values(mwmoneyio_seq,#{io_category},#{io_detail},#{io_reg_date},#{io_price},#{io_remain},#{io_bank},#{io_account},#{id},#{io_N_div},#{io_set})
+	</insert>
+
+	
+
+</mapper>
