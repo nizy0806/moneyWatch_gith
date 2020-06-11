@@ -27,9 +27,19 @@
       },
       defaultDate: new Date(),
       locale : "ko",
+      selectable: true,
       navLinks: true, // can click day/week names to navigate views
       businessHours: true, // display business hours
       editable: true,
+    
+      dateClick:function(info){
+          var url = "C_popUp.mw";
+          var name = "popup test";
+          var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+    	 
+          window.open(url,name,option);
+      }
+      
      /*  events: [
         {
           title: 'Business Lunch',
