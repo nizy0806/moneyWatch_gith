@@ -17,10 +17,16 @@ public class CalendarBean {
 		return "/calendar/calendar";
 	}
 	
-	@RequestMapping("C_popUp.mw")
+	@RequestMapping("C_popUp.mw") //Ä¶¸°´õ ÆË¾÷Ã¢
 	public String cal_pop() {
-		//mwscheduleDAO.schedule_insert(mwdto); //ÀÏÁ¤Ãß°¡
-		return "/calendar/pop_up";
+		return "/calendar/day";
+	}
+	
+	@RequestMapping("C_insert.mw") //Ä¶¸°´õ ÆË¾÷Ã¢ ÀÔ·Â
+	public String cal_insert(MwScheduleDTO mwdto) {
+		mwscheduleDAO.schedule_insert(mwdto);
+
+		return "/calendar/day";
 	}
 	
 	/*

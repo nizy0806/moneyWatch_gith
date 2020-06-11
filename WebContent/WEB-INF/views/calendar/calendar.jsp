@@ -34,11 +34,22 @@
     
       dateClick:function(info){
           var url = "C_popUp.mw";
-          var name = "popup test";
+          var name = "C_insert";
           var option = "width = 500, height = 500, top = 100, left = 200, location = no"
     	 
           window.open(url,name,option);
       }
+      
+  /*    events: [
+    	  {
+    		  id :,
+    		  title :,
+    		  place :,
+    		  star_time :,
+    		  end_time :,
+    		  memo :,
+    	  }
+      ]
       
      /*  events: [
         {
@@ -130,10 +141,10 @@
 <body>
 
   <div id='calendar' style="position : relative">
-  	<div>
+  	<!-- <div>
   		<button class="add-button" type="button"
   		onclick="click_add();">일정추가</button>
-  	</div>
+  	</div> -->
   </div>
 
 </body>
