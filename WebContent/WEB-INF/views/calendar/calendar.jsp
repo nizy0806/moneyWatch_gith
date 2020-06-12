@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "mw.calendar.model.MwScheduleDTO" %>
+<%@ page import = "java.util.List" %>
+<%@ page import = "java.util.ArrayList" %>
+ --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +18,10 @@
 <script src='packages/daygrid/main.js'></script>
 <script src='packages/timegrid/main.js'></script>
 <script src='packages/list/main.js'></script>
+
 <script>
+<%-- <% List<MwScheduleDTO> list = (ArrayList<MwScheduleDTO>)request.getAttribute("showSchedule"); %> --%>
+
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -32,7 +40,8 @@
       businessHours: true, // display business hours
       editable: true,
     
-      dateClick:function(info){
+      //날짜 클릭 시 팝업창 오픈
+      dateClick: function(info){
           var url = "C_popUp.mw";
           var name = "C_insert";
           var option = "width = 500, height = 500, top = 100, left = 200, location = no"
@@ -40,16 +49,17 @@
           window.open(url,name,option);
       }
       
-  /*    events: [
-    	  {
-    		  id :,
-    		  title :,
-    		  place :,
-    		  star_time :,
-    		  end_time :,
-    		  memo :,
+/*       eventSources:[{
+    	  events: function(info,successCallback, faulureCallback){
+    		  $.ajax({
+    			  url:
+    		  })
     	  }
-      ]
+      }]
+       */
+      
+      
+      
       
      /*  events: [
         {
@@ -109,6 +119,8 @@
   });
 
 </script>
+
+
 <style>
 
   body {
@@ -139,7 +151,7 @@
 </style>
 </head>
 <body>
-
+<div id=result></div>
   <div id='calendar' style="position : relative">
   	<!-- <div>
   		<button class="add-button" type="button"
