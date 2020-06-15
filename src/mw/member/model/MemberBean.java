@@ -20,14 +20,17 @@ public class MemberBean {
 	private MemberDAO dao = null;
 	
 	@RequestMapping("loginForm.mw")
-	public String mwloginform() {
+	public String loginform() {
 		return "/member/loginForm";
 	}
 
 	@RequestMapping("loginPro.mw")
-	public String mwloginPro(MemberDTO dto, HttpSession session, Model model) {
-	
+	public String loginPro(MemberDTO dto, HttpSession session, Model model, HttpServletRequest request) {
+		String id=(String)session.getAttribute(dto.getId());
+		String pw=request.getParameter(dto.getPw());
 		int check=dao.loginCheck(dto);
+		
+		System.out.println(check);
 		
 		if(check==1) {
 		session.setAttribute("memId", dto.getId());
@@ -37,7 +40,7 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("logout.mw")
-	public String logout(HttpSession session) {
+	public String aoplogout(HttpSession session) {
 		session.invalidate();
 		
 		return "/member/logout";
@@ -73,23 +76,24 @@ public class MemberBean {
 	
 	
 	@RequestMapping("modify.mw")
-	public String modify(MemberDTO dto, HttpSession session){		
+	public String aopmodify(MemberDTO dto, HttpSession session){		
 
 		return "/member/modify";
 	}
 	
 	@RequestMapping("modifyForm.mw")
-	public String modifyForm(MemberDTO dto,HttpSession session,Model model) {
+	public String aopmodifyForm(HttpSession session,Model model) {
 		String id=(String)session.getAttribute("memId");
-		dao.modifyCheck(id);
+		MemberDTO dto =dao.modifyCheck(id);
 		model.addAttribute("dto",dto);
-		System.out.println(id);
+	
 		
 		return "/member/modifyForm";
 	}
 	
+	
 	@RequestMapping("modifyPro.mw")
-	public String modifyPro(MemberDTO dto) {
+	public String aopmodifyPro(MemberDTO dto) {
 		dao.updateMember(dto);
 		
 		
@@ -102,14 +106,13 @@ public class MemberBean {
 	
 	
 	
-	
 	@RequestMapping("memOutForm.mw")
-	public String memOutForm() {
+	public String aopmemOutForm() {
 		return "/member/memOutForm";
 	}
 	
 	@RequestMapping("memOutPro.mw")
-	public String memOutPro(MemberDTO dto , Model model, HttpServletRequest request, HttpSession session) {
+	public String aopmemOutPro(MemberDTO dto , Model model, HttpServletRequest request, HttpSession session) {
 		String pw = request.getParameter("pw");
 		String id = (String)session.getAttribute("memId");
 		System.out.println(id);
@@ -121,6 +124,7 @@ public class MemberBean {
 		
 		if(check==1) {
 			dao.deleteMem(id);
+			session.invalidate();
 		}
 		
 		return "/member/memOutPro";

@@ -4,19 +4,27 @@
     <html>
      <head><title>로그인</title>
       <script language="JavaScript">
-        
-        function begin(){
-         document.myform.id.focus();
-        }
-        function checkIt(){
+      
+      function begin(){
+          document.myform.id.focus();
+         }
+      
+      function checkIt(){
          if(!document.myform.id.value){
-          alert("아이디를 입력하지 않으셨습니다.");
-          document.myform.pw.focus();
-          return false;
-          }
-        }
+        	alert("아이디를 입력하지 않으셨습니다.");
+          	document.myform.id.focus();
+          	return false;
+          	}
+         if(!document.myform.pw.value){
+          	alert("비밀번호를 입력하지 않으셨습니다.");
+          	document.myform.pw.focus();
+         	return false;
+          	}
+         }
+      
         
       </script>  
+      
      </head>
     <body onload="begin()">
      <form name="myform" action="/moneyWatch/loginPro.mw" method="post" onSubmit="return checkIt()">
@@ -39,7 +47,7 @@
         <td colspan="2" align="middle">
          <input type="submit" value="로그인">
          <input type="reset" value="다시입력">
-         <input type="button" value="화윈가입" onclick="javascript:window.location='/moneyWatch/registerForm.mw'"></td></tr>             
+         <input type="button" value="회윈가입" onclick="javascript:window.location='/moneyWatch/registerForm.mw'"></td></tr>             
       </table>
      </form>
     </body>  

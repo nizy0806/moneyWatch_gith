@@ -11,12 +11,8 @@
     	if(!userinput.pw.value){
     		alert("비밀번호를 입력하세요");
     		return false;
-    	}
-    	if(userinput.passwd.value != userinput.passwd2.value){
-    		alert("비밀번호를 동일하게 입력하세요");
-    		return false;
-    	}
-    	if(!userinput.username.value){
+     	}
+    	if(!userinput.name.value){
     		alert("사용자 이름을 입력하세요");
     		return false;
     	}   		
@@ -24,9 +20,9 @@
     -->
 </script>
 <body>
-  <form method="post" action="modifyPro.mw" onsubmit="return checkIt()">
-   
-   <table width="400" border="1" cellspacing="0" cellspacing="2" align="center">
+  <form method="post" action="/moneyWatch/modifyPro.mw" name="userinput" onsubmit="return checkIt()">
+
+   <table width="400" border="1" cellspacing="0" cellpadding="2" align="center">
     <tr>
      <td colspan="2" heigth="35" align="center">
       <font size="+1"><b>회원 정보 수정</b></font></td>
@@ -34,7 +30,8 @@
     
     <tr>
      <td width="150">사용자 ID</td>
-     <td width="350">${dto.id}</td>
+     <input type="hidden" name="id" value="${dto.getId()}" >
+     <td width="350">${dto.getId()}</td>
     </tr>
     
     <tr>
@@ -59,7 +56,7 @@
 				<option value="알뜰폰">알뜰폰</option>			
 				</select>
 				
-				<select name="phone1">
+				<select name="phone1" value="${dto.getPhone1()}">
 				<option value="010">010</option>
 				<option value="011">011</option>
 				<option value="016">016</option>
@@ -81,7 +78,7 @@
     <tr>
      <td wigth="150">주소</td>
      <td width="350">
-      <input type="text" name="street" size="9" maxlength="9" value="${dto.getStreet()}"></td>
+      <input type="text" name="street" size="30" maxlength="30" value="${dto.getStreet()}"></td>
     </tr>
     
     <tr>
@@ -103,7 +100,7 @@
      <td colspan="1" align="center">
       <input type="submit" name="modify" value="수정">
       <input type="button" value="취소" onclick="javascript:window.location='main.mw'"></td>
-    </tr>    
+    </tr>
    </table>
   </form> 
  </body>

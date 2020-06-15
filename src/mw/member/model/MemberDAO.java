@@ -37,9 +37,14 @@ public class MemberDAO {
 		
 		sqlSession.delete("member.deleteMem", id);
 		
+		
+		
 	}
 	
 
+	
+	
+	
 	public MemberDTO modifyCheck(String id) {
 		MemberDTO dto = (MemberDTO)sqlSession.selectOne("member.modifyCheck",id);
 	    return dto;
