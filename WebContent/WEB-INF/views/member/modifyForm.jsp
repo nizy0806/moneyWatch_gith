@@ -3,6 +3,7 @@
 <html>
 <head>
 <title>회원정보수정</title>
+
 <script language="JavaScript">
     <!-- 
     function checkIt(){
@@ -12,7 +13,7 @@
     		alert("비밀번호를 입력하세요");
     		return false;
     	}
-    	if(userinput.passwd.value != userinput.passwd2.value){
+    	if(userinput.pw.value != userinput.pw2.value){
     		alert("비밀번호를 동일하게 입력하세요");
     		return false;
     	}
@@ -24,9 +25,9 @@
     -->
 </script>
 <body>
-  <form method="post" action="modifyPro.mw" onsubmit="return checkIt()">
+  <form method="post" action="/moneyWatch/modifyPro.mw" name="userinput" onsubmit="return checkIt()">
    
-   <table width="400" border="1" cellspacing="0" cellspacing="2" align="center">
+   <table width="400" border="1" cellspacing="0" cellpadding="2" align="center">
     <tr>
      <td colspan="2" heigth="35" align="center">
       <font size="+1"><b>회원 정보 수정</b></font></td>
@@ -34,7 +35,8 @@
     
     <tr>
      <td width="150">사용자 ID</td>
-     <td width="350">${dto.id}</td>
+      <input type="hidden" name="id" value="${dto.getId()}">
+     <td width="350">${dto.getId()}</td>
     </tr>
     
     <tr>
