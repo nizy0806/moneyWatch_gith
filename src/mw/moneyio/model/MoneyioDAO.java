@@ -22,6 +22,17 @@ public class MoneyioDAO {
 	}
 	
 	public void insert(MoneyioDTO dto) {
+//		System.out.println("id : " + dto.getId());
+//		System.out.println("category : " + dto.getIo_category());
+//		System.out.println("detail : " + dto.getIo_detail());
+//		System.out.println("reg_date : " + dto.getIo_reg_date());
+//		System.out.println("price : " + dto.getIo_price());
+//		System.out.println("remain : " + dto.getIo_remain());
+//		System.out.println("bank : " + dto.getIo_bank());
+//		System.out.println("account : " + dto.getIo_account());
+//		System.out.println("n_div : " + dto.getIo_N_div());
+//		System.out.println("set : " + dto.getIo_set());
+		
 		sqlSession.insert("moneyio.insert", dto);
 	}
 }

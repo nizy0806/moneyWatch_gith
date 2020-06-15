@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="mw.member.model.MemberDTO" alias="memberDTO" />
 		<typeAlias type="mw.calendar.model.MwScheduleDTO" alias="mwScheduleDTO"/> 
+		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/>
 	</typeAliases>
 	
 	<!-- Mapper파일 Mapping -->
@@ -15,6 +16,7 @@
 	<mappers>
 		<mapper resource="mw/sql/memberSQL.xml" />
 		<mapper resource="mw/sql/calendarSQL.xml" />
+		<mapper resource="mw/sql/moneyioSQL.xml" />
 	</mappers>
 	
 </configuration>
