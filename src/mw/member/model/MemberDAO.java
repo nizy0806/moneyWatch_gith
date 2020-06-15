@@ -23,11 +23,19 @@ public class MemberDAO {
 	
 	public int memberCheck(String id) {
 		int checker = sqlSession.selectOne("member.memberCheck", id);
+		
 		return checker;
 	}
 	
+	public int deleteCheck(MemberDTO dto) {
+		int check = sqlSession.selectOne("member.deleteCheck",dto);
+		
+		return check;
+	}
 	
-	
-	
-	
+	public void deleteMem(String id) {
+		
+		sqlSession.delete("member.deleteMem", id);
+		
+	}
 }

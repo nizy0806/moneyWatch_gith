@@ -1,5 +1,6 @@
 package mw.member.model;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,12 @@ public class MemberBean {
 		return "/member/logout";
 	}
 	
-	
-	
 	@RequestMapping("registerForm.mw")	
 	public String registerForm() {
 		return "/member/registerForm";
 	}
+	
+	
 	@RequestMapping("registerPro.mw")	
 	public String registerPro(MemberDTO dto) {
 		
@@ -55,6 +56,8 @@ public class MemberBean {
 		
 		return "/member/registerPro";
 	}
+	
+	
 	@RequestMapping("confirmId.mw")
 	public String confirmId(String id,Model model) {
 		int checker=dao.memberCheck(id);
@@ -64,7 +67,7 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("modify.mw")
-	public String mwmodify(){
+	public String mwmodify(MemberDTO dto, HttpSession session){
 		
 		return "/member/modify";
 	}
@@ -82,17 +85,39 @@ public class MemberBean {
 		return "/member/modifyPro";
 	}
 	
-	@RequestMapping("deleteForm.mw")
-	public String mwdeleteForm() {
-		return "/member/deleteForm";
+	
+	/*
+	 * @RequestMapping("memOutForm.mw") 
+	 * public String memOutForm(MemberDTO dto,Model model,HttpSession session) {
+	 * int check=dao.deleteCheck(dto);
+	 * model.addAttribute("check",check);
+	 * 
+	 * return "/member/memOutForm"; }
+	 */
+	
+	@RequestMapping("memOutForm.mw")
+	public String memOutForm() {
+		return "/member/memOutForm";
 	}
 	
-	@RequestMapping("deletePro.mw")
-	public String mwdeletePro() {
-		return "/member/deletePro";
+	@RequestMapping("memOutPro.mw")
+	public String memOutPro(MemberDTO dto , Model model, HttpServletRequest request, HttpSession session) {
+		String pw = request.getParameter("pw");
+		String id = (String)session.getAttribute("memId");
+		System.out.println(id);
+		dto.setId(id);
+		dto.setPw(pw);
+		
+		int check = dao.deleteCheck(dto);
+		model.addAttribute("check",check);
+		
+		if(check==1) {
+			dao.deleteMem(id);
+		}
+		
+		return "/member/memOutPro";
 	}
 }
-	
 	
 
 	
