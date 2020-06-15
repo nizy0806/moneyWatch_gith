@@ -5,7 +5,18 @@
 
 	<!-- 일정 추가 DB insert -->
 	<insert id="schedule_insert" parameterType="mwScheduleDTO">
-		insert into mwSchedule values(schedule_seq.nextval,#{id},#{title},#{memo},#{start_time},#{end_time},#{place})	
+		insert into mwSchedule values(
+										schedule_seq.nextval,
+										#{id},
+										#{title},
+										#{memo},
+										#{start_time},
+										#{end_time},
+										#{place}
+									)	
 	</insert>
+	<select id="schedule_select" resultType="mwScheduleDTO" parameterType="mwScheduleDTO">
+		select * from mwSchedule where id=#{id}
+	</select>
 
 </mapper>

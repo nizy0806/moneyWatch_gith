@@ -1,17 +1,19 @@
 package mw.moneyio.model;
 
+
 public class MoneyioDTO {
-	private int io_num;			//sequence 번호
-	private String io_category;	//카테고리
-	private String io_detail;		//세부내역
-	private String io_reg_date;	//날짜
-	private int io_price;			//거래금액
-	private int io_remain;			//거래잔액
-	private String io_bank;		//대상(은행/카드)
-	private String io_account;		//거래번호(계좌/카드번호)
-	private String id;			//회원ID
-	private int io_N_div;			//N빵 0/1
-	private int io_set;			//구분 0/1(수입/지출)
+
+	private int io_num;
+	private String io_category;
+	private String io_detail;
+	private String io_reg_date;
+	private int io_price;
+	private int io_remain;
+	private String io_bank;
+	private String io_account;
+	private String id;
+	private int io_n_div;
+	private int io_set;
 	
 	public int getIo_num() {
 		return io_num;
@@ -67,11 +69,11 @@ public class MoneyioDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getIo_N_div() {
-		return io_N_div;
+	public int getIo_n_div() {
+		return io_n_div;
 	}
-	public void setIo_N_div(int io_N_div) {
-		this.io_N_div = io_N_div;
+	public void setIo_n_div(int io_n_div) {
+		this.io_n_div = io_n_div;
 	}
 	public int getIo_set() {
 		return io_set;
@@ -79,4 +81,6 @@ public class MoneyioDTO {
 	public void setIo_set(int io_set) {
 		this.io_set = io_set;
 	}
+	
+	
 }

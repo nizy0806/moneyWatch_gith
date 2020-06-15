@@ -16,14 +16,15 @@
 		select count(*) from mwMember where id = #{id}
 	</select>
 	
-	<select id="updateForm" resultType="memberDTO" parameterType="String">
-		select * from mwMember where id = #{id}
-	</select>
-	
-	<update id="updatePro" parameterType="memberDTO">
-		update mwMember set
-	</update>
-	
+	<select id="modifyForm" resultType="memberDTO" parameterType="String">
+  		select * from mwMember where id=#{id}
+  		
+  	</select>
+  	
+  	<update id="modifyPro" parameterType="memberDTO">
+  		update mwMember set pw=#{pw},name=#{name},tel=#{tel},phone1=#{phone1},phone2=#{phone2},zon=#{zon},street=#{street},addr=#{addr},email1=#{email1},email2=#{email2},where id=#{id}
+  	</update>
+  	
 	<delete id="deletePro" parameterType="memberDTO">
 		delete from mwMember where id=#{id} and pw=#{pw}
 	</delete>
