@@ -1,6 +1,7 @@
 package mw.member.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import mw.member.model.MemberDTO;
 
 public class MemberDAO {
 	
@@ -25,9 +26,17 @@ public class MemberDAO {
 		int checker = sqlSession.selectOne("member.memberCheck", id);
 		return checker;
 	}
+	public MemberDTO modifyForm(String id) {
+		MemberDTO dto = (MemberDTO)sqlSession.selectOne("member.modifyForm",id);
+	    return dto;
+	}
 	
+	public void mwupdate(MemberDTO dto){
+		sqlSession.update("member.modifyPro", dto);
+	}
 	
-	
-	
+	public void mwdelete(MemberDTO dto){
+		sqlSession.delete("member.deletePro", dto);
+	}
 	
 }

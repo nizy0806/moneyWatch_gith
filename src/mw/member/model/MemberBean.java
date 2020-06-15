@@ -2,11 +2,14 @@ package mw.member.model;
 
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.ibatis.session.SqlSession;
 
+import mw.member.model.MemberDTO;
 import mw.member.model.MemberDAO;
 
 
@@ -64,21 +67,21 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("modify.mw")
-	public String mwmodify(){
-		
+	public String mwmodify(){		
 		return "/member/modify";
 	}
 	
 	@RequestMapping("modifyForm.mw")
-	public String mwmodifyForm(String id) {
-		
+	public String mwmodifyForm(HttpSession session,Model model) {
+		String id=(String)session.getAttribute("memId");
+		MemberDTO dto = dao.modifyForm(id);
+		model.addAttribute("dto",dto);
 		return "/member/modifyForm";
 	}
 	
 	@RequestMapping("modifyPro.mw")
-	public String mwmodifyPro(HttpSession session,MemberDTO dto) {
-		String id=(String)session.getAttribute("memId");
-		dto.setId(id);
+	public String mwmodifyPro(MemberDTO dto) {
+		dao.mwupdate(dto);
 		return "/member/modifyPro";
 	}
 	
@@ -88,7 +91,19 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("deletePro.mw")
-	public String mwdeletePro() {
+	public String mwdeletePro(HttpSession session, Model model, String pw) {
+		String id = (String)session.getAttribute("memId");
+		MemberDTO dto = new MemberDTO();
+		dto.setId(id);
+		dto.setPw(pw);
+		
+		int check = dao.loginCheck(dto);
+		if(check == 1) {
+			dao.mwdelete(dto);
+			session.removeAttribute("memId");
+		}
+		model.addAttribute("check", check);
+		
 		return "/member/deletePro";
 	}
 }
