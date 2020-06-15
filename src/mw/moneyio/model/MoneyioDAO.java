@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class MoneyioDAO {
+	
 	private SqlSessionTemplate sqlSession = null;
 	
 	public MoneyioDAO(SqlSessionTemplate sqlSession) {
@@ -23,5 +24,18 @@ public class MoneyioDAO {
 	
 	public void insert(MoneyioDTO dto) {
 		sqlSession.insert("moneyio.insert", dto);
+	}
+	
+	public List moneyioListAll(String id) {
+		
+		return sqlSession.selectList("moneyio.moneyioListAll", id);
+	}
+	public List moneyioListIn(String id) {
+		
+		return sqlSession.selectList("moneyio.moneyioListIn", id);
+	}
+	public List moneyioListOut(String id) {
+		
+		return sqlSession.selectList("moneyio.moneyioListOut", id);
 	}
 }

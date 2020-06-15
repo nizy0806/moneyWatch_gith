@@ -16,6 +16,16 @@
 		insert into mwMoneyio values(mwmoneyio_seq,#{io_category},#{io_detail},#{io_reg_date},#{io_price},#{io_remain},#{io_bank},#{io_account},#{id},#{io_N_div},#{io_set})
 	</insert>
 
+	<select id="moneyioListAll" resultType="moneyioDTO" parameterType="String">
+		select * from mwmoneyio where id = #{id} order by io_num desc
+	</select>
 	
+	<select id="moneyioListIn" resultType="moneyioDTO" parameterType="String">
+		select * from mwmoneyio where id = #{id} and io_set = 0 order by io_num desc
+	</select>
+	
+	<select id="moneyioListOut" resultType="moneyioDTO" parameterType="String">
+		select * from mwmoneyio where id = #{id} and io_set = 1 order by io_num desc
+	</select>
 
 </mapper>
