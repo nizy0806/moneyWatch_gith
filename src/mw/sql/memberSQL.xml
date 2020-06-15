@@ -16,13 +16,13 @@
 		select count(*) from mwMember where id = #{id}
 	</select>
 	
-	 <select id="modifyForm" resultType="memberDTO" parameterType="String">
+	 <select id="modifyCheck" resultType="memberDTO" parameterType="String">
   		select * from mwMember where id=#{id}
   		
   	</select>
   	
-  	<update id="modifyPro" parameterType="memberDTO">
-  		update mwMember set pw=#{pw},name=#{name},tel=#{tel},phone1=#{phone1},phone2=#{phone2},zon=#{zon},street=#{street},addr=#{addr},email1=#{email1},email2=#{email2},where id=#{id}
+  	<update id="updateMember" parameterType="memberDTO">
+  		update mwMember set name=#{name},pw=#{pw},tel=#{tel},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3},zon=#{zon},street=#{street},addr=#{addr},email1=#{email1},email2=#{email2},where id=#{id}
   	</update>
   				 		
 												

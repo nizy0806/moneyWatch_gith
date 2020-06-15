@@ -66,34 +66,42 @@ public class MemberBean {
 		return "/member/confirmId";
 	}
 	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("modify.mw")
-	public String mwmodify(MemberDTO dto, HttpSession session){
-		
+	public String modify(MemberDTO dto, HttpSession session){		
+
 		return "/member/modify";
 	}
 	
 	@RequestMapping("modifyForm.mw")
-	public String mwmodifyForm(String id) {
+	public String modifyForm(MemberDTO dto,HttpSession session,Model model) {
+		String id=(String)session.getAttribute("memId");
+		dao.modifyCheck(id);
+		model.addAttribute("dto",dto);
+		System.out.println(id);
 		
 		return "/member/modifyForm";
 	}
 	
 	@RequestMapping("modifyPro.mw")
-	public String mwmodifyPro(HttpSession session,MemberDTO dto) {
-		String id=(String)session.getAttribute("memId");
-		dto.setId(id);
+	public String modifyPro(MemberDTO dto) {
+		dao.updateMember(dto);
+		
+		
 		return "/member/modifyPro";
 	}
 	
+
 	
-	/*
-	 * @RequestMapping("memOutForm.mw") 
-	 * public String memOutForm(MemberDTO dto,Model model,HttpSession session) {
-	 * int check=dao.deleteCheck(dto);
-	 * model.addAttribute("check",check);
-	 * 
-	 * return "/member/memOutForm"; }
-	 */
+	
+	
+	
+	
 	
 	@RequestMapping("memOutForm.mw")
 	public String memOutForm() {
@@ -117,6 +125,8 @@ public class MemberBean {
 		
 		return "/member/memOutPro";
 	}
+	
+	
 }
 	
 
