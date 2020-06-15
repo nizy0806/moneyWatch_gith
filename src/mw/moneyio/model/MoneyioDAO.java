@@ -1,5 +1,6 @@
 package mw.moneyio.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -48,5 +49,14 @@ public class MoneyioDAO {
 	public List moneyioListOut(String id) {
 		
 		return sqlSession.selectList("moneyio.moneyioListOut", id);
+	}
+	
+	public MoneyioDTO moneyioListDetail(String id, int ioNum) {
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("ioNum", ioNum);
+		
+		return sqlSession.selectOne("moneyio.moneyioListDetail", map);
 	}
 }

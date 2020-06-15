@@ -10,11 +10,11 @@
 	<select id="bankAccount" resultType="String" parameterType="moneyioDTO">
 		select io_account from mwMoneyio where id=#{id} and io_bank=#{io_bank}
 	</select>
-
 	
 	<insert id="insert" parameterType="moneyioDTO">
 		insert into mwmoneyio values(mwmoneyio_seq.nextval,#{io_category},#{io_detail},#{io_reg_date},#{io_price},#{io_remain},#{io_bank},#{io_account},#{id},#{io_N_div},#{io_set})
 	</insert>
+	
 
 	<select id="moneyioListAll" resultType="moneyioDTO" parameterType="String">
 		select * from mwmoneyio where id = #{id} order by io_num desc
@@ -28,4 +28,8 @@
 		select * from mwmoneyio where id = #{id} and io_set = 1 order by io_num desc
 	</select>
 
+	<select id="moneyioListDetail" resultType="moneyioDTO" parameterType="hashmap">
+		select * from mwmoneyio where id = #{id} and io_num = #{ioNum}
+	</select>
+	
 </mapper>

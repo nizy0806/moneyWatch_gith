@@ -3,6 +3,8 @@ package mw.moneyio.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +43,10 @@ public class MoneyioBean {
 	
 	
 	@RequestMapping("moneyioList.mw")	
-	public String moneyioList(/*String id, */Model model) {
+	public String moneyioList(/*String id, */Model model, HttpSession session) {
+		
 		String id = "minmingk1";
+	/* String id = session.getAttribute("memId"); */
 
 		List list = new ArrayList();
 		list = dao.moneyioListAll(id);
@@ -53,25 +57,38 @@ public class MoneyioBean {
 	}
 	
 	@RequestMapping("ioList.mw")	
-	public String moneyioList(String id, String filter, Model model) {
+	public String ioList(String filter, Model model, HttpSession session) {
 		
 		List list = new ArrayList();
 		
-		System.out.println(id);
-		System.out.println(filter);
+		String id = "minmingk1";
+		/* String id = session.getAttribute("memId"); */
 		
-		
-		if(filter == "all") {
+		if(filter.equals("all")) {
 			list = dao.moneyioListAll(id);
-		}else if (filter == "inMoney") {
+		}else if (filter.equals("inMoney")) {
 			list = dao.moneyioListIn(id);
 		}else {
 			list = dao.moneyioListOut(id);
 		}
 
+		model.addAttribute("id",id);
 		model.addAttribute("moneyioList", list);
 		
 		return "/moneyio/ioList";
+	}
+	
+	@RequestMapping("ioListDetail.mw")
+	public String ioListDetail(int ioNum, Model model, HttpSession session) {
+		
+		System.out.println("bean : "+ioNum);
+		
+		String id = "minmingk1";
+		/* String id = session.getAttribute("memId"); */
+		
+		MoneyioDTO dto = dao.moneyioListDetail(id, ioNum);
+		
+		return "/moneyio/ioListDetail";
 	}
 	
 }
