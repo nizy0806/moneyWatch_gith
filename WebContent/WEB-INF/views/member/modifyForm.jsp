@@ -25,6 +25,7 @@
 </script>
 <body>
   <form method="post" action="modifyPro.mw" onsubmit="return checkIt()">
+   
    <table width="400" border="1" cellspacing="0" cellspacing="2" align="center">
     <tr>
      <td colspan="2" heigth="35" align="center">
@@ -39,19 +40,19 @@
     <tr>
      <td width="150">이름</td>
      <td width="350">
-      <input type="text" name="name" size="9" maxlength="9" value="${dto.getName}"></td>
+      <input type="text" name="name" size="9" maxlength="9" value="${dto.getName()}"></td>
     </tr>
        
     <tr>
      <td width="150">비밀번호</td>
      <td width="350">
-      <input type="password" name="pw" size="9" maxlength="9" value="${dto.getPw}"></td>
+      <input type="password" name="pw" size="9" maxlength="9" value="${dto.getPw()}"></td>
     </tr>
     
     <tr>		
 		<td width="300"> 휴대폰 번호 </td>
 		<td width="300">
-				<select name="tel" value="${dto.getTel}">
+				<select name="tel" value="${dto.getTel()}">
 				<option value="SKT">SKT</option>
 				<option value="KT">KT</option>
 				<option value="LGU+">LGU+</option>
@@ -66,34 +67,34 @@
 				</select>
 				
 				
-				<input type="text" name="phone2" size="10" maxlength="4">
-				<input type="text" name="phone3" size="10" maxlength="4">
+				<input type="text" name="phone2" size="10" maxlength="4" value="${dto.getPhone2()}">
+				<input type="text" name="phone3" size="10" maxlength="4" value="${dto.getPhone3()}">
 		</td>
 		</tr>
 
     <tr>
      <td wigth="150">우편번호</td>
      <td width="350">
-      <input type="text" name="zon" size="9" maxlength="9" value="${dto.getZon}"></td>
+      <input type="text" name="zon" size="9" maxlength="9" value="${dto.getZon()}"></td>
     </tr>
     
     <tr>
      <td wigth="150">주소</td>
      <td width="350">
-      <input type="text" name="street" size="9" maxlength="9" value="${dto.getStreet}"></td>
+      <input type="text" name="street" size="9" maxlength="9" value="${dto.getStreet()}"></td>
     </tr>
     
     <tr>
      <td wigth="150">상세주소</td>
      <td width="350">
-      <input type="text" name="addr" size="9" maxlength="9" value="${dto.getAddr}"></td>
+      <input type="text" name="addr" size="9" maxlength="9" value="${dto.getAddr()}"></td>
     </tr>
 
     <tr>
 		<td width="300">이메일 ID</td>
 		<td width="300">
-				<input type="text" name="email1" size="10" maxlength="12" value="${dto.getEmail1}"><a>@</a>
-				<input type="text" name="email2" size="10" maxlength="12" value="${dto.getEmail2}">
+				<input type="text" name="email1" size="10" maxlength="12" value="${dto.getEmail1()}"><a>@</a>
+				<input type="text" name="email2" size="10" maxlength="12" value="${dto.getEmail2()}">
 		
 		</td>
 		</tr>
