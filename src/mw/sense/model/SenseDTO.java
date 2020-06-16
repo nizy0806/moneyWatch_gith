@@ -10,7 +10,7 @@ public class SenseDTO {
 	private String sense_content; //내용
 	private String sense_url; //URL
 	private String sense_thumbnail; //섬네일이미지
-	private Timestamp reg_date; //날짠
+	private Timestamp reg_date; //날짜
 	
 	//setter
 	public void setNum(int num) {

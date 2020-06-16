@@ -11,7 +11,7 @@
 	   http://www.springframework.org/schema/aop
 	   http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
 >
-	<bean id="mwscheduleDTO" class="mw.calendar.model.MwScheduleDTO" />
+
 	<bean id="mwscheduleDAO" class="mw.calendar.model.MwScheduleDAO" >
 		<constructor-arg  ref="sqlSession"/>
 	</bean>

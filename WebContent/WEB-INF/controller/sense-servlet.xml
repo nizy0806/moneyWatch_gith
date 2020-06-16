@@ -12,6 +12,9 @@
 	   http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
 >
 
+	<bean id="senseDAO" class="mw.sense.model.SenseDAO">
+		<constructor-arg ref="sqlSession" />
+	</bean>
 	
 	<context:component-scan base-package="mw.sense.model" />
 	

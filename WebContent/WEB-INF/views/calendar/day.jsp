@@ -15,20 +15,21 @@
 
 <script>
 	function schedule_insert(){
-		var scheduleDB = {
-				id : $("#id").val(), 
-				title : $("#title").val(), 
-				place : $("#place").val(), 
-				start_time : $("#start_time").val(), 
-				end_time : $("#end_time").val(), 
-				memo : $("#memo").val()
+		var scheduleDB = { //일정 입력 데이터 객체변수
+				id : $("#id").val(), //id - session값 이용 필요
+				title : $("#title").val(), //일정명
+				place : $("#place").val(), //장소
+				start_time : $("#start_time").val(), //시작일 
+				end_time : $("#end_time").val(), //종료일
+				memo : $("#memo").val() //메모
 		}
 		$.ajax({
-			type : "post",
+			type : "post", //송신 데이터타입
 			url : "C_insert.mw",
 			data : scheduleDB,
+			dataType : "JSON", //수신 데이터타입
 			success : function(data){
-				//opener.parent.loaction.reload();
+				opener.parent.location.reload();
 				console.log(data);
 				//$("").html(data);
 				//window.close();
@@ -79,8 +80,7 @@
 			<textarea class="memo" id="memo" type="text" name="memo" row="5" cols="20" placeholder="100글자까지 입력 가능합니다"></textarea>
 		</div>		
 	</form>
-		<button class="insert" type="button" id= "save">저장</button>
-		<!-- <button class="insert" type="button" onclick="schedule_insert();">저장</button> -->
+		<button class="insert" type="button" onclick="schedule_insert();">저장</button>
 		
 	</div>
 </div>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ 
+<mapper namespace="sense">
+	<!-- 카테고리 선택 -->	
+	<select id="categorySelect" resultType="senseDTO" parameterType="String">
+		select * from mwsense where	(
+				select sense_detail_category from mwsense_category where sense_detail_category=#{gategory}
+			)
+	</select>
+	
+	<!-- 센스 임의 입력 -->
+	<insert id="insert" parameterType="senseDTO">
+		insert into mwsense values(
+				schedule_seq.nextval,		
+				#{main_set},
+				#{sense_category},
+				#{sense_title},
+				#{sense_content},
+				#{sense_url},
+				#{sense_thumbnail},
+				#{sense_reg_date}
+			)
+	</insert>
+	
+	<!-- 센스 임의 입력 확인 -->
+	<select id="insertCheck" parameterType="senseDTO">
+		select count(*) from mwsense where sense_url=#{sense_url}
+	</select>
+														
+</mapper>
