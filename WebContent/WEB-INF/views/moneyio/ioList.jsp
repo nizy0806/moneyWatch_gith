@@ -5,13 +5,13 @@
 
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-	
 	function detail(ioNum){
+		var detail = "#detail"+ioNum;
 		$.ajax({
 			url : "ioListDetail.mw",
 			data : {ioNum: ioNum},
 			success : function(data){
-				$("#ioListDetail").html(data);
+				$(detail).html(data);
 			}
 		});
 	}
@@ -19,34 +19,42 @@
 
 
 
-<!-- 내역 출력 -->
-<div id="ioList">
-	
+	<!-- 내역 출력 -->
+	 <div id="ioList">
 		<c:forEach var="ioListval" items="${moneyioList}">
-		<table border = "1" width="500">
-			<tr>
-				<td align = center onclick="detail(${ioListval.io_num})">
-					${ioListval.io_reg_date}
-				</td>
-				<td align = right onclick="detail(${ioListval.io_num})">
-					거래 금액
-				</td>
-				<td align = right onclick="detail(${ioListval.io_num})">
-					${ioListval.io_price} 원
-				</td>
-			</tr>
-			<tr>
-				<td align = center onclick="detail(${ioListval.io_num})">
-					${ioListval.io_detail}
-				</td>
-				<td align = right onclick="detail(${ioListval.io_num})">
-					남은 잔액
-				</td>
-				<td align = right onclick="detail(${ioListval.io_num})">
-					${ioListval.io_remain} 원
-				</td>
-			</tr>
-		</table>	
-		</c:forEach>
-	
-</div>
+			<table border = "1" width="500">
+<%-- 
+				<tr>
+					<td colspan="5">Number : ${ioListval.io_num}</td>
+				</tr>
+--%>		
+				
+				<tr>
+					<td align = center width="300" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_reg_date}
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						거래 금액
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_price} 원
+					</td>
+				</tr>
+				<tr>
+					<td align = center width="300" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_detail}
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						남은 잔액
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_remain} 원
+					</td>
+				</tr>
+				<tr>
+					<table width="500" border="1" colspan="5" id="detail${ioListval.io_num}">
+					</table>
+				</tr>
+			</table>
+		</c:forEach>		
+	</div>

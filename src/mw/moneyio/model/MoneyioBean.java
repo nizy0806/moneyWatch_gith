@@ -81,12 +81,11 @@ public class MoneyioBean {
 	@RequestMapping("ioListDetail.mw")
 	public String ioListDetail(int ioNum, Model model, HttpSession session) {
 		
-		System.out.println("bean : "+ioNum);
-		
 		String id = "minmingk1";
 		/* String id = session.getAttribute("memId"); */
 		
 		MoneyioDTO dto = dao.moneyioListDetail(id, ioNum);
+		model.addAttribute("dto", dto);
 		
 		return "/moneyio/ioListDetail";
 	}

@@ -15,11 +15,12 @@
 	}
 	
 	function detail(ioNum){
+		var detail = "#detail"+ioNum;
 		$.ajax({
 			url : "ioListDetail.mw",
 			data : {ioNum: ioNum},
 			success : function(data){
-				$("#ioListDetail").append(data);
+				$(detail).html(data);
 			}
 		});
 	}
@@ -53,48 +54,52 @@
 	
 	<!-- 내역 출력 -->
 	 <div id="ioList">
-		
-			<c:forEach var="ioListval" items="${moneyioList}">
+		<c:forEach var="ioListval" items="${moneyioList}">
 			<table border = "1" width="500">
-			
+<%-- 
 				<tr>
-					<td colspan="3">Number : ${ioListval.io_num}</td>
+					<td colspan="5">Number : ${ioListval.io_num}</td>
 				</tr>
-				
+--%>		
 				
 				<tr>
-					<td align = center onclick="detail(${ioListval.io_num})">
+					<td align = center width="300" onclick="detail(${ioListval.io_num})">
 						${ioListval.io_reg_date}
 					</td>
-					<td align = right onclick="detail(${ioListval.io_num})">
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
 						거래 금액
 					</td>
-					<td align = right onclick="detail(${ioListval.io_num})">
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
 						${ioListval.io_price} 원
 					</td>
 				</tr>
 				<tr>
-					<td align = center onclick="detail(${ioListval.io_num})">
+					<td align = center width="300" onclick="detail(${ioListval.io_num})">
 						${ioListval.io_detail}
 					</td>
-					<td align = right onclick="detail(${ioListval.io_num})">
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
 						남은 잔액
 					</td>
-					<td align = right onclick="detail(${ioListval.io_num})">
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
 						${ioListval.io_remain} 원
 					</td>
 				</tr>
-				<label id="detail"></label>
-</table>
-			</c:forEach>
-		
+				<tr>
+					<table width="500" border="1" colspan="5" id="detail${ioListval.io_num}">
+					</table>
+				</tr>
+			</table>
+		</c:forEach>		
 	</div>
 
 </center>
 
 
 
-
+<!-- 
+1) 팝업창으로 Detail 출력
+2) 스크롤 내려서 출력 
+-->
 
 
 <%-- 
