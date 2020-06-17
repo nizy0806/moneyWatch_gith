@@ -11,10 +11,53 @@
 		select io_account from mwMoneyio where id=#{id} and io_bank=#{io_bank}
 	</select>
 	
+	<!-- 지출/수입 insert -->
 	<insert id="insert" parameterType="moneyioDTO">
 		insert into mwmoneyio values(mwmoneyio_seq.nextval,#{io_category},#{io_detail},#{io_reg_date},#{io_price},#{io_remain},#{io_bank},#{io_account},#{id},#{io_N_div},#{io_set})
 	</insert>
 	
+	<!-- 지출/수입  n빵 내역 insert -->
+	<insert id="n_insert" parameterType="nbreadDTO">
+		insert into mwnbread values(mwnbread_seq.nextval,select io_num from mwmoneyio where io_num=#{io_num}, select id from mwmoneyio io_num=#{io_num}, select io_category from mwmoneyio where io_num=#{io_num}, #{n_debtor}, #{n_price})
+	</insert>
+	
+	<!-- 지출/수입 내역 수정페이지 데이터 -->	
+	<select id="updateForm" resultType="moneyioDTO" parameterType="int">
+		select * from mwmoneyio where io_num = #{io_num} 
+	</select>
+	
+	<!-- 지출/수입 n빵 내역 수정페이지 데이터 -->
+	<select id="n_updateForm" resultType="nbreadDTO" parameterType="int">
+		select * from mwnbread where n_num = #{n_num}
+	</select>
+	
+	<!-- 지출/수입 내역 update -->
+	<update id="update" parameterType="int">
+		update mwmoneyio 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="io_category != null">io_category=#{io_category},</if>
+			<if test="io_detail !=null">io_detail = #{io_detail},</if>
+			<if test="io_reg_date != null">io_reg_date = #{io_reg_date},</if>
+			<if test="io_price != null">io_price = #{io_price},</if>
+			<if test="io_remain != null">io_remain = #{io_remain},</if>
+			<if test="io_bank !=null">io_bank = #{io_bank},</if>
+			<if test="io_account !=null">io_account = #{io_account},</if>
+			<if test="io_n_div != null">io_n_div = #{io_n_div},</if>
+			<if test="io_set != null">io_set = #{io_set}</if>
+		</trim>
+		where io_num=#{io_num}
+	</update>
+	
+	<!-- 지출/수입 n빵 내역 update -->
+	<update id="n_update" parameterType="int">
+		update mwnbread 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="n_category != null">n_category = #{n_category},</if>
+			<if test="n_debtor != null">n_debtor=#{n_debtor},</if>
+			<if test="n_price != null">n_price = #{n_price}</if>
+		</trim>
+		where n_num = #{n_num}
+	</update>
 
 	<select id="moneyioListAll" resultType="moneyioDTO" parameterType="String">
 		select * from mwmoneyio where id = #{id} order by io_num desc

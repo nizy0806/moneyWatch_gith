@@ -24,22 +24,31 @@ public class MoneyioBean {
 	
 	
 	@RequestMapping("moneyioPro.mw")
-	public String moneyioPro(MoneyioDTO dto) {
+	public String moneyioPro(MoneyioDTO dto, NbreadDTO ndto) {
 //		System.out.println("id : " + dto.getId());
-//		System.out.println("category : " + dto.getIo_category());
-//		System.out.println("detail : " + dto.getIo_detail());
-//		System.out.println("reg_date : " + dto.getIo_reg_date());
-//		System.out.println("price : " + dto.getIo_price());
-//		System.out.println("remain : " + dto.getIo_remain());
-//		System.out.println("bank : " + dto.getIo_bank());
-//		System.out.println("account : " + dto.getIo_account());
-//		System.out.println("n_div : " + dto.getIo_N_div());
-//		System.out.println("set : " + dto.getIo_set());
-		dao.insert(dto);
+
+		dao.insert(dto, ndto);
 		//model.addAttribute(attributeValue);
 		return "/moneyio/moneyioPro";
 	}
+	//지출/수입 입력 페이지 수정 페이지
+	@RequestMapping("ioUpdateForm.mw")
+	public String ioUpdateForm(int io_num, int n_num, Model model) {
+		List list = dao.ioUpdateForm(io_num);
+		List n_list = dao.ioNbreadForm(n_num);
+		model.addAttribute("list", list);
+		model.addAttribute("n_list", n_list);
+		
+		return "/moneyio/ioUpdateForm";
+	}
 	
+	//지출/수입 입력 페이지 update
+	@RequestMapping("ioUpdatePro.mw")
+	public String ioUpdatePro(int io_num, int n_num) {
+		dao.ioUpdatePro(io_num);
+		dao.ioNbreadPro(n_num);
+		return "/moneyio/ioUpdatePro";
+	}	
 	
 	
 	@RequestMapping("moneyioList.mw")	
