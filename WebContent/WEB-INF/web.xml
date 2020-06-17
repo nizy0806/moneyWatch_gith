@@ -36,6 +36,7 @@
 				/WEB-INF/controller/calendar-servlet.xml
 				/WEB-INF/controller/moneyio-servlet.xml
 				/WEB-INF/controller/sense-servlet.xml
+				/WEB-INF/controller/account_card-servlet.xml
 			</param-value>
 		</init-param>
 	</servlet>
