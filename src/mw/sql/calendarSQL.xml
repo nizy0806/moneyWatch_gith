@@ -4,7 +4,7 @@
 <mapper namespace="calendar">
 
 	<!-- 일정 추가 DB insert -->
-	<insert id="schedule_insert" parameterType="mwScheduleDTO">
+	<insert id="schedule_insert" parameterType="mwscheduleDTO">
 		insert into mwSchedule values(
 										schedule_seq.nextval,
 										#{id},
@@ -15,8 +15,9 @@
 										#{place}
 									)	
 	</insert>
-	<select id="schedule_select" resultType="mwScheduleDTO" parameterType="mwScheduleDTO">
-		select * from mwSchedule where id=#{id}
+	<select id="schedule_select" resultType="mwscheduleDTO" parameterType="mwscheduleDTO">
+		select * from mwSchedule order by num desc
+<!-- 		where id=#{id} -->
 	</select>
 
 </mapper>

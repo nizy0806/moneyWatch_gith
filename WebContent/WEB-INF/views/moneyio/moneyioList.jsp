@@ -6,77 +6,100 @@
 <script>
 	function filter(){
 		$.ajax({
-			url : "/moneyWatch/iolist.mw",
-			data : {id: 'minmingk1', filter: $("#filter").val()},
+			url : "ioList.mw",
+			data : {filter: $("#filter").val()},
 			success : function(data){
-				$("#iolist").html(data);
+				$("#ioList").html(data);
 			}
 		});
-		
+	}
+	
+	function detail(ioNum){
+		var detail = "#detail"+ioNum;
+		$.ajax({
+			url : "ioListDetail.mw",
+			data : {ioNum: ioNum},
+			success : function(data){
+				$(detail).html(data);
+			}
+		});
 	}
 </script>
 
 <center>
-<!-- 종합 -->
-<div>	
-	<table border = "1" width="300">
-		<tr>
-			<td>
-				<select id="filter" name="filter" onChange="filter()">
-					<option value="all" selected>전체</option>
-					<option value="inMoney">수입</option>
-					<option value="outMoney">지출</option>					
-				</select>			
-			</td>
-			<td>
-				마지막 업데이트 : 2020.##.##
-			</td>			
-		</tr>
-		<tr>
-			<td colspan=2>
-				전체 남은 잔액 : ${moneyioList[0].io_remain} 원
-			</td>
-		</tr>
-	</table>
-<br />
-</div>
-
-
-<!-- 내역 출력 -->
-<div id="ioList">
-	<table border = "1" width="500">
-		<c:forEach var="ioList" items="${moneyioList}">
+	<!-- 종합 -->
+	<div>	
+		<table border = "1" width="300">
 			<tr>
-				<td align = center>
-					${ioList.io_reg_date}
+				<td>
+					<select id="filter" name="filter" onchange="filter()">
+						<option value="all" selected>전체</option>
+						<option value="inMoney">수입</option>
+						<option value="outMoney">지출</option>					
+					</select>			
 				</td>
-				<td align = right>
-					거래 금액
-				</td>
-				<td align = right>
-					${ioList.io_price} 원
-				</td>
+				<td>
+					마지막 업데이트 : 2020.##.##
+				</td>			
 			</tr>
 			<tr>
-				<td align = center>
-					${ioList.io_detail}
-				</td>
-				<td align = right>
-					남은 잔액
-				</td>
-				<td align = right>
-					${ioList.io_remain} 원
+				<td colspan=2>
+					전체 남은 잔액 : ${moneyioList[0].io_remain} 원
 				</td>
 			</tr>
-		</c:forEach>
-	</table>
-</div>
+		</table>
+	<br />
+	</div>
+	
+	
+	<!-- 내역 출력 -->
+	 <div id="ioList">
+		<c:forEach var="ioListval" items="${moneyioList}">
+			<table border = "1" width="500">
+<%-- 
+				<tr>
+					<td colspan="5">Number : ${ioListval.io_num}</td>
+				</tr>
+--%>		
+				
+				<tr>
+					<td align = center width="300" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_reg_date}
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						거래 금액
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_price} 원
+					</td>
+				</tr>
+				<tr>
+					<td align = center width="300" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_detail}
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						남은 잔액
+					</td>
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">
+						${ioListval.io_remain} 원
+					</td>
+				</tr>
+				<tr>
+					<table width="500" border="1" colspan="5" id="detail${ioListval.io_num}">
+					</table>
+				</tr>
+			</table>
+		</c:forEach>		
+	</div>
 
 </center>
 
 
 
-
+<!-- 
+1) 팝업창으로 Detail 출력
+2) 스크롤 내려서 출력 
+-->
 
 
 <%-- 

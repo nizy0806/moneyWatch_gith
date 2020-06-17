@@ -3,6 +3,7 @@
 <html>
 <head>
 <title>회원정보수정</title>
+
 <script language="JavaScript">
     <!-- 
     function checkIt(){
@@ -30,7 +31,7 @@
     
     <tr>
      <td width="150">사용자 ID</td>
-     <input type="hidden" name="id" value="${dto.getId()}" >
+      <input type="hidden" name="id" value="${dto.getId()}">
      <td width="350">${dto.getId()}</td>
     </tr>
     

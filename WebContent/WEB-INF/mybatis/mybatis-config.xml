@@ -10,6 +10,13 @@
 		<typeAlias type="mw.member.model.DeleteMemListDTO" alias="deleteMemListDTO"/>
 		<typeAlias type="mw.calendar.model.MwScheduleDTO" alias="mwScheduleDTO"/> 
 		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/>
+
+		<typeAlias type="mw.calendar.model.MwScheduleDTO" alias="mwscheduleDTO"/> <!-- 캘린더일정 -->
+		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/> <!-- 지출/수입 내역 -->
+		<typeAlias type="mw.moneyio.model.NbreadDTO" alias="nbreadDTO"/> <!-- n빵 내역 -->
+		<typeAlias type="mw.sense.model.SenseDTO" alias="senseDTO"/> <!-- 금융지식 -->
+		<typeAlias type="mw.sense.model.SenseCategoryDTO" alias="sensecategoryDTO"/> <!-- 금융지식카테고리 -->
+
 		
 	</typeAliases>
 	
@@ -17,8 +24,10 @@
 	
 	<mappers>
 		<mapper resource="mw/sql/memberSQL.xml" />
-		<mapper resource="mw/sql/calendarSQL.xml" />
+		<mapper resource="mw/sql/calendarSQL.xml" /> <!-- 캘린더일정 -->
 		<mapper resource="mw/sql/moneyioSQL.xml" />
+		<mapper resource="mw/sql/senseSQL.xml" /> <!-- 금융지식 -->
+		
 	</mappers>
 	
 </configuration>

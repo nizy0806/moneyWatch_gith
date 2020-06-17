@@ -1,5 +1,6 @@
 package mw.moneyio.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,20 +22,28 @@ public class MoneyioDAO {
 		List account = sqlSession.selectList("moneyio.bankAccount", dto);
 		return account;
 	}
-	
-	public void insert(MoneyioDTO dto) {
+	//지출/수입 내역 입력
+	public void insert(MoneyioDTO dto, NbreadDTO ndto) {  
 //		System.out.println("id : " + dto.getId());
-//		System.out.println("category : " + dto.getIo_category());
-//		System.out.println("detail : " + dto.getIo_detail());
-//		System.out.println("reg_date : " + dto.getIo_reg_date());
-//		System.out.println("price : " + dto.getIo_price());
-//		System.out.println("remain : " + dto.getIo_remain());
-//		System.out.println("bank : " + dto.getIo_bank());
-//		System.out.println("account : " + dto.getIo_account());
-//		System.out.println("n_div : " + dto.getIo_N_div());
-//		System.out.println("set : " + dto.getIo_set());
 		
 		sqlSession.insert("moneyio.insert", dto);
+		sqlSession.insert("moneyio.n_insert", ndto );
+	}
+	//지출/수입 내역 수정 페이지
+	public List ioUpdateForm(int io_num) {
+		return sqlSession.selectList("moneyio.updateForm", io_num);
+	}
+	//지출/수입 내역 n빵 수정 페이지
+	public List ioNbreadForm(int n_num) {
+		return sqlSession.selectList("moneyio.n_updateForm", n_num);
+	}
+	//지출/수입 내역 수정
+	public void ioUpdatePro(int io_num) {
+		sqlSession.update("moneyio.update", io_num);
+	}
+	//지출/수입 내역 n빵 수정
+	public void ioNbreadPro(int n_num) {
+		sqlSession.update("moneyio.n_update", n_num);
 	}
 	
 	public List moneyioListAll(String id) {
@@ -48,5 +57,14 @@ public class MoneyioDAO {
 	public List moneyioListOut(String id) {
 		
 		return sqlSession.selectList("moneyio.moneyioListOut", id);
+	}
+	
+	public MoneyioDTO moneyioListDetail(String id, int ioNum) {
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("ioNum", ioNum);
+		
+		return sqlSession.selectOne("moneyio.moneyioListDetail", map);
 	}
 }
