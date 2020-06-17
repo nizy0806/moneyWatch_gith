@@ -1,6 +1,8 @@
 package mw.member.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import java.util.HashMap;
+import mw.member.model.*;
 
 public class MemberDAO {
 	
@@ -27,23 +29,28 @@ public class MemberDAO {
 		return checker;
 	}
 	
-	public int deleteCheck(MemberDTO dto) {
-		int check = sqlSession.selectOne("member.deleteCheck",dto);
+	public int deleteCheck(String id,String pw) { 
+		HashMap map = new HashMap();
+		map.put("id",id);
+		map.put("pw",pw);
 		
+		int check = (int)sqlSession.selectOne("member.deleteCheck",map);
 		return check;
 	}
 	
 	public void deleteMem(String id) {
-		
 		sqlSession.delete("member.deleteMem", id);
-		
-		
-		
+	
 	}
 	
-
+	public MemberDTO deleteSelect(String id) {
+		MemberDTO dto1=(MemberDTO)sqlSession.selectOne("member.deleteSelect", id);
+		return dto1;
+	}
 	
-	
+	public void deleteInsert(DeleteMemListDTO dto2) {
+		sqlSession.insert("member.deleteMemList", dto2);
+	}
 	
 	public MemberDTO modifyCheck(String id) {
 		MemberDTO dto = (MemberDTO)sqlSession.selectOne("member.modifyCheck",id);

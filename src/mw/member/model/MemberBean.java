@@ -2,11 +2,15 @@ package mw.member.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
 
 import mw.member.model.MemberDAO;
 
@@ -112,26 +116,55 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("memOutPro.mw")
-	public String aopmemOutPro(MemberDTO dto , Model model, HttpServletRequest request, HttpSession session) {
-		String pw = request.getParameter("pw");
-		String id = (String)session.getAttribute("memId");
-		System.out.println(id);
-		dto.setId(id);
-		dto.setPw(pw);
+	public String aopmemOutPro(MemberDTO dto , Model model, DeleteMemListDTO dto2 , HttpServletRequest request, HttpSession session) {
 		
-		int check = dao.deleteCheck(dto);
+		
+		String pw =request.getParameter("pw");
+		String id =(String)session.getAttribute("memId");
+		
+		
+		int check = dao.deleteCheck(id,pw);
+		
 		model.addAttribute("check",check);
 		
-		if(check==1) {
+		System.out.println(id);
+		System.out.println(pw);
+		System.out.println(check);
+				
+		if(check==1) { // 삭제 진행
+			
+			  String reason=request.getParameter("reason");
+			  
+			  MemberDTO dto1=dao.deleteSelect(id);
+			  
+			  
+			  dto2.setId(dto1.getId()); 
+			  dto2.setName(dto1.getName());
+			  dto2.setGender(dto1.getGender()); 
+			  dto2.setBirth_y(dto1.getBirth_y());
+			  dto2.setBirth_m(dto1.getBirth_m()); 
+			  dto2.setBirth_d(dto1.getBirth_d());
+			  dto2.setTel(dto1.getTel()); 
+			  dto2.setPhone1(dto1.getPhone1());
+			  dto2.setPhone2(dto1.getPhone2()); 
+			  dto2.setPhone3(dto1.getPhone3());
+			  dto2.setReason(reason);
+			  dto2.setReg(dto1.getReg());
+			  
+			  
+			  dao.deleteInsert(dto2);
+			
+			
 			dao.deleteMem(id);
 			session.invalidate();
+			
 		}
 		
 		return "/member/memOutPro";
 	}
-	
-	
 }
+
+
 	
 
 	

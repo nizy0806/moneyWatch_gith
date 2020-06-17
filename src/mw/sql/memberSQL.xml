@@ -17,7 +17,7 @@
 	</select>
 	
 	 <select id="modifyCheck" resultType="memberDTO" parameterType="String">
-  		select * from mwMember where id=#{id}
+  		select * from mwMember where id=#{id} 
   		
   	</select>
   	
@@ -30,13 +30,27 @@
   		select * from mwMember where ${ch} like '%'||#{search}||'%'   	${ch}명령어를 입력하려면 #말고 $써야함
     </select> -->
   	 
-  	<select id="deleteCheck" resultType="int" parameterType="memberDTO">
+  	<select id="deleteCheck" resultType="int" parameterType="hashmap">
 		select count(*) from mwMember where id=#{id} and pw=#{pw}
 	</select>
+  	
+  	
+  	
+  	<select id="deleteSelect" resultType="memberDTO" parameterType="String">
+  		select * from mwMember where id=#{id} 
+  	</select>
+  	
+  	<insert id="deleteMemList" parameterType="deleteMemListDTO" >
+  		insert into mw_deleteMember values(mw_deleteMember_seq.nextval,#{id},#{name},#{gender},#{birth_y},#{birth_m},#{birth_d},#{tel},#{phone1},#{phone2},#{phone3},#{reason},sysdate)
+  	</insert>
+  	
+  	
   	 
   	<delete id="deleteMem" parameterType="String">
   		delete from mwMember where id=#{id}
   	</delete>
+  	
+  	
   	 
   	 
 																			

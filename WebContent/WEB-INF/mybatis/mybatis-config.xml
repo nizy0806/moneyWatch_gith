@@ -7,9 +7,10 @@
 	
 	<typeAliases>
 		<typeAlias type="mw.member.model.MemberDTO" alias="memberDTO" />
+		<typeAlias type="mw.member.model.DeleteMemListDTO" alias="deleteMemListDTO"/>
 		<typeAlias type="mw.calendar.model.MwScheduleDTO" alias="mwScheduleDTO"/> 
 		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/>
-
+		
 	</typeAliases>
 	
 	<!-- Mapper파일 Mapping -->

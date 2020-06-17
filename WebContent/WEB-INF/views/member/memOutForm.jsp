@@ -28,13 +28,24 @@
 	<tr height="30">
 	  <td colspan="2" align="middle" >
 	  <input type="password" name="pw" size="15" maxlength="12"></td></tr>
+	 
+	<td width="300">탈퇴사유</td>
+	<td width="300">
+	  <select name="reason">
+	  <option value="그냥">그냥</option>
+	  <option value="질려서">질려서</option>
+	  </select>
+	  </td></tr>
+	 
+
+	  
 	<tr height="30">
 	  <td colspan="2" align="middle">
 	  <input type="submit" value="회원 탈퇴">
 	  <input type="button" value="취 소" onclick="javascript:window.location='/moneyWatch/main.mw'">
+	  </td></tr>
 </table>
 </form>
-
 </head>
 </body>
 </html>

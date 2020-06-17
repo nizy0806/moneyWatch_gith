@@ -11,5 +11,9 @@
 
 
 <c:if test="${check==1}">
-	<c:redirect url="loginForm.mw"></c:redirect>
+<script>
+	alert("이용해주셔서 감사합니다");
+	window.location="/moneyWatch/main.mw";
+</script>
+	
 </c:if> 
