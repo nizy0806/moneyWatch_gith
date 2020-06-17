@@ -6,6 +6,18 @@
 <head>
 <title>중복확인</title>
 
+
+<script language="javascript">
+
+  function setId()
+    {		
+    	opener.document.userinput.id.value;
+		self.close();
+		
+	}
+
+</script>
+
 <c:if test="${checker == 1}">
 
 	<table width="300" border="0" cellspacing="0" cellpadding="5">
@@ -31,20 +43,9 @@
   <tr bgcolor="${title_c}"> 
     <td align="center"> 
       <p>입력하신 ${id}은(는) 사용하실 수 있는 ID입니다. </p>
-      <input type="button" value="닫기" onclick="setid()">
+      <input type="button" value="닫기" value="confirm_id" onclick="setId()">
     </td>
   </tr>
 </table>
 </c:if>
 </html>
-
-<script language="javascript">
-
-  function setid()
-    {		
-    	opener.document.userinput.id.value="${id}";
-		self.close();
-		
-	}
-
-</script>

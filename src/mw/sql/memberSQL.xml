@@ -16,24 +16,42 @@
 		select count(*) from mwMember where id = #{id}
 	</select>
 	
-	<select id="modifyForm" resultType="memberDTO" parameterType="String">
-  		select * from mwMember where id=#{id}
+	 <select id="modifyCheck" resultType="memberDTO" parameterType="String">
+  		select * from mwMember where id=#{id} 
   		
   	</select>
   	
-  	<update id="modifyPro" parameterType="memberDTO">
-  		update mwMember set pw=#{pw},name=#{name},tel=#{tel},phone1=#{phone1},phone2=#{phone2},zon=#{zon},street=#{street},addr=#{addr},email1=#{email1},email2=#{email2},where id=#{id}
+  	<update id="updateMember" parameterType="memberDTO">
+  		update mwMember set pw=#{pw},name=#{name},tel=#{tel},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3},zon=#{zon},street=#{street},addr=#{addr},email1=#{email1},email2=#{email2} where id=#{id}
   	</update>
-  	
-	<delete id="deletePro" parameterType="memberDTO">
-		delete from mwMember where id=#{id} and pw=#{pw}
-	</delete>
-				 		
+  				 		
 												
-	<select id="search" resultType="memberDTO" parameterType="hashmap">
-
-
+	<!-- <select id="search" resultType="memberDTO" parameterType="hashmap">
+  		select * from mwMember where ${ch} like '%'||#{search}||'%'   	${ch}명령어를 입력하려면 #말고 $써야함
+    </select> -->
+  	 
+  	<select id="deleteCheck" resultType="int" parameterType="hashmap">
+		select count(*) from mwMember where id=#{id} and pw=#{pw}
 	</select>
-			
+  	
+  	
+  	
+  	<select id="deleteSelect" resultType="memberDTO" parameterType="String">
+  		select * from mwMember where id=#{id} 
+  	</select>
+  	
+  	<insert id="deleteMemList" parameterType="deleteMemListDTO" >
+  		insert into mw_deleteMember values(mw_deleteMember_seq.nextval,#{id},#{name},#{gender},#{birth_y},#{birth_m},#{birth_d},#{tel},#{phone1},#{phone2},#{phone3},#{reason},sysdate)
+  	</insert>
+  	
+  	
+  	 
+  	<delete id="deleteMem" parameterType="String">
+  		delete from mwMember where id=#{id}
+  	</delete>
+  	
+  	
+  	 
+  	 
 																			
 </mapper>

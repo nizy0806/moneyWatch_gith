@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>회원가입 form</title>
+<title>회원가입</title>
 <link href="" rel="" type="text/css">
 
 <script language="JavaScript">
@@ -158,14 +158,14 @@
 		<tr>
 		<td width="300">주소</td>
 		<td width="300">
-				<input type="text" name="street" size="10" maxlength="12">
+				<input type="text" name="street" size="30" maxlength="30">
 		</td>
 		</tr>
 		
 		<tr>
 		<td width="300">상세주소</td>
 		<td width="300">
-				<input type="text" name="addr" size="10" maxlength="12">
+				<input type="text" name="addr" size="30" maxlength="30">
 		</td>
 		</tr>
 		

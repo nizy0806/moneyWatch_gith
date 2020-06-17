@@ -1,7 +1,8 @@
 package mw.member.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import mw.member.model.MemberDTO;
+import java.util.HashMap;
+import mw.member.model.*;
 
 public class MemberDAO {
 	
@@ -24,19 +25,40 @@ public class MemberDAO {
 	
 	public int memberCheck(String id) {
 		int checker = sqlSession.selectOne("member.memberCheck", id);
+		
 		return checker;
 	}
-	public MemberDTO modifyForm(String id) {
-		MemberDTO dto = (MemberDTO)sqlSession.selectOne("member.modifyForm",id);
+	
+	public int deleteCheck(String id,String pw) { 
+		HashMap map = new HashMap();
+		map.put("id",id);
+		map.put("pw",pw);
+		
+		int check = (int)sqlSession.selectOne("member.deleteCheck",map);
+		return check;
+	}
+	
+	public void deleteMem(String id) {
+		sqlSession.delete("member.deleteMem", id);
+	
+	}
+	
+	public MemberDTO deleteSelect(String id) {
+		MemberDTO dto1=(MemberDTO)sqlSession.selectOne("member.deleteSelect", id);
+		return dto1;
+	}
+	
+	public void deleteInsert(DeleteMemListDTO dto2) {
+		sqlSession.insert("member.deleteMemList", dto2);
+	}
+	
+	public MemberDTO modifyCheck(String id) {
+		MemberDTO dto = (MemberDTO)sqlSession.selectOne("member.modifyCheck",id);
 	    return dto;
 	}
-	
-	public void mwupdate(MemberDTO dto){
-		sqlSession.update("member.modifyPro", dto);
+
+	public void updateMember(MemberDTO dto){
+		sqlSession.update("member.updateMember", dto);
+
 	}
-	
-	public void mwdelete(MemberDTO dto){
-		sqlSession.delete("member.deletePro", dto);
-	}
-	
 }

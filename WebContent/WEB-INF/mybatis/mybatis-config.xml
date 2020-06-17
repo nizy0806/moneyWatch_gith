@@ -11,9 +11,13 @@
 		<typeAlias type="mw.account_card.model.CardDTO" alias="cardDTO"/> <!-- 카드정보 -->
 		<typeAlias type="mw.account_card.model.Account_cardDTO" alias="accountCardDTO"/>
 		<typeAlias type="mw.calendar.model.MwScheduleDTO" alias="mwscheduleDTO"/> <!-- 캘린더일정 -->
+		<typeAlias type="mw.member.model.DeleteMemListDTO" alias="deleteMemListDTO"/>
 		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/>
+		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/> <!-- 지출/수입 내역 -->
+		<typeAlias type="mw.moneyio.model.NbreadDTO" alias="nbreadDTO"/> <!-- n빵 내역 -->
 		<typeAlias type="mw.sense.model.SenseDTO" alias="senseDTO"/> <!-- 금융지식 -->
 		<typeAlias type="mw.sense.model.SenseCategoryDTO" alias="sensecategoryDTO"/> <!-- 금융지식카테고리 -->
+
 		
 	</typeAliases>
 	

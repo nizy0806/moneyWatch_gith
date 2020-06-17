@@ -11,11 +11,11 @@
 <script language="javaScript">
 
 function focusIt(){
-	document.inform.id.focus();
+	document.inputForm.id.focus();
 }
 
 function checkIt(){
-	inpytForm=eval("document.inform");
+	inputForm=eval("document.inform");
 		if(!inputForm.id.value){
 		alert("아이디를 입력하세요");
 		inputForm.id.focus();
@@ -33,7 +33,7 @@ function checkIt(){
 	<tr>
 	<td width="300" height="20">&ndsp;</td>
 	
-	<form name="inform" method="post" action="/moneyWatch/loginPro.mw" onSubmit="return checkIt();">
+	<form name="inputForm" method="post" action="/moneyWatch/loginPro.mw" onSubmit="return checkIt();">
 	<td width="100" align="right">아이디</td>
 	<td width="100">
 		<input type="text" name="id" size="15" mexlength="10"></td>
