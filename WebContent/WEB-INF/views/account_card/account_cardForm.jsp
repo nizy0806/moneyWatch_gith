@@ -2,6 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script>
+	function fnCngList(sVal){
+		
+		// 카드전체리스트
+		var card_list = new Array(); 
+		<c:foreach items="${card_list}" var="list">
+			list.push("${list.card_name}");
+		</c:foreach>
+
+	}
+
+</script>
 <form method="post" action="account_cardPro.mw">
 	<table>
 		<tr>
@@ -11,7 +23,7 @@
 		<tr>
 			<td>카드/통장</td>
 			<td>
-				<select name="ca_set">
+				<select name="ca_set" >
 					<option value=""></option>
 					<option value="0">카드</option>
 					<option value="1">통장</option>
@@ -22,7 +34,7 @@
 		<tr>
 			<td>은행/카드 기업명</td>
 			<td>
-				<select name="ca_company">
+				<select name="ca_company" id="company" onchange="fnCngList(this.value);">
 					<option value="">카드사</option>
 					<c:forEach var="cdto" items="${card_company_list}">
 						<option value="${cdto.company}">${cdto.company}</option>
@@ -34,8 +46,8 @@
 		<tr>
 			<td>통장/카드 이름</td>
 			<td>
-				<select name="ca_name">
-					<option value="">카드이름</option>
+				<select name="ca_name" id="name">
+					<option value="">카드명</option>
 					<c:forEach var="cdto" items="${card_name_list}">
 						<c:if test=""></c:if>
 						<option value="${cdto.card_name}">${cdto.card_name}</option>
