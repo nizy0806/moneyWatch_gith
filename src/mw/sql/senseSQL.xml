@@ -9,24 +9,34 @@
 				select sense_detail_category from mwsense_category where sense_detail_category=#{gategory}
 			)
 	</select>
+	<!-- 카테고리 리스트 -->
+	<select id="category" resultType="sensecategoryDTO">
+		select sense_detail_category from mwsense_category order by num asc
+	</select>
 	
-	<!-- 센스 임의 입력 -->
+	
+	<!-- 센스 직접 입력 /  파일제외-->
 	<insert id="insert" parameterType="senseDTO">
-		insert into mwsense values(
-				schedule_seq.nextval,		
-				#{main_set},
-				#{sense_category},
-				#{sense_title},
-				#{sense_content},
-				#{sense_url},
-				#{sense_thumbnail},
-				#{sense_reg_date}
-			)
+		insert into mwsense values (
+			mwsense_seq.nextval, 
+			#{main_set},
+			#{sense_category},
+			#{sense_title},
+			#{sense_content},
+			#{sense_url}, 
+			null,
+			sysdate)
 	</insert>
 	
-	<!-- 센스 임의 입력 확인 -->
-	<select id="insertCheck" parameterType="senseDTO">
+	
+	<!-- 센스 직접 입력 확인 -->
+	<select id="insertCheck" resultType="int" parameterType="senseDTO">
 		select count(*) from mwsense where sense_url=#{sense_url}
+	</select>
+	
+	<!-- 파일업로드를 하기 위한 max num값 출력 -->
+	<select id="maxNum" resultType="int">
+		select max(num) from mwsense
 	</select>
 														
 </mapper>

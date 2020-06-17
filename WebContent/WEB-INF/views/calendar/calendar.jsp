@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import = "mw.calendar.model.MwScheduleDTO" %>
-<%@ page import = "java.util.List" %>
-<%@ page import = "java.util.ArrayList" %>
- --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,21 +43,28 @@
           var option = "width = 500, height = 500, top = 100, left = 200, location = no"
     	 
           window.open(url,name,option);
-      }
+      },
+      eventSources:[
+    	  {
+    	  $.ajax({
+              type: "get", 
+              url: "Calendar.mw", // 클라이언트가 요청 보낼 서버의 url주소
+              datyType: "JSON",
+              success: function (data) {
+              	console.log(data);
+              },
+              error: function(){
+            	  alert("ajax error");
+              }),
+              
+    	  title: 
+    	  start:
+    	  end:
+    	  place:
+    	  memo:
       
-/*       eventSources:[{
-    	  events: function(info,successCallback, faulureCallback){
-    		  $.ajax({
-    			  url:
-    		  })
-    	  }
-      }]
-       */
-      
-      
-      
-      
-     /*  events: [
+/*        
+       events: [
         {
           title: 'Business Lunch',
           start: '2020-05-03T13:00:00',
@@ -112,8 +115,9 @@
           rendering: 'background',
           color: '#ff9f89'
         }
-      ] */
+      ] 
     });
+    */
 
     calendar.render();
   });

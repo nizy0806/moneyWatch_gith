@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -17,8 +20,14 @@ public class CalendarBean {
 	private MwScheduleDAO dao = null;
 	
 	@RequestMapping("Calendar.mw")
-	public String cal(MwScheduleDTO mwdto) {
-		//mwscheduleDAO.schedule_insert(mwdto); //ÀÏÁ¤Ãß°¡
+	public String cal() {
+		//DB»Ñ·ÁÁÖ±â ÇÊ¿ä
+		return "/calendar/calendar";
+	}
+	
+	@RequestMapping(value = "Calendar.mw", method=RequestMethod.POST)
+	public String cal(HttpServletRequest request) {
+		
 		return "/calendar/calendar";
 	}
 	
@@ -29,13 +38,14 @@ public class CalendarBean {
 	
 	@RequestMapping("C_insert.mw") //Ä¶¸°´õ ÆË¾÷Ã¢ ÀÔ·Â	
 	public @ResponseBody Map<Object, Object> cal_insert(MwScheduleDTO mwdto, Model model)throws Exception {
+		dao.schedule_insert(mwdto); //Ä¶¸°´õ ÀÏÁ¤ DBÀÔ·Â
+
 		Map<Object,Object> map = new HashMap<Object, Object>(); //¹ÝÈ¯ÇÒ °´Ã¼ »ý¼º
 		
-		dao.schedule_insert(mwdto); //Ä¶¸°´õ ÀÏÁ¤ DBÀÔ·Â
 		
-		List<MwScheduleDTO> list = dao.schedule_select(mwdto);	
-		model.addAttribute("list", list);
-		System.out.println("bean");
+		//List<MwScheduleDTO> list = dao.schedule_select(mwdto);	
+		//model.addAttribute("list", list);
+		System.out.println("DBinsert");
 
 
 		return map;
