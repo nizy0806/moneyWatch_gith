@@ -6,21 +6,55 @@
 <head>
 <meta charset="UTF-8">
 <title>입출력 내역 기입하기</title>
-
 <link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-
 </head>
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	var n_all;
+		function N_divFunction() {
+			var checkBox = document.getElementById("customSwitch1");
+			var text = document.getElementById("io_N_div");
+			var n_bread = document.getElementById("n_bread");
 
+			if (checkBox.checked == true) {
+				text.style.display = "block";
+				n_bread.style.display="block";
+				
+			} else {
+				text.style.display = "none";
+				n_bread.style.display="none";
+				document.getElementById("io_N_div").value = "0";
+				
+			}
+		}
+		
+		function n_button(){
+			/* var n_div = document.getElementById("io_N_div").value; */
+			
+			$.ajax({
+				url : "nbreadForm.mw",
+				data : {nPeople: $("#io_N_div").val()},
+				success : function(data){
+					$("#n_people").html(data);
+				}
+			});
+
+			
+		}
+
+	</script>
 <body>
 	<form action="/moneyWatch/moneyioPro.mw" method="post">
+	<fieldset>
+	<div class="form-group">
 		<h1>
 			<input type="text" name="id">님 안녕하세요!
 		</h1>
 		<table border="1" align="center" width="60%">
 
-			<fieldset>
+			<!-- <fieldset> -->
 				<tr>
-					<div class="form-group">
+					<!-- <div class="form-group"> -->
 						<td><label for="Select">&nbsp&nbsp&nbsp&nbsp카테고리</label></td>
 						<td><select class="form-control" name="io_category">
 								<option value="none">--선택--</option>
@@ -66,7 +100,7 @@
 						</td>
 				</tr>
 				<tr>
-					<div class="form-group">
+					<!-- <div class="form-group"> -->
 						<td><label for="exampleSelect1">&nbsp&nbsp&nbsp&nbsp대상(은행/카드)</label></td>
 						<td><select class="form-control" name="io_bank">
 								<option value="none">--은행/카드--</option>
@@ -85,10 +119,10 @@
 								<option>5</option>
 						</select></td>
 						
-					</div>
+					<!-- </div> -->
 				</tr>
 				<tr>
-					<div class="form-group">
+					<!-- <div class="form-group"> -->
 						<td><label for="money">&nbsp&nbsp&nbsp&nbsp거래 금액</label></td>
 						<td><input type="text" class="form-control" name="io_price"
 							placeholder="won"></td>
@@ -96,10 +130,10 @@
 								잔액</label></td>
 						<td colspan="2"><input type="text" class="form-control"
 							name="io_remain" placeholder="won"></td>
-					</div>
+					<!-- </div> -->
 				</tr>
 				<tr>
-					<div class="form-group">
+					<!-- <div class="form-group"> -->
 						<td><label for="exampleTextarea">&nbsp&nbsp&nbsp&nbsp세부내역</label></td>
 						<td colspan="1"><textarea class="form-control"
 								name="io_detail" rows="3"></textarea></td>
@@ -107,14 +141,10 @@
 							<input type="date" class="form-control" name="io_reg_date"></td>
 						<td colspan="2"><div class="custom-control custom-switch">
 
-								<input type="checkbox" class="custom-control-input"
-									id="customSwitch1" onclick="N_divFunction()">
-								&nbsp&nbsp<label class="custom-control-label"
-									for="customSwitch1">&nbsp&nbspN빵 Check</label> 
-							</div></td>
-						
-					</div>
-					
+						<input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="N_divFunction()" />&nbsp&nbsp
+						<label class="custom-control-label" for="customSwitch1">&nbsp&nbspN빵 Check</label> 
+						</td>
+					<!-- </div> -->
 				</tr>
 				<tr>
 				<td></td><td></td><td></td><td></td>
@@ -122,73 +152,57 @@
 								<button type="submit" class="btn btn-primary" name="">&nbsp&nbspSubmit&nbsp&nbsp</button>   
 							</center></td>
 				</tr>
+				
+			</table>
+			</div>
 			
 			</fieldset>
 
-		</table><br /><br />
+		<br /><br />
 		
 		<div id="n_bread" style="text-align:center;display: none;">
 		<h5 >N빵 상세 내역 기입하기</h5><br />
 		<table border="1" align="center" width="40%">
 		<tr>
-		<td><label for="text">&nbsp&nbsp인원</label></td>
+		<td align="center"><label for="text">인원</label></td>
 		<td><input type="text" id="io_N_div" name="io_N_div" style="display: none" placeholder="N빵 인원"></td>
 		<td><button type="button" class="btn btn-primary" OnClick="n_button()">Click</button></td>
 		</tr>
 		</table>
 		</div>
-		
-			<table border="1" align="center" width="50%" id="n_people" style="display:none">
-				<fieldset>
-					<div>
+		<br />
+		<fieldset>
+		<div class="form-group">
+			<table border="1" align="center" width="50%" id="n_people">
+<!-- 
 						<tr>
-						<div class="form-group">
+						
 							<td><label for="text">&nbsp&nbsp&nbsp&nbsp이름</label></td>
-							<td><input type="text" class="form-control" name="" />
+							<td><input type="text" class="form-control" name="" /></td>
 							<td><label for="text">&nbsp&nbsp&nbsp&nbspN빵 금액</label></td>
-							<td><input type="text" class="form-control" name=""/>
-						</div>
-						</tr>
+							<td><input type="text" class="form-control" name=""/></td>
+
+						</tr> -->
+			</table>
+									
+			<table border="1" align="center" width="50%">						
 					<tr>
 						<center>
 							<input type="reset" class="btn btn-primary" name="reset" value="다시입력">
 						</center>
 					</tr>
 					<br />
-				</fieldset>
+
 			</table>
+		</div>
+		</fieldset>	
+			
+			
 	</form>
-	<div id="test"></div>
-	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript">
-	var n_all;
-		function N_divFunction() {
-			var checkBox = document.getElementById("customSwitch1");
-			var text = document.getElementById("io_N_div");
-			var n_bread = document.getElementById("n_bread");
+	
 
-			if (checkBox.checked == true) {
-				text.style.display = "block";
-				n_bread.style.display="block";
-				
-			} else {
-				text.style.display = "none";
-				n_bread.style.display="none";
-				document.getElementById("io_N_div").value = "0";
-				
-			}
-		}
-		
-		function n_button(){
-			var n_div = document.getElementById("io_N_div").value;
-			n_all = n_div;
-			
-			$("#n_people").append("<tr><td>sadfasdfsafasf</td></tr>");
-			
-		}
-		
-
-	</script>
+	
+	
 </body>
 
 </html>

@@ -3,6 +3,7 @@ package mw.moneyio.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +17,33 @@ public class MoneyioBean {
 	@Autowired
 	private MoneyioDAO dao = null;
 	
+	private List list = new ArrayList();
+	
 	@RequestMapping("moneyioForm.mw")
 	public String moneyioForm() {
 		
 		return "/moneyio/moneyioForm";
 	}
 	
-	
+/*	
 	@RequestMapping("moneyioPro.mw")
 	public String moneyioPro(MoneyioDTO dto, NbreadDTO ndto) {
 //		System.out.println("id : " + dto.getId());
-
 		dao.insert(dto, ndto);
-		//model.addAttribute(attributeValue);
 		return "/moneyio/moneyioPro";
 	}
+*/
+	@RequestMapping("moneyioPro.mw")
+	public String moneyioPro(MoneyioDTO dto, NbreadDTO ndto, HttpServletRequest request) {
+		/* dao.insert(dto, ndto); */
+		String n_debtor = request.getParameter("n_debtor");
+		ndto.setN_debtor(n_debtor);
+		System.out.println(ndto.getN_debtor());
+		
+		return "/moneyio/moneyioPro";
+	}
+	
+	
 	//지출/수입 입력 페이지 수정 페이지
 	@RequestMapping("ioUpdateForm.mw")
 	public String ioUpdateForm(int io_num, int n_num, Model model) {
@@ -57,7 +70,6 @@ public class MoneyioBean {
 		String id = "minmingk1";
 	/* String id = session.getAttribute("memId"); */
 
-		List list = new ArrayList();
 		list = dao.moneyioListAll(id);
 		
 		model.addAttribute("moneyioList", list);
@@ -67,9 +79,7 @@ public class MoneyioBean {
 	
 	@RequestMapping("ioList.mw")	
 	public String ioList(String filter, Model model, HttpSession session) {
-		
-		List list = new ArrayList();
-		
+				
 		String id = "minmingk1";
 		/* String id = session.getAttribute("memId"); */
 		
@@ -97,6 +107,14 @@ public class MoneyioBean {
 		model.addAttribute("dto", dto);
 		
 		return "/moneyio/ioListDetail";
+	}
+	
+	@RequestMapping("nbreadForm.mw")
+	public String nbreadForm(int nPeople, Model model) {
+
+		model.addAttribute("nPeople", nPeople);
+		
+		return "/moneyio/nbreadForm";
 	}
 	
 }
