@@ -62,8 +62,9 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 							event.putString("adminRe", "회원님의 아이디는 ### 입니다.");		
 							
 						}else if((userMsg.contains("현재") || userMsg.contains("지금")) && 
-								(userMsg.contains("남아있는") || userMsg.contains("남은")) && userMsg.contains("잔액")) {
-							
+								(userMsg.contains("남아있") || userMsg.contains("남은")) && 
+								(userMsg.contains("잔액") || userMsg.contains("금액") || userMsg.contains("얼마"))
+								) {
 							
 							event.putString("adminRe", "회원님의 현재 남은 잔액은 " + /* list[0].io_remain  + */ "원 입니다.");		
 							
