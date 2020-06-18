@@ -37,6 +37,7 @@
 				/WEB-INF/controller/moneyio-servlet.xml
 				/WEB-INF/controller/sense-servlet.xml
 				/WEB-INF/controller/account_card-servlet.xml
+				/WEB-INF/controller/chat-servlet.xml
 			</param-value>
 		</init-param>
 	</servlet>
