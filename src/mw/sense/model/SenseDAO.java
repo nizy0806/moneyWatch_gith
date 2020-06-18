@@ -20,7 +20,7 @@ public class SenseDAO {
 	public List<SenseCategoryDTO> category() {
 		return sqlSession.selectList("sense.category"); //카테고리로 선택해서 불러옴
 	}
-	 
+	
 	//센스 직접 입력
 	public void senseInsert(SenseDTO dto) {
 		sqlSession.insert("sense.insert", dto); //데이터입력
