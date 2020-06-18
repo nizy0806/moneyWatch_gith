@@ -6,11 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>입출력 내역 기입하기</title>
-
 <link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-
 </head>
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	var n_all;
+		function N_divFunction() {
+			var checkBox = document.getElementById("customSwitch1");
+			var text = document.getElementById("io_N_div");
+			var n_bread = document.getElementById("n_bread");
 
+			if (checkBox.checked == true) {
+				text.style.display = "block";
+				n_bread.style.display="block";
+				
+			} else {
+				text.style.display = "none";
+				n_bread.style.display="none";
+				document.getElementById("io_N_div").value = "0";
+				
+			}
+		}
+		
+		function n_button(){
+			var n_div = document.getElementById("io_N_div").value;
+			n_all = n_div;
+			
+			$("#n_people").append("<tr><td>sadfasdfsafasf</td></tr>");
+			
+		}
+
+	</script>
 <body>
 	<form action="/moneyWatch/moneyioPro.mw" method="post">
 		<h1>
@@ -159,36 +185,7 @@
 			</table>
 	</form>
 	<div id="test"></div>
-	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript">
-	var n_all;
-		function N_divFunction() {
-			var checkBox = document.getElementById("customSwitch1");
-			var text = document.getElementById("io_N_div");
-			var n_bread = document.getElementById("n_bread");
-
-			if (checkBox.checked == true) {
-				text.style.display = "block";
-				n_bread.style.display="block";
-				
-			} else {
-				text.style.display = "none";
-				n_bread.style.display="none";
-				document.getElementById("io_N_div").value = "0";
-				
-			}
-		}
-		
-		function n_button(){
-			var n_div = document.getElementById("io_N_div").value;
-			n_all = n_div;
-			
-			$("#n_people").append("<tr><td>sadfasdfsafasf</td></tr>");
-			
-		}
-		
-
-	</script>
+	
 </body>
 
 </html>

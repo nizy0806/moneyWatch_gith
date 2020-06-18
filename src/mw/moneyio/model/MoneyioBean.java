@@ -26,9 +26,7 @@ public class MoneyioBean {
 	@RequestMapping("moneyioPro.mw")
 	public String moneyioPro(MoneyioDTO dto, NbreadDTO ndto) {
 //		System.out.println("id : " + dto.getId());
-
 		dao.insert(dto, ndto);
-		//model.addAttribute(attributeValue);
 		return "/moneyio/moneyioPro";
 	}
 	//지출/수입 입력 페이지 수정 페이지

@@ -27,7 +27,9 @@ public class MoneyioDAO {
 //		System.out.println("id : " + dto.getId());
 		
 		sqlSession.insert("moneyio.insert", dto);
-		sqlSession.insert("moneyio.n_insert", ndto );
+		if(dto.getIo_n_div() > 0) {
+			sqlSession.insert("moneyio.n_insert", ndto );
+		}
 	}
 	//지출/수입 내역 수정 페이지
 	public List ioUpdateForm(int io_num) {
