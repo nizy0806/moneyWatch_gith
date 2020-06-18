@@ -9,7 +9,7 @@
 		$.ajax({
 			type: "POST",
 			url: "select_card.mw", // 데이터를 넘겨줄 url
-			data: {cardCompany: $("#company").val()}, // 넘겨줄 데이터
+			data: {cardCompany: $("#company").val()}, // 설정한 url에 넘겨줄 데이터
 			success: function(data){
 				$("#select_card").html(data); // 다시 받아온 데이터를 넣어줄 곳
 			}			
