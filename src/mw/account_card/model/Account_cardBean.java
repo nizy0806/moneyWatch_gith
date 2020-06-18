@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,20 +17,34 @@ public class Account_cardBean {
 	@Autowired
 	private Account_cardDAO acdao= null;
 	
+	// 카드/계좌 등록 form
 	@RequestMapping("account_cardForm.mw")
-	public String Account_cardForm(Model model) {
+	public String Account_cardForm(Model model, HttpSession session) {
 		
-		List card_list = acdao.card_select();
-		List card_company_list = acdao.card_company_select();
-		List card_name_list = acdao.card_name_select();
-		
-		model.addAttribute("card_list",card_list);
+		/* String id = (String)session.getAttribute("memId"); */
+		String id = "nahui068";
+
+		List card_company_list = acdao.card_company_select(); // 카드회사 리스트
+
 		model.addAttribute("card_company_list",card_company_list);
-		model.addAttribute("card_name_list",card_name_list);
+		model.addAttribute("memId",id);
 		
 		return "/account_card/account_cardForm";
 	}
 	
+	// 카드사에 따른 카드이름 선택
+	@RequestMapping("select_card.mw")
+	public String select_card(String cardCompany, Model model){
+			
+		List card_cn_list = acdao.card_cn_select(cardCompany); // 카드명,카드회사 리스트
+		
+		model.addAttribute("cardCompany", cardCompany); // 카드회사
+		model.addAttribute("cardList", card_cn_list);
+		
+		return "/account_card/select_card";
+	}
+	
+	// 카드/계좌 등록 
 	@RequestMapping("account_cardPro.mw")
 	public String Account_cardPro(Account_cardDTO acdto) {
 		
@@ -88,4 +104,10 @@ public class Account_cardBean {
 		
 		return "/account_card/card_img_insert";
 	}
+	
+
+	
+	
+	
+	
 }

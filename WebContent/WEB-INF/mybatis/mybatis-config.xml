@@ -9,7 +9,7 @@
 		<typeAlias type="mw.member.model.MemberDTO" alias="memberDTO" /> <!-- 회원  -->
 		<typeAlias type="mw.account_card.model.Card_imgDTO" alias="card_imgDTO"/> <!-- 카드이미지 -->
 		<typeAlias type="mw.account_card.model.CardDTO" alias="cardDTO"/> <!-- 카드정보 -->
-		<typeAlias type="mw.account_card.model.Account_cardDTO" alias="accountCardDTO"/>
+		<typeAlias type="mw.account_card.model.Account_cardDTO" alias="accountCardDTO"/> <!-- 카드/계좌 정보등록 -->
 		<typeAlias type="mw.calendar.model.MwScheduleDTO" alias="mwscheduleDTO"/> <!-- 캘린더일정 -->
 		<typeAlias type="mw.member.model.DeleteMemListDTO" alias="deleteMemListDTO"/><!--탈퇴회원 -->
 		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/>

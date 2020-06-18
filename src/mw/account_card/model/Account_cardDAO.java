@@ -15,6 +15,12 @@ public class Account_cardDAO {
 	
 	// 회원이 등록하는 카드/계좌
 	public void insert(Account_cardDTO acdto) {
+		System.out.println(acdto.getCa_name());
+		System.out.println(acdto.getCa_company());
+		System.out.println(acdto.getCa_nickname());
+		System.out.println(acdto.getCa_set());
+		System.out.println(acdto.getId());
+		
 		sqlSession.insert("account_card.ac_insert",acdto);
 	}
 	
@@ -32,7 +38,16 @@ public class Account_cardDAO {
 		return card_list;
 	}
 	
-	// 카드회사 가져오기 
+	// 카드회사  및 카드이름 가져오기 
+	public List card_cn_select(String cardName) {
+		
+		List card_cn_list = new ArrayList();
+		card_cn_list = sqlSession.selectList("account_card.card_cn",cardName);
+		
+		return card_cn_list;
+	}
+	
+	// 카드사 가져오기
 	public List card_company_select() {
 		
 		List card_company_list = new ArrayList();
@@ -40,15 +55,7 @@ public class Account_cardDAO {
 		
 		return card_company_list;
 	}
-	
-	// 카드이름 가져오기 
-	public List card_name_select() {
-		
-		List card_name_list = new ArrayList();
-		card_name_list = sqlSession.selectList("account_card.card_name");
-		
-		return card_name_list;
-	}
+
 	
 	
 }

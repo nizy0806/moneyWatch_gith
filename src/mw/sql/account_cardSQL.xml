@@ -8,19 +8,19 @@
 		select * from mwCard
 	</select>
 	
-	<!-- 카드 회사 -->
+	<!-- 카드사 및 카드이름-->
+	<select id="card_cn" resultType="cardDTO" parameterType="String">
+		select distinct company,card_name from mwCard where company = #{value}
+	</select>
+	
+	<!-- 카드사 -->
 	<select id="card_company" resultType="cardDTO">
 		select distinct company from mwCard
 	</select>
 	
-	<!-- 카드 이름 -->
-	<select id="card_name" resultType="cardDTO">
-		select distinct card_name from mwCard
-	</select>
-	
 	<!-- 카드/계좌 DB insert -->
 	<insert id="ac_insert" parameterType="accountCardDTO">
-		insert into mwRegister_CA values(CAregister_seq.nextval,#{CA_set},#{id},#{CA_company},#{CA_name},#{CA_nickname})	
+		insert into mwRegister_CA values(CAregister_seq.nextval,#{ca_set},#{id},#{ca_company},#{ca_name},#{ca_nickname})	
 	</insert>
 
 	<!-- 카드 정보 이미지 DB insert -->
