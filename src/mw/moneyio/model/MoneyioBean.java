@@ -16,6 +16,8 @@ public class MoneyioBean {
 	@Autowired
 	private MoneyioDAO dao = null;
 	
+	private List list = new ArrayList();
+	
 	@RequestMapping("moneyioForm.mw")
 	public String moneyioForm() {
 		
@@ -55,7 +57,6 @@ public class MoneyioBean {
 		String id = "minmingk1";
 	/* String id = session.getAttribute("memId"); */
 
-		List list = new ArrayList();
 		list = dao.moneyioListAll(id);
 		
 		model.addAttribute("moneyioList", list);
@@ -65,9 +66,7 @@ public class MoneyioBean {
 	
 	@RequestMapping("ioList.mw")	
 	public String ioList(String filter, Model model, HttpSession session) {
-		
-		List list = new ArrayList();
-		
+				
 		String id = "minmingk1";
 		/* String id = session.getAttribute("memId"); */
 		
