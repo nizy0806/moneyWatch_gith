@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +25,12 @@
 		<tr>
 			<td>
 				카테고리 : <!-- for문 돌려서 셀렉트 -->
-					<select>
-						<option></option>
-					</select>
+				<select name="sense_category">
+						<option>카테고리</option>
+					<c:forEach var="list" items="${ list }">				
+						<option>${ list.sense_detail_category }</option>
+					</c:forEach>
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -39,12 +43,12 @@
 				URL : <input type="text" id="sense_url" name="sense_url"/>
 			</td>
 		</tr>
-			<tr>
-				<td>
-					이미지 : <input type="file" id="sense_thumbnail" name="sense_thumbnail"><br/>
-						  <input type="submit" value="전송"/>
-				</td> 
-			</tr>
+		<tr>
+			<td>
+<!--   				이미지 : <input type="file" id="sense_thumbnail" name="sense_thumbnail"><br/>  -->
+					  <input type="submit" value="전송"/>
+			</td> 
+		</tr>
 	</table>
 	</form>
 </body>

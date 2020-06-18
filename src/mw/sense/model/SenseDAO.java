@@ -16,17 +16,28 @@ public class SenseDAO {
 	
 	//메인
 	
-	//선택리스트
-	public List<SenseDTO> categorySelect(String category) {
-		return sqlSession.selectList("sense.categorySelect", category); //카테고리로 선택해서 불러옴
+	//센스 입력 폼에 카테고리 셀렉트 리스트
+	public List<SenseCategoryDTO> category() {
+		return sqlSession.selectList("sense.category"); //카테고리로 선택해서 불러옴
 	}
 	
-	//센스 임의 입력과 입력 확인
-	public int senseWrite(SenseDTO dto) {
+	//센스 직접 입력
+	public void senseInsert(SenseDTO dto) {
 		sqlSession.insert("sense.insert", dto); //데이터입력
-		int check = sqlSession.selectOne("sense.insertCheck", dto); //입력확인
+	}
+	
+	//센스 입력 확인
+	public int senseInsertCheck(SenseDTO dto) {
+		int check = sqlSession.selectOne("sense.insertCheck", dto);
+		System.out.println(check);
 		return check;
 	}
+	
+//	//이미지파일 num값 가져오기
+//	public int getMaxNum() {
+//		int num = sqlSession.selectOne("sense.maxNum");
+//		return num;
+//	}
 	
 	
 	
