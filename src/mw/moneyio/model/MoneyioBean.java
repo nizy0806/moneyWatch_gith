@@ -36,9 +36,20 @@ public class MoneyioBean {
 	@RequestMapping("moneyioPro.mw")
 	public String moneyioPro(MoneyioDTO dto, NbreadDTO ndto, HttpServletRequest request) {
 		/* dao.insert(dto, ndto); */
-		String n_debtor = request.getParameter("n_debtor");
-		ndto.setN_debtor(n_debtor);
-		System.out.println(ndto.getN_debtor());
+		String[] n_debtor = request.getParameterValues("n_debtor");
+		String[] n_price = request.getParameterValues("n_price");
+		
+		for(int i = 0; i < n_debtor.length; i++) {
+			ndto.setN_debtor(n_debtor[i]);
+			ndto.setN_price(n_price[i]);
+			
+			/////// dao수행 코드 작성하기
+			
+			System.out.println(ndto.getN_debtor());
+		}
+		
+		
+		//System.out.println(ndto.getN_debtor());
 		
 		return "/moneyio/moneyioPro";
 	}
