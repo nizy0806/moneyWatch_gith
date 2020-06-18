@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>senseWriteForm</title>
+
 </head>
 <body>
 	<h1>당신의 sense를 입력하세요 관리자야^^</h1>
@@ -19,7 +21,15 @@
 		</tr>
 		<tr>
 			<td>
-				메인 유무 : <input type="checkbox" id="main_set" name="main_set" value="0"/>			
+				메인 유무 : <input type="checkbox" id="main_set" name="main_set"/>
+							<script>
+								if($("#main_set").prop("checked")){
+									$("#main_set").val(1);
+								}else{
+									$("#main_set").val(0);
+								}
+							</script>
+								
 			</td>
 		</tr>
 		<tr>

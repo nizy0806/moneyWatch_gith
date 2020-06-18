@@ -3,18 +3,46 @@
 
  
 <mapper namespace="sense">
-	<!-- 카테고리 선택 -->	
-	<select id="categorySelect" resultType="senseDTO" parameterType="String">
-		select * from mwsense where	(
-				select sense_detail_category from mwsense_category where sense_detail_category=#{gategory}
+
+	<!-- 메인 동영상 / 메인페이지/ 랜덤 카테고리 출력 후 해당 카테고리인 랜덤 영상을 출력-->
+	<select id="mainVideo" resultType="senseDTO">
+			<!-- DB main_set의 값이 1 일때, 메인 -->
+	<![CDATA[
+		select * from (
+		   select * from mwsense where main_set=${0} and sense_category=(
+		       select sense_detail_category from 
+		            (select * from mwsense_category order by dbms_random.value)
+		        where rownum <= 1
+		    )
+		) where rownum <= 1 		
+		]]>	<!-- <= 등호 처리  -->
+	</select>
+	
+	<!-- 메인 리스트 출력 / 메인페이지-->
+	<select id="mainList" resultType="senseDTO">
+		select num, sense_category, sense_title, sense_content, sense_url, sense_thumbnail from mwsense where main_set=${0} order by num desc <!-- DB main_set의 값이 1 일때, 메인 -->
+	</select>
+
+	<!-- 카테고리 선택시 / 메인페이지-->	
+	<select id="categorySelect" resultType="senseDTO" parameterType="int">
+		select * from mwsense where main_set=${0} and sense_category=(
+				select sense_detail_category from mwsense_category where num=#{num} 
 			)
+		order by num desc
 	</select>
-	<!-- 카테고리 리스트 -->
+	
+	<!-- 디테일 페이지 -->
+	<select id="detail" resultType="senseDTO" parameterType="int">
+		select * from mwsense where num=${num}
+	</select>
+	
+	
+	
+	<!-- 카테고리 리스트 / 센스 입력시  -->
 	<select id="category" resultType="sensecategoryDTO">
-		select sense_detail_category from mwsense_category order by num asc
+		select * from mwsense_category order by num asc
 	</select>
-	
-	
+		
 	<!-- 센스 직접 입력 /  파일제외-->
 	<insert id="insert" parameterType="senseDTO">
 		insert into mwsense values (
@@ -26,8 +54,7 @@
 			#{sense_url}, 
 			null,
 			sysdate)
-	</insert>
-	
+	</insert>	
 	
 	<!-- 센스 직접 입력 확인 -->
 	<select id="insertCheck" resultType="int" parameterType="senseDTO">

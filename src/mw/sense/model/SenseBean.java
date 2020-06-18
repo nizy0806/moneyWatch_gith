@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -16,27 +17,96 @@ public class SenseBean {
 	@Autowired
 	private SenseDAO dao = null;
 	
-	//메인
+	/*
+	//R - 메인 
 	@RequestMapping("sense.mw")
-	public String senseMain() {
+	public String senseMain(Model model, String category) {
+		
+		if(category == null) {
+			
+			SenseDTO video = dao.mainVideo(); //오늘의 영상
+			List<SenseDTO> mainlist = dao.mainList(); //메인 리스트
+			
+			model.addAttribute("video", video); //오늘의 영상 url 보내기
+			model.addAttribute("list", mainlist); //메인 리스트			
 
-		return "/sense/senseList";
+			return "/sense/senseMain";
+			
+		}else{
+			
+			SenseDTO video = dao.mainVideo(); //오늘의 영상
+			List<SenseDTO> category_select_list = dao.mainCategorySelect(category); //리스트 출력		
+			
+			model.addAttribute("video", video); //오늘의 영상 url 보내기
+			model.addAttribute("list", category_select_list);
+			return "/sense/senseMain";
+			
+		}
+	}
+	*/
+	//R - 메인 
+	@RequestMapping("sense.mw")
+	public String senseMain(Model model) {
+	
+		SenseDTO video = dao.mainVideo(); //오늘의 영상
+		List<SenseCategoryDTO> category = dao.category(); //카테고리 리스트
+		List<SenseDTO> mainlist = dao.mainList(); //메인 리스트
+				
+		model.addAttribute("video", video); //오늘의 영상 url 보내기
+		model.addAttribute("category", category); //카테고리 리스트
+		model.addAttribute("list", mainlist); //메인 리스트			
+
+		return "/sense/senseMain";
+		
 	}
 	
-	//센스 직접 입력 폼 - 카테고리 선택
+	/*
+	//R - 메인 / 카테고리 선택 시 리스트
+	@RequestMapping("senseSelect.mw")
+	public @ResponseBody Model senseCategorySelect(Model model, int num) {
+		System.out.println(num);
+		List<SenseDTO> category_select_list = dao.mainCategorySelect(num); //리스트 출력				
+		return 	model.addAttribute("list", category_select_list);
+		
+	}
+	*/
+	
+	//R - 메인 / 카테고리 선택 시 리스트
+	@RequestMapping("senseSelect.mw")
+	public String senseCategorySelect(Model model, int num) {
+		
+		List<SenseDTO> category_select_list = dao.mainCategorySelect(num); //리스트 출력		
+		model.addAttribute("list", category_select_list);
+		
+		return "/sense/mainList";		
+	}
+	
+	//R - 디테일 페이지
+	@RequestMapping("senseDetail.mw")
+	public String senseDetail(int num) { //시퀀스 번호를 매개변수로 받음
+		
+		dao.senseDetail(num); //디테일 페이지의 정보를 가져옴
+		return "/sense/detail";
+		
+	}
+	
+	
+	
+	//C - 센스 직접 입력 폼 - 카테고리 selectbox
 	@RequestMapping("senseWriteForm.mw")
 	public String categorySelect(Model model) {
-		List<SenseCategoryDTO> list = dao.category();
+		
+		List<SenseCategoryDTO> list = dao.category(); //카테고리 리스트
 		model.addAttribute("list", list);
 		return "/sense/senseWriteForm";
+		
 	}
 	
-	//센스 직접 입력 pro페이지 
+	//C - 센스 직접 입력 pro페이지 
 	@RequestMapping("senseWritePro.mw")
 	public String senseWritePro(SenseDTO dto, Model model) {
 
-		dao.senseInsert(dto); //입력
-		
+		dao.senseInsert(dto); //입력		
 		int check = dao.senseInsertCheck(dto); //입력확인
 		
 		model.addAttribute("check", check); //check 반환
