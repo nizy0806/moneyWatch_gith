@@ -3,6 +3,8 @@ package mw.sense.model;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,7 +94,7 @@ public class SenseBean {
 	
 	
 	
-	//C - 센스 직접 입력 폼 - 카테고리 selectbox
+	//C - 센스 직접 입력 form - 카테고리 selectbox
 	@RequestMapping("senseWriteForm.mw")
 	public String categorySelect(Model model) {
 		
@@ -151,5 +153,33 @@ public class SenseBean {
 //		model.addAttribute("check", check); //check 반환
 //		return "/sense/senseWritePro";
 //	}
+	
+	//센스 수정 form페이지
+	@RequestMapping("senseModify.mw")
+	public String senseModifySelect(int num, Model model, HttpSession session) {
+		
+		//관리자 테이블 만들어지면 추가 처리 - dao, sql 작성 필요
+		String id = "admin";
+		// String id = session.getAttribute("memId");
+		
+		dao.senseModifySelect(num); //시퀀스 값으로 게시글 내용 호출
+		return "/sense/senseModify";
+		
+	}
+	
+	//센스 수정 pro페이지
+	@RequestMapping("senseModifyPro.mw")
+	public String senseModify(SenseDTO dto, Model model, HttpSession session) {
+		
+		//관리자 테이블 만들어지면 추가 처리 - dao, sql 작성 필요
+		String id = "admin";
+		// String id = session.getAttribute("memId");
+		
+		dao.senseModify(dto);
+		int check = dao.senseModifyCheck(dto);
+		
+		model.addAttribute("check", check); //check 반환
+		return "/sense/senseModifyPro";
+	}
 	
 }

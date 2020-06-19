@@ -31,7 +31,7 @@ public class SenseDAO {
 	
 	//디테일 페이지
 	public SenseDTO senseDetail(int num) {
-		return sqlSession.selectOne("sense.detail", num); //디테일 페이지에 해당 정보를 보여줌
+		return sqlSession.selectOne("sense.select", num); //디테일 페이지에 해당 정보를 보여줌
 	}
 	
 	
@@ -58,6 +58,20 @@ public class SenseDAO {
 //		return num;
 //	}
 	
+	//U - 센스 수정 페이지 불러오기
+	public SenseDTO senseModifySelect(int num) {
+		return sqlSession.selectOne("sense.select", num); //디테일 페이지에 해당 정보를 보여줌
+	}
 	
+	//U - 센스 수정하기
+	public void senseModify(SenseDTO dto) {
+		sqlSession.update("sense.senseModify",dto);
+	}
+	
+	//U - 센스 수정 확인
+	public int senseModifyCheck(SenseDTO dto) {
+		int check = sqlSession.selectOne("sense.modifyCheck", dto);
+		return check;
+	}
 	
 }

@@ -31,8 +31,8 @@
 		order by num desc
 	</select>
 	
-	<!-- 디테일 페이지 -->
-	<select id="detail" resultType="senseDTO" parameterType="int">
+	<!-- 디테일 페이지/ 수정 페이지 -->
+	<select id="select" resultType="senseDTO" parameterType="int">
 		select * from mwsense where num=${num}
 	</select>
 	
@@ -65,5 +65,27 @@
 	<select id="maxNum" resultType="int">
 		select max(num) from mwsense
 	</select>
+	
+	<!-- 센스 게시글 수정 -->
+	<update id="senseModify" parameterType="senseDTO">
+		update mwsense
+		<trim prefix="set" suffixOverrides=",">
+			<if test="num != null">num=#{num},</if>
+			<if test="main_set !=null">main_set=#{main_set},</if>
+			<if test="sense_category != null">sense_category=#{sense_category},</if>
+			<if test="sense_title != null">sense_title=#{sense_title},</if>
+			<if test="sense_content != null">sense_content=#{sense_content},</if>
+			<if test="sense_url != null">sense_url=#{sense_url},</if>
+			<if test="sense_thumbnail != null">sense_thumbnail=#{sense_thumbnail},</if>
+			<if test="sense_reg_date != null">reg_date=#{reg_date}</if>
+		</trim>
+		where mwsense=#{num}
+	</update>
+	
+	<!-- 센스 수정 확인 -->
+	<select id="modifyCheck" resultType="int" parameterType="senseDTO">
+		select count(*) from mwsense where sense_url=#{sense_url}
+	</select>
+	
 														
 </mapper>
