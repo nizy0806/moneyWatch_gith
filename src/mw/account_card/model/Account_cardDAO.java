@@ -15,12 +15,6 @@ public class Account_cardDAO {
 	
 	// 회원이 등록하는 카드/계좌
 	public void insert(Account_cardDTO acdto) {
-		System.out.println(acdto.getCa_name());
-		System.out.println(acdto.getCa_company());
-		System.out.println(acdto.getCa_nickname());
-		System.out.println(acdto.getCa_set());
-		System.out.println(acdto.getId());
-		
 		sqlSession.insert("account_card.ac_insert",acdto);
 	}
 	
@@ -54,6 +48,24 @@ public class Account_cardDAO {
 		card_company_list = sqlSession.selectList("account_card.card_company");
 		
 		return card_company_list;
+	}
+	
+	// 카드명에 따른 카드혜택 가져오기
+	public List card_benefit_select(String cardName) {
+		
+		List card_benefit_list = new ArrayList();
+		card_benefit_list = sqlSession.selectList("account_card.card_benefit",cardName);
+		
+		return card_benefit_list;
+	}
+	
+	//카드 이미지
+	public List card_img() {
+		
+		List card_img = new ArrayList();
+		card_img = sqlSession.selectList("account_card.card_img");
+		
+		return card_img;
 	}
 
 	

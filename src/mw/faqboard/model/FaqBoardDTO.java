@@ -13,6 +13,8 @@ public class FaqBoardDTO {
 	private int re_step;
 	private int re_level;
 	private Timestamp reg;
+	private int ref;
+	
 	
 	
 	
@@ -75,5 +77,11 @@ public class FaqBoardDTO {
 	}
 	public void setReg(Timestamp reg) {
 		this.reg = reg;
+	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref=ref;
 	}
 }
