@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>F&A 게시판</title>
+<title>FAQ 게시판</title>
 </head>
 
 <body>
@@ -44,13 +44,76 @@
 		<td align="center" width="150">작성일</td>
 		<td align="center" width="50">조회</td>
 	</tr>
-<c:forEach var="article" items="${articleList}" >	
+<c:forEach var="article" items="${articleList}" >
+
+	<tr height="30">
+		<td align="center" width="50">${number} </td>
+			<c:set var="number" value="${number-1}" />
+		<td width="250">
+			<c:set var="wid" value="0" /></td>
+			<c:if test="${article.re_level > 0}" >
+			<img src="/moneyWatch/image/level.gif" width="${wid}" height="16">
+			<c:set var="wid" value="${5*article.re_level}" />
+			</c:if>
+			
+			<c:if test="${article.re_level ==0}" >
+			<img src="/moneyWatch/image/level.gif" width="${wid}" height="16">
+			</c:if>
+			
+			<a href="/moneyWatch/content.mw?num=${article.num}&pageNum=${currentPage}">
+			${article.subject}</a>
+			<c:if test="${article.readcount >=20}">
+			<img src="/moneyWatch/image/hot.gif" border="0" height="16" >
+			</c:if>
+			
+		<td align="center" width="100">
+			<a href="mail to:${article.email}">${article.writer}</a></td>
+		<td align="center" width="150">${article.reg_date}</td>
+		
+		<td align="center" width="50">${article.readcount}</td>
+	</tr>
 </c:forEach>
 </table>
 </c:if>
 
-
-
+	<c:if test="${count > 0}">
+	
+		<c:if test="${startPage > 10}">
+		<a href="/moneyWatch/faqList.mw?pageNum=${startPage - 10}">이전</a>
+		</c:if>
+		
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+			<a href="/moneyWatch/faqList.mw?pageNum=${i}" >${i}</a>
+		</c:forEach>
+		
+		<c:if test="${endPage < pageCount}" >
+			<a href="/moneyWatch/faqList.mw?pageNum=${startPage + 10}">다음</a>
+		</c:if>
+	</c:if>
 </center>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

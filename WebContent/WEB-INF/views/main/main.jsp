@@ -60,7 +60,7 @@ function checkIt(){
 	
 	<input type="submit" value="로그아웃" >
 	<input type="button" value="회원정보변경" onclick="javascript:window.location='/moneyWatch/modify.mw'">
-
+	<input type="button" value="게시판" onclick="javascript:window.location='/moneyWatch/faqList.mw'">
 
 </form>
 
