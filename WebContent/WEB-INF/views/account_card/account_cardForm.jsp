@@ -34,6 +34,7 @@
 
 </script>
 
+<h1>카드/계좌 등록</h1>
 <form name = "card_info" method="post" action="account_cardPro.mw">
 	<table align="center" border="1">
 		<tr>

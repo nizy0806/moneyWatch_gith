@@ -49,6 +49,24 @@ public class Account_cardDAO {
 		
 		return card_company_list;
 	}
+	
+	// 카드명에 따른 카드혜택 가져오기
+	public List card_benefit_select(String cardName) {
+		
+		List card_benefit_list = new ArrayList();
+		card_benefit_list = sqlSession.selectList("account_card.card_benefit",cardName);
+		
+		return card_benefit_list;
+	}
+	
+	//카드 이미지
+	public List card_img() {
+		
+		List card_img = new ArrayList();
+		card_img = sqlSession.selectList("account_card.card_img");
+		
+		return card_img;
+	}
 
 	
 	

@@ -121,6 +121,41 @@ public class Account_cardBean {
 		return "/account_card/card_img_insert";
 	}
 	
+	// 카드사 선택(혜택보기 위한 것)
+	@RequestMapping("card_benefit.mw")
+	public String card_benefit(String cardCompany, Model model) {
+		
+		List card_company_list = acdao.card_company_select(); // 카드회사 리스트
+
+		model.addAttribute("card_company_list",card_company_list);
+		
+		return "/card_benefit/card_benefit";
+	}
+	
+	// 카드명 선택(혜택보기 위한 것)
+	@RequestMapping("benefit_select.mw")
+	public String benefit_select(String cardCompany, Model model) {
+		
+		List card_cn_list = acdao.card_cn_select(cardCompany); // 카드명,카드회사 리스트
+		//List card_img = acdao.card_img();
+		
+		model.addAttribute("cardCompany", cardCompany); // 카드회사
+		model.addAttribute("cardList", card_cn_list);
+		//model.addAttribute("cardImg",card_img); // 카드이미지
+		
+		return "/card_benefit/benefit_select";
+	}
+	
+	// 카드에 대한 혜택
+	@RequestMapping("benefit.mw")
+	public String benefit(String cardName, Model model) {
+		
+		List card_benefit_list = acdao.card_benefit_select(cardName);
+		
+		model.addAttribute("benefitList",card_benefit_list);
+		return "/card_benefit/benefit";
+		
+	}
 
 	
 	
