@@ -15,12 +15,6 @@ public class Account_cardDAO {
 	
 	// 회원이 등록하는 카드/계좌
 	public void insert(Account_cardDTO acdto) {
-		System.out.println(acdto.getCa_name());
-		System.out.println(acdto.getCa_company());
-		System.out.println(acdto.getCa_nickname());
-		System.out.println(acdto.getCa_set());
-		System.out.println(acdto.getId());
-		
 		sqlSession.insert("account_card.ac_insert",acdto);
 	}
 	

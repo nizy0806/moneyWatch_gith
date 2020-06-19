@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
 
-		<td>통장/카드이름</td>
+		<td>카드명</td>
 		<td>
 			<select name="ca_name" id="card_name">
 				<option value="카드명">카드명</option>

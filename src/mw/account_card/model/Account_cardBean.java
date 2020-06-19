@@ -24,9 +24,6 @@ public class Account_cardBean {
 		/* String id = (String)session.getAttribute("memId"); */
 		String id = "nahui068";
 
-		List card_company_list = acdao.card_company_select(); // 카드회사 리스트
-
-		model.addAttribute("card_company_list",card_company_list);
 		model.addAttribute("memId",id);
 		
 		return "/account_card/account_cardForm";
@@ -34,14 +31,33 @@ public class Account_cardBean {
 	
 	// 카드사에 따른 카드이름 선택
 	@RequestMapping("select_card.mw")
-	public String select_card(String cardCompany, Model model){
-			
-		List card_cn_list = acdao.card_cn_select(cardCompany); // 카드명,카드회사 리스트
+	public String select_cardName(String cardCompany, Model model){
 		
+		List card_cn_list = acdao.card_cn_select(cardCompany); // 카드명,카드회사 리스트
+	
 		model.addAttribute("cardCompany", cardCompany); // 카드회사
 		model.addAttribute("cardList", card_cn_list);
 		
 		return "/account_card/select_card";
+	}
+	
+	// 은행선택 및 계좌번호 선택하는 칸 
+	@RequestMapping("bank.mw")
+	public String select_bank(String bank_num, Model model) {
+		
+		model.addAttribute("bank_num",bank_num);
+		return "/account_card/bank";
+	}
+	
+	// 카드사 및 카드명 선택하는 칸
+	@RequestMapping("card.mw")
+	public String select_card(String card_num, Model model) {
+		
+		List card_company_list = acdao.card_company_select(); // 카드회사 리스트
+
+		model.addAttribute("card_company_list",card_company_list);
+		model.addAttribute("card_num",card_num);
+		return "/account_card/card";
 	}
 	
 	// 카드/계좌 등록 

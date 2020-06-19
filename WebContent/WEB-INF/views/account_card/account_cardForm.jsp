@@ -4,59 +4,65 @@
 
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script language="javascript">
-	function setSelectBox(){
 
+	function selectCard(){
 		$.ajax({
-			type: "POST",
-			url: "select_card.mw", // 데이터를 넘겨줄 url
-			data: {cardCompany: $("#company").val()}, // 설정한 url에 넘겨줄 데이터
-			success: function(data){
-				$("#select_card").html(data); // 다시 받아온 데이터를 넣어줄 곳
-			}			
+			type : "POST",
+			url : "card.mw",
+			data : {card_num:$("#ca_set1").val()},
+			success : function(data){
+				$("#select").html(data);
+			}
 		});
 		
+	}
+	
+	function selectBank(){
+		$.ajax({
+			type : "POST",
+			url : "bank.mw",
+			data : {bank_num:$("#ca_set2").val()},
+			success : function(data){
+				$("#select").html(data);
+				
+			}
+		});
 		
 	}
+	
+	
+
 </script>
 
 <form name = "card_info" method="post" action="account_cardPro.mw">
-	<table>
+	<table align="center" border="1">
 		<tr>
 			<td>회원id</td>
 			<td><input type="hidden" name="id" value="${memId}">${memId}</td>
 		</tr>
 		
 		<tr>
-			<td>카드/통장</td>
+			<td>카드/계좌</td>
 			<td>
-				<select name="ca_set" >
+				<input type="radio" name="ca_set" id = "ca_set1" value="0" onclick="selectCard()">카드
+				<input type="radio" name="ca_set" id = "ca_set2" value="1" onclick="selectBank()">계좌				
+				<!-- <select name="ca_set" >
 					<option value=""></option>
 					<option value="0">카드</option>
-					<option value="1">통장</option>
-				</select>
+					<option value="1">계좌</option>
+				</select> -->
 			</td>
 		</tr>
-	
-		<tr>
-			<td>은행/카드 기업명</td>
-			<td>
-				<select name="ca_company" id="company" onchange="setSelectBox()">
-					<option value="카드사">카드사</option>
-					<c:forEach var = "cdto" items="${card_company_list}" varStatus="status">
-						<option value="${cdto.company}">${cdto.company}</option>
-					</c:forEach>
-				</select>				
-			</td>
-		</tr>
-		<tr id="select_card"></tr>
 		
+		<tr id="select"></tr>
+
 		<tr>
-			<td>통장/카드 별칭</td>
+			<td>카드/계좌 별칭</td>
 			<td><input type="text" name="ca_nickname"></td>
 		</tr>
 		
-		<tr>
-			<td><input type="submit" value="등록" /></td>
+		<tr >
+			<td align="center" colspan="3"><input type="submit" value="등록" /></td>
 		</tr>
 		
 	</table>
