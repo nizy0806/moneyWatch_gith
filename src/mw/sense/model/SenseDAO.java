@@ -29,11 +29,18 @@ public class SenseDAO {
 		return sqlSession.selectList("sense.categorySelect", num); //메인페이지 카테고리 선택시 리스트 출력
 	}
 	
-	//디테일 페이지
-	public SenseDTO senseDetail(int num) {
-		return sqlSession.selectOne("sense.select", num); //디테일 페이지에 해당 정보를 보여줌
+	//디테일 메인 비디오
+	public String senseDetailVideo(int num) {
+		String url = sqlSession.selectOne("sense.senseDetailVideo", num); //메인 리스트에서 선택시 비디오 url 변경
+		return url;
 	}
 	
+	
+	//디테일 페이지
+	public SenseDTO senseDetail(int num) {
+		SenseDTO dto = sqlSession.selectOne("sense.select", num);
+		return dto; //디테일 페이지에 해당 정보를 보여줌
+	}
 	
 	//센스 입력 폼에 카테고리 셀렉트 리스트
 	public List<SenseCategoryDTO> category() {
@@ -48,7 +55,6 @@ public class SenseDAO {
 	//센스 입력 확인
 	public int senseInsertCheck(SenseDTO dto) {
 		int check = sqlSession.selectOne("sense.insertCheck", dto);
-		System.out.println(check);
 		return check;
 	}
 	
@@ -58,9 +64,13 @@ public class SenseDAO {
 //		return num;
 //	}
 	
+	//U - ID confirm	
+	
+	
 	//U - 센스 수정 페이지 불러오기
 	public SenseDTO senseModifySelect(int num) {
-		return sqlSession.selectOne("sense.select", num); //디테일 페이지에 해당 정보를 보여줌
+		SenseDTO dto = (SenseDTO)sqlSession.selectOne("sense.select", num);
+		return dto; //센스 수정 페이지에 해당 정보를 보여줌
 	}
 	
 	//U - 센스 수정하기

@@ -20,18 +20,16 @@
 			data : {num: num},
 			success: function(data){
 				$(detail).html(data);
+			}
+		});
+		$.ajax({
+			type: "POST",
+			url: "senseDetailVideo.mw",
+			data : {num: num},
+			success: function(data){
 				$("#video_url").html(data);
 			}
 		});
-	}
-	
-	//sense detail에서 수정 버튼 선택시 작동
-	function senseModify(num){
-		alert(num);
-        var url = "senseModify.mw";
-        var name = "senseModify";
-  	 
-        open(url,name,num);
 	}
 	
 	//sense detail에서 삭제 버튼 선택시 작동

@@ -40,7 +40,7 @@
 		<h2 align="center">오늘의 영상</h2>
 		<div align="center">
 			<iframe width="850" height="478" src="https://www.youtube.com/embed/KgXtSx8ublA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
-			<b id="video_url" >${ video.sense_url }${ sense_url }</b>
+			<b id="video_url" >${url}</b>
 		</div>
 		
 		<h2 align="center">SenseUp List</h2>

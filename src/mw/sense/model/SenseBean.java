@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -85,13 +86,20 @@ public class SenseBean {
 	
 	//R - 디테일 페이지
 	@RequestMapping("senseDetail.mw")
-	public String senseDetail(int num) { //시퀀스 번호를 매개변수로 받음
+	public String senseDetail(int num, Model model) { //시퀀스 번호를 매개변수로 받음
 		
-		dao.senseDetail(num); //디테일 페이지의 정보를 가져옴
+		SenseDTO dto = dao.senseDetail(num);
+		model.addAttribute("detail", dto); //디테일 페이지의 정보를 가져옴
 		return "/sense/detail";
 		
 	}
 	
+	//R - 디테일 main video url 변경
+	@RequestMapping("senseDetailVideo.mw")
+	public @ResponseBody String senseDetailVideo(int num) {
+		String url = dao.senseDetailVideo(num);		
+		return url;
+	}
 	
 	
 	//C - 센스 직접 입력 form - 카테고리 selectbox
@@ -156,24 +164,20 @@ public class SenseBean {
 	
 	//센스 수정 form페이지
 	@RequestMapping("senseModify.mw")
-	public String senseModifySelect(int num, Model model, HttpSession session) {
+	public String senseModifySelect(int num, Model model) {
 		
-		//관리자 테이블 만들어지면 추가 처리 - dao, sql 작성 필요
-		String id = "admin";
-		// String id = session.getAttribute("memId");
+		List<SenseCategoryDTO> category = dao.category(); //카테고리 리스트 가져오기
+		SenseDTO dto = dao.senseModifySelect(num); //시퀀스 값으로 게시글 내용 호출
 		
-		dao.senseModifySelect(num); //시퀀스 값으로 게시글 내용 호출
+		model.addAttribute("category", category); //카테고리 리스트
+		model.addAttribute("modify", dto); //게시글 내용
 		return "/sense/senseModify";
 		
 	}
 	
 	//센스 수정 pro페이지
 	@RequestMapping("senseModifyPro.mw")
-	public String senseModify(SenseDTO dto, Model model, HttpSession session) {
-		
-		//관리자 테이블 만들어지면 추가 처리 - dao, sql 작성 필요
-		String id = "admin";
-		// String id = session.getAttribute("memId");
+	public String senseModify(SenseDTO dto, Model model) {
 		
 		dao.senseModify(dto);
 		int check = dao.senseModifyCheck(dto);

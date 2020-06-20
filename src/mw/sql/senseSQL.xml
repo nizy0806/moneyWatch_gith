@@ -31,12 +31,15 @@
 		order by num desc
 	</select>
 	
+	<!-- 디테일 비디오 변경 - 메인 영상을 변경해줌 -->
+	<select id="senseDetailVideo" resultType="String" parameterType="int">
+		select sense_url from mwsense where num=#{num}
+	</select>
+	
 	<!-- 디테일 페이지/ 수정 페이지 -->
 	<select id="select" resultType="senseDTO" parameterType="int">
 		select * from mwsense where num=${num}
-	</select>
-	
-	
+	</select>	
 	
 	<!-- 카테고리 리스트 / 센스 입력시  -->
 	<select id="category" resultType="sensecategoryDTO">
@@ -55,6 +58,10 @@
 			null,
 			sysdate)
 	</insert>	
+	
+	<!-- ID confirm -->
+	<select id="confirmId" resultType="int" parameterType="String">
+	</select>
 	
 	<!-- 센스 직접 입력 확인 -->
 	<select id="insertCheck" resultType="int" parameterType="senseDTO">
@@ -77,14 +84,20 @@
 			<if test="sense_content != null">sense_content=#{sense_content},</if>
 			<if test="sense_url != null">sense_url=#{sense_url},</if>
 			<if test="sense_thumbnail != null">sense_thumbnail=#{sense_thumbnail},</if>
-			<if test="sense_reg_date != null">reg_date=#{reg_date}</if>
+			<if test="reg_date != null">reg_date=sysdate</if>
 		</trim>
-		where mwsense=#{num}
+		where num=#{num}
 	</update>
 	
 	<!-- 센스 수정 확인 -->
 	<select id="modifyCheck" resultType="int" parameterType="senseDTO">
-		select count(*) from mwsense where sense_url=#{sense_url}
+		select count(*) from mwsense 
+			where num=#{num} 
+				and main_set=#{main_set} 
+				and sense_category=#{sense_category} 
+				and sense_content=#{sense_content} 
+				and sense_url=#{sense_url} 
+				and sense_thumbnail=#{sense_thumbnail}
 	</select>
 	
 														
