@@ -60,6 +60,19 @@
 		</trim>
 		where n_num = #{n_num}
 	</update>
+	
+		<!-- 연령대별 지출 chart -->
+	<select id="chart20" resultType="moneyioDTO">
+	<![CDATA[
+		select * from(
+    		select io_category, sum(io_price) as io_price from mwmoneyio where (
+        	io_age between '20' and '29') and io_category not in('n빵비', '기타')
+    		group by io_category
+    		order by count(io_category) desc
+		)where rownum <= 5
+	]]>
+	</select>
+
 
 	<select id="moneyioListAll" resultType="moneyioDTO" parameterType="String">
 		select * from mwmoneyio where id = #{id} order by io_num desc

@@ -43,7 +43,7 @@ public class MoneyioBean {
 			ndto.setN_debtor(n_debtor[i]);
 			ndto.setN_price(n_price[i]);
 			
-			/////// dao¼öÇà ÄÚµå ÀÛ¼ºÇÏ±â
+			/////// daoï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Û¼ï¿½ï¿½Ï±ï¿½
 			
 			System.out.println(ndto.getN_debtor());
 		}
@@ -55,7 +55,7 @@ public class MoneyioBean {
 	}
 	
 	
-	//ÁöÃâ/¼öÀÔ ÀÔ·Â ÆäÀÌÁö ¼öÁ¤ ÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("ioUpdateForm.mw")
 	public String ioUpdateForm(int io_num, int n_num, Model model) {
 		List list = dao.ioUpdateForm(io_num);
@@ -66,13 +66,24 @@ public class MoneyioBean {
 		return "/moneyio/ioUpdateForm";
 	}
 	
-	//ÁöÃâ/¼öÀÔ ÀÔ·Â ÆäÀÌÁö update
+	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ update
 	@RequestMapping("ioUpdatePro.mw")
 	public String ioUpdatePro(int io_num, int n_num) {
 		dao.ioUpdatePro(io_num);
 		dao.ioNbreadPro(n_num);
 		return "/moneyio/ioUpdatePro";
 	}	
+	
+	@RequestMapping("ageChart.mw")
+	public String ageChart20(Model model, MoneyioDTO dto) {
+		
+		List chart_list = new ArrayList();
+		
+		chart_list = dao.ageChart20();
+		
+		model.addAttribute("chart_list", chart_list);
+		return "/moneyio/ageChart";
+	}
 	
 	
 	@RequestMapping("moneyioList.mw")	

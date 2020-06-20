@@ -22,7 +22,7 @@ public class MoneyioDAO {
 		List account = sqlSession.selectList("moneyio.bankAccount", dto);
 		return account;
 	}
-	//ÁöÃâ/¼öÀÔ ³»¿ª ÀÔ·Â
+	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 	public void insert(MoneyioDTO dto, NbreadDTO ndto) {  
 //		System.out.println("id : " + dto.getId());
 		
@@ -31,21 +31,24 @@ public class MoneyioDAO {
 			sqlSession.insert("moneyio.n_insert", ndto );
 		}
 	}
-	//ÁöÃâ/¼öÀÔ ³»¿ª ¼öÁ¤ ÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List ioUpdateForm(int io_num) {
 		return sqlSession.selectList("moneyio.updateForm", io_num);
 	}
-	//ÁöÃâ/¼öÀÔ ³»¿ª n»§ ¼öÁ¤ ÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ nï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List ioNbreadForm(int n_num) {
 		return sqlSession.selectList("moneyio.n_updateForm", n_num);
 	}
-	//ÁöÃâ/¼öÀÔ ³»¿ª ¼öÁ¤
+	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void ioUpdatePro(int io_num) {
 		sqlSession.update("moneyio.update", io_num);
 	}
-	//ÁöÃâ/¼öÀÔ ³»¿ª n»§ ¼öÁ¤
+	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ nï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void ioNbreadPro(int n_num) {
 		sqlSession.update("moneyio.n_update", n_num);
+	}
+	public List ageChart20() {
+		return sqlSession.selectList("moneyio.chart20");
 	}
 	
 	public List moneyioListAll(String id) {
