@@ -38,4 +38,15 @@
 		select * from card_img;
 	</select>
 	
+	<!-- 나의 카드 및 계좌 정보 -->
+	<select id="my_ac" resultType="accountCardDTO" parameterType="String">
+		select * from mwRegister_CA where id=#{id}
+	</select>
+	
+	<!-- 나의 카드 및 계좌 삭제 -->
+	<delete id="my_ac_del" parameterType="hashmap">
+		delete from mwRegister_CA where id=#{id} and num=#{num}
+	</delete>
+	
+	
 </mapper>

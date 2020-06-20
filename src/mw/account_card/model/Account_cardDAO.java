@@ -1,6 +1,7 @@
 package mw.account_card.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -66,6 +67,25 @@ public class Account_cardDAO {
 		card_img = sqlSession.selectList("account_card.card_img");
 		
 		return card_img;
+	}
+	
+	// 나의 카드 및 계좌정보 확인
+	public List myCard(String id) {
+		
+		List mycard = new ArrayList();
+		mycard = sqlSession.selectList("account_card.my_ac",id);
+		
+		return mycard;
+	}
+	
+	// 나의 카드 및 계좌정보 삭제
+	public void delMyCard(String id, int num) {
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("num",num);
+		
+		sqlSession.delete("account_card.my_ac_del",map);
 	}
 
 	

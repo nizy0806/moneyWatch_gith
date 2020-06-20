@@ -47,11 +47,6 @@
 			<td>
 				<input type="radio" name="ca_set" id = "ca_set1" value="0" onclick="selectCard()">카드
 				<input type="radio" name="ca_set" id = "ca_set2" value="1" onclick="selectBank()">계좌				
-				<!-- <select name="ca_set" >
-					<option value=""></option>
-					<option value="0">카드</option>
-					<option value="1">계좌</option>
-				</select> -->
 			</td>
 		</tr>
 		
@@ -67,17 +62,6 @@
 		</tr>
 		
 	</table>
-	
-
-
-
-<%--
-1. 카드회사 선택 (onChange())
-2. script >> 카드이름선택할 select visible(block)
-3. 선택한 카드에 대한 카드 종류들이 나오는 ... 
-
-
- --%>
 
 
 </form>

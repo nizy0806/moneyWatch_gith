@@ -1,11 +1,14 @@
 package mw.account_card.model;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -156,7 +159,33 @@ public class Account_cardBean {
 		return "/card_benefit/benefit";
 		
 	}
+	
+	// 나의 카드 및 계좌 정보
+	@RequestMapping("myCard.mw")
+	public String myAccountCardForm(HttpSession session, Model model) {
+		
+		/* String id = (String)session.getAttribute("memId"); */
+		String id = "nahui068";
+		
+		List mycard_list = acdao.myCard(id);
+		
+		model.addAttribute("myCardList",mycard_list);
+		
+		return "/account_card/myAccountCardForm";
+	}
+	
+	// 나의 카드 및 계좌 삭제
+	@RequestMapping("myCardDel.mw")
+	public String myCardDel(int num) throws UnsupportedEncodingException {
+		/* String id = (String)session.getAttribute("memId"); */
+		String id = "nahui068";
+		
+		acdao.delMyCard(id, num);
+		
+		return "/account_card/myAccountCardDelete";
+	}
 
+	
 	
 	
 	
