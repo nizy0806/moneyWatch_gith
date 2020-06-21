@@ -162,7 +162,7 @@ public class SenseBean {
 //		return "/sense/senseWritePro";
 //	}
 	
-	//센스 수정 form페이지
+	//U - 센스 수정 form페이지
 	@RequestMapping("senseModify.mw")
 	public String senseModifySelect(int num, Model model) {
 		
@@ -175,15 +175,43 @@ public class SenseBean {
 		
 	}
 	
-	//센스 수정 pro페이지
+	//U - 센스 수정 pro페이지
 	@RequestMapping("senseModifyPro.mw")
 	public String senseModify(SenseDTO dto, Model model) {
 		
 		dao.senseModify(dto);
 		int check = dao.senseModifyCheck(dto);
 		
-		model.addAttribute("check", check); //check 반환
+		model.addAttribute("check", check); // 수정 확인 check 반환
 		return "/sense/senseModifyPro";
+	}
+	
+	
+	//D - 센스 삭제를 위한 PW확인
+	@RequestMapping("senseDeletePro.mw")
+	public String confirmPassword(HttpSession session, String password, int num, Model model) {
+		
+		String id = "admin";
+		// String id = session.getAttribute("memId");
+		int check = dao.confirmPassword(id, password); //id와 pw를 확인함
+		
+		if (check == 1) { // id/pw가 맞을 때
+			
+			dao.senseDelete(num); // 센스 게시글 삭제			
+			int deleteCheck = dao.senseDeleteCheck(num); // 게시글 삭제 확인 
+			
+			if(deleteCheck == 0) { // 제대로 삭제 되었을 때
+				model.addAttribute("check",check); // 1을 반환
+			}else {
+				check = -1;
+				model.addAttribute("check", check); // -1을 반환
+			}
+			
+		}else {	// id/pw가 틀릴 때
+			model.addAttribute("check",check); // 0을 반환
+		}
+		
+		return "/sense/senseDeletePro";
 	}
 	
 }

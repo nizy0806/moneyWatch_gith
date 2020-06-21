@@ -1,5 +1,6 @@
 package mw.sense.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -64,24 +65,48 @@ public class SenseDAO {
 //		return num;
 //	}
 	
-	//U - ID confirm	
+	// ID confirm	
 	
 	
-	//U - 센스 수정 페이지 불러오기
+	// PW confirm
+	public int confirmPassword(String id, String password) {
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("pw", password);
+		int check = sqlSession.selectOne("sense.confirmPassword", map);
+		
+		return check;
+	}
+	
+	
+	// 센스 수정 페이지 불러오기
 	public SenseDTO senseModifySelect(int num) {
 		SenseDTO dto = (SenseDTO)sqlSession.selectOne("sense.select", num);
 		return dto; //센스 수정 페이지에 해당 정보를 보여줌
 	}
 	
-	//U - 센스 수정하기
+	// 센스 수정하기
 	public void senseModify(SenseDTO dto) {
 		sqlSession.update("sense.senseModify",dto);
 	}
 	
-	//U - 센스 수정 확인
+	// 센스 수정 확인
 	public int senseModifyCheck(SenseDTO dto) {
 		int check = sqlSession.selectOne("sense.modifyCheck", dto);
 		return check;
+	}
+	
+	// 센스 삭제
+	public void senseDelete(int num) {
+		sqlSession.delete("senseDelete", num);
+	}
+	
+	// 센스 삭제 확인
+	
+	public int senseDeleteCheck(int num) {
+		int deleteCheck = sqlSession.selectOne("senseDeleteCheck", num);
+		return deleteCheck;
 	}
 	
 }

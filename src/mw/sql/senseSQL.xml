@@ -63,6 +63,10 @@
 	<select id="confirmId" resultType="int" parameterType="String">
 	</select>
 	
+	<!-- PW confirm -->
+	<select id="confirmPassword" resultType="int" parameterType="hashMap">
+	</select>
+	
 	<!-- 센스 직접 입력 확인 -->
 	<select id="insertCheck" resultType="int" parameterType="senseDTO">
 		select count(*) from mwsense where sense_url=#{sense_url}
@@ -97,8 +101,17 @@
 				and sense_category=#{sense_category} 
 				and sense_content=#{sense_content} 
 				and sense_url=#{sense_url} 
-				and sense_thumbnail=#{sense_thumbnail}
+				<!-- and sense_thumbnail=#{sense_thumbnail} -->
 	</select>
 	
+	<!-- 센스 삭제 -->
+	<select id="senseDelete" parameterType="int">
+		delete from mwsense where num=#{num}
+	</select>
+	
+	<!-- 센스 삭제 확인 -->
+	<select id="senseDeleteCheck" resultType="int" parameterType="int">
+		select count(*) from mwsense where num=#{num}
+	</select>
 														
 </mapper>
