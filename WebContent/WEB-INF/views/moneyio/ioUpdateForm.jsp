@@ -140,7 +140,7 @@
 				<tr>
 						<td><label for="exampleTextarea">&nbsp&nbsp&nbsp&nbsp세부내역</label></td>
 						<td colspan="1"><textarea class="form-control"
-								name="io_detail" rows="3" value="${dto.io_detail }"></textarea></td>
+								name="io_detail" rows="3" >${dto.io_detail }</textarea></td>
 						<td><label for="text">&nbsp&nbsp&nbsp&nbsp날짜</label>
 							<input type="date" class="form-control" name="io_reg_date" value="${dto.io_reg_date}"></td>
 						<td colspan="2"><div class="custom-control custom-switch">
