@@ -20,32 +20,55 @@ public class MoneyioBean {
 	private List list = new ArrayList();
 	
 	@RequestMapping("moneyioForm.mw")
-	public String moneyioForm() {
+	public String moneyioForm(My_cardDTO dto, Model model) {
+		String id= "nahui068";
+		List bank_list = dao.bankName();
 		
+		model.addAttribute("id", id);
+		model.addAttribute("bank_list", bank_list);
 		return "/moneyio/moneyioForm";
 	}
 	
-/*	
-	@RequestMapping("moneyioPro.mw")
-	public String moneyioPro(MoneyioDTO dto, NbreadDTO ndto) {
-//		System.out.println("id : " + dto.getId());
-		dao.insert(dto, ndto);
-		return "/moneyio/moneyioPro";
+
+	@RequestMapping("bankSelect.mw")
+	public String bankSelect(String ca_company, Model model) {
+		//System.out.println("bean: "+ca_company);
+		List bankAccount = dao.bankAccount(ca_company);
+		model.addAttribute("bankAccount", bankAccount);
+		return "/moneyio/bankSelect";
 	}
-*/
+	
+	@RequestMapping("nbreadForm.mw")
+	public String nbreadForm(int nPeople, Model model) {
+
+		model.addAttribute("nPeople", nPeople);
+		
+		return "/moneyio/nbreadForm";
+	}
+	
 	@RequestMapping("moneyioPro.mw")
 	public String moneyioPro(MoneyioDTO dto, NbreadDTO ndto, HttpServletRequest request) {
-		/* dao.insert(dto, ndto); */
-		String[] n_debtor = request.getParameterValues("n_debtor");
-		String[] n_price = request.getParameterValues("n_price");
+			
+		System.out.println("dto io_num : "+dto.getIo_num());
 		
-		for(int i = 0; i < n_debtor.length; i++) {
-			ndto.setN_debtor(n_debtor[i]);
-			ndto.setN_price(n_price[i]);
+		ndto.setIo_num(dto.getIo_num());
+		
+		System.out.println("ndto io_num"+ndto.getIo_num());
+		
+		dao.insert(dto);
+		
+		
+		if(dto.getIo_N_div()>0) {
+			String[] n_debtor = request.getParameterValues("n_debtor");
+			String[] n_price = request.getParameterValues("n_price");
 			
-			/////// dao���� �ڵ� �ۼ��ϱ�
+			for(int i = 0; i < n_debtor.length; i++) {
+				ndto.setN_debtor(n_debtor[i]);
+				ndto.setN_price(n_price[i]);
+				dao.n_insert(ndto);
+				System.out.println("ndto get n debtor"+ndto.getN_debtor());
+			}
 			
-			System.out.println(ndto.getN_debtor());
 		}
 		
 		
@@ -128,12 +151,5 @@ public class MoneyioBean {
 		return "/moneyio/ioListDetail";
 	}
 	
-	@RequestMapping("nbreadForm.mw")
-	public String nbreadForm(int nPeople, Model model) {
-
-		model.addAttribute("nPeople", nPeople);
-		
-		return "/moneyio/nbreadForm";
-	}
 	
 }
