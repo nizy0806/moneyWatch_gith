@@ -88,6 +88,14 @@ public class Account_cardDAO {
 		sqlSession.delete("account_card.my_ac_del",map);
 	}
 
-	
+	// 나의 카드 혜택보기 
+	public List mycard_benefit(String ca_name) {
+		
+		System.out.println(ca_name);
+		List myBenefit = new ArrayList();
+		myBenefit = sqlSession.selectList("account_card.my_ac_benefit",ca_name);
+		
+		return myBenefit;
+	}
 	
 }

@@ -48,5 +48,10 @@
 		delete from mwRegister_CA where id=#{id} and num=#{num}
 	</delete>
 	
+	<!-- 나의 카드혜택 보기 -->
+	<select id="my_ac_benefit" resultType="cardDTO" parameterType="String">
+		select * from mwCard where card_name in (select ca_name from mwRegister_CA where ca_name like '%' || #{ca_name} || '%') 
+	</select>
+	
 	
 </mapper>
