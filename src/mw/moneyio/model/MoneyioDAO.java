@@ -33,21 +33,15 @@ public class MoneyioDAO {
 		sqlSession.insert("moneyio.n_insert", ndto);
 	}
 
-	public List ioUpdateForm(int io_num) {
-		return sqlSession.selectList("moneyio.updateForm", io_num);
-	}
+	public MoneyioDTO ioUpdateForm(int io_num) {
 
-	public List ioNbreadForm(int n_num) {
-		return sqlSession.selectList("moneyio.n_updateForm", n_num);
+		return sqlSession.selectOne("moneyio.updateForm", io_num);
 	}
 
 	public void ioUpdatePro(int io_num) {
 		sqlSession.update("moneyio.update", io_num);
 	}
 
-	public void ioNbreadPro(int n_num) {
-		sqlSession.update("moneyio.n_update", n_num);
-	}
 	public List ageChart20() {
 		return sqlSession.selectList("moneyio.chart20");
 	}

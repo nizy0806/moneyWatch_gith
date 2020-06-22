@@ -69,20 +69,24 @@ public class MoneyioBean {
 				System.out.println("ndto get n debtor"+ndto.getN_debtor());
 			}
 			
-		}
-		
+		}	
 		
 		//System.out.println(ndto.getN_debtor());
-		
 		return "/moneyio/moneyioPro";
 	}
 	
 	@RequestMapping("ioUpdateForm.mw")
-	public String ioUpdateForm(int io_num, int n_num, Model model) {
-		List list = dao.ioUpdateForm(io_num);
-		List n_list = dao.ioNbreadForm(n_num);
-		model.addAttribute("list", list);
-		model.addAttribute("n_list", n_list);
+	public String ioUpdateForm(Model model) {
+		
+		String id="nahui068";
+		int io_num=329;
+		
+		MoneyioDTO dto = dao.ioUpdateForm(io_num);
+		List bank_list = dao.bankName();
+		
+		model.addAttribute("id", id);
+		model.addAttribute("dto", dto);
+		model.addAttribute("bank_list", bank_list);
 		
 		return "/moneyio/ioUpdateForm";
 	}
@@ -90,7 +94,6 @@ public class MoneyioBean {
 	@RequestMapping("ioUpdatePro.mw")
 	public String ioUpdatePro(int io_num, int n_num) {
 		dao.ioUpdatePro(io_num);
-		dao.ioNbreadPro(n_num);
 		return "/moneyio/ioUpdatePro";
 	}	
 	
