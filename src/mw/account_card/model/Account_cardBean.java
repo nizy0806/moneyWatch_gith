@@ -2,6 +2,7 @@ package mw.account_card.model;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -176,7 +177,7 @@ public class Account_cardBean {
 	
 	// 나의 카드 및 계좌 삭제
 	@RequestMapping("myCardDel.mw")
-	public String myCardDel(int num) throws UnsupportedEncodingException {
+	public String myCardDel(int num){
 		/* String id = (String)session.getAttribute("memId"); */
 		String id = "nahui068";
 		
@@ -184,7 +185,18 @@ public class Account_cardBean {
 		
 		return "/account_card/myAccountCardDelete";
 	}
-
+	
+	// 나의 카드 혜택보기
+	@RequestMapping("mycardBenefit.mw")
+	public String mycardBenefit(String ca_name, Model model) {
+		
+		List myBenefit = acdao.mycard_benefit(ca_name);
+		
+		model.addAttribute("myBenefit",myBenefit); 
+		model.addAttribute("card_name",ca_name); // 카드이름
+		
+		return "/card_benefit/MycardBenefit";
+	}
 	
 	
 	
