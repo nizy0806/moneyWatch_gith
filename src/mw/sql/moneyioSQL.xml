@@ -3,24 +3,24 @@
 
 <mapper namespace="moneyio">
 
-	<select id="bankName" resultType="moneyioDTO" parameterType="String">
-		select io_bank from mwMoneyio where id=#{id}
+	<select id="bankName" resultType="mycardDTO" ><!-- parameterType="String" --> 
+		select ca_company from mwRegister_CA where id='nahui068' order by ca_name asc
 	</select>
 	
-	<select id="bankAccount" resultType="String" parameterType="moneyioDTO">
-		select io_account from mwMoneyio where id=#{id} and io_bank=#{io_bank}
+	<select id="bankAccount" resultType="mycardDTO" parameterType="String" >
+		select ca_name from mwRegister_CA where id='nahui068' and ca_company=#{value} 
 	</select>
 	
 	<!-- 지출/수입 insert -->
 	<insert id="insert" parameterType="moneyioDTO">
 		insert into mwmoneyio values(mwmoneyio_seq.nextval,#{io_category},#{io_detail},#{io_reg_date},#{io_price},#{io_remain},#{io_bank},
-		#{io_account},#{id},#{io_N_div},#{io_set}, select 2020-Birth_y+1 from mwmember where id=#{id})
+		#{io_account},#{id},#{io_N_div},#{io_set},(select 2020-Birth_y+1 from mwmember where id=#{id}))
 	</insert>
 	
 	<!-- 지출/수입  n빵 내역 insert -->
 	<insert id="n_insert" parameterType="nbreadDTO">
-		insert into mwnbread values(mwnbread_seq.nextval,select io_num from mwmoneyio where io_num=#{io_num}, select id from mwmoneyio io_num=#{io_num}, 
-		select io_category from mwmoneyio where io_num=#{io_num}, #{n_debtor}, #{n_price})
+		insert into mwn_bread values(mwnbread_seq.nextval,(select max(io_num) from mwmoneyio), (select id from mwmoneyio where io_num=(select max(io_num) from mwmoneyio)), 
+		(select io_category from mwmoneyio where io_num=(select max(io_num) from mwmoneyio),#{n_debtor},#{n_price})
 	</insert>
 	
 	<!-- 지출/수입 내역 수정페이지 데이터 -->	

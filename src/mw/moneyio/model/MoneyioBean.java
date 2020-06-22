@@ -54,8 +54,6 @@ public class MoneyioBean {
 		return "/moneyio/moneyioPro";
 	}
 	
-	
-	//����/���� �Է� ������ ���� ������
 	@RequestMapping("ioUpdateForm.mw")
 	public String ioUpdateForm(int io_num, int n_num, Model model) {
 		List list = dao.ioUpdateForm(io_num);
@@ -66,7 +64,6 @@ public class MoneyioBean {
 		return "/moneyio/ioUpdateForm";
 	}
 	
-	//����/���� �Է� ������ update
 	@RequestMapping("ioUpdatePro.mw")
 	public String ioUpdatePro(int io_num, int n_num) {
 		dao.ioUpdatePro(io_num);

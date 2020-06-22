@@ -13,7 +13,7 @@ public class MoneyioDTO {
 	private String io_bank;
 	private String io_account;
 	private String id;
-	private int io_n_div;
+	private int io_N_div;
 	private int io_set;
 	
 	public int getIo_num() {
@@ -46,7 +46,7 @@ public class MoneyioDTO {
 	public void setIo_price(int io_price) {
 		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 		formatter.format(io_price);
-		//System.out.println("ÄÞ¸¶ Ç¥½Ã: "+io_price);
+		//System.out.println("ï¿½Þ¸ï¿½ Ç¥ï¿½ï¿½: "+io_price);
 		this.io_price = io_price;
 	}
 	public int getIo_remain() {
@@ -56,7 +56,7 @@ public class MoneyioDTO {
 	public void setIo_remain(int io_remain) {
 		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 		formatter.format(io_remain);
-		//System.out.println("ÄÞ¸¶ Ç¥½Ã: "+io_remain);
+		//System.out.println("ï¿½Þ¸ï¿½ Ç¥ï¿½ï¿½: "+io_remain);
 		this.io_remain = io_remain;
 	}
 	public String getIo_bank() {
@@ -77,11 +77,11 @@ public class MoneyioDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getIo_n_div() {
-		return io_n_div;
+	public int getIo_N_div() {
+		return io_N_div;
 	}
-	public void setIo_n_div(int io_n_div) {
-		this.io_n_div = io_n_div;
+	public void setIo_N_div(int io_N_div) {
+		this.io_N_div = io_N_div;
 	}
 	public int getIo_set() {
 		return io_set;
