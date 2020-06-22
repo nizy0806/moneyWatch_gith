@@ -17,6 +17,7 @@
 		
 		<typeAlias type="mw.moneyio.model.MoneyioDTO" alias="moneyioDTO"/> <!-- 지출/수입 내역 -->
 		<typeAlias type="mw.moneyio.model.NbreadDTO" alias="nbreadDTO"/> <!-- n빵 내역 -->
+		<typeAlias type="mw.moneyio.model.My_cardDTO" alias="mycardDTO"/>
 		
 		<typeAlias type="mw.sense.model.SenseDTO" alias="senseDTO"/> <!-- 금융지식 -->
 		<typeAlias type="mw.sense.model.SenseCategoryDTO" alias="sensecategoryDTO"/> <!-- 금융지식카테고리 -->

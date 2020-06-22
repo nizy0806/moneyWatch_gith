@@ -23,38 +23,53 @@
 			} else {
 				text.style.display = "none";
 				n_bread.style.display="none";
-				document.getElementById("io_N_div").value = "0";
-				
+				n_people.style.display="none";
+				document.getElementById("io_N_div").value = "0";	
+				document.getElementById("n_people").value = "0";	
 			}
+			
+					
 		}
 		
 		function n_button(){
 			/* var n_div = document.getElementById("io_N_div").value; */
-			
+			n_people.style.display="block";
 			$.ajax({
 				url : "nbreadForm.mw",
 				data : {nPeople: $("#io_N_div").val()},
 				success : function(data){
 					$("#n_people").html(data);
 				}
-			});
-
-			
+			});			
 		}
+		
+		function bank(){
+			$.ajax({
+				url : "bankSelect.mw", 
+				data : {ca_company: $("#io_bank").val()},
+				success : function(data){
+					$("#io_account").html(data);
+				}
+				
+			});
+		}
+		
+		
+		
+		
+		//$("#io_account option:selected").val();
 
 	</script>
 <body>
-	<form action="/moneyWatch/moneyioPro.mw" method="post">
+	<form action="/moneyWatch/moneyioPro.mw" >
 	<fieldset>
 	<div class="form-group">
 		<h1>
-			<input type="text" name="id">님 안녕하세요!
+			${id}님 안녕하세요!
+			<input type="hidden" name="id" value="${id}"/>
 		</h1>
 		<table border="1" align="center" width="60%">
-
-			<!-- <fieldset> -->
 				<tr>
-					<!-- <div class="form-group"> -->
 						<td><label for="Select">&nbsp&nbsp&nbsp&nbsp카테고리</label></td>
 						<td><select class="form-control" name="io_category">
 								<option value="none">--선택--</option>
@@ -100,29 +115,19 @@
 						</td>
 				</tr>
 				<tr>
-					<!-- <div class="form-group"> -->
 						<td><label for="exampleSelect1">&nbsp&nbsp&nbsp&nbsp대상(은행/카드)</label></td>
-						<td><select class="form-control" name="io_bank">
+						<td><select class="form-control" name="io_bank" id="io_bank" onchange="bank()">
 								<option value="none">--은행/카드--</option>
-								<option>kb국민은행체크카드</option>
-								<option>우리은행신용카드</option>
-								<option>신한나라사랑체크카드</option>
-								<option>우리나라사랑체크카드</option>
-								<option>kb나라사랑체크카드</option>
+								<c:forEach items="${bank_list}" var="bank">
+									<option value="${bank.ca_company}">${bank.ca_company}</option>
+								</c:forEach>
 						</select></td>
 						<td><label for="exampleSelect1">&nbsp&nbsp&nbsp&nbsp거래번호(계좌/카드번호)</label></td>
-						<td colspan="2"><select class="form-control" name="io_account">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-						</select></td>
-						
-					<!-- </div> -->
+						<td colspan="2"><select class="form-control" name="io_account" id="io_account">
+								
+						</select></td>				
 				</tr>
 				<tr>
-					<!-- <div class="form-group"> -->
 						<td><label for="money">&nbsp&nbsp&nbsp&nbsp거래 금액</label></td>
 						<td><input type="text" class="form-control" name="io_price"
 							placeholder="won"></td>
@@ -130,10 +135,8 @@
 								잔액</label></td>
 						<td colspan="2"><input type="text" class="form-control"
 							name="io_remain" placeholder="won"></td>
-					<!-- </div> -->
 				</tr>
 				<tr>
-					<!-- <div class="form-group"> -->
 						<td><label for="exampleTextarea">&nbsp&nbsp&nbsp&nbsp세부내역</label></td>
 						<td colspan="1"><textarea class="form-control"
 								name="io_detail" rows="3"></textarea></td>
@@ -144,7 +147,6 @@
 						<input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="N_divFunction()" />&nbsp&nbsp
 						<label class="custom-control-label" for="customSwitch1">&nbsp&nbspN빵 Check</label> 
 						</td>
-					<!-- </div> -->
 				</tr>
 				<tr>
 				<td></td><td></td><td></td><td></td>
@@ -155,9 +157,6 @@
 				
 			</table>
 			</div>
-			
-			</fieldset>
-
 		<br /><br />
 		
 		<div id="n_bread" style="text-align:center;display: none;">
@@ -170,38 +169,14 @@
 		</tr>
 		</table>
 		</div>
+		
 		<br />
-		<fieldset>
 		<div class="form-group">
 			<table border="1" align="center" width="50%" id="n_people">
-<!-- 
-						<tr>
-						
-							<td><label for="text">&nbsp&nbsp&nbsp&nbsp이름</label></td>
-							<td><input type="text" class="form-control" name="" /></td>
-							<td><label for="text">&nbsp&nbsp&nbsp&nbspN빵 금액</label></td>
-							<td><input type="text" class="form-control" name=""/></td>
-
-						</tr> -->
-			</table>
-									
-			<table border="1" align="center" width="50%">						
-					<tr>
-						<center>
-							<input type="reset" class="btn btn-primary" name="reset" value="다시입력">
-						</center>
-					</tr>
-					<br />
 
 			</table>
 		</div>
-		</fieldset>	
-			
-			
 	</form>
-	
-
-	
 	
 </body>
 
