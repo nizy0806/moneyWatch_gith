@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>입출력 내역 수정하기</title>
-<link href="/mw_test/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -61,7 +61,7 @@
 
 	</script>
 <body>
-	<form action="/mw_test/ioUpdatePro.mw" >
+	<form action="/moneyWatch/ioUpdatePro.mw" >
 
 
 	<div class="form-group">
