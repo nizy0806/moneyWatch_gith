@@ -21,8 +21,8 @@ public class MwScheduleDAO {
 	}
 	
 	// 일정출력	
-	public List<MwScheduleDTO> schedule_select(MwScheduleDTO mwdto) throws Exception {
+	public List<MwScheduleDTO> schedule_select(String id) throws Exception {
 		System.out.println("select 실행!!");
-		return sqlSession.selectList("calendar.schedule_select", mwdto);
+		return sqlSession.selectList("calendar.schedule_select", id);
 	}
 }

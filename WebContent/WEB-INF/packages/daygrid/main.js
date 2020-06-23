@@ -714,9 +714,7 @@ Docs & License: https://fullcalendar.io/
                 '') +
             (otherAttrs ?
                 ' ' + otherAttrs :
-                '') 
-                + 'id="day_click"'
-                +
+                '') +
             '></td>';
     }
 

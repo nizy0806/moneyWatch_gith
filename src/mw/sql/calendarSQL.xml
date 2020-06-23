@@ -15,8 +15,10 @@
 										#{place}
 									)	
 	</insert>
-	<select id="schedule_select" resultType="mwscheduleDTO" parameterType="mwscheduleDTO">
-		select * from mwSchedule order by num desc
+	
+	<!-- 일정꺼내오기 -->
+	<select id="schedule_select" resultType="mwscheduleDTO" parameterType="String">
+		select * from mwSchedule where id=#{id}
 <!-- 		where id=#{id} -->
 	</select>
 

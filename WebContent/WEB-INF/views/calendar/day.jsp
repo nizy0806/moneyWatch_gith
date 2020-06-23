@@ -9,7 +9,7 @@
 <title>일정추가</title>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script scr="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- custom -->
 <script src="js/fullcalendar/calendar.js" type="text/javascript"></script>
 
@@ -32,7 +32,7 @@
 				opener.parent.location.reload();
 				console.log(data);
 				//$("").html(data);
-				//window.close();
+				window.close();
 			}
 		})
 	}
@@ -59,13 +59,13 @@
 			<h3 class="zTree-h3">시작일</h3>
 		</div>
 		<div class="domain">
-			<input class="date" id="start_time" type="text" name="start_time" placeholder="">
+			<input class="date" id="start_time" type="date" name="start_time" placeholder="">
 		</div>
 		<div class="domain">
 			<h3 class="zTree-h3">종료일</h3>
 		</div>
 		<div class="domain">
-			<input class="date" id="end_time" type="text" name="end_time" placeholder="">
+			<input class="date" id="end_time" type="date" name="end_time" placeholder="">
 		</div>
 		<div class="domain">
 			<h3 class="zTree-h3">장소</h3>

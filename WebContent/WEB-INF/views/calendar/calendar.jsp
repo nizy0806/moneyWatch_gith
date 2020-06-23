@@ -14,12 +14,14 @@
 <script src='packages/daygrid/main.js'></script>
 <script src='packages/timegrid/main.js'></script>
 <script src='packages/list/main.js'></script>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script>
+
+
 <%-- <% List<MwScheduleDTO> list = (ArrayList<MwScheduleDTO>)request.getAttribute("showSchedule"); %> --%>
-
-
   document.addEventListener('DOMContentLoaded', function() {
+	
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -40,11 +42,96 @@
       dateClick: function(info){
           var url = "C_popUp.mw";
           var name = "C_insert";
-          var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+          var option = "width = 500, height = 500, top = 100, left = 200, location = no";
     	 
           window.open(url,name,option);
       },
-      eventSources:[
+      events: [
+          {
+
+            title: 'Business Lunch',
+            start: '2020-05-03T13:00:00',
+            constraint: 'businessHours'
+          },
+          {
+            title: 'Meeting',
+            start: '2020-05-13T11:00:00',
+            constraint: 'availableForMeeting', // defined below
+            color: '#257e4a'
+          },
+          {
+            title: 'Conference',
+            start: '2020-05-18',
+            end: '2020-05-20'
+          },
+          {
+            title: 'Party',
+            start: '2020-05-29T20:00:00'
+          },
+
+          // areas where "Meeting" must be dropped
+          {
+            groupId: 'availableForMeeting',
+            start: '2020-05-11T10:00:00',
+            end: '2020-05-11T16:00:00',
+            rendering: 'background'
+          },
+          {
+            groupId: 'availableForMeeting',
+            start: '2020-05-13T10:00:00',
+            end: '2020-05-13T16:00:00',
+            rendering: 'background'
+          },
+
+          // red areas where no events can be dropped
+          {
+            start: '2020-05-24',
+            end: '2020-05-28',
+            overlap: false,
+            rendering: 'background',
+            color: '#ff9f89'
+          },
+          {
+            start: '2020-05-06',
+            end: '2020-05-08',
+            overlap: false,
+            rendering: 'background',
+            color: '#ff9f89'
+          }
+        ]
+/*     events:function(start,end,callback){
+    	$.ajax({
+    		type : 'get',
+    		url : 'eventAll.mw',
+    		dataType : 'json',
+    		success : function(map){
+    			//var events = [];
+    			//var keys = Object.keys(map);
+    			
+    			//$.each(map,function(){
+    			//	events.push({
+	
+    					//for(var i in keys){
+    						 title: 'Business Lunch',
+          					start: '2020-05-03T13:00:00',
+          					constraint: 'businessHours'
+    					//}
+    					
+    	    			//start:map.get(i).getStart_time();
+	                                                               
+    					//end:$(this).attr('end_time')
+    		//		});
+    		//		console.log(plan);
+    		//		callback(events);
+    		//	});	
+    		}
+    	});
+    }
+   });
+    calendar.render();
+  });
+    
+     /*  eventSources:[
     	  {
     	  $.ajax({
               type: "get", 
@@ -61,10 +148,9 @@
     	  start:
     	  end:
     	  place:
-    	  memo:
-      
-/*        
-       events: [
+    	  memo: */
+            
+      /*  events: [
         {
           title: 'Business Lunch',
           start: '2020-05-03T13:00:00',
@@ -115,12 +201,7 @@
           rendering: 'background',
           color: '#ff9f89'
         }
-      ] 
-    });
-    */
-
-    calendar.render();
-  });
+      ]  */
 
 </script>
 

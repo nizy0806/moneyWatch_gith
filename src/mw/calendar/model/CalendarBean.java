@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,30 @@ public class CalendarBean {
 	private MwScheduleDAO dao = null;
 	
 	@RequestMapping("Calendar.mw")
-	public String cal() {
+	public String cal(MwScheduleDTO mwdto, Model model) throws Exception {
 		//DB뿌려주기 필요
+
 		return "/calendar/calendar";
 	}
 	
+	// 저장된 스케줄 불러오기 
+	@RequestMapping(value = "eventAll.mw", method = RequestMethod.POST,  produces = "application/json")
+	public @ResponseBody HashMap<String,String> getPlan(HttpSession session) throws Exception {
+		
+		HashMap<String,String> map = new HashMap<String,String>();
+		
+		/* String id = (String)session.getAttribute("memId"); */
+		String id = "tempid";
+		
+		List<MwScheduleDTO> list = dao.schedule_select(id);
+		
+		for(int i=0; i<list.size();i++) {
+			map.put(list.get(i).getTitle(),list.get(i).getStart_time());
+		}
+		
+		return map; 
+	}
+
 	@RequestMapping(value = "Calendar.mw", method=RequestMethod.POST)
 	public String cal(HttpServletRequest request) {
 		
@@ -38,16 +58,15 @@ public class CalendarBean {
 	
 	@RequestMapping("C_insert.mw") //캘린더 팝업창 입력	
 	public @ResponseBody Map<Object, Object> cal_insert(MwScheduleDTO mwdto, Model model)throws Exception {
+		
 		dao.schedule_insert(mwdto); //캘린더 일정 DB입력
 
 		Map<Object,Object> map = new HashMap<Object, Object>(); //반환할 객체 생성
-		
-		
+			
 		//List<MwScheduleDTO> list = dao.schedule_select(mwdto);	
 		//model.addAttribute("list", list);
 		System.out.println("DBinsert");
-
-
+		
 		return map;
 	}
 	
