@@ -9,7 +9,7 @@
 			<!-- DB main_set의 값이 1 일때, 메인 -->
 	<![CDATA[
 		select * from (
-		   select * from mwsense where main_set=${0} and sense_category=(
+		   select * from mwsense where main_set=${1} and sense_category=(
 		       select sense_detail_category from 
 		            (select * from mwsense_category order by dbms_random.value)
 		        where rownum <= 1
@@ -20,7 +20,7 @@
 	
 	<!-- 메인 리스트 출력 / 메인페이지-->
 	<select id="mainList" resultType="senseDTO">
-		select num, sense_category, sense_title, sense_content, sense_url, sense_thumbnail from mwsense where main_set=${0} order by num desc <!-- DB main_set의 값이 1 일때, 메인 -->
+		select num, sense_category, sense_title, sense_content, sense_url, sense_thumbnail from mwsense where main_set=${1} order by num desc <!-- DB main_set의 값이 1 일때, 메인 -->
 	</select>
 
 	<!-- 카테고리 선택시 / 메인페이지-->	
@@ -46,7 +46,7 @@
 		select * from mwsense_category order by num asc
 	</select>
 		
-	<!-- 센스 직접 입력 /  파일제외-->
+	<!-- 센스 직접 입력 -->
 	<insert id="insert" parameterType="senseDTO">
 		insert into mwsense values (
 			mwsense_seq.nextval, 
@@ -55,8 +55,7 @@
 			#{sense_title},
 			#{sense_content},
 			#{sense_url}, 
-			null,
-			sysdate)
+			#{sense_thumbnail})
 	</insert>	
 	
 	<!-- ID confirm -->
@@ -72,11 +71,6 @@
 		select count(*) from mwsense where sense_url=#{sense_url}
 	</select>
 	
-	<!-- 파일업로드를 하기 위한 max num값 출력 -->
-	<select id="maxNum" resultType="int">
-		select max(num) from mwsense
-	</select>
-	
 	<!-- 센스 게시글 수정 -->
 	<update id="senseModify" parameterType="senseDTO">
 		update mwsense
@@ -87,8 +81,7 @@
 			<if test="sense_title != null">sense_title=#{sense_title},</if>
 			<if test="sense_content != null">sense_content=#{sense_content},</if>
 			<if test="sense_url != null">sense_url=#{sense_url},</if>
-			<if test="sense_thumbnail != null">sense_thumbnail=#{sense_thumbnail},</if>
-			<if test="reg_date != null">reg_date=sysdate</if>
+			<if test="sense_thumbnail != null">sense_thumbnail=#{sense_thumbnail}</if>
 		</trim>
 		where num=#{num}
 	</update>

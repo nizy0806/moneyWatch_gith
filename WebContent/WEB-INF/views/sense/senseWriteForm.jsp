@@ -10,33 +10,28 @@
 
 </head>
 <body>
-	<h1>당신의 sense를 입력하세요 관리자야^^</h1>
+	<h1 align="center">당신의 sense를 입력하세요 관리자야^^</h1>
 	
-	<form action="senseWritePro.mw" method="post" enctype="multipart/form-data">
-	<table>
+	<form action="senseWritePro.mw" method="post">
+	<table align="center">
 		<tr>
+			<td>제목 : </td>
 			<td>
-				제목 : <input type="text" id="sense_title" name="sense_title"/>
+				<input type="text" id="sense_title" name="sense_title"/>
 			</td>
 		</tr>
 		<tr>
+			<td>메인</td>
 			<td>
-				메인 유무 : <input type="checkbox" id="main_set" name="main_set"/>
-							<script>
-								if($("#main_set").prop("checked")){
-									$("#main_set").val(1);
-								}else{
-									$("#main_set").val(0);
-								}
-							</script>
-								
+				<input type="radio" id="main_set" name="main_set" value="1" />메인노출
+				<input type="radio" id="main_set" name="main_set" value="0" checked/>메인안함
 			</td>
 		</tr>
 		<tr>
-			<td>
-				카테고리 : <!-- for문 돌려서 셀렉트 -->
+			<td>카테고리 :</td>
+			<td>  <!-- for문 돌려서 셀렉트 -->
 				<select name="sense_category">
-						<option>카테고리</option>
+						<option>--카테고리--</option>
 					<c:forEach var="list" items="${ list }">				
 						<option>${ list.sense_detail_category }</option>
 					</c:forEach>
@@ -44,19 +39,26 @@
 			</td>
 		</tr>
 		<tr>
+			<td>내용 : </td> 
+			<td>	
+				<input type="text" id="sense_content" name="sense_content"/>
+			</td>
+		</tr>
+		<tr>
+			<td>URL : </td>
 			<td>
-				내용 : <input type="text" id="sense_content" name="sense_content"/>
+				<input type="text" id="sense_url" name="sense_url"/>
+			</td>
+		</tr>
+		<tr>
+			<td>THUMBNAIL : </td>
+			<td>
+				<input type="text" id="sense_thumbnail" name="sense_thumbnail"/>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				URL : <input type="text" id="sense_url" name="sense_url"/>
-			</td>
-		</tr>
-		<tr>
-			<td>
-<!--   				이미지 : <input type="file" id="sense_thumbnail" name="sense_thumbnail"><br/>  -->
-					  <input type="submit" value="전송"/>
+				<input type="submit" value="저장"/>
 			</td> 
 		</tr>
 	</table>

@@ -1,7 +1,5 @@
 package mw.sense.model;
 
-import java.sql.Timestamp;
-
 public class SenseDTO {
 	private int num; //번호
 	private int main_set; //메인
@@ -10,7 +8,7 @@ public class SenseDTO {
 	private String sense_content; //내용
 	private String sense_url; //URL
 	private String sense_thumbnail; //섬네일이미지
-	private Timestamp reg_date; //날짜
+
 	
 	//setter
 	public void setNum(int num) {
@@ -34,9 +32,7 @@ public class SenseDTO {
 	public void setSense_thumbnail(String sense_thumbnail) {
 		this.sense_thumbnail = sense_thumbnail;
 	}
-	public void setReg_date(Timestamp reg_date) {
-		this.reg_date = reg_date;
-	}
+
 	
 	//getter
 	public int getNum() {
@@ -60,8 +56,6 @@ public class SenseDTO {
 	public String getSense_thumbnail() {
 		return sense_thumbnail;
 	}
-	public Timestamp getReg_date() {
-		return reg_date;
-	}
+
 	
 }

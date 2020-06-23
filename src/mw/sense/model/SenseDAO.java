@@ -59,12 +59,6 @@ public class SenseDAO {
 		return check;
 	}
 	
-//	//이미지파일 num값 가져오기
-//	public int getMaxNum() {
-//		int num = sqlSession.selectOne("sense.maxNum");
-//		return num;
-//	}
-	
 	// ID confirm	
 	
 	
