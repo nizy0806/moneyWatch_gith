@@ -6,6 +6,7 @@
 	<!-- 자주 사용하는 객체를 별칭 설정 -->
 	
 	<typeAliases>
+		<typeAlias type="mw.main.model.MainDTO" alias="mainDTO"/> <!-- 메인 -->
 		<typeAlias type="mw.member.model.MemberDTO" alias="memberDTO" /> <!-- 회원  -->
 		<typeAlias type="mw.member.model.DeleteMemListDTO" alias="deleteMemListDTO"/><!--탈퇴회원 -->
 		
@@ -37,6 +38,7 @@
 		<mapper resource="mw/sql/senseSQL.xml" /> <!-- 금융지식 -->
 		<mapper resource="mw/sql/faqboardSQL.xml" /> <!--F&A게시판 -->
 		<mapper resource="mw/sql/emailSQL.xml"/><!-- 아이디/비번 찾기 -->
+		<mapper resource="mw/sql/mainSQL.xml"/><!-- 메인 -->
 	</mappers>
 	
 </configuration>

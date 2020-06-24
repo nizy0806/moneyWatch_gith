@@ -40,6 +40,7 @@
 				/WEB-INF/controller/faqboard-servlet.xml
 				/WEB-INF/controller/chat-servlet.xml
 				/WEB-INF/controller/email-servlet.xml
+				/WEB-INF/controller/main-servlet.xml
 			</param-value>
 		</init-param>
 	</servlet>
