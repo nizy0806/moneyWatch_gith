@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>연령대별 지출 chart</title>
@@ -12,11 +12,7 @@
 
 <script type="text/javascript">
 	FusionCharts.ready(function() {
-		alert('${chart_list[0].io_price}')
-		alert('${chart_list[1].io_price}')
-		alert('${chart_list[2].io_price}')
-		alert('${chart_list[3].io_price}')
-		alert('${chart_list[4].io_price}')
+
 		var chartObj20 = new FusionCharts({
 			type : 'radar',
 			renderAt : 'chart-container20',
@@ -29,34 +25,34 @@
 					"subCaption" : "Based on moneyWatch customer",
 					"numberPreffix" : "$",
 					"theme" : "fusion",
-					"radarfillcolor" : "#b3eef2",
+					"radarfillcolor" : "#BC71C7",
 				},
 				"categories" : [ {
 					"category" : [ {
 
-						"label" : "${chart_list[0].io_category}"
+						"label" : "${chart_list20[0].io_category}"
 					}, {
-						"label" : "${chart_list[1].io_category}"
+						"label" : "${chart_list20[1].io_category}"
 					}, {
-						"label" : "${chart_list[2].io_category}"
+						"label" : "${chart_list20[2].io_category}"
 					}, {
-						"label" : "${chart_list[3].io_category}"
+						"label" : "${chart_list20[3].io_category}"
 					}, {
-						"label" : "${chart_list[4].io_category}"
+						"label" : "${chart_list20[4].io_category}"
 					} ]
 				} ],
 				"dataset" : [ {
 					"seriesname" : "20s' Expenditure",
 					"data" : [ {
-						"value" : '${chart_list[0].io_price/10000}'
+						"value" : '${chart_list20[0].io_price/10000}'
 					}, {
-						"value" : '${chart_list[1].io_price/10000}'
+						"value" : '${chart_list20[1].io_price/10000}'
 					}, {
-						"value" : '${chart_list[2].io_price/10000}'
+						"value" : '${chart_list20[2].io_price/10000}'
 					}, {
-						"value" : '${chart_list[3].io_price/10000}'
+						"value" : '${chart_list20[3].io_price/10000}'
 					}, {
-						"value" : '${chart_list[4].io_price/10000}'
+						"value" : '${chart_list20[4].io_price/10000}'
 					} ]
 				} ]
 			}
@@ -74,37 +70,37 @@
 			dataFormat : 'json',
 			dataSource : {
 				"chart" : {
-					"caption" : "30대 지출 랭킹 5",
+					"caption" : "30대 지출 랭킹 5 (단위:만)",
 					"subCaption" : "Based on moneyWatch customer",
 					"numberPreffix" : "$",
 					"theme" : "fusion",
-					"radarfillcolor" : "#ffffff",
+					"radarfillcolor" : "#6CBD87",
 				},
 				"categories" : [ {
 					"category" : [ {
-						"label" : "Ambience"
+						"label" : "${chart_list30[0].io_category}"
 					}, {
-						"label" : "Product Assortment"
+						"label" : "${chart_list30[1].io_category}"
 					}, {
-						"label" : "Price Competitiveness"
+						"label" : "${chart_list30[2].io_category}"
 					}, {
-						"label" : "Service"
+						"label" : "${chart_list30[3].io_category}"
 					}, {
-						"label" : "Recommend to others"
+						"label" : "${chart_list30[4].io_category}"
 					} ]
 				} ],
 				"dataset" : [ {
 					"seriesname" : "30s' Expenditure",
 					"data" : [ {
-						"value" : "3.5"
+						"value" : "${chart_list30[0].io_price/10000}"
 					}, {
-						"value" : "4.8"
+						"value" : "${chart_list30[1].io_price/10000}"
 					}, {
-						"value" : "3.1"
+						"value" : "${chart_list30[2].io_price/10000}"
 					}, {
-						"value" : "4.0"
+						"value" : "${chart_list30[3].io_price/10000}"
 					}, {
-						"value" : "3.6"
+						"value" : "${chart_list30[4].io_price/10000}"
 					} ]
 				} ]
 			}
@@ -121,37 +117,37 @@
 			dataFormat : 'json',
 			dataSource : {
 				"chart" : {
-					"caption" : "40대 지출 랭킹 5",
+					"caption" : "40대 지출 랭킹 5 (단위:만)",
 					"subCaption" : "Based on moneyWatch customer",
 					"numberPreffix" : "$",
 					"theme" : "fusion",
-					"radarfillcolor" : "#ffffff",
+					"radarfillcolor" : "#C7C071",
 				},
 				"categories" : [ {
 					"category" : [ {
-						"label" : "Ambience"
+						"label" : "${chart_list40[0].io_category}"
 					}, {
-						"label" : "Product Assortment"
+						"label" : "${chart_list40[1].io_category}"
 					}, {
-						"label" : "Price Competitiveness"
+						"label" : "${chart_list40[2].io_category}"
 					}, {
-						"label" : "Service"
+						"label" : "${chart_list40[3].io_category}"
 					}, {
-						"label" : "Recommend to others"
+						"label" : "${chart_list40[4].io_category}"
 					} ]
 				} ],
 				"dataset" : [ {
 					"seriesname" : "40s' Expenditure",
 					"data" : [ {
-						"value" : "3.5"
+						"value" : "${chart_list40[0].io_price/10000}"
 					}, {
-						"value" : "4.8"
+						"value" : "${chart_list40[1].io_price/10000}"
 					}, {
-						"value" : "3.1"
+						"value" : "${chart_list40[2].io_price/10000}"
 					}, {
-						"value" : "4.0"
+						"value" : "${chart_list40[3].io_price/10000}"
 					}, {
-						"value" : "3.6"
+						"value" : "${chart_list40[4].io_price/10000}"
 					} ]
 				} ]
 			}

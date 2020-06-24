@@ -42,8 +42,19 @@ public class MoneyioDAO {
 		sqlSession.update("moneyio.update", io_num);
 	}
 
+	//연령대별 지출 chart 페이지 -20
 	public List ageChart20() {
 		return sqlSession.selectList("moneyio.chart20");
+	}
+	
+	//연령대별 지출 chart 페이지 -30
+	public List ageChart30() {
+		return sqlSession.selectList("moneyio.chart30");
+	}
+	
+	//연령대별 지출 chart 페이지 -40
+	public List ageChart40() {
+		return sqlSession.selectList("moneyio.chart40");
 	}
 	
 	public List moneyioListAll(String id) {

@@ -61,14 +61,38 @@
 		where n_num = #{n_num}
 	</update>
 	
-		<!-- 연령대별 지출 chart -->
+	<!-- 연령대별 지출 chart-20대 -->
 	<select id="chart20" resultType="moneyioDTO">
 	<![CDATA[
 		select * from(
     		select io_category, sum(io_price) as io_price from mwmoneyio where (
-        	io_age between '20' and '29') and io_category not in('n빵비', '기타')
+        	io_age between '20' and '29') and io_category not in('n빵비', '기타') and io_set=1
     		group by io_category
-    		order by count(io_category) desc
+    		order by io_price desc
+		)where rownum <= 5
+	]]>
+	</select>
+	
+	<!-- 연령대별 지출 chart-30대 -->
+	<select id="chart30" resultType="moneyioDTO">
+	<![CDATA[
+		select * from(
+    		select io_category, sum(io_price) as io_price from mwmoneyio where (
+        	io_age between '30' and '39') and io_category not in('n빵비', '기타') and io_set=1
+    		group by io_category
+    		order by io_price desc
+		)where rownum <= 5
+	]]>
+	</select>
+	
+	<!-- 연령대별 지출 chart-40대 -->
+	<select id="chart40" resultType="moneyioDTO">
+	<![CDATA[
+		select * from(
+    		select io_category, sum(io_price) as io_price from mwmoneyio where (
+        	io_age between '40' and '49') and io_category not in('n빵비', '기타') and io_set=1
+    		group by io_category
+    		order by io_price desc
 		)where rownum <= 5
 	]]>
 	</select>
