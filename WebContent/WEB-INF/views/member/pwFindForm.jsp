@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>비밀번호 찾기</title>
+<link href="/mw_test/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<style>
+legend{
+	text-align: center;
+}
+table{
+	border-collapse:separate;
+	border-spacing: 0 30px;
+}
+td{
+	text-align: center;
+}
+
+</style>
+</head>
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+<body>
+  <fieldset>
+	<legend>비밀번호 찾기</legend>
+    <form action="/mw_test/pwFindPro.mw" >
+    	<div class="form-group row">
+    		<table border="0" align="center" width="60%" >
+    			<tr>
+    				<td><label for="id">id</label></td>
+    				<td colspan="3"><input type="text" class="form-control" name="id" /></td>
+    			</tr>
+    			<tr>
+    				<td><label for="Name">성명</label></td>
+    				<td colspan="3"><input type="text" class="form-control" name="name" /></td>
+    			</tr>
+    			
+    			<tr>
+    				<td><label for="Email">이메일</label></td>
+    				<td><input type="text" class="form-control" name="email1"/></td>
+    				<td>@</td>
+    				<td><select class="form-control" name="email2" >
+    					<option value="none">--주소 선택--</option>
+    					<option value="naver.com">naver.com</option>
+    					<option value="gmail.com">gmail.com</option>
+    					<option value="daum.com">daum.com</option>
+    					<option value="nate.com">nate.com</option>
+    				</select></td>
+    				
+    			</tr>
+    			<tr>
+    			<td></td>
+    			<td colspan="3"><center><button type="submit" class="btn btn-primary" name="">&nbsp;&nbsp;Submit&nbsp;&nbsp;</button></center></td>
+    			</tr>
+    		</table>
+    	</div>
+    </form>
+</fieldset>
+</body>
+</html>
