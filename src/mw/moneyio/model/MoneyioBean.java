@@ -100,11 +100,17 @@ public class MoneyioBean {
 	@RequestMapping("ageChart.mw")
 	public String ageChart20(Model model, MoneyioDTO dto) {
 		
-		List chart_list = new ArrayList();
+		List chart_list20 = new ArrayList();
+		List chart_list30 = new ArrayList();
+		List chart_list40 = new ArrayList();
 		
-		chart_list = dao.ageChart20();
-		
-		model.addAttribute("chart_list", chart_list);
+		chart_list20 = dao.ageChart20();
+		chart_list30 = dao.ageChart30();
+		chart_list40 = dao.ageChart40();
+
+		model.addAttribute("chart_list20", chart_list20);
+		model.addAttribute("chart_list30", chart_list30);
+		model.addAttribute("chart_list40", chart_list40);
 		return "/moneyio/ageChart";
 	}
 	
