@@ -14,14 +14,11 @@
 <script src='packages/daygrid/main.js'></script>
 <script src='packages/timegrid/main.js'></script>
 <script src='packages/list/main.js'></script>
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-
 <script>
 
-
-<%-- <% List<MwScheduleDTO> list = (ArrayList<MwScheduleDTO>)request.getAttribute("showSchedule"); %> --%>
   document.addEventListener('DOMContentLoaded', function() {
-	
+    var calendarEl = document.getElementById('calendar');
+
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -39,118 +36,15 @@
       editable: true,
     
       //날짜 클릭 시 팝업창 오픈
-      dateClick: function(info){
+     dateClick: function(info){
           var url = "C_popUp.mw";
           var name = "C_insert";
           var option = "width = 500, height = 500, top = 100, left = 200, location = no";
     	 
           window.open(url,name,option);
-      },
-      events: [
-          {
-
-            title: 'Business Lunch',
-            start: '2020-05-03T13:00:00',
-            constraint: 'businessHours'
-          },
-          {
-            title: 'Meeting',
-            start: '2020-05-13T11:00:00',
-            constraint: 'availableForMeeting', // defined below
-            color: '#257e4a'
-          },
-          {
-            title: 'Conference',
-            start: '2020-05-18',
-            end: '2020-05-20'
-          },
-          {
-            title: 'Party',
-            start: '2020-05-29T20:00:00'
-          },
-
-          // areas where "Meeting" must be dropped
-          {
-            groupId: 'availableForMeeting',
-            start: '2020-05-11T10:00:00',
-            end: '2020-05-11T16:00:00',
-            rendering: 'background'
-          },
-          {
-            groupId: 'availableForMeeting',
-            start: '2020-05-13T10:00:00',
-            end: '2020-05-13T16:00:00',
-            rendering: 'background'
-          },
-
-          // red areas where no events can be dropped
-          {
-            start: '2020-05-24',
-            end: '2020-05-28',
-            overlap: false,
-            rendering: 'background',
-            color: '#ff9f89'
-          },
-          {
-            start: '2020-05-06',
-            end: '2020-05-08',
-            overlap: false,
-            rendering: 'background',
-            color: '#ff9f89'
-          }
-        ]
-/*     events:function(start,end,callback){
-    	$.ajax({
-    		type : 'get',
-    		url : 'eventAll.mw',
-    		dataType : 'json',
-    		success : function(map){
-    			//var events = [];
-    			//var keys = Object.keys(map);
-    			
-    			//$.each(map,function(){
-    			//	events.push({
-	
-    					//for(var i in keys){
-    						 title: 'Business Lunch',
-          					start: '2020-05-03T13:00:00',
-          					constraint: 'businessHours'
-    					//}
-    					
-    	    			//start:map.get(i).getStart_time();
-	                                                               
-    					//end:$(this).attr('end_time')
-    		//		});
-    		//		console.log(plan);
-    		//		callback(events);
-    		//	});	
-    		}
-    	});
-    }
-   });
-    calendar.render();
-  });
-    
-     /*  eventSources:[
-    	  {
-    	  $.ajax({
-              type: "get", 
-              url: "Calendar.mw", // 클라이언트가 요청 보낼 서버의 url주소
-              datyType: "JSON",
-              success: function (data) {
-              	console.log(data);
-              },
-              error: function(){
-            	  alert("ajax error");
-              }),
-              
-    	  title: 
-    	  start:
-    	  end:
-    	  place:
-    	  memo: */
-            
-      /*  events: [
+      }
+      
+      /* events: [
         {
           title: 'Business Lunch',
           start: '2020-05-03T13:00:00',
@@ -201,11 +95,193 @@
           rendering: 'background',
           color: '#ff9f89'
         }
-      ]  */
+      ] */
+    });
+
+    calendar.render();
+  });
 
 </script>
 
+<style>
 
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+</head>
+<body>
+
+  <div id='calendar'></div>
+
+</body>
+</html>
+
+
+<%-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href='packages/core/main.css' rel='stylesheet' />
+<link href='packages/daygrid/main.css' rel='stylesheet' />
+<link href='packages/timegrid/main.css' rel='stylesheet' />
+<link href='packages/list/main.css' rel='stylesheet' />
+<script src='packages/core/main.js'></script>
+<script src='packages/interaction/main.js'></script>
+<script src='packages/daygrid/main.js'></script>
+<script src='packages/timegrid/main.js'></script>
+<script src='packages/list/main.js'></script>
+
+<script>
+
+
+<% List<MwScheduleDTO> list = (ArrayList<MwScheduleDTO>)request.getAttribute("showSchedule"); %>
+  document.addEventListener('DOMContentLoaded', function() {
+	
+	var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+      },
+      defaultDate: new Date(),
+      locale : "ko",
+      selectable: true,
+      navLinks: true, // can click day/week names to navigate views
+      businessHours: true, // display business hours
+      editable: true,
+    
+      //날짜 클릭 시 팝업창 오픈
+     dateClick: function(info){
+    	  //var moment = $('.callender_area').fullCalendar('getDate');
+          var url = "C_popUp.mw";
+          var name = "C_insert";
+          var option = "width = 500, height = 500, top = 100, left = 200, location = no";
+    	 
+          window.open(url,name,option);
+      }
+    
+    });
+    calendar.render();
+  });
+ --%>
+<!--  events:function(start,end,callback){
+    	$.ajax({
+    		type : 'get',
+    		url : 'eventAll.mw',
+    		dataType : 'json',
+    		success : function(map){
+    			//var events = [];
+    			//var keys = Object.keys(map);
+    			
+    			//$.each(map,function(){
+    			//	events.push({
+	
+    					//for(var i in keys){
+    						 title: 'Business Lunch',
+          					start: '2020-05-03T13:00:00',
+          					constraint: 'businessHours'
+    					//}
+    					
+    	    			//start:map.get(i).getStart_time();
+	                                                               
+    					//end:$(this).attr('end_time')
+    		//		});
+    		//		console.log(plan);
+    		//		callback(events);
+    		//	});	
+    		}
+    	});
+    }
+   });
+    calendar.render();
+  });
+    
+     /*  eventSources:[
+    	  {
+    	  $.ajax({
+              type: "get", 
+              url: "Calendar.mw", // 클라이언트가 요청 보낼 서버의 url주소
+              datyType: "JSON",
+              success: function (data) {
+              	console.log(data);
+              },
+              error: function(){
+            	  alert("ajax error");
+              }),
+              
+    	  title: 
+    	  start:
+    	  end:
+    	  place:
+    	  memo: */
+            
+     /* events: [
+        {
+          title: 'Business Lunch',
+          start: '2020-05-03T13:00:00',
+          constraint: 'businessHours'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-05-13T11:00:00',
+          constraint: 'availableForMeeting', // defined below
+          color: '#257e4a'
+        },
+        {
+          title: 'Conference',
+          start: '2020-05-18',
+          end: '2020-05-20'
+        },
+        {
+          title: 'Party',
+          start: '2020-05-29T20:00:00'
+        },
+
+        // areas where "Meeting" must be dropped
+        {
+          groupId: 'availableForMeeting',
+          start: '2020-05-11T10:00:00',
+          end: '2020-05-11T16:00:00',
+          rendering: 'background'
+        },
+        {
+          groupId: 'availableForMeeting',
+          start: '2020-05-13T10:00:00',
+          end: '2020-05-13T16:00:00',
+          rendering: 'background'
+        },
+
+        // red areas where no events can be dropped
+        {
+          start: '2020-05-24',
+          end: '2020-05-28',
+          overlap: false,
+          rendering: 'background',
+          color: '#ff9f89'
+        },
+        {
+          start: '2020-05-06',
+          end: '2020-05-08',
+          overlap: false,
+          rendering: 'background',
+          color: '#ff9f89'
+        }
+      ] -->
+</script> 
 <style>
 
   body {

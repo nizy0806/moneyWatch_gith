@@ -36,6 +36,19 @@
 			}
 		})
 	}
+	
+/* 	$(function(){
+		$('#insert').on('click',function(){
+			$.ajax({
+				url : 'eventAll.mw',
+				type:'get',
+				success:function(t){
+					$(t).find()
+				}
+			})
+		})
+		
+	}) */
 </script>
 
 </head>
@@ -80,7 +93,7 @@
 			<textarea class="memo" id="memo" type="text" name="memo" row="5" cols="20" placeholder="100글자까지 입력 가능합니다"></textarea>
 		</div>		
 	</form>
-		<button class="insert" type="button" onclick="schedule_insert();">저장</button>
+		<button class="insert" id="insert" type="button" onclick="schedule_insert();">저장</button>
 		
 	</div>
 </div>
