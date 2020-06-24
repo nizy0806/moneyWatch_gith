@@ -20,7 +20,7 @@
 	
 	<!-- 메인 리스트 출력 / 메인페이지-->
 	<select id="mainList" resultType="senseDTO">
-		select num, sense_category, sense_title, sense_content, sense_url, sense_thumbnail from mwsense where main_set=${1} order by num desc <!-- DB main_set의 값이 1 일때, 메인 -->
+		select num, sense_category, sense_title, sense_content, sense_url, sense_thumbnail from mwsense where main_set=${1} <!-- DB main_set의 값이 1 일때, 메인 -->
 	</select>
 
 	<!-- 카테고리 선택시 / 메인페이지-->	
@@ -45,11 +45,16 @@
 	<select id="category" resultType="sensecategoryDTO">
 		select * from mwsense_category order by num asc
 	</select>
+	
+	<!-- 센스 NUM값 최댓값 빼기 -->
+	<select id="senseMaxNum" resultType="int">
+		select max(num) from mwsense
+	</select>
 		
 	<!-- 센스 직접 입력 -->
 	<insert id="insert" parameterType="senseDTO">
 		insert into mwsense values (
-			mwsense_seq.nextval, 
+			#{num}, 
 			#{main_set},
 			#{sense_category},
 			#{sense_title},
@@ -68,7 +73,12 @@
 	
 	<!-- 센스 직접 입력 확인 -->
 	<select id="insertCheck" resultType="int" parameterType="senseDTO">
-		select count(*) from mwsense where sense_url=#{sense_url}
+		select count(*) from mwsense where sense_url=#{sense_url} or sense_thumbnail=#{sense_thumbnail}
+	</select>
+	
+	<!-- 수정을 위한확인 -->
+	<select id="check" resultType="int" parameterType="senseDTO">
+		select count(*) from mwsense where num=#{num}
 	</select>
 	
 	<!-- 센스 게시글 수정 -->
@@ -85,18 +95,7 @@
 		</trim>
 		where num=#{num}
 	</update>
-	
-	<!-- 센스 수정 확인 -->
-	<select id="modifyCheck" resultType="int" parameterType="senseDTO">
-		select count(*) from mwsense 
-			where num=#{num} 
-				and main_set=#{main_set} 
-				and sense_category=#{sense_category} 
-				and sense_content=#{sense_content} 
-				and sense_url=#{sense_url} 
-				<!-- and sense_thumbnail=#{sense_thumbnail} -->
-	</select>
-	
+		
 	<!-- 센스 삭제 -->
 	<select id="senseDelete" parameterType="int">
 		delete from mwsense where num=#{num}

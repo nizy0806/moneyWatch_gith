@@ -68,7 +68,7 @@ public class SenseBean {
 	public String categorySelect(Model model) {
 		
 		List<SenseCategoryDTO> list = dao.category(); //카테고리 리스트
-		model.addAttribute("list", list);
+		model.addAttribute("list", list);		
 		return "/sense/senseWriteForm";
 		
 	}
@@ -76,9 +76,14 @@ public class SenseBean {
 	//C - 센스 직접 입력 pro페이지 
 	@RequestMapping("senseWritePro.mw")
 	public String senseWritePro(SenseDTO dto, Model model) {
-
-		dao.senseInsert(dto); //입력		
-		int check = dao.senseInsertCheck(dto); //입력확인
+		
+		int maxNum = dao.senseMaxNum() + 1; //mwsense테이블의 num 최댓값을 출력해 +1 해줌
+		dto.setNum(maxNum); //dto에 maxNum을 넣어줌
+		
+		int check = dao.senseInsertCheck(dto); //url or thumbnail 유효성 확인		
+		if (check == 0) {
+			dao.senseInsert(dto); //입력					
+		}
 		
 		model.addAttribute("check", check); //check 반환
 		return "/sense/senseWritePro";
@@ -101,8 +106,12 @@ public class SenseBean {
 	@RequestMapping("senseModifyPro.mw")
 	public String senseModify(SenseDTO dto, Model model) {
 		
-		dao.senseModify(dto);
-		int check = dao.senseModifyCheck(dto);
+		int check = dao.modifyCheck(dto); //존재 유효성 확인		
+		
+		if (check == 1) { //1일 경우 DB수정 진행
+			dao.senseModify(dto);				
+			check = 2;
+		}
 		
 		model.addAttribute("check", check); // 수정 확인 check 반환
 		return "/sense/senseModifyPro";

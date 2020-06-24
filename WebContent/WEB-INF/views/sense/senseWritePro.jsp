@@ -5,24 +5,29 @@
 <html>
 <head>
 <title>senseWritePro</title>
-
 <!-- 입력확인 -->
 <c:choose>
+	<c:when test="${ check == 1 }">	
 	<!-- 입력에 성공했을 경우ㅡ  -->
-	<c:when test="${ check == 1 }">
 		<script>
 			alert("정상적으로 입력되었습니다.");
-			opener.parent.location.reload();
+			window.location='/moneyWatch/sense.mw';
 		</script>
 	</c:when>
 	
-	<!-- 입력에 실패했을 경우 -->
 	<c:when test="${ check == 0 }">
+	<!-- 입력에 실패했을 경우 -->
 		<script>
 			alert("입력에 실패하였습니다.");
-			opener.parent.location.reload();
+			history.go(-1);
 		</script>	
 	</c:when>
+	<c:otherwise>
+		<script>
+			alert("에러");
+			history.go(-1);
+		</script>	
+	</c:otherwise>
 </c:choose>
 </head>
 <body>
