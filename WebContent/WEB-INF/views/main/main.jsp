@@ -1,70 +1,139 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-
-        
-<html>
+<!DOCTYPE html>
 <head>
-<title>메인페이지</title>
-<c:if test="${sessionScope.memId ==null}">
-<script language="javaScript">
-
-function focusIt(){
-	document.inputForm.id.focus();
-}
-
-function checkIt(){
-	inputForm=eval("document.inform");
-		if(!inputForm.id.value){
-		alert("아이디를 입력하세요");
-		inputForm.id.focus();
-		
-		return false;
-		}
-		if(!inputForm.pw.value){
-			alert("비밀번호를 입력하세요");
-			inputForm.pw.focus();
-			
-			return false;
-		}
-	}
-</script>
-	<tr>
-	<td width="300" height="20">&ndsp;</td>
-	
-	<form name="inputForm" method="post" action="/moneyWatch/loginPro.mw" onSubmit="return checkIt();">
-	<td width="100" align="right">아이디</td>
-	<td width="100">
-		<input type="text" name="id" size="15" mexlength="10"></td>
-		
-	<td width="100" align="right">비밀번호</td>
-	<td width="100">
-		<input type="password" name="pw" size="15" mexlength="10"></td>
-	</tr>
-	<tr>
-		<td colspan="3" align="center">
-			<input type="submit" name="Submit" value="로그인">
-			<input type="button" value="회원가입" onclick="javascript:window.location='/moneyWatch/registerForm.mw'">
-	
-	</td>		
-	</form>
-	</tr>
-    </c:if>
-    
-    
-	<td rowspan="3" align="center">${sessionScope.memId}님 환영합니다<br />
-	<c:if test="${sessionScope.memId != null}"> 
-	<form method="post" action="/moneyWatch/logout.mw">
-	
-	
-	<input type="submit" value="로그아웃" >
-	<input type="button" value="회원정보변경" onclick="javascript:window.location='/moneyWatch/modify.mw'">
-	<input type="button" value="게시판" onclick="javascript:window.location='/moneyWatch/faqList.mw'">
-
-</form>
-
-
+  <title>moneyWatch main page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  </style>
 </head>
-</c:if>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:0; background-color:#b89fe3;">
+  <h1>moneyWatch</h1>
+  <p>통장이 텅장이 되지 말자!</p> 
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark"">
+<div class="container">	
+  <a class="navbar-brand" href="#"><i class="fas fa-bars"></i></a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Member</a>
+    <div class="dropdown-menu" style="">
+      <a class="dropdown-item" href="#">회원정보 수정</a>
+      <a class="dropdown-item" href="#">마이페이지</a>
+      <a class="dropdown-item" href="#">회원 탈퇴</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+    </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Service</a>
+    <div class="dropdown-menu" style="">
+      <a class="dropdown-item" href="#">챗봇</a>
+      <a class="dropdown-item" href="#">캘린더</a>
+      <a class="dropdown-item" href="#">지출/수입 등록</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">나의 소비패턴 보기</a>
+      <a class="dropdown-item" href="#">연령별 지출 비교</a>
+    </div>
+    </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">카드/계좌</a>
+    <div class="dropdown-menu" style="">
+      <a class="dropdown-item" href="#">등록</a>
+      <a class="dropdown-item" href="#">목록 및 혜택 보기</a>
+    </div>
+    </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">게시판</a>
+    <div class="dropdown-menu" style="">
+      <a class="dropdown-item" href="#">금융 상식</a>
+      <a class="dropdown-item" href="#">챌린지</a>
+    </div>
+    </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">관리자</a>
+    <div class="dropdown-menu" style="">
+      <a class="dropdown-item" href="#">회원 관리</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">연령별 지출 관리</a>
+      <a class="dropdown-item" href="#">소비패턴 분석 관리</a>
+      <a class="dropdown-item" href="#">카드 목록/혜택 관리</a>
+      <a class="dropdown-item" href="#">챗봇 관리</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">게시판 관리</a>
+    </div>
+    </li>
+
+    </ul>
+  </div> 
+  </div> 
+</nav>
+
+<div class="container" style="margin-top:30px">
+  <div class="row">
+   
+  <div class="col-sm-8">
+      <h2>Calendar</h2>
+      <h5>Today, Dec 7, 2017</h5>
+      <div class="fakeimg" style="height:90%;">캘린더 페이지 넣는 곳</div>
+      <p>캘린더를 클릭해 일정을 등록해보세요!</p>
+      <p> ....</p>
+      <br>
+      
+    </div>
+   <div class="col-sm-4">
+      <h2>About Me</h2>
+      <h5>OOO님 환영합니다 :^)</h5>
+      <div class="fakeimg" style="background-color:#dba4d7;"></div>
+      <p>개인정보 보호를 위해 주기적으로 비밀번호를 변경해주세요!</p>
+      <h3>오늘의 금융상식</h3>
+      <br />
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <br />
+      <p style="text-align:right;">금융상식 더 보러 가기 ></p>
+      <hr class="d-sm-none">
+    </div>
+    
+  </div>
+</div>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+</div>
+
+</body>
 </html>
+        
