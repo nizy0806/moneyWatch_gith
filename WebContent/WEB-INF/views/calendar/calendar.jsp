@@ -51,33 +51,6 @@
 </c:forEach> 
  ];
   
-/*   var money_date = [
-		<c:forEach var="mlist" items="${mlist}" varStatus="status">
-		       {"id":'<c:out value="${mlist.id}" />'
-		       ,"title":'<c:out value="${mlist.io_price}" />'
-		       ,"start":'<c:out value="${mlist.io_reg_date}" />'
-		    	<c:if test="${mlist.io_set == '1'}">
-		       		,"color":'#FF0000'
-		       	</c:if>
-		       }<c:if test="${!status.last}">,</c:if>
-     
-	</c:forEach> 
-  ]; */
-
-/*   $(function(){
-	  var dataset = new Array();
-	  
-	  <c:forEach items="${listview}" var="info">
-	  	var json = new Object();
-	  	json.serverTitle="${info.title}";
-	  	json.serverStart="${info.start_time}";
-	  	result.put(json);
-	  </c:forEach>
-	  
-	  alert("jsoninfo="+JSON.stringfy(result));
-  }) */
-
-  
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     
