@@ -70,12 +70,23 @@
     
       //날짜 클릭 시 팝업창 오픈
       dateClick: function(info){
-          var url = "C_popUp.mw";
+    	  
+    	  let str2arr = info.dateStr.split("-");
+    	  let s_date_obj = new Date(str2arr[0], str2arr[1] - 1, str2arr[2]);
+
+    	  let s_year = s_date_obj.getFullYear(); // 선택된날짜 연도
+    	  let s_month = s_date_obj.getMonth() + 1; // 선택된날짜 월
+    	  let s_date = s_date_obj.getDate(); // 선택된날짜 일
+    	 
+    	  if(s_month < 10) s_month = '0' + s_month;
+    	  if(s_date < 10) s_date = '0' + s_date;
+    	  
+    	  var url = "C_popUp.mw?year="+s_year+"&month="+s_month+"&date="+s_date;
           var name = "C_insert";
           var option = "width = 500, height = 500, top = 100, left = 200, location = no";
-    	 
-          window.open(url,name,option);
+    	  window.open(url,name,option);
       },
+      
     events : dataset
 
     });

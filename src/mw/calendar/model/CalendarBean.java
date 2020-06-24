@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +46,21 @@ public class CalendarBean {
 	}
 
 	@RequestMapping("C_popUp.mw") // Ä¶¸°´õ ÆË¾÷Ã¢
-	public String cal_pop() {
+	public String cal_pop(Model model,HttpServletRequest request) {
+		
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		//if(month!='10' || month!='11' || )
+		String day = request.getParameter("date");
+		String date = year + "-" + month + "-" + day;
+		
+		System.out.println(date);
+		model.addAttribute("date",date);
+		
+		//model.addAttribute("year",year);
+		//model.addAttribute("month",month);
+		//model.addAttribute("date",date);
+		
 		return "/calendar/day";
 	}
 

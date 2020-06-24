@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -75,6 +76,7 @@
 		</div>	
 		
 		<div class="domain" >
+			
 			노랑 <input class="sc_color" type="radio" name="sc_color" value="#FFEB5A">
 			보라 <input class="sc_color" type="radio" name="sc_color" value="#C45FDD">
 			초록 <input class="sc_color" type="radio" name="sc_color" value="#FF7A85">
@@ -85,13 +87,13 @@
 			<h3 class="zTree-h3">시작일</h3>
 		</div>
 		<div class="domain">
-			<input class="date" id="start_time" type="date" name="start_time" placeholder="">
+			<input class="date" id="start_time" type="date" name="start_time" value="${date}">
 		</div>
 		<div class="domain">
 			<h3 class="zTree-h3">종료일</h3>
 		</div>
 		<div class="domain">
-			<input class="date" id="end_time" type="date" name="end_time" placeholder="">
+			<input class="date" id="end_time" type="date" name="end_time" value="${date}">
 		</div>
 		<div class="domain">
 			<h3 class="zTree-h3">장소</h3>
