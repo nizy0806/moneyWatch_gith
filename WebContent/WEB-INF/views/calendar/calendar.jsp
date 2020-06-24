@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,88 +15,96 @@
 <script src='packages/daygrid/main.js'></script>
 <script src='packages/timegrid/main.js'></script>
 <script src='packages/list/main.js'></script>
+
 <script>
 
+  var dataset = [
+	<c:forEach var="listview" items="${listview}" varStatus="status">
+	    <c:if test="${listview.start_time != ''}">
+	        {"id":'<c:out value="${listview.id}" />'
+	        ,"title":'<c:out value="${listview.title}" />'
+	        ,"start":'<c:out value="${listview.start_time}" />'
+	        <c:if test="${listview.end_time != ''}">
+	            ,"end":'<c:out value="${listview.end_time}" />'
+	            ,"color":'<c:out value="${listview.sc_color}" />'
+	        </c:if>
+	        },
+	    </c:if>
+	</c:forEach>
+	
+		<c:forEach var="olist" items="${olist}" varStatus="status">
+	    {"id":'<c:out value="${olist.id}" />'
+	    ,"title":'<c:out value="${olist.io_price}" />'
+	    ,"start":'<c:out value="${olist.io_reg_date}" />'
+	    ,"color":'#FF9696'
+	    },
+	
+	</c:forEach> 
+	
+	<c:forEach var="ilist" items="${ilist}" varStatus="status">
+    {"id":'<c:out value="${ilist.id}" />'
+    ,"title":'<c:out value="${ilist.io_price}" />'
+    ,"start":'<c:out value="${ilist.io_reg_date}" />'
+    ,"color":'#91D8FA'
+    }<c:if test="${!status.last}">,</c:if>
+
+</c:forEach> 
+ ];
+  
+/*   var money_date = [
+		<c:forEach var="mlist" items="${mlist}" varStatus="status">
+		       {"id":'<c:out value="${mlist.id}" />'
+		       ,"title":'<c:out value="${mlist.io_price}" />'
+		       ,"start":'<c:out value="${mlist.io_reg_date}" />'
+		    	<c:if test="${mlist.io_set == '1'}">
+		       		,"color":'#FF0000'
+		       	</c:if>
+		       }<c:if test="${!status.last}">,</c:if>
+     
+	</c:forEach> 
+  ]; */
+
+/*   $(function(){
+	  var dataset = new Array();
+	  
+	  <c:forEach items="${listview}" var="info">
+	  	var json = new Object();
+	  	json.serverTitle="${info.title}";
+	  	json.serverStart="${info.start_time}";
+	  	result.put(json);
+	  </c:forEach>
+	  
+	  alert("jsoninfo="+JSON.stringfy(result));
+  }) */
+
+  
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-
-    var calendarEl = document.getElementById('calendar');
-
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        right: 'dayGridMonth,listMonth'
       },
       defaultDate: new Date(),
       locale : "ko",
       selectable: true,
       navLinks: true, // can click day/week names to navigate views
       businessHours: true, // display business hours
-      editable: true,
+      //editable: true,
     
       //날짜 클릭 시 팝업창 오픈
-     dateClick: function(info){
+      dateClick: function(info){
           var url = "C_popUp.mw";
           var name = "C_insert";
           var option = "width = 500, height = 500, top = 100, left = 200, location = no";
     	 
           window.open(url,name,option);
-      }
-      
-      /* events: [
-        {
-          title: 'Business Lunch',
-          start: '2020-05-03T13:00:00',
-          constraint: 'businessHours'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-05-13T11:00:00',
-          constraint: 'availableForMeeting', // defined below
-          color: '#257e4a'
-        },
-        {
-          title: 'Conference',
-          start: '2020-05-18',
-          end: '2020-05-20'
-        },
-        {
-          title: 'Party',
-          start: '2020-05-29T20:00:00'
-        },
+      },
+    events : dataset
 
-        // areas where "Meeting" must be dropped
-        {
-          groupId: 'availableForMeeting',
-          start: '2020-05-11T10:00:00',
-          end: '2020-05-11T16:00:00',
-          rendering: 'background'
-        },
-        {
-          groupId: 'availableForMeeting',
-          start: '2020-05-13T10:00:00',
-          end: '2020-05-13T16:00:00',
-          rendering: 'background'
-        },
-
-        // red areas where no events can be dropped
-        {
-          start: '2020-05-24',
-          end: '2020-05-28',
-          overlap: false,
-          rendering: 'background',
-          color: '#ff9f89'
-        },
-        {
-          start: '2020-05-06',
-          end: '2020-05-08',
-          overlap: false,
-          rendering: 'background',
-          color: '#ff9f89'
-        }
-      ] */
     });
 
     calendar.render();
