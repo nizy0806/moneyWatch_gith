@@ -75,27 +75,48 @@ public class MoneyioBean {
 		return "/moneyio/moneyioPro";
 	}
 	
+	//지출/수입 입력 페이지 수정 페이지
 	@RequestMapping("ioUpdateForm.mw")
 	public String ioUpdateForm(Model model) {
 		
 		String id="nahui068";
-		int io_num=329;
-		
+		int io_num=905;
+
 		MoneyioDTO dto = dao.ioUpdateForm(io_num);
-		List bank_list = dao.bankName();
-		
+		if(dto.getIo_N_div() == 0) {
+			dto.setIo_N_div(0);
+		}
+
 		model.addAttribute("id", id);
 		model.addAttribute("dto", dto);
-		model.addAttribute("bank_list", bank_list);
 		
 		return "/moneyio/ioUpdateForm";
 	}
 	
+	//지출/수입 입력 페이지 update
 	@RequestMapping("ioUpdatePro.mw")
-	public String ioUpdatePro(int io_num, int n_num) {
-		dao.ioUpdatePro(io_num);
+	public String ioUpdatePro(MoneyioDTO dto, NbreadDTO ndto, HttpServletRequest request) {
+		//int io_num = 905;
+		dao.ioUpdatePro(dto);
+		
+		if(dto.getIo_N_div()>0) {
+			dao.n_delete(ndto.getIo_num());
+			String[] n_debtor = request.getParameterValues("n_debtor");
+			String[] n_price = request.getParameterValues("n_price");
+			
+			for(int i = 0; i < n_debtor.length; i++) {
+				ndto.setN_debtor(n_debtor[i]);
+				ndto.setN_price(n_price[i]);
+				dao.n_insert2(ndto);
+				System.out.println("ndto get n debtor"+ndto.getN_debtor());
+			}
+			
+		}else {
+			dao.n_delete(ndto.getN_num());
+		}
+		
 		return "/moneyio/ioUpdatePro";
-	}	
+	}
 	
 	@RequestMapping("ageChart.mw")
 	public String ageChart20(Model model, MoneyioDTO dto) {

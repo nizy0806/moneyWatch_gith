@@ -38,8 +38,19 @@ public class MoneyioDAO {
 		return sqlSession.selectOne("moneyio.updateForm", io_num);
 	}
 
-	public void ioUpdatePro(int io_num) {
-		sqlSession.update("moneyio.update", io_num);
+	//지출/수입 내역 수정
+	public void ioUpdatePro(MoneyioDTO dto) {
+		sqlSession.update("moneyio.update", dto);
+	}
+	
+	public void n_UpdatePro(NbreadDTO ndto) {
+		sqlSession.update("moneyio.n_update", ndto);
+	}
+	public void n_delete(int io_num) {
+		sqlSession.delete("moneyio.n_delete", io_num);
+	}
+	public void n_insert2(NbreadDTO ndto) {
+		sqlSession.insert("moneyio.n_insert2", ndto);
 	}
 
 	//연령대별 지출 chart 페이지 -20

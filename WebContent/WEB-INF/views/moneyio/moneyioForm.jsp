@@ -164,7 +164,7 @@
 		<table border="1" align="center" width="40%">
 		<tr>
 		<td align="center"><label for="text">인원</label></td>
-		<td><input type="text" id="io_N_div" name="io_N_div" style="display: none" placeholder="N빵 인원"></td>
+		<td><input type="text" id="io_N_div" name="io_N_div" value="0" style="display: none" placeholder="N빵 인원"></td>
 		<td><button type="button" class="btn btn-primary" OnClick="n_button()">Click</button></td>
 		</tr>
 		</table>
