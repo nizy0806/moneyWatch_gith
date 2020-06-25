@@ -17,14 +17,6 @@
 <script>
 	function schedule_insert(){
 		
-		/* var sc_color="0";
-		var radio_btn = document.getElementsByName("sc_color");
-		var radio_btn_checked = 0;
-		for(var i =0; i<radio_btn.length;i++){
-			if(radio_btn[i].checked==true){
-				sc_color = $('#sc_color').val();
-			}
-		} */
 		var sc_color = $('input[name=sc_color]:checked').val();
 		var scheduleDB = { //일정 입력 데이터 객체변수
 				id : $("#id").val(), //id - session값 이용 필요
@@ -56,6 +48,8 @@
 
 <body>
 <div class="group" id="popupGroup">
+<button onclick="window.open('/moneyWatch/moneyioForm.mw')">입/출금 등록하기</button>
+
 	<div class= "group-head">
 		<h1 class="xTree-h1">일정추가</h1>
 	</div>
@@ -79,7 +73,7 @@
 			
 			노랑 <input class="sc_color" type="radio" name="sc_color" value="#FFEB5A">
 			보라 <input class="sc_color" type="radio" name="sc_color" value="#C45FDD">
-			초록 <input class="sc_color" type="radio" name="sc_color" value="#FF7A85">
+			초록 <input class="sc_color" type="radio" name="sc_color" value="#5AD18F">
 			민트 <input class="sc_color" type="radio" name="sc_color" value="#5CEEE6">
 		</div>
 		

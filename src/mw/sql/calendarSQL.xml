@@ -35,4 +35,18 @@
 		<!-- select * from mwmoneyio where id=#{id} -->
 	</select>
 	
+	<!-- 세부일정내용 -->
+	<select id="day_detail" resultType="mwscheduleDTO" parameterType="hashmap">
+		select * from mwSchedule where id=#{id} and start_time=#{start_time} and title=#{title}
+	</select>
+	
+	<!-- 세부지출내용 -->
+	<select id="out_detail" resultType="moneyioDTO" parameterType="hashmap">
+		select * from mwmoneyio where id=#{id} and io_reg_date=#{io_reg_date} and io_set=1
+	</select>
+	
+	<!-- 세부수입내용 -->
+	<select id="in_detail" resultType="moneyioDTO" parameterType="hashmap">
+		select * from mwmoneyio where id=#{id} and io_reg_date=#{io_reg_date} and io_set=0
+	</select>	
 </mapper>

@@ -1,5 +1,6 @@
 package mw.calendar.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.vertx.java.core.http.impl.HttpReadStreamBase;
 
 import mw.moneyio.model.MoneyioDTO;
 
@@ -39,71 +41,80 @@ public class CalendarBean {
 		return "/calendar/calendar";
 	}
 
-	@RequestMapping(value = "Calendar.mw", method = RequestMethod.POST)
-	public String cal(HttpServletRequest request) {
-
-		return "/calendar/calendar";
-	}
+	/*
+	 * @RequestMapping(value = "Calendar.mw", method = RequestMethod.POST) public
+	 * String cal(HttpServletRequest request) {
+	 * 
+	 * return "/calendar/calendar"; }
+	 */
 
 	@RequestMapping("C_popUp.mw") // Ä¶¸°´õ ÆË¾÷Ã¢
 	public String cal_pop(Model model,HttpServletRequest request) {
 		
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
-		//if(month!='10' || month!='11' || )
 		String day = request.getParameter("date");
 		String date = year + "-" + month + "-" + day;
-		
-		System.out.println(date);
+
 		model.addAttribute("date",date);
-		
-		//model.addAttribute("year",year);
-		//model.addAttribute("month",month);
-		//model.addAttribute("date",date);
-		
+
 		return "/calendar/day";
 	}
 
 	@RequestMapping("C_insert.mw") // Ä¶¸°´õ ÆË¾÷Ã¢ ÀÔ·Â
-	public String cal_insert(MwScheduleDTO mwdto, Model model) throws Exception {
+	public String cal_insert(MwScheduleDTO mwdto, Model model) {
 
 		dao.schedule_insert(mwdto); // Ä¶¸°´õ ÀÏÁ¤ DBÀÔ·Â
 
-		//Map<Object, Object> map = new HashMap<Object, Object>(); // ¹ÝÈ¯ÇÒ °´Ã¼ »ý¼º @ResponseBody Map<Object, Object>
-
-		// List<MwScheduleDTO> list = dao.schedule_select(mwdto);
-		// model.addAttribute("list", list);
-		System.out.println("DBinsert");
-
 		return "/calendar/day";
 	}
+	
+	// ÀÏÁ¤ ¼¼ºÎ³»¿ë 
+	@RequestMapping("day_detail.mw")
+	public String day_detail(HttpServletRequest request, Model model) {
 
-	/*
-	 * @RequestMapping("C_insert.mw") //Ä¶¸°´õ ÆË¾÷Ã¢ ÀÔ·Â public @ResponseBody
-	 * List<MwScheduleDTO> cal_insert(MwScheduleDTO mwdto, Model model) {
-	 * dao.schedule_insert(mwdto); List<MwScheduleDTO> list =
-	 * dao.schedule_select(mwdto); model.addAttribute("list", list);
-	 * System.out.println(list.get(1).toString());
-	 * 
-	 * 
-	 * return list; }
-	 */
+		List detail = new ArrayList();
+		
+		/* String id = request.getSession("memId"); */
+		String id = "tempid";
+		String title = request.getParameter("title");
+		String start_time = request.getParameter("start_time");
+			
+		detail = dao.day_detail(id,title,start_time);
+		model.addAttribute("detail",detail);
 
-	/*
-	 * @RequestMapping("C_insert.mw") //Ä¶¸°´õ ÆË¾÷Ã¢¿¡¼­ ÀÏÁ¤ ÀÔ·Â public Map<Object,Object>
-	 * cal_insert(MwScheduleDTO mwdto, Model model) throws Exception {
-	 * 
-	 * Map<Object,Object>map = new HashMap<Object, Object>(); //¹ÝÈ¯ÇÒ °´Ã¼ »ý¼º
-	 * 
-	 * dao.schedule_insert(mwdto); //ÀÏÁ¤ ÀÔ·Â
-	 * 
-	 * System.out.print("ÀÎ¼­Æ®!!"); // List<MwScheduleDTO> list =
-	 * dao.schedule_select(mwdto); // model.addAttribute("list", list); //
-	 * System.out.println(list.get(1).toString());
-	 * 
-	 * 
-	 * return map; }
-	 * 
-	 */
-
+		return "/calendar/day_detail";
+	}
+	
+	@RequestMapping("out_detail.mw")
+	public String out_detail(HttpServletRequest request, Model model) {
+		
+		List outlist = new ArrayList();
+		
+		/* String id = request.getSession("memId"); */
+		String id = "crong";
+		String io_reg_date = request.getParameter("io_reg_date");
+		
+		outlist = dao.out_detail(id,io_reg_date);
+		
+		model.addAttribute("outlist",outlist);
+		
+		return "/calendar/out_detail";
+	}
+	
+	@RequestMapping("in_detail.mw")
+	public String in_detail(HttpServletRequest request, Model model) {
+		
+		List inlist = new ArrayList();
+		
+		/* String id = request.getSession("memId"); */
+		String id = "crong";
+		String io_reg_date = request.getParameter("io_reg_date");
+		
+		inlist = dao.in_detail(id,io_reg_date);
+		
+		model.addAttribute("inlist",inlist);
+		
+		return "/calendar/in_detail";
+	}
 }
