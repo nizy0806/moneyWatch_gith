@@ -49,7 +49,7 @@
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Service</a>
     <div class="dropdown-menu" style="">
       <a class="dropdown-item" href="#">챗봇</a>
-      <a class="dropdown-item" href="#">캘린더</a>
+      <a class="dropdown-item" href="Calendar.mw">캘린더</a>
       <a class="dropdown-item" href="#">지출/수입 등록</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#">나의 소비패턴 보기</a>
@@ -66,7 +66,7 @@
             <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">게시판</a>
     <div class="dropdown-menu" style="">
-      <a class="dropdown-item" href="#">금융 상식</a>
+      <a class="dropdown-item" href="sense.mw">금융 상식</a>
       <a class="dropdown-item" href="#">챌린지</a>
     </div>
     </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -80,7 +80,7 @@
       <a class="dropdown-item" href="#">카드 목록/혜택 관리</a>
       <a class="dropdown-item" href="#">챗봇 관리</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">게시판 관리</a>
+      <a class="dropdown-item" href="sense.mw">게시판 관리</a>
     </div>
     </li>
 
@@ -109,21 +109,26 @@
       <h3>오늘의 금융상식</h3>
       <br />
       <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+     <!--
+       <li class="nav-item">
+         <a class="nav-link active" href="#">Active</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="#">Link</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="#">Link</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link disabled" href="#">Disabled</a>
+       </li>
+       -->
+        
+			<iframe width="360" height="210" src="https://www.youtube.com/embed/${video.sense_url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
+		
       </ul>
       <br />
-      <p style="text-align:right;">금융상식 더 보러 가기 ></p>
+      <p style="text-align:right;" onclick="location.href='sense.mw'">금융상식 더 보러 가기 ></p>
       <hr class="d-sm-none">
     </div>
     

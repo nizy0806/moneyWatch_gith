@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main">
+
+	<select id="video_url" resultType="mainDTO">
+		<![CDATA[
+		select * from (
+		   select * from mwsense where main_set=${0} and sense_category=(
+		       select sense_detail_category from 
+		            (select * from mwsense_category order by dbms_random.value)
+		        where rownum <= 1
+		    )
+		) where rownum <= 1 		
+		]]>	<!-- <= 등호 처리  -->
+	</select>
+
+</mapper>

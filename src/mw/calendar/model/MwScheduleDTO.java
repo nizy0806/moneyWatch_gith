@@ -1,5 +1,8 @@
 package mw.calendar.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class MwScheduleDTO {
 	private int num; //번호
 	private String id; //회원ID
@@ -8,6 +11,7 @@ public class MwScheduleDTO {
 	private String start_time; //시작시간
 	private String end_time; //종료시간
 	private String place; //장소
+	private String sc_color; //색상
 	
 	public void setNum(int num) {
 		this.num = num;
@@ -29,6 +33,9 @@ public class MwScheduleDTO {
 	}
 	public void setPlace(String place) {
 		this.place = place;
+	}
+	public void setSc_color(String sc_color) {
+		this.sc_color = sc_color;
 	}
 	
 	public int getNum() {
@@ -52,5 +59,9 @@ public class MwScheduleDTO {
 	public String getPlace() {
 		return place;
 	}
+	public String getSc_color() {
+		return sc_color;
+	}
+
 	
 }
