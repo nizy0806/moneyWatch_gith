@@ -15,7 +15,8 @@
   <style>
   .fakeimg {
     height: 200px;
-    background: #aaa;
+    background:  rgba(250, 235, 215,0.5);
+    
   }
   </style>
 </head>
@@ -95,7 +96,10 @@
   <div class="col-sm-8">
       <h2>Calendar</h2>
       <h5>Today, Dec 7, 2017</h5>
-      <div class="fakeimg" style="height:90%;">캘린더 페이지 넣는 곳</div>
+      <div class="fakeimg" style="height:90%;">
+      	<iframe src="Calendar.mw" width="100%" height="106%"></iframe>
+
+      </div>
       <p>캘린더를 클릭해 일정을 등록해보세요!</p>
       <p> ....</p>
       <br>
@@ -124,7 +128,7 @@
        </li>
        -->
         
-			<iframe width="360" height="210" src="https://www.youtube.com/embed/${video.sense_url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
+	<iframe width="360" height="210" src="https://www.youtube.com/embed/${video.sense_url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
 		
       </ul>
       <br />
