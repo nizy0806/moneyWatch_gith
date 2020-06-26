@@ -1,5 +1,6 @@
 package mw.calendar.model;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,26 +45,29 @@ public class CalendarBean {
 	}
 
 	/*
-	 * @RequestMapping(value = "Calendar.mw", method = RequestMethod.POST) public
-	 * String cal(HttpServletRequest request) {
+	 * @RequestMapping("C_popUp.mw") // Ä¶¸°´õ ÆË¾÷Ã¢ public String cal_pop(Model
+	 * model,HttpServletRequest request) {
 	 * 
-	 * return "/calendar/calendar"; }
+	 * String year = request.getParameter("year"); String month =
+	 * request.getParameter("month"); String day = request.getParameter("date");
+	 * String date = year + "-" + month + "-" + day;
+	 * 
+	 * model.addAttribute("date",date);
+	 * 
+	 * return "/calendar/day"; }
 	 */
-
-	@RequestMapping("C_popUp.mw") // Ä¶¸°´õ ÆË¾÷Ã¢
-	public String cal_pop(Model model,HttpServletRequest request) {
+	
+	@RequestMapping("day_popUp.mw") // Ä¶¸°´õ ÆË¾÷Ã¢
+	public String cal_pop(Model model,String year,String month,String day) {
 		
-		String year = request.getParameter("year");
-		String month = request.getParameter("month");
-		String day = request.getParameter("date");
 		String date = year + "-" + month + "-" + day;
 
 		model.addAttribute("date",date);
 
 		return "/calendar/day";
 	}
-
-	@RequestMapping("C_insert.mw") // Ä¶¸°´õ ÆË¾÷Ã¢ ÀÔ·Â
+	
+	@RequestMapping("day_insert.mw") // Ä¶¸°´õÀÏÁ¤ µ¥ÀÌÅÍ ÀÔ·Â
 	public String cal_insert(MwScheduleDTO mwdto, Model model) {
 
 		dao.schedule_insert(mwdto); // Ä¶¸°´õ ÀÏÁ¤ DBÀÔ·Â
@@ -88,6 +92,7 @@ public class CalendarBean {
 //		return "/calendar/day_detail";
 //	}
 	
+	// ÀÏÁ¤¼¼ºÎ³»¿ë
 	@RequestMapping("day_detail.mw")
 	public String day_detail(String title,String start_time, Model model) {
 
@@ -95,16 +100,16 @@ public class CalendarBean {
 		/* String id = request.getSession("memId"); */
 		String id = "tempid";
 		
-		detail = dao.day_detail(id, title , start_time);
+		MwScheduleDTO detail = dao.day_detail(id, title , start_time);
 
-		MwScheduleDTO mwDTO = (MwScheduleDTO)detail.get(0);
+		//MwScheduleDTO mwDTO = (MwScheduleDTO)detail.get(0);
 		
-		model.addAttribute("detail", mwDTO);
+		model.addAttribute("detail", detail);
 		
 		return "/calendar/day_detail";
 	}
 	
-	
+	// ¼¼ºÎÁöÃâ³»¿ë
 	@RequestMapping("out_detail.mw")
 	public String out_detail(HttpServletRequest request, Model model) {
 		
@@ -121,6 +126,7 @@ public class CalendarBean {
 		return "/calendar/out_detail";
 	}
 	
+	// ¼¼ºÎ¼öÀÔ³»¿ë
 	@RequestMapping("in_detail.mw")
 	public String in_detail(HttpServletRequest request, Model model) {
 		
@@ -135,5 +141,19 @@ public class CalendarBean {
 		model.addAttribute("inlist",inlist);
 		
 		return "/calendar/in_detail";
+	}
+	
+	//ÀÏÁ¤»èÁ¦
+	@RequestMapping("day_delete.mw")
+	public String day_delete(HttpServletRequest request){
+	
+		String id = "tempid";
+		String title = request.getParameter("title");
+		String start_time = request.getParameter("start_time");
+		
+		System.out.println(id+" "+title+" "+start_time);
+		dao.day_delete(id, title, start_time);
+		
+		return "/calendar/day_delete";
 	}
 }

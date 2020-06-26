@@ -15,4 +15,8 @@
 		<tr>
 			<td>장소</td><td>${detail.place}</td>
 		</tr>
+		<tr>
+			<input type="button" value="일정삭제" onclick="window.location='day_delete.mw?title=${detail.title}&start_time=${detail.start_time}'">
+			
+		</tr>
 	</table>

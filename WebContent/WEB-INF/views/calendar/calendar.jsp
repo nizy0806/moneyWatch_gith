@@ -62,7 +62,7 @@
   		if (month.length < 2) month = '0' + month; if (day.length < 2) day = '0' + day; 
   		return [year, month, day].join('-'); 
   	}
- 	
+   
   document.addEventListener('DOMContentLoaded', function() {
 	
 	var modal = document.getElementById('myModal');
@@ -92,15 +92,27 @@
 
     	  let s_year = s_date_obj.getFullYear(); // 선택된날짜 연도
     	  let s_month = s_date_obj.getMonth() + 1; // 선택된날짜 월
-    	  let s_date = s_date_obj.getDate(); // 선택된날짜 일
+    	  let s_day = s_date_obj.getDate(); // 선택된날짜 일
     	 
     	  if(s_month < 10) s_month = '0' + s_month;
-    	  if(s_date < 10) s_date = '0' + s_date;
+    	  if(s_day < 10) s_day = '0' + s_day;
     	  
-    	  var url = "C_popUp.mw?year="+s_year+"&month="+s_month+"&date="+s_date;
+    	  /* var url = "C_popUp.mw?year="+s_year+"&month="+s_month+"&date="+s_day;
           var name = "C_insert";
           var option = "width = 500, height = 500, top = 100, left = 200, location = no";
-    	  window.open(url,name,option);
+    	  window.open(url,name,option); */
+    	  
+    	  $.ajax({
+	    		type : "post", //송신 데이터타입
+	    		url : "day_popUp.mw",
+	    		data : {year:s_year, month:s_month, day:s_day},
+	    		success : function(data){
+	    			$("#content").html(data);
+	    		}
+	    	});
+    	  
+    	  modal.style.display = "block"; 
+    	  
       },
       
     events : dataset,
@@ -114,20 +126,18 @@
     	var url = info.event.url;
     
     	
-    	if(url.indexOf('day') != -1){
+    	if(url.indexOf('day') != -1){ // 세부일정
 	    	$.ajax({
 	    		type : "post", //송신 데이터타입
 	    		url : "day_detail.mw",
 	    		data : {title:title, start_time:start_time},
-	    		//dataType : "JSON", //수신 데이터타입
 	    		success : function(data){
-	    			//modal.style.display = "block"; 
-	    			$("#day").html(data);
+	    			$("#content").html(data);
 	    		}
 	    	});
     	}
     	
-    	if(url.indexOf('out') != -1){
+    	if(url.indexOf('out') != -1){ // 지출세부일정
 	    	$.ajax({
 	    		type : "post", //송신 데이터타입
 	    		url : "out_detail.mw",
@@ -135,30 +145,23 @@
 	    		//dataType : "JSON", //수신 데이터타입
 	    		success : function(data){
 	    			//modal.style.display = "block"; 
-	    			$("#day").html(data);
+	    			$("#content").html(data);
 	    		}
 	    	});
     	}
     	
-    	if(url.indexOf('in') != -1){
+    	if(url.indexOf('in') != -1){ // 수입세부일정
 	    	$.ajax({
 	    		type : "post", //송신 데이터타입
 	    		url : "in_detail.mw",
 	    		data : {title:title, start_time:start_time},
-	    		//dataType : "JSON", //수신 데이터타입
 	    		success : function(data){
 	    			//modal.style.display = "block"; 
-	    			$("#day").html(data);
+	    			$("#content").html(data);
 	    		}
 	    	});
     	}
-    	modal.style.display = "block"; 
-    	
-    	/* var name = "pop_up";
-        var option = "width = 500, height = 500, top = 100, left = 200, location = no";
-    	window.open(info.event.url,name,option);
-		
-       return false;  */
+    	modal.style.display = "block";
      
     }
       
@@ -169,17 +172,15 @@
     }
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+/*     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
+    } */
 
     calendar.render();
   });
   
-
-
 </script>
 
 <style>
@@ -197,40 +198,41 @@
   }
 
 	/* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+   .modal {
+     display: none; /* Hidden by default */
+     position: fixed; /* Stay in place */
+     z-index: 1; /* Sit on top */
+     left: 0;
+     top: 0;
+     width: 100%; /* Full width */
+     height: 100%; /* Full height */
+     overflow: auto; /* Enable scroll if needed */
+     background-color: rgb(0,0,0); /* Fallback color */
+     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }
     
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%; /* Could be more or less, depending on screen size */                          
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    /* Modal Content/Box */
+     .modal-content {
+     	background-color: #fefefe;
+     	margin:  15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%; /* Could be more or less, depending on screen size */                          
+     }
+     
+     /* The Close Button */
+      .close {
+         color: #aaa;
+         float: right;
+         font-size: 28px;
+         font-weight: bold;
+       }
+      .close:hover,
+      .close:focus {
+         color: black;
+         text-decoration: none;
+         cursor: pointer;
+     }
 
 </style>
 
@@ -246,13 +248,11 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span> 
-        <div id="day">
+        <div id="content">
         </div>
                                                                      
       </div>
  
     </div>
-  
-
 </body>
 </html>

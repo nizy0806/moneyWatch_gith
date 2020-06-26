@@ -41,14 +41,14 @@ public class MwScheduleDAO {
 	}
 	
 	// 技何老沥
-	public List day_detail(String id, String title , String start_time ) {
+	public MwScheduleDTO day_detail(String id, String title , String start_time ) {
 		
 		HashMap map = new HashMap();
 		map.put("id",id);
 		map.put("title",title);
 		map.put("start_time",start_time);
 	
-		return sqlSession.selectList("calendar.day_detail",map);
+		return sqlSession.selectOne("calendar.day_detail",map);
 	}
 	
 	// 技何瘤免郴开
@@ -69,5 +69,17 @@ public class MwScheduleDAO {
 		imap.put("io_reg_date",io_reg_date);
 		
 		return sqlSession.selectList("calendar.in_detail",imap);
+	}
+	
+	// 老沥昏力
+	public void day_delete(String id, String title, String start_time) {
+		
+		HashMap dmap = new HashMap();
+		dmap.put("id", id);
+		dmap.put("title", title);
+		dmap.put("start_time", start_time);
+		
+		sqlSession.delete("calendar.day_delete",dmap);
+		
 	}
 }
