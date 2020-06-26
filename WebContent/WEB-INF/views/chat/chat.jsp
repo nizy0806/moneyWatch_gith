@@ -40,8 +40,9 @@
 
 		});
 		
-		$("#sendBtn").bind("click", function() {		
+		$("#sendBtn").bind("click", function() {	
 			var msg = $("#chat").val();
+			alert(msg + '${id}');
 			socket.emit('msg', {msg:msg, id:'${id}'});
 
 			$("#chat").focus();
