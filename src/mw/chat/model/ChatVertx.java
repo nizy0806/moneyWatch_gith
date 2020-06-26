@@ -31,7 +31,7 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 	
 	@Autowired
 	private MemberDAO meDAO = null;
-	private MemberDTO meDTO = new MemberDTO();
+	//private MemberDTO meDTO = new MemberDTO();		// memberDTO set 문제 해결해야함
 	public List moAllList = new ArrayList();
 	
 	
@@ -48,11 +48,15 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 				
 				socket.on("msg", new Handler<JsonObject>() {	// 요청(채팅실행)될 때마다 실행
 					public void handle(JsonObject event) {
+						System.out.println("id : " + event.getString("id"));
 						
-						moAllList = moDAO.moneyioListAll(event.getString("id"));	// 메시지 보낸 사용자에 대한 입출력내역 목록 가져오기
+						String id = event.getString("id");
 						
-						meDTO = meDAO.modifyCheck(event.getString("id"));			// 메시지 보낸 사용자에 대한 회원정보 가져오기
-						String id = meDTO.getId();
+						moAllList = moDAO.moneyioListAll(id);	// 메시지 보낸 사용자에 대한 입출력내역 목록 가져오기
+						
+						//meDTO = meDAO.modifyCheck(id);			// 메시지 보낸 사용자에 대한 회원정보 가져오기
+						
+						//System.out.println("id2 : " + meDTO.getId());
 						
 						moDTO_0 = (MoneyioDTO)moAllList.get(0);	// 가장 최근 내역
 						moDTO_1 = (MoneyioDTO)moAllList.get(1);	// 이전(1) 내역
@@ -75,7 +79,7 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 							
 						}else if((userMsg.contains("id") || userMsg.contains("아이디")) && userMsg.contains("찾아")) {
 					// 회원 ID 알림
-							event.putString("adminRe", "회원님의 아이디는 [ "+ id + " ] 입니다.");		
+							//event.putString("adminRe", "회원님의 아이디는 [ "+ id + " ] 입니다.");		
 							
 						}else if((userMsg.contains("현재") || userMsg.contains("지금")) ||
 								(userMsg.contains("남아있") || userMsg.contains("남은") || userMsg.contains("있어")) && 
@@ -83,7 +87,7 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 										userMsg.contains("얼마") || userMsg.contains("돈")) ) {
 					// 남은 잔액 알림
 							
-							event.putString("adminRe", id + " 님의 현재 남은 잔액은 " + moDTO_0.getIo_remain()  + "원 입니다.");		
+							//event.putString("adminRe", id + " 님의 현재 남은 잔액은 " + moDTO_0.getIo_remain()  + "원 입니다.");		
 							
 						}else if((userMsg.contains("어제") || userMsg.contains("전날")
 								 || userMsg.contains("하루 전") || userMsg.contains("1일 전")) &&
@@ -94,7 +98,7 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 					// 어제(전날) 지출 금액 알림
 							
 							int before_remain = moDTO_2.getIo_remain() - moDTO_1.getIo_remain();
-							event.putString("adminRe", id + " 님은 어제 " + before_remain  + "원 입니다.");		
+							//event.putString("adminRe", id + " 님은 어제 " + before_remain  + "원 입니다.");		
 							
 						}else {
 					// 키워드 조건에 해당되지 않는 질문에 대한 답		
@@ -107,7 +111,7 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 						System.out.println("handler ::: " + event.getString("adminRe"));
 
 						io.sockets().emit("response", event);
-
+ 
 					}
 				});
 				
