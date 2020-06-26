@@ -45,9 +45,7 @@ public class MoneyioDTO {
 		return io_price;
 	}
 	public void setIo_price(int io_price) {
-		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
-		formatter.format(io_price);
-		//System.out.println("�޸� ǥ��: "+io_price);
+		
 		this.io_price = io_price;
 	}
 	public int getIo_remain() {
@@ -55,9 +53,7 @@ public class MoneyioDTO {
 		return io_remain;
 	}
 	public void setIo_remain(int io_remain) {
-		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
-		formatter.format(io_remain);
-		//System.out.println("�޸� ǥ��: "+io_remain);
+
 		this.io_remain = io_remain;
 	}
 	public String getIo_bank() {
