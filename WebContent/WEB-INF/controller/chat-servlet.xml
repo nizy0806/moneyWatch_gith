@@ -15,9 +15,9 @@
 	<bean id="chatVertx" class="mw.chat.model.ChatVertx" />
 	
 
-	<bean id="MoneyioDAO" class="mw.moneyio.model.MoneyioDAO">
+	<!-- <bean id="MoneyioDAO" class="mw.moneyio.model.MoneyioDAO">
 		<constructor-arg ref="sqlSession" />
-	</bean>
+	</bean> -->
 
 	
 	<context:component-scan base-package="mw.chat.model" />
