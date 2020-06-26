@@ -97,61 +97,61 @@
 								<option value="예금이자">예금이자</option>
 								<option value="기타">기타</option>
 						</select></td>
-						<td><label for="moneyioChoice">&nbsp&nbsp&nbsp&nbsp수입/지출
+						<td><label for="moneyioChoice">&nbsp;&nbsp;&nbsp;&nbsp;수입/지출
 								선택</label></td>
 						<td>
 							<div class="custom-control custom-radio">
 								<input type="radio" id="customRadio1" name="io_set" value=1
-									class="custom-control-input" checked> &nbsp&nbsp<label
-									class="custom-control-label" for="customRadio1">&nbsp&nbsp지출</label>
+									class="custom-control-input" checked> &nbsp;&nbsp;<label
+									class="custom-control-label" for="customRadio1">&nbsp;&nbsp;지출</label>
 							</div>
 						</td>
 						<td>
 							<div class="custom-control custom-radio">
 								<input type="radio" id="customRadio2" name="io_set" value=0
-									class="custom-control-input"> &nbsp&nbsp<label
-									class="custom-control-label" for="customRadio2">&nbsp&nbsp수입</label>
+									class="custom-control-input"> &nbsp;&nbsp;<label
+									class="custom-control-label" for="customRadio2">&nbsp;&nbsp;수입</label>
 							</div>
 						</td>
 				</tr>
 				<tr>
-						<td><label for="exampleSelect1">&nbsp&nbsp&nbsp&nbsp대상(은행/카드)</label></td>
+						<td><label for="exampleSelect1">&nbsp;&nbsp;&nbsp;&nbsp;대상(은행/카드)</label></td>
 						<td><select class="form-control" name="io_bank" id="io_bank" onchange="bank()">
 								<option value="none">--은행/카드--</option>
 								<c:forEach items="${bank_list}" var="bank">
 									<option value="${bank.ca_company}">${bank.ca_company}</option>
 								</c:forEach>
 						</select></td>
-						<td><label for="exampleSelect1">&nbsp&nbsp&nbsp&nbsp거래번호(계좌/카드번호)</label></td>
+						<td><label for="exampleSelect1">&nbsp;&nbsp;&nbsp;&nbsp;거래번호(계좌/카드번호)</label></td>
 						<td colspan="2"><select class="form-control" name="io_account" id="io_account">
 								
 						</select></td>				
 				</tr>
 				<tr>
-						<td><label for="money">&nbsp&nbsp&nbsp&nbsp거래 금액</label></td>
+						<td><label for="money">&nbsp;&nbsp;&nbsp;&nbsp;거래 금액</label></td>
 						<td><input type="text" class="form-control" name="io_price"
 							placeholder="won"></td>
-						<td><label for="text">&nbsp&nbsp&nbsp&nbsp거래
+						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;거래
 								잔액</label></td>
 						<td colspan="2"><input type="text" class="form-control"
 							name="io_remain" placeholder="won"></td>
 				</tr>
 				<tr>
-						<td><label for="exampleTextarea">&nbsp&nbsp&nbsp&nbsp세부내역</label></td>
+						<td><label for="exampleTextarea">&nbsp;&nbsp;&nbsp;&nbsp;세부내역</label></td>
 						<td colspan="1"><textarea class="form-control"
 								name="io_detail" rows="3"></textarea></td>
-						<td><label for="text">&nbsp&nbsp&nbsp&nbsp날짜</label>
+						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;날짜</label>
 							<input type="date" class="form-control" name="io_reg_date"></td>
 						<td colspan="2"><div class="custom-control custom-switch">
 
-						<input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="N_divFunction()" />&nbsp&nbsp
-						<label class="custom-control-label" for="customSwitch1">&nbsp&nbspN빵 Check</label> 
+						<input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="N_divFunction()" />&nbsp;&nbsp;
+						<label class="custom-control-label" for="customSwitch1">&nbsp;&nbsp;N빵 Check</label> 
 						</td>
 				</tr>
 				<tr>
 				<td></td><td></td><td></td><td></td>
 					<td colspan="5"><center>
-								<button type="submit" class="btn btn-primary" name="">&nbsp&nbspSubmit&nbsp&nbsp</button>   
+								<button type="submit" class="btn btn-primary" name="">&nbsp;&nbsp;Submit&nbsp;&nbsp;</button>   
 							</center></td>
 				</tr>
 				
