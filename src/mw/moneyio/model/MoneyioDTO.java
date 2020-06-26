@@ -15,6 +15,7 @@ public class MoneyioDTO {
 	private String id;
 	private int io_N_div;
 	private int io_set;
+	private String io_age;
 	
 	public int getIo_num() {
 		return io_num;
@@ -88,6 +89,12 @@ public class MoneyioDTO {
 	}
 	public void setIo_set(int io_set) {
 		this.io_set = io_set;
+	}
+	public String getIo_age() {
+		return io_age;
+	}
+	public void setIo_age(String io_age) {
+		this.io_age = io_age;
 	}
 	
 	
