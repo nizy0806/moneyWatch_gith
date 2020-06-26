@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
-
-<h1>일정</h1>
-<c:forEach var="detail" items="${detail}">
+<h1>세부일정</h1>
 	<table>
 		<tr>
 			<td>일정</td><td>${detail.title}</td>
@@ -17,9 +15,4 @@
 		<tr>
 			<td>장소</td><td>${detail.place}</td>
 		</tr>
-	
 	</table>
-
-
-
-</c:forEach>

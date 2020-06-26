@@ -17,7 +17,7 @@
 <script>
 	function schedule_insert(){
 		
-		var sc_color = $('input[name=sc_color]:checked').val();
+		//var sc_color = $('input[name=sc_color]:checked').val();
 		var scheduleDB = { //일정 입력 데이터 객체변수
 				id : $("#id").val(), //id - session값 이용 필요
 				title : $("#title").val(), //일정명
@@ -25,7 +25,8 @@
 				start_time : $("#start_time").val(), //시작일 
 				end_time : $("#end_time").val(), //종료일
 				memo : $("#memo").val(), //메모
-				sc_color : sc_color
+				sc_color : $("#sc_color").val()
+				//sc_color : sc_color
 		}
 		
 		$.ajax({
@@ -70,11 +71,16 @@
 		</div>	
 		
 		<div class="domain" >
-			
-			노랑 <input class="sc_color" type="radio" name="sc_color" value="#FFEB5A">
+			<select class="sc_color" name="sc_color" id="sc_color">
+				<option value="#FFEB5A" style="color:#FFEB5A;"> 노랑색</option>
+				<option value="#C45FDD" style="color:#C45FDD;"> 보라색</option>
+				<option value="#5AD18F" style="color:#5AD18F;"> 초록색</option>
+				<option value="#5CEEE6" style="color:#5CEEE6;"> 민트색</option>
+			</select>
+			<!-- 노랑 <input class="sc_color" type="radio" name="sc_color" value="#FFEB5A" style="color:#FFEB5A;">
 			보라 <input class="sc_color" type="radio" name="sc_color" value="#C45FDD">
 			초록 <input class="sc_color" type="radio" name="sc_color" value="#5AD18F">
-			민트 <input class="sc_color" type="radio" name="sc_color" value="#5CEEE6">
+			민트 <input class="sc_color" type="radio" name="sc_color" value="#5CEEE6"> -->
 		</div>
 		
 		<div class="domain">
