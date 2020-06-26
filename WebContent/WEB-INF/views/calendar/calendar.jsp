@@ -16,6 +16,7 @@
 <script src='packages/daygrid/main.js'></script>
 <script src='packages/timegrid/main.js'></script>
 <script src='packages/list/main.js'></script>
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
 
@@ -23,8 +24,8 @@
 	<c:forEach var="listview" items="${listview}" varStatus="status">
 	    <c:if test="${listview.start_time != ''}">
 	        {"id":'<c:out value="${listview.id}" />'
-	        ,"url":'day_detail.mw?id='+'<c:out value="${listview.id}"/>'+'&title='+'<c:out value="${listview.title}" />'+'&start_time='+'<c:out value="${listview.start_time}" />'
-	        ,"title":'<c:out value="${listview.title}" />'
+	         ,"url":'day_detail.mw?id='+'<c:out value="${listview.id}"/>'+'&title='+'<c:out value="${listview.title}" />'+'&start_time='+'<c:out value="${listview.start_time}" />'
+	        ,"title":'<c:out value="${listview.title}" />'	        
 	        ,"start":'<c:out value="${listview.start_time}" />'
 	        <c:if test="${listview.end_time != ''}">
 	            ,"end":'<c:out value="${listview.end_time}" />'
@@ -55,8 +56,18 @@
 	</c:forEach> 
  ];
   
+   // 날짜 포맷 yyyy-mm-dd
+   function formatDate(date) { 
+  		var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear(); 
+  		if (month.length < 2) month = '0' + month; if (day.length < 2) day = '0' + day; 
+  		return [year, month, day].join('-'); 
+  	}
+ 	
   document.addEventListener('DOMContentLoaded', function() {
-	  
+	
+	var modal = document.getElementById('myModal');
+  	var span = document.getElementsByClassName("close")[0];   
+
     var calendarEl = document.getElementById('calendar');
     
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -93,21 +104,81 @@
       },
       
     events : dataset,
+    // 레이어팝업으로 만들기
     eventClick:function(info) {
-    	
+    
     	info.jsEvent.preventDefault();
     	
-    	var name = "aaa";
+    	var title = info.event.title;
+    	var start_time = formatDate(info.event.start);
+    	var url = info.event.url;
+    
+    	
+    	if(url.indexOf('day') != -1){
+	    	$.ajax({
+	    		type : "post", //송신 데이터타입
+	    		url : "day_detail.mw",
+	    		data : {title:title, start_time:start_time},
+	    		//dataType : "JSON", //수신 데이터타입
+	    		success : function(data){
+	    			//modal.style.display = "block"; 
+	    			$("#day").html(data);
+	    		}
+	    	});
+    	}
+    	
+    	if(url.indexOf('out') != -1){
+	    	$.ajax({
+	    		type : "post", //송신 데이터타입
+	    		url : "out_detail.mw",
+	    		data : {title:title, start_time:start_time},
+	    		//dataType : "JSON", //수신 데이터타입
+	    		success : function(data){
+	    			//modal.style.display = "block"; 
+	    			$("#day").html(data);
+	    		}
+	    	});
+    	}
+    	
+    	if(url.indexOf('in') != -1){
+	    	$.ajax({
+	    		type : "post", //송신 데이터타입
+	    		url : "in_detail.mw",
+	    		data : {title:title, start_time:start_time},
+	    		//dataType : "JSON", //수신 데이터타입
+	    		success : function(data){
+	    			//modal.style.display = "block"; 
+	    			$("#day").html(data);
+	    		}
+	    	});
+    	}
+    	modal.style.display = "block"; 
+    	
+    	/* var name = "pop_up";
         var option = "width = 500, height = 500, top = 100, left = 200, location = no";
     	window.open(info.event.url,name,option);
 		
-       return false;
-        
+       return false;  */
+     
     }
-   }); 
+      
+   });
+    
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     calendar.render();
   });
+  
+
 
 </script>
 
@@ -125,42 +196,63 @@
     margin: 0 auto;
   }
 
+	/* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
 </style>
+
 </head>
+
 <body>
 
   <div id='calendar'></div>
+  
+  <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span> 
+        <div id="day">
+        </div>
+                                                                     
+      </div>
+ 
+    </div>
+  
 
 </body>
-</html>
-</script> 
-<style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  .add-button {
-  	position : absolute;
-  	top : 1px;
-  	right : 230px;
-  	background : #2C#E50;
-  	border:0;
-  	color : white;
-  	hight : 35px;
-  	border-radius:3px;
-  	width:157px;
-  
-  }
-
-</style>
-
 </html>

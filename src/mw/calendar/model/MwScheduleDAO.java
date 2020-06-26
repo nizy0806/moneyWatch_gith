@@ -41,13 +41,13 @@ public class MwScheduleDAO {
 	}
 	
 	// 세부일정
-	public List day_detail(String id, String title, String start_time) {
+	public List day_detail(String id, String title , String start_time ) {
 		
 		HashMap map = new HashMap();
 		map.put("id",id);
 		map.put("title",title);
 		map.put("start_time",start_time);
-		
+	
 		return sqlSession.selectList("calendar.day_detail",map);
 	}
 	

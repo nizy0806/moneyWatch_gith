@@ -24,9 +24,11 @@ public class CalendarBean {
 
 	@Autowired
 	private MwScheduleDAO dao = null;
+	
+	List detail = new ArrayList();
 
 	@RequestMapping("Calendar.mw")
-	public String cal(MwScheduleDTO mwdto, Model model) throws Exception {
+	public String cal(HttpServletRequest request,MwScheduleDTO mwdto, Model model) throws Exception {
 		
 		// DB뿌려주기 필요
 		String id = "tempid";
@@ -70,21 +72,38 @@ public class CalendarBean {
 	}
 	
 	// 일정 세부내용 
+//	@RequestMapping("day_detail.mw")
+//	public String day_detail(HttpServletRequest request, Model model) {
+//
+//		List detail = new ArrayList();
+//		
+//		/* String id = request.getSession("memId"); */
+//		String id = "tempid";
+//		String title = request.getParameter("title");
+//		String start_time = request.getParameter("start_time");
+//			
+//		detail = dao.day_detail(id,title,start_time);
+//		model.addAttribute("detail",detail);
+//		
+//		return "/calendar/day_detail";
+//	}
+	
 	@RequestMapping("day_detail.mw")
-	public String day_detail(HttpServletRequest request, Model model) {
+	public String day_detail(String title,String start_time, Model model) {
 
-		List detail = new ArrayList();
 		
 		/* String id = request.getSession("memId"); */
 		String id = "tempid";
-		String title = request.getParameter("title");
-		String start_time = request.getParameter("start_time");
-			
-		detail = dao.day_detail(id,title,start_time);
-		model.addAttribute("detail",detail);
+		
+		detail = dao.day_detail(id, title , start_time);
 
+		MwScheduleDTO mwDTO = (MwScheduleDTO)detail.get(0);
+		
+		model.addAttribute("detail", mwDTO);
+		
 		return "/calendar/day_detail";
 	}
+	
 	
 	@RequestMapping("out_detail.mw")
 	public String out_detail(HttpServletRequest request, Model model) {
@@ -93,7 +112,7 @@ public class CalendarBean {
 		
 		/* String id = request.getSession("memId"); */
 		String id = "crong";
-		String io_reg_date = request.getParameter("io_reg_date");
+		String io_reg_date = request.getParameter("start_time");
 		
 		outlist = dao.out_detail(id,io_reg_date);
 		
@@ -109,7 +128,7 @@ public class CalendarBean {
 		
 		/* String id = request.getSession("memId"); */
 		String id = "crong";
-		String io_reg_date = request.getParameter("io_reg_date");
+		String io_reg_date = request.getParameter("start_time");
 		
 		inlist = dao.in_detail(id,io_reg_date);
 		
