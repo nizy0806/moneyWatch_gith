@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainBean {
 	
 	@Autowired
-	private MainDAO dao = null; //메인 영상을 출력하기 위한 DAO ㅅ
+	private MainDAO dao = null; //메인 영상을 출력하기 위한 DAO
 	
 	@RequestMapping("siteMap.mw")	
 	public String siteMap() {
