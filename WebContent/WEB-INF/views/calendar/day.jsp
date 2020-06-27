@@ -58,7 +58,7 @@
 <body>
 <div class="group" id="popupGroup">
 <button onclick="window.open('/moneyWatch/moneyioForm.mw')">입/출금 등록하기</button>
-	<table>
+	
 	<div class= "group-head">
 		<h1 class="xTree-h1">일정추가</h1>
 	</div>
@@ -126,7 +126,7 @@
 			<textarea class="memo" id="memo" type="text" name="memo" row="5" cols="20" placeholder="100글자까지 입력 가능합니다"></textarea>
 		</div>
 		<button type="submit" id = "day_submit" name="day_submit" class="day_submit">등록</button>
-		</table>	
+			
 	</form>
 		
 		
