@@ -19,7 +19,7 @@
 </script>
 		<td>카드사</td>
 		<td>
-			<select name="ca_company" id="company" onchange="setSelectBox()">
+			<select name="card_company" id="company" onchange="setSelectBox()">
 				<option value="카드사">카드사</option>
 				<c:forEach var = "cdto" items="${card_company_list}" >
 					<option value="${cdto.company}">${cdto.company}</option>
@@ -28,3 +28,20 @@
 		</td>
 		
 		<label id="select_card" ></label>
+		<td>카드별칭</td><td><input type="text" name="card_nickname"></td>
+		<td>은행명</td>
+		<td>
+			<select name="account_company" id="bank">
+				<option value="은행명">은행명</option>
+				<option value="우리은행">우리은행</option>
+				<option value="기업은행">기업은행</option>
+				<option value="신한은행">신한은행</option>
+				<option value="농협은행">농협은행</option>
+				<option value="하나은행">하나은행</option>
+				<option value="수협">수협</option>
+			</select>
+		</td>
+		
+		<td>연결된 계좌번호</td>
+		<td><input type="text" name="account_num"></td>
+		<tr><td>잔고</td><td><input type="text" name="balance"></td></tr>

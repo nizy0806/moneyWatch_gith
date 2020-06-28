@@ -5,7 +5,7 @@
 		
 		<td>은행명</td>
 		<td>
-			<select name="ca_company" id="bank">
+			<select name="account_company" id="bank">
 				<option value="은행명">은행명</option>
 				<option value="우리은행">우리은행</option>
 				<option value="기업은행">기업은행</option>
@@ -17,5 +17,5 @@
 		</td>
 		
 		<td>계좌번호</td>
-		<td><input type="text" name="ca_name"></td>
-		
+		<td><input type="text" name="account_num"></td>
+		<tr><td>잔고</td><td><input type="text" name="balance"></td></tr>

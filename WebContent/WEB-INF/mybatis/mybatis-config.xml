@@ -26,6 +26,9 @@
 		<typeAlias type="mw.sense.model.SenseCategoryDTO" alias="sensecategoryDTO"/> <!-- 금융지식카테고리 -->
 		<typeAlias type="mw.faqboard.model.FaqBoardDTO" alias="faqboardDTO"/><!--F&A게시판 -->
 		
+		<typeAlias type="mw.account_card.model.Reg_CardDTO" alias="reg_cardDTO"/> <!-- 카드정보등록 -->
+		<typeAlias type="mw.account_card.model.Reg_AccountDTO" alias="reg_accountDTO"/><!-- 계좌정보등록 -->
+		
 	</typeAliases>
 	
 	<!-- Mapper파일 Mapping -->

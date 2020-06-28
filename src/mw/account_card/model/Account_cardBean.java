@@ -64,14 +64,24 @@ public class Account_cardBean {
 		return "/account_card/card";
 	}
 	
-	// 카드/계좌 등록 
+	// 카드 및 계좌등록
 	@RequestMapping("account_cardPro.mw")
-	public String Account_cardPro(Account_cardDTO acdto) {
+	public String account_cardPro(HttpServletRequest request,Reg_CardDTO cdto,Reg_AccountDTO adto) {
+
+		String ca_set = request.getParameter("ca_set");
 		
-		acdao.insert(acdto);
+		if(ca_set.equals("0")) { // 카드등록일 경우 
+			acdao.card_insert(cdto); // 카드등록
+			acdao.account_insert(adto); // 계좌등록
+		}
+			
+		if(ca_set.equals("1")){ // 계좌등록일 경우
+			acdao.account_insert(adto);
+		}
 		
 		return "/account_card/account_cardPro";
 	}
+	
 	
 	// 카드 이미지 삽입
 	@RequestMapping("card_img_insert.mw")
@@ -168,14 +178,16 @@ public class Account_cardBean {
 		/* String id = (String)session.getAttribute("memId"); */
 		String id = "nahui068";
 		
-		List mycard_list = acdao.myCard(id);
+		List mycard_list = (List) acdao.myCard(id).get("mycard");
+		List myaccount_list = (List) acdao.myCard(id).get("myaccount");
 		
 		model.addAttribute("myCardList",mycard_list);
+		model.addAttribute("myAccountList",myaccount_list);
 		
 		return "/account_card/myAccountCardForm";
 	}
 	
-	// 나의 카드 및 계좌 삭제
+	// 나의 카드삭제
 	@RequestMapping("myCardDel.mw")
 	public String myCardDel(int num){
 		/* String id = (String)session.getAttribute("memId"); */
@@ -183,17 +195,28 @@ public class Account_cardBean {
 		
 		acdao.delMyCard(id, num);
 		
-		return "/account_card/myAccountCardDelete";
+		return "/account_card/myCardDelete";
+	}
+	
+	// 나의 계좌 삭제
+	@RequestMapping("myAccountDel.mw")
+	public String myAccountDel(int num){
+		/* String id = (String)session.getAttribute("memId"); */
+		String id = "nahui068";
+		
+		acdao.delMyAccount(id, num);
+		
+		return "/account_card/myAccountDelete";
 	}
 	
 	// 나의 카드 혜택보기
 	@RequestMapping("mycardBenefit.mw")
-	public String mycardBenefit(String ca_name, Model model) {
+	public String mycardBenefit(String card_name, Model model) {
 		
-		List myBenefit = acdao.mycard_benefit(ca_name);
+		List myBenefit = acdao.mycard_benefit(card_name);
 		
 		model.addAttribute("myBenefit",myBenefit); 
-		model.addAttribute("card_name",ca_name); // 카드이름
+		model.addAttribute("card_name",card_name); // 카드이름
 		
 		return "/card_benefit/MycardBenefit";
 	}

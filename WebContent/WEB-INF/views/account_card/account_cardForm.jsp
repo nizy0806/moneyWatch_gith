@@ -52,16 +52,11 @@
 		
 		<tr id="select"></tr>
 
-		<tr>
-			<td>카드/계좌 별칭</td>
-			<td><input type="text" name="ca_nickname"></td>
-		</tr>
 		
 		<tr >
 			<td align="center" colspan="3"><input type="submit" value="등록" /></td>
 		</tr>
 		
 	</table>
-
 
 </form>
