@@ -84,7 +84,7 @@ public class Account_cardBean {
 			
 		if(ca_set.equals("1")){ // 계좌등록일 경우
 			
-			check = acdao.check_account(id,adto.getAccount_num()); // 계좌가 존재하는지 확인
+			check = acdao.check_account(id,adto.getAccount_company(),adto.getAccount_num()); // 계좌가 존재하는지 확인
 			
 			if(check == 0) {
 				acdao.account_insert(adto);
@@ -103,20 +103,28 @@ public class Account_cardBean {
 		
 		File dir = null;
 		String [] path = new String[7];
-		path[0] = "C:\\Users\\pc\\Desktop\\image_ibk";
-		path[1] = "C:\\Users\\pc\\Desktop\\image_samsung";
-		path[2] = "C:\\Users\\pc\\Desktop\\image_hyundai";
-		path[3] = "C:\\Users\\pc\\Desktop\\image_shinhan";
-		path[4] = "C:\\Users\\pc\\Desktop\\image_woori";
-		path[5] = "C:\\Users\\pc\\Desktop\\image_kb";
-		path[6] = "C:\\Users\\pc\\Desktop\\image_lotte";
+		path[0] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_ibk";
+		path[1] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_samsung";
+		path[2] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_hyundai";
+		path[3] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_shinhan";
+		path[4] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_woori";
+		path[5] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_kb";
+		path[6] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_lotte";
+		
+//		path[0] = "C:\\Users\\pc\\Desktop\\image_ibk";
+//		path[1] = "C:\\Users\\pc\\Desktop\\image_samsung";
+//		path[2] = "C:\\Users\\pc\\Desktop\\image_hyundai";
+//		path[3] = "C:\\Users\\pc\\Desktop\\image_shinhan";
+//		path[4] = "C:\\Users\\pc\\Desktop\\image_woori";
+//		path[5] = "C:\\Users\\pc\\Desktop\\image_kb";
+//		path[6] = "C:\\Users\\pc\\Desktop\\image_lotte";
 		
 		//String path="C:\\Users\\pc\\Desktop\\image_ibk";
 		for(int i=0; i<path.length; i++) {
 			dir = new File(path[i]);
 		
 			File [] fileList = dir.listFiles(); // 해당경로에 존재하는 파일 저장	
-		
+			
 			for(File file : fileList) {// 저장된 파일만큼 for문 돌려서 값 가져오기	
 				if(file.isFile()) {
 					String fileName = file.getName();
@@ -124,6 +132,7 @@ public class Account_cardBean {
 					int f = Integer.parseInt(fileName.substring(0,index)); // 파일이름(파일이름이 곧 이미지번호)
 				
 					cdto.setImg_cnt(f);
+					
 					if(i==0) {
 						cdto.setCompany("기업카드");
 					}else if(i==1) {
@@ -139,6 +148,7 @@ public class Account_cardBean {
 					}else if(i==6) {
 						cdto.setCompany("롯데카드");
 					}
+					
 					cdto.setPath(file.getPath());
 				}
 				acdao.card_img_insert(cdto);
@@ -165,11 +175,10 @@ public class Account_cardBean {
 	public String benefit_select(String cardCompany, Model model) {
 		
 		List card_cn_list = acdao.card_cn_select(cardCompany); // 카드명,카드회사 리스트
-		//List card_img = acdao.card_img();
+		
 		
 		model.addAttribute("cardCompany", cardCompany); // 카드회사
 		model.addAttribute("cardList", card_cn_list);
-		//model.addAttribute("cardImg",card_img); // 카드이미지
 		
 		return "/card_benefit/benefit_select";
 	}
@@ -178,9 +187,12 @@ public class Account_cardBean {
 	@RequestMapping("benefit.mw")
 	public String benefit(String cardName, Model model) {
 		
-		List card_benefit_list = acdao.card_benefit_select(cardName);
-		
+		List card_benefit_list = acdao.card_benefit_select(cardName); // 선택된 카드에 대한 혜택
+		String card_img = acdao.card_img(cardName);
+		System.out.println(card_img);
 		model.addAttribute("benefitList",card_benefit_list);
+		model.addAttribute("cardImg",card_img); // 카드이미지
+		
 		return "/card_benefit/benefit";
 		
 	}
