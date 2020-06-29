@@ -66,19 +66,33 @@ public class Account_cardBean {
 	
 	// 카드 및 계좌등록
 	@RequestMapping("account_cardPro.mw")
-	public String account_cardPro(HttpServletRequest request,Reg_CardDTO cdto,Reg_AccountDTO adto) {
-
+	public String account_cardPro(Model model,HttpServletRequest request,Reg_CardDTO cdto,Reg_AccountDTO adto) {
+		
+		int check = 0;
+	
+		/* String id = (String)session.getAttribute("memId"); */
+		String id = "nahui068";
 		String ca_set = request.getParameter("ca_set");
 		
 		if(ca_set.equals("0")) { // 카드등록일 경우 
-			acdao.card_insert(cdto); // 카드등록
-			acdao.account_insert(adto); // 계좌등록
+			check = acdao.check_card(id, cdto.getCard_name(), cdto.getAccount_num());
+			if(check == 0) {
+				acdao.card_insert(cdto); // 카드등록
+				acdao.account_insert(adto); // 계좌등록
+			}
 		}
 			
 		if(ca_set.equals("1")){ // 계좌등록일 경우
-			acdao.account_insert(adto);
+			
+			check = acdao.check_account(id,adto.getAccount_num()); // 계좌가 존재하는지 확인
+			
+			if(check == 0) {
+				acdao.account_insert(adto);
+			}
 		}
 		
+		model.addAttribute("check",check);
+
 		return "/account_card/account_cardPro";
 	}
 	

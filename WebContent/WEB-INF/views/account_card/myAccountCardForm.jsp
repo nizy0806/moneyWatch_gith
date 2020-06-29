@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <h1>등록된 나의 카드 및 계좌</h1>
 
@@ -37,7 +38,7 @@
 	<tr align="center"><th>은행명</th><th>계좌번호</th><th>계좌잔고</th><th>삭제</th></tr>
 <c:forEach var="adto" items="${myAccountList}">
 	<tr align="center">
-		<td>${adto.account_company}</td><td>${adto.account_num}</td><td>${adto.balance}</td>
+		<td>${adto.account_company}</td><td>${adto.account_num}</td><td><fmt:formatNumber value="${adto.balance}" pattern="#,###"/></td>
 		<td><a href='myAccountDel.mw?num=${adto.num}'>삭제</a></td>
 	</tr>	
 </c:forEach>

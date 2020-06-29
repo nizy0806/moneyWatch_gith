@@ -97,10 +97,6 @@
     	  if(s_month < 10) s_month = '0' + s_month;
     	  if(s_day < 10) s_day = '0' + s_day;
     	  
-    	  /* var url = "C_popUp.mw?year="+s_year+"&month="+s_month+"&date="+s_day;
-          var name = "C_insert";
-          var option = "width = 500, height = 500, top = 100, left = 200, location = no";
-    	  window.open(url,name,option); */
     	  
     	  $.ajax({
 	    		type : "post", //송신 데이터타입
@@ -171,13 +167,6 @@
         modal.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
-/*     window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    } */
-
     calendar.render();
   });
   
@@ -217,7 +206,7 @@
      	margin:  15% auto; /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
-        width: 50%; /* Could be more or less, depending on screen size */                          
+        width: 30%; /* Could be more or less, depending on screen size */                          
      }
      
      /* The Close Button */

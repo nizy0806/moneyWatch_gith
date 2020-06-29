@@ -68,4 +68,13 @@
 		select * from mwCard where card_name in (select card_name from mwRegisterCard where card_name like '%' || #{card_name} || '%') 
 	</select>
 
+	<!-- 계좌중복확인 -->
+	<select id="check_account" resultType="int" parameterType="hashmap">
+		select count(*) from mwRegisterAccount where id=#{id} and account_num=#{account_num}
+	</select>
+	
+	<!-- 카드에 대한 연결된 계좌 중복확인 -->
+	<select id="check_card" resultType="int" parameterType="hashmap">
+		select count(*) from mwRegisterCard where id=#{id} and card_name=#{card_name} and account_num=#{account_num}
+	</select>
 </mapper>

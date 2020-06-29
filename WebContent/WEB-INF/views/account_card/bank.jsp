@@ -18,4 +18,4 @@
 		
 		<td>계좌번호</td>
 		<td><input type="text" name="account_num"></td>
-		<tr><td>잔고</td><td><input type="text" name="balance"></td></tr>
+		<td>잔고</td><td><input type="text" name="balance"></td>
