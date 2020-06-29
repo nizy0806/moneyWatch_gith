@@ -11,15 +11,15 @@
 </head>
 <body>
 <!-- 센스 디테일 페이지 / 메인 리스트 클릭 시 작동-->
-	<table ="center">
+	<table>
 		<tr>
-			<td align="center">${ detail.sense_content }</td>
+			<td>${ detail.sense_content }</td>
 		</tr>
 		<tr>	
-			<td width="100" align="center">
+			<td>
 				<input type="button" value="수정" onclick="location.href='/moneyWatch/senseModify.mw?num=${detail.num}'"/>
 			</td>	
-			<td width="100" align="center">
+			<td>
 				<input type="button" value="삭제" onclick="senseDelete(${detail.num})">      
 			</td>
 		</tr>
