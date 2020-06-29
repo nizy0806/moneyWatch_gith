@@ -25,17 +25,19 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 	// moneyioDAO, DTO, List 생성(호출)
 	@Autowired
 	private MoneyioDAO moDAO = null;
-	private MoneyioDTO moDTO_0 = new MoneyioDTO();	// 최근 내역 저장
-	private MoneyioDTO moDTO_1 = new MoneyioDTO();	// 1일 전 날짜, 잔액 저장
-	private MoneyioDTO moDTO_2 = new MoneyioDTO();	// 2일 전 날짜, 잔액 저장
-	public List meAllList = new ArrayList();
+	private MoneyioDTO moDTO = new MoneyioDTO();
+	public List moAllList = new ArrayList();		// 모든 내역 목록 저장
+	public List moReList = new ArrayList();			// 일자별 마지막 내역 저장
 
+	int remainAgo_1;
+	int remainAgo_2;
+	int before_remain;
+	
 	// memberDAO, DTO, List 생성(호출)
 	@Autowired
 	private MemberDAO meDAO = null;
 	private MemberDTO meDTO = new MemberDTO();
-	public List moAllList = new ArrayList();
-	public List moReList = new ArrayList();
+	public List meAllList = new ArrayList();
 	
 	
 	@Override
@@ -56,16 +58,12 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 						String id = event.getString("id");
 						
 						moAllList = moDAO.moneyioListAll(id);	// 메시지 보낸 사용자에 대한 입출력내역 목록 가져오기
-						moReList = moDAO.moneyioListRemain(id);
+						moReList = moDAO.moneyioListRemain(id);	// 메시지 보낸 사용자에 대한 입출력내역의 일자별 마지막 내역 가져오기
 						
 						meDTO = meDAO.modifyCheck(id);			// 메시지 보낸 사용자에 대한 회원정보 가져오기
 						
 						System.out.println("id2 : " + meDTO.getId());
 						
-						moDTO_0 = (MoneyioDTO)moAllList.get(0);	// 가장 최근 내역
-						//moDTO_1 = (MoneyioDTO)moAllList.get(1);	// 이전(1) 내역
-						//moDTO_2 = (MoneyioDTO)moAllList.get(2);	// 이전(2) 내역
-
 						String userMsg = "";
 						userMsg = event.getString("msg"); 	// 회원이 보낸 채팅메시지
 						
@@ -97,19 +95,42 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 								(userMsg.contains("잔액") || userMsg.contains("금액") || 
 										userMsg.contains("얼마") || userMsg.contains("돈")) ) {
 			// 남은 잔액 알림							
-							event.putString("adminRe", id + " 님의 현재 남은 잔액은 " + moDTO_0.getIo_remain()  + "원 입니다.");		
+							moDTO = (MoneyioDTO)moAllList.get(0);		// 가장 최근 내역
+							event.putString("adminRe", id + " 님의 현재 남은 잔액은 " + moDTO.getIo_remain()  + "원 입니다.");		
 							
 						}else if((userMsg.contains("어제") || userMsg.contains("전날")
 								 || userMsg.contains("하루 전") || userMsg.contains("1일 전")) &&
-								(userMsg.contains("사용") || userMsg.contains("소비") || 
+								(userMsg.contains("사용") || userMsg.contains("소비") || userMsg.contains("썻") ||
 									userMsg.contains("쓴") || userMsg.contains("썼") || userMsg.contains("지출")) && 
 								(userMsg.contains("잔액") || userMsg.contains("금액") || userMsg.contains("얼마")
 									|| userMsg.contains("돈")) ) {
-			// 어제(전날) 지출 금액 알림							
-							int before_remain = moDTO_2.getIo_remain() - moDTO_1.getIo_remain();
-							event.putString("adminRe", id + " 님은 어제 " + before_remain  + "원 입니다.");		
+			// 어제(전날) 지출 금액 알림	
+							moDTO = (MoneyioDTO)moReList.get(1);		// 1일 전 마지막 내역 저장
+							remainAgo_1 = moDTO.getIo_remain();		// 1일 전 남은 잔액
+							moDTO = (MoneyioDTO)moReList.get(2);		// 2일 전 마지막 내역 저장
+							remainAgo_2 = moDTO.getIo_remain();		// 2일 전 남은 잔액
 							
-						}else {
+							before_remain = remainAgo_2 - remainAgo_1;	// 1일 전에 지출한 잔액
+							
+							event.putString("adminRe", id + " 님은 어제 사용하신 금액 " + before_remain  + "원 입니다.");		
+							
+						}else if((userMsg.contains("그제") || userMsg.contains("이튿날")
+								 || userMsg.contains("그저께") || userMsg.contains("2일 전")) &&
+								(userMsg.contains("사용") || userMsg.contains("소비") || userMsg.contains("썻") ||
+									userMsg.contains("쓴") || userMsg.contains("썼") || userMsg.contains("지출")) && 
+								(userMsg.contains("잔액") || userMsg.contains("금액") || userMsg.contains("얼마")
+									|| userMsg.contains("돈")) ) {
+			// 그제(이튿날) 지출 금액 알림	
+							moDTO = (MoneyioDTO)moReList.get(2);		// 1일 전 마지막 내역 저장
+							remainAgo_1 = moDTO.getIo_remain();		// 1일 전 남은 잔액
+							moDTO = (MoneyioDTO)moReList.get(3);		// 2일 전 마지막 내역 저장
+							remainAgo_2 = moDTO.getIo_remain();		// 2일 전 남은 잔액
+							
+							before_remain = remainAgo_2 - remainAgo_1;	// 1일 전에 지출한 잔액
+							
+							event.putString("adminRe", id + " 님은 어제 사용하신 금액 " + before_remain  + "원 입니다.");		
+							
+						}else{
 			// 키워드 조건에 해당되지 않는 질문에 대한 답		
 							event.putString("adminRe", "다시 입력해주세요.");
 							
