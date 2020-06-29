@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>	
 <script language="javascript">
 
@@ -17,9 +17,29 @@
 	}
 	
 </script>
+<br><br><br>
+<div class="form-group">
+<center><h1>카드혜택</h1></center>
+<table align="center" width="50%">
+    <td>
+    	<select class="custom-select" name="ca_company" id="company" onchange="setSelectBox()">
+    		<option value="">카드사</option>
+			<c:forEach var = "cdto" items="${card_company_list}" >
+				<option value="${cdto.company}">${cdto.company}</option>
+			</c:forEach>
+    	</select>
+    </td>
+   
+  	<div class="form-group">
+		<table align="center" width="50%" id="select_card">
 
-<h1>카드혜택</h1>
-<table>
+		</table>
+	</div>
+</table>
+</div>
+
+
+<%-- <table>
 	<tr>
 	<td>카드사</td>
 		<td>
@@ -33,4 +53,4 @@
 	</tr>
 			
 	<tr id="select_card" ></tr>
-</table>
+</table> --%>

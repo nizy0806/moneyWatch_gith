@@ -20,7 +20,7 @@ public class MoneyioDAO {
 	
 	public List<My_cardDTO> bankAccount(My_cardDTO mdto) {
 		//System.out.println(ca_company);
-		return sqlSession.selectList("moneyio.bankAccount", mdto));
+		return sqlSession.selectList("moneyio.bankAccount", mdto);
 	}
 
 	public void insert(MoneyioDTO dto) {
@@ -89,4 +89,13 @@ public class MoneyioDAO {
 		
 		return sqlSession.selectOne("moneyio.moneyioListDetail", map);
 	}
+	
+	public List moneyioListRemain(String id) {
+		
+		return sqlSession.selectList("moneyio.moneyioListRemain", id);
+	}
+	
+	
+	
+	
 }

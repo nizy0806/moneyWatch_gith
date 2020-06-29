@@ -39,8 +39,9 @@
 	</select> 
 	
 	<!-- 카드이미지 -->
- 	<select id="card_img" resultType="card_imgDTO">
-		select * from card_img;
+ 	<select id="card_img" resultType="String" parameterType="String">
+		select distinct path from card_img, mwCard where card_img.company = mwCard.company and card_img.img_cnt = mwCard.img_cnt 
+		and mwCard.card_name=#{card_name}
 	</select>
 	
 	<!-- 나의 카드 정보 -->
@@ -68,4 +69,14 @@
 		select * from mwCard where card_name in (select card_name from mwRegisterCard where card_name like '%' || #{card_name} || '%') 
 	</select>
 
+	<!-- 계좌중복확인 -->
+	<select id="check_account" resultType="int" parameterType="hashmap">
+		select count(*) from mwRegisterAccount where id=#{id} and account_num=#{account_num} and account_company=#{account_company}
+	</select>
+	
+	<!-- 카드에 대한 연결된 계좌 중복확인 -->
+	<select id="check_card" resultType="int" parameterType="hashmap">
+		select count(*) from mwRegisterCard where id=#{id} and card_name=#{card_name} and account_num=#{account_num}
+	</select>
+	
 </mapper>

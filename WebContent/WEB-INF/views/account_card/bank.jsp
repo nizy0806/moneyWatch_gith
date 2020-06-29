@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
-		
-		<td>은행명</td>
+		<div class="form-group">
 		<td>
-			<select name="account_company" id="bank">
+	    <select class="custom-select" name="account_company" id="bank">
 				<option value="은행명">은행명</option>
 				<option value="우리은행">우리은행</option>
 				<option value="기업은행">기업은행</option>
@@ -13,9 +12,11 @@
 				<option value="농협은행">농협은행</option>
 				<option value="하나은행">하나은행</option>
 				<option value="수협">수협</option>
-			</select>
-		</td>
-		
-		<td>계좌번호</td>
-		<td><input type="text" name="account_num"></td>
-		<tr><td>잔고</td><td><input type="text" name="balance"></td></tr>
+	    </select>
+	    </td>
+		  <td><label class="col-form-label" for="inputDefault">계좌번호</label></td>
+		  <td><input type="text" name="account_num" class="form-control" id="inputDefault"></td>
+	  		
+		<td><label class="col-form-label" for="inputDefault">잔고</label></td>
+		<td><input type="text"  name="balance" class="form-control" id="inputDefault"></td>
+		</div>

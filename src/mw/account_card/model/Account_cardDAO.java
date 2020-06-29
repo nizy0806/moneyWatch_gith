@@ -66,10 +66,9 @@ public class Account_cardDAO {
 	}
 	
 	//카드 이미지
-	public List card_img() {
-		
-		List card_img = new ArrayList();
-		card_img = sqlSession.selectList("account_card.card_img");
+	public String card_img(String cardName) {
+			
+		String card_img = sqlSession.selectOne("account_card.card_img",cardName);
 		
 		return card_img;
 	}
@@ -113,11 +112,34 @@ public class Account_cardDAO {
 	// 나의 카드 혜택보기 
 	public List mycard_benefit(String ca_name) {
 		
-		System.out.println(ca_name);
 		List myBenefit = new ArrayList();
 		myBenefit = sqlSession.selectList("account_card.my_ac_benefit",ca_name);
 		
 		return myBenefit;
+	}
+	
+	// 계좌중복확인
+	public int check_account(String id,String account_company, String account_num) {
+		
+		HashMap amap = new HashMap();
+		amap.put("id", id);
+		amap.put("account_company",account_company);
+		amap.put("account_num", account_num);
+	
+		int check = sqlSession.selectOne("account_card.check_account",amap);
+		return check;
+	}
+	
+	// 카드에 대한 연결된 계좌 중복확인
+	public int check_card(String id, String card_name, String account_num) {
+		
+		HashMap cmap = new HashMap();
+		cmap.put("id",id);
+		cmap.put("card_name", card_name);
+		cmap.put("account_num",account_num);
+		
+		int check = sqlSession.selectOne("account_card.check_card",cmap);
+		return check;
 	}
 	
 }
