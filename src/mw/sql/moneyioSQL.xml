@@ -3,12 +3,12 @@
 
 <mapper namespace="moneyio">
 
-	<select id="bankName" resultType="mycardDTO" ><!-- parameterType="String" --> 
-		select ca_company from mwRegister_CA where id='nahui068' order by ca_name asc
+	<select id="bankName" resultType="mycardDTO" parameterType="String" >
+		select ca_company from mwRegister_CA where id=#{id} order by ca_name asc
 	</select>
 	
-	<select id="bankAccount" resultType="mycardDTO" parameterType="String" >
-		select ca_name from mwRegister_CA where id='nahui068' and ca_company=#{value} 
+	<select id="bankAccount" resultType="mycardDTO" parameterType="mycardDTO"  >
+		select ca_name from mwRegister_CA where id=#{id} and ca_company=#{value} 
 	</select>
 	
 	<!-- 지출/수입 insert -->

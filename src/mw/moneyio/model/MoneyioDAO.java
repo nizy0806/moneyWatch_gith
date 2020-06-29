@@ -13,14 +13,14 @@ public class MoneyioDAO {
 		this.sqlSession = sqlSession;
 	}
 	
-	public List bankName() {
+	public List<My_cardDTO> bankName(String id) {
 		
-		return sqlSession.selectList("moneyio.bankName");
+		return sqlSession.selectList("moneyio.bankName", id);
 	}
 	
-	public List bankAccount(String ca_company) {
+	public List<My_cardDTO> bankAccount(My_cardDTO mdto) {
 		//System.out.println(ca_company);
-		return sqlSession.selectList("moneyio.bankAccount", ca_company);
+		return sqlSession.selectList("moneyio.bankAccount", mdto));
 	}
 
 	public void insert(MoneyioDTO dto) {

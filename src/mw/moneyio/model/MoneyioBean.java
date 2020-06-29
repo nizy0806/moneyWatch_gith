@@ -17,12 +17,12 @@ public class MoneyioBean {
 	@Autowired
 	private MoneyioDAO dao = null;
 	
-	private List list = new ArrayList();
+	//private List list = new ArrayList();
 	
 	@RequestMapping("moneyioForm.mw")
 	public String moneyioForm(My_cardDTO dto, Model model) {
 		String id= "nahui068";
-		List bank_list = dao.bankName();
+		List<My_cardDTO> bank_list = dao.bankName(id);
 		
 		model.addAttribute("id", id);
 		model.addAttribute("bank_list", bank_list);
@@ -31,9 +31,9 @@ public class MoneyioBean {
 	
 
 	@RequestMapping("bankSelect.mw")
-	public String bankSelect(String ca_company, Model model) {
+	public String bankSelect(My_cardDTO mdto, Model model) {
 		//System.out.println("bean: "+ca_company);
-		List bankAccount = dao.bankAccount(ca_company);
+		List<My_cardDTO> bankAccount = dao.bankAccount(mdto);
 		model.addAttribute("bankAccount", bankAccount);
 		return "/moneyio/bankSelect";
 	}
