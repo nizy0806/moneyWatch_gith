@@ -1,6 +1,8 @@
 package mw.chat.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,10 @@ import mw.moneyio.model.MoneyioDTO;
 
 public class ChatVertx extends DefaultEmbeddableVerticle {
 	private static SocketIOServer io = null;
+	
+	
+	SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
+	
 	
 	// moneyioDAO, DTO, List 생성(호출)
 	@Autowired
@@ -53,6 +59,13 @@ public class ChatVertx extends DefaultEmbeddableVerticle {
 				
 				socket.on("msg", new Handler<JsonObject>() {	// 요청(채팅실행)될 때마다 실행
 					public void handle(JsonObject event) {
+						Date time = new Date();									//////// new 객체가 계속 생성되어도 괜찮은건가???????
+						
+						String nowTime = formatTime.format(time);
+						
+						event.putString("nowTime", nowTime);
+						
+						
 						System.out.println("id : " + event.getString("id"));
 						
 						String id = event.getString("id");

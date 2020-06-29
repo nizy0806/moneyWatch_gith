@@ -26,7 +26,7 @@
 			//if('${sessionScope.memId}' == "admin" || '${sessionScope.memId}' == msg.id){ // 자기 자신이 쓴 글(+관리자)
 				
 				$('#msgs').append('<table width="100%"><tr><td style="width:1000px"></td><td bgcolor="yellow" align="right" style="width:300px">' + msg.msg
-								+ '</td></tr><tr><td style="width:1000px"></td><td bgcolor="skyblue" align="right" style="width:300px; font-size:70%"> [현재시간 출력]'
+								+ '</td></tr><tr><td style="width:1000px"></td><td bgcolor="skyblue" align="right" style="width:300px; font-size:70%">' + msg.nowTime
 								+ '</td></tr><tr><td></td></tr></table>');
 	
 				$('#msgs').append('<table width="100%"><tr><td bgcolor="yellowgreen" align="left" style="width:300px">' + msg.adminRe
