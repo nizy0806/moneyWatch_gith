@@ -34,8 +34,6 @@ public class MemberBean {
 		String pw=request.getParameter(dto.getPw());
 		int check=dao.loginCheck(dto);
 		
-		System.out.println(check);
-		
 		if(check==1) {
 		session.setAttribute("memId", dto.getId());
 	}

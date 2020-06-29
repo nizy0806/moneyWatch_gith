@@ -1,6 +1,7 @@
 package mw.faqboard.model;
 
 import java.sql.Timestamp;
+import java.lang.Integer;
 
 public class FaqBoardDTO {
 	private int faq_num;

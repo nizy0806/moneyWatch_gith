@@ -12,7 +12,7 @@
 	   http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
 >
 
-<bean id="faqboardDAO" class="mw.faqboard.model.FaqBoardDAO">
+	<bean id="faqboardDAO" class="mw.faqboard.model.FaqBoardDAO">
 		<constructor-arg ref="sqlSession" />
 	</bean> 
 
