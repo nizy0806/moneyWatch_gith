@@ -1,6 +1,8 @@
 package mw.moneyio.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MoneyioBean {
+	
+	SimpleDateFormat formatDate = new SimpleDateFormat("yyyy.MM.dd");
 	
 	@Autowired
 	private MoneyioDAO dao = null;
@@ -138,6 +142,8 @@ public class MoneyioBean {
 	
 	@RequestMapping("moneyioList.mw")	
 	public String moneyioList(/*String id, */Model model, HttpSession session) {
+		Date date = new Date();
+		String nowDate = formatDate.format(date);
 		
 		String id = "minmingk1";
 	/* String id = session.getAttribute("memId"); */
@@ -145,6 +151,7 @@ public class MoneyioBean {
 		List list = dao.moneyioListAll(id);
 		
 		model.addAttribute("moneyioList", list);
+		model.addAttribute("nowDate", nowDate);
 		
 		return "/moneyio/moneyioList";
 	}
