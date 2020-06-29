@@ -9,6 +9,8 @@
 <title>회원가입</title>
 <link href="" rel="" type="text/css">
 
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
 <script language="JavaScript">
 	function checkIt(){ //ID 입력값확인하는 함수
 		var userinput = eval("document.userinput");
@@ -27,6 +29,7 @@
 			return false;
 		}
 	}
+	
 	function openConfirmId(userinput){ //ID
 		if(userinput.id.value==""){
 			alert("아이디를 입력하세요 ...");
@@ -35,7 +38,22 @@
 		url = "/moneyWatch/confirmId.mw?id="+userinput.id.value;
 		
 		open(url,"confirm","toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300, height=200")
-	} 
+	}
+	
+	
+	function openZipSearch() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					document.getElementById("zon").value = data.zonecode;
+					document.getElementById("street").value = data.address;
+				}
+			}).open();
+		}
+	
+
+
+	
+	
 </script>
 
 	<body bgcolor="">
@@ -146,30 +164,9 @@
 				<input type="text" name="phone2" size="10" maxlength="4">
 				<input type="text" name="phone3" size="10" maxlength="4">
 		</td>
-		</tr>			
-		
-		<tr>
-		<td width="300">우편번호</td>
-		<td width="300">
-				<input type="text" name="zon" size="10" maxlength="12">
-		</td>
 		</tr>
 		
-		<tr>
-		<td width="300">주소</td>
-		<td width="300">
-				<input type="text" name="street" size="30" maxlength="30">
-		</td>
-		</tr>
-		
-		<tr>
-		<td width="300">상세주소</td>
-		<td width="300">
-				<input type="text" name="addr" size="30" maxlength="30">
-		</td>
-		</tr>
-		
-		
+			
 		<tr>
 		<td width="300">이메일 ID</td>
 		<td width="300">
@@ -178,6 +175,20 @@
 		
 		</td>
 		</tr>
+		
+		
+		<tr>
+			<td height="30">주소</td>
+			<td>
+			<input type="text" id="zon" name="zon" SIZE="12" placeholder="우편번호" readonly />
+			<input type="button" id="jooso_btn" onclick="openZipSearch()" value="주소검색" /> <br/>
+			<input type="text" name="street" id="street" SIZE="40" placeholder="주소" readonly /> <br/>
+			<input type="text" name="addr" id="addr" SIZE="40" placeholder="상세주소" />
+			</td>
+		</tr>
+		
+		
+		</form>
 		
 		<tr>
 		<td colspan="2" align="center">
@@ -189,6 +200,6 @@
 		</tr>	
 	</table>
 	</body>
-	</form>
+	
 	</head>
 </html>

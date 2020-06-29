@@ -4,12 +4,65 @@
 <mapper namespace="faqboard">
 
 	<insert id="insertBoard" parameterType="faqboardDTO">
-		insert into mwFaQBoard values(mw_deleteMember_seq.nextval,#{faq_num},#{writer},#{subject},#{faq_eamil},#{content},#{pw},#{readcount},#{re_step},#{re_level},sysdate,#{ref})
+		insert into mwFaQBoard values(mwFaQBoard_seq.nextval,#{writer},#{subject},#{faq_email},#{content},#{pw},#{readcount},#{re_step},#{re_level},sysdate,#{ref})
 	</insert>
 	
-	<!-- <select id="selectBoard" resultType="String" parameterType="faqboardDTO" >
-		"select * from (select #{faq_num},#{writer},#{email},#{subject},#{pw},#{reg_date},#{re_step},#{re_level},#{content},#{readcount},rownum r from "+
-		"(select *  from mwFaQBoard order by #{ref} desc, #{re_step} asc) order by #{ref} desc, re_step asc ) where r >= ? and r <= ? ")
-	</select>	 -->		
+	
+	
+	<select id="getArticles" resultType="faqboardDTO" parameterType="hashmap" >
+		<![CDATA[select * from (select faq_num,writer,subject,faq_email,content,pw,readcount ,re_step,re_level,reg,ref,rownum r from(select *  from mwFaQBoard order by faq_num desc) order by faq_num desc) where r >= #{start} and r <= #{end} ]]>
+	</select>
+	
+	
+	<select id="getCount" resultType="int" >
+		select count(*) from mwFaQBoard
+	</select>
+	
+	
+	<select id="getContent" resultType="faqboardDTO" parameterType="int">
+		select * from mwFaQBoard where faq_num=#{faq_num}
+	</select>
+	
+	
+	<update id="upCount" parameterType="int">
+		update mwFaQBoard set readcount=readcount+1 where faq_num=#{faq_num}
+	</update> 
+	
+	
+	<select id="DeleteCheck" resultType="int" parameterType="hashmap">
+		select count(*) from mwFaQBoard where faq_num=#{faq_num} and pw=#{pw}
+	</select>
+	
+	
+	<delete id="DeleteWriting" parameterType="String">
+		delete from mwFaQBoard where faq_num=#{faq_num}
+	</delete> 
+	
+	
+	<select id="updateSelect" resultType="faqboardDTO" parameterType="String">
+		select * from mwFaQBoard where faq_num=#{faq_num}
+	</select>
+	
+	
+	<select id="updateCheck" resultType="int" parameterType="hashmap">
+		select count(*) from mwFaQBoard where faq_num=#{faq_num} and pw=#{pw}
+	</select>
+	
+	<update id="updateContent" parameterType="faqboardDTO">
+		update mwFaQBoard set writer=#{writer},faq_email=#{faq_email},subject=#{subject},content=#{content} where faq_num=#{faq_num}
+	</update>
+	
+	<select id="selectReply" resultType="int" parameterType="String">
+		select * from mwFaQBoard where faq_num=#{faq_num}
+	</select>
+	
+	<insert id="setQno" parameterType="int">
+		select into mwReply value qno=#{qno}
+	</insert>
+	
+	<insert id="insertReply" parameterType="replyDTO">
+		insert into mwReply values(#{qno},#{replytext},#{rname},#{replydate},#{step},#{id})
+	</insert>
+	
 </mapper>
 
