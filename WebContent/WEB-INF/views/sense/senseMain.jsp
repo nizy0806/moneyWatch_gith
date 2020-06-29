@@ -38,21 +38,20 @@
 	</div>
 	<div>
 		<h2 align="center">오늘의 영상</h2>
-		<div align="center">
-			<iframe width="850" height="478" src="https://www.youtube.com/embed/KgXtSx8ublA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
-			<b id="video_url" >${url}</b>
+		<div align="center" id="video_url">
+			<iframe width="850" height="478" src="https://www.youtube.com/embed/${video.sense_url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
 		</div>
 		
 		<h2 align="center">SenseUp List</h2>
 		
-		<div id="mainList">
+		<div id="mainList"> <!-- 기본 메인에서 리스트를 가져오고/ 카테고리 선택 시 ajax를 통해 리스트를 가져옴 -->
 			<c:forEach items="${ list }" var="list">			
 			<table align="center">
 				<!-- 첫 페이지일 경우 : category=null -->
 				<tr>
-					<td align="center"><img src="" alt="Page Not Found" width="100" height="110" name="default_image"/></td>
-					<td align="center">${ list.sense_thumbnail }</td> <!-- 썸네일이미지> --> 
-					<td align="center" onclick="detail(${ list.num })">${ list.sense_title }</td>
+					<!-- 썸네일이미지> --> 
+					<td onclick="detail(${ list.num })"><img src="https://img.youtube.com/vi/${ list.sense_thumbnail }/default.jpg" alt="Page Not Found"/></td>
+					<td onclick="detail(${ list.num })">${ list.sense_title }</td>
 				</tr>
 			
 				<!-- ajax를 통해 디테일한 내용을 가져옴  -->

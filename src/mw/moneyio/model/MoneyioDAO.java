@@ -13,42 +13,59 @@ public class MoneyioDAO {
 		this.sqlSession = sqlSession;
 	}
 	
-	public List bankName(String id) {
-		List bank = sqlSession.selectList("moneyio.bankName", id);
-		return bank;
+	public List<My_cardDTO> bankName(String id) {
+		
+		return sqlSession.selectList("moneyio.bankName", id);
 	}
 	
-	public List bankAccount(MoneyioDTO dto) {
-		List account = sqlSession.selectList("moneyio.bankAccount", dto);
-		return account;
+	public List<My_cardDTO> bankAccount(My_cardDTO mdto) {
+		//System.out.println(ca_company);
+		return sqlSession.selectList("moneyio.bankAccount", mdto);
 	}
-	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
-	public void insert(MoneyioDTO dto, NbreadDTO ndto) {  
+
+	public void insert(MoneyioDTO dto) {
 //		System.out.println("id : " + dto.getId());
-		
 		sqlSession.insert("moneyio.insert", dto);
-		if(dto.getIo_n_div() > 0) {
-			sqlSession.insert("moneyio.n_insert", ndto );
-		}
+		
 	}
-	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	public List ioUpdateForm(int io_num) {
-		return sqlSession.selectList("moneyio.updateForm", io_num);
+	public void n_insert(NbreadDTO ndto) {
+
+		sqlSession.insert("moneyio.n_insert", ndto);
 	}
-	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ nï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	public List ioNbreadForm(int n_num) {
-		return sqlSession.selectList("moneyio.n_updateForm", n_num);
+
+	public MoneyioDTO ioUpdateForm(int io_num) {
+
+		return sqlSession.selectOne("moneyio.updateForm", io_num);
 	}
-	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	public void ioUpdatePro(int io_num) {
-		sqlSession.update("moneyio.update", io_num);
+
+	//ÁöÃâ/¼öÀÔ ³»¿ª ¼öÁ¤
+	public void ioUpdatePro(MoneyioDTO dto) {
+		sqlSession.update("moneyio.update", dto);
 	}
-	//ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ nï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	public void ioNbreadPro(int n_num) {
-		sqlSession.update("moneyio.n_update", n_num);
+	
+	public void n_UpdatePro(NbreadDTO ndto) {
+		sqlSession.update("moneyio.n_update", ndto);
 	}
+	public void n_delete(int io_num) {
+		sqlSession.delete("moneyio.n_delete", io_num);
+	}
+	public void n_insert2(NbreadDTO ndto) {
+		sqlSession.insert("moneyio.n_insert2", ndto);
+	}
+
+	//¿¬·É´ëº° ÁöÃâ chart ÆäÀÌÁö -20
 	public List ageChart20() {
 		return sqlSession.selectList("moneyio.chart20");
+	}
+	
+	//¿¬·É´ëº° ÁöÃâ chart ÆäÀÌÁö -30
+	public List ageChart30() {
+		return sqlSession.selectList("moneyio.chart30");
+	}
+	
+	//¿¬·É´ëº° ÁöÃâ chart ÆäÀÌÁö -40
+	public List ageChart40() {
+		return sqlSession.selectList("moneyio.chart40");
 	}
 	
 	public List moneyioListAll(String id) {

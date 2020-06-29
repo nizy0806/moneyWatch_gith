@@ -14,9 +14,14 @@ public class Account_cardDAO {
 		this.sqlSession = sqlSession;
 	}
 	
-	// 회원이 등록하는 카드/계좌
-	public void insert(Account_cardDTO acdto) {
-		sqlSession.insert("account_card.ac_insert",acdto);
+	// 회원 카드등록
+	public void card_insert(Reg_CardDTO cdto) {
+		sqlSession.insert("account_card.card_insert",cdto);
+	}
+	
+	// 회원 계좌등록
+	public void account_insert(Reg_AccountDTO adto) {
+		sqlSession.insert("account_card.account_insert",adto);
 	}
 	
 	// 카드정보 이미지 등록		
@@ -70,24 +75,49 @@ public class Account_cardDAO {
 	}
 	
 	// 나의 카드 및 계좌정보 확인
-	public List myCard(String id) {
+	public HashMap myCard(String id) {
 		
 		List mycard = new ArrayList();
-		mycard = sqlSession.selectList("account_card.my_ac",id);
+		List myaccount = new ArrayList();
 		
-		return mycard;
+		mycard = sqlSession.selectList("account_card.mycard",id);
+		myaccount = sqlSession.selectList("account_card.myaccount",id);
+		
+		HashMap acmap = new HashMap();
+		acmap.put("mycard",mycard);
+		acmap.put("myaccount", myaccount);
+		
+		return acmap;
 	}
 	
-	// 나의 카드 및 계좌정보 삭제
+	// 나의 카드삭제
 	public void delMyCard(String id, int num) {
 		
 		HashMap map = new HashMap();
 		map.put("id", id);
 		map.put("num",num);
 		
-		sqlSession.delete("account_card.my_ac_del",map);
+		sqlSession.delete("account_card.mycard_del",map);
 	}
 
+	// 나의 계좌삭제
+	public void delMyAccount(String id, int num) {
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("num",num);
+		
+		sqlSession.delete("account_card.myaccount_del",map);
+	}
 	
+	// 나의 카드 혜택보기 
+	public List mycard_benefit(String ca_name) {
+		
+		System.out.println(ca_name);
+		List myBenefit = new ArrayList();
+		myBenefit = sqlSession.selectList("account_card.my_ac_benefit",ca_name);
+		
+		return myBenefit;
+	}
 	
 }

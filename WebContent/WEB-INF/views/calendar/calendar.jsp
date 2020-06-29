@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,116 +16,172 @@
 <script src='packages/daygrid/main.js'></script>
 <script src='packages/timegrid/main.js'></script>
 <script src='packages/list/main.js'></script>
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
-<%-- <% List<MwScheduleDTO> list = (ArrayList<MwScheduleDTO>)request.getAttribute("showSchedule"); %> --%>
 
+   var dataset = [
+	<c:forEach var="listview" items="${listview}" varStatus="status">
+	    <c:if test="${listview.start_time != ''}">
+	        {"id":'<c:out value="${listview.id}" />'
+	         ,"url":'day_detail.mw?id='+'<c:out value="${listview.id}"/>'+'&title='+'<c:out value="${listview.title}" />'+'&start_time='+'<c:out value="${listview.start_time}" />'
+	        ,"title":'<c:out value="${listview.title}" />'	        
+	        ,"start":'<c:out value="${listview.start_time}" />'
+	        <c:if test="${listview.end_time != ''}">
+	            ,"end":'<c:out value="${listview.end_time}" />'
+	            ,"color":'<c:out value="${listview.sc_color}" />'
+	        </c:if>
+	        },
+	    </c:if>
+	</c:forEach>
+	
+		<c:forEach var="olist" items="${olist}" varStatus="status">
+	    {"id":'<c:out value="${olist.id}" />'
+	    ,"url":'out_detail.mw?io_reg_date='+'<c:out value="${olist.io_reg_date}" />'
+	    ,"title":'<fmt:formatNumber value="${olist.io_price}" pattern="#,###"/>'
+	    ,"start":'<c:out value="${olist.io_reg_date}" />'
+	    ,"color":'#FF9696'
+	    },
+	
+	</c:forEach> 
+	
+	<c:forEach var="ilist" items="${ilist}" varStatus="status">
+    {"id":'<c:out value="${ilist.id}" />'
+    ,"url":'in_detail.mw?io_reg_date='+'<c:out value="${ilist.io_reg_date}" />'
+    ,"title":'<fmt:formatNumber value="${ilist.io_price}" pattern="#,###"/>'
+    ,"start":'<c:out value="${ilist.io_reg_date}" />'
+    ,"color":'#91D8FA'
+    }<c:if test="${!status.last}">,</c:if>
 
+	</c:forEach> 
+ ];
+  
+   // 날짜 포맷 yyyy-mm-dd
+   function formatDate(date) { 
+  		var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear(); 
+  		if (month.length < 2) month = '0' + month; if (day.length < 2) day = '0' + day; 
+  		return [year, month, day].join('-'); 
+  	}
+   
   document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+	
+	var modal = document.getElementById('myModal');
+  	var span = document.getElementsByClassName("close")[0];   
 
+    var calendarEl = document.getElementById('calendar');
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        right: 'dayGridMonth,listMonth'
       },
       defaultDate: new Date(),
       locale : "ko",
       selectable: true,
       navLinks: true, // can click day/week names to navigate views
       businessHours: true, // display business hours
-      editable: true,
+      //editable: true,
     
       //날짜 클릭 시 팝업창 오픈
       dateClick: function(info){
-          var url = "C_popUp.mw";
-          var name = "C_insert";
-          var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+    	  
+    	  let str2arr = info.dateStr.split("-");
+    	  let s_date_obj = new Date(str2arr[0], str2arr[1] - 1, str2arr[2]);
+
+    	  let s_year = s_date_obj.getFullYear(); // 선택된날짜 연도
+    	  let s_month = s_date_obj.getMonth() + 1; // 선택된날짜 월
+    	  let s_day = s_date_obj.getDate(); // 선택된날짜 일
     	 
-          window.open(url,name,option);
-      },
-      eventSources:[
-    	  {
+    	  if(s_month < 10) s_month = '0' + s_month;
+    	  if(s_day < 10) s_day = '0' + s_day;
+    	  
+    	  /* var url = "C_popUp.mw?year="+s_year+"&month="+s_month+"&date="+s_day;
+          var name = "C_insert";
+          var option = "width = 500, height = 500, top = 100, left = 200, location = no";
+    	  window.open(url,name,option); */
+    	  
     	  $.ajax({
-              type: "get", 
-              url: "Calendar.mw", // 클라이언트가 요청 보낼 서버의 url주소
-              datyType: "JSON",
-              success: function (data) {
-              	console.log(data);
-              },
-              error: function(){
-            	  alert("ajax error");
-              }),
-              
-    	  title: 
-    	  start:
-    	  end:
-    	  place:
-    	  memo:
+	    		type : "post", //송신 데이터타입
+	    		url : "day_popUp.mw",
+	    		data : {year:s_year, month:s_month, day:s_day},
+	    		success : function(data){
+	    			$("#content").html(data);
+	    		}
+	    	});
+    	  
+    	  modal.style.display = "block"; 
+    	  
+      },
       
-/*        
-       events: [
-        {
-          title: 'Business Lunch',
-          start: '2020-05-03T13:00:00',
-          constraint: 'businessHours'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-05-13T11:00:00',
-          constraint: 'availableForMeeting', // defined below
-          color: '#257e4a'
-        },
-        {
-          title: 'Conference',
-          start: '2020-05-18',
-          end: '2020-05-20'
-        },
-        {
-          title: 'Party',
-          start: '2020-05-29T20:00:00'
-        },
+    events : dataset,
+    // 레이어팝업으로 만들기
+    eventClick:function(info) {
+    
+    	info.jsEvent.preventDefault();
+    	
+    	var title = info.event.title;
+    	var start_time = formatDate(info.event.start);
+    	var url = info.event.url;
+    
+    	
+    	if(url.indexOf('day') != -1){ // 세부일정
+	    	$.ajax({
+	    		type : "post", //송신 데이터타입
+	    		url : "day_detail.mw",
+	    		data : {title:title, start_time:start_time},
+	    		success : function(data){
+	    			$("#content").html(data);
+	    		}
+	    	});
+    	}
+    	
+    	if(url.indexOf('out') != -1){ // 지출세부일정
+	    	$.ajax({
+	    		type : "post", //송신 데이터타입
+	    		url : "out_detail.mw",
+	    		data : {title:title, start_time:start_time},
+	    		//dataType : "JSON", //수신 데이터타입
+	    		success : function(data){
+	    			//modal.style.display = "block"; 
+	    			$("#content").html(data);
+	    		}
+	    	});
+    	}
+    	
+    	if(url.indexOf('in') != -1){ // 수입세부일정
+	    	$.ajax({
+	    		type : "post", //송신 데이터타입
+	    		url : "in_detail.mw",
+	    		data : {title:title, start_time:start_time},
+	    		success : function(data){
+	    			//modal.style.display = "block"; 
+	    			$("#content").html(data);
+	    		}
+	    	});
+    	}
+    	modal.style.display = "block";
+     
+    }
+      
+   });
+    
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
 
-        // areas where "Meeting" must be dropped
-        {
-          groupId: 'availableForMeeting',
-          start: '2020-05-11T10:00:00',
-          end: '2020-05-11T16:00:00',
-          rendering: 'background'
-        },
-        {
-          groupId: 'availableForMeeting',
-          start: '2020-05-13T10:00:00',
-          end: '2020-05-13T16:00:00',
-          rendering: 'background'
-        },
-
-        // red areas where no events can be dropped
-        {
-          start: '2020-05-24',
-          end: '2020-05-28',
-          overlap: false,
-          rendering: 'background',
-          color: '#ff9f89'
-        },
-        {
-          start: '2020-05-06',
-          end: '2020-05-08',
-          overlap: false,
-          rendering: 'background',
-          color: '#ff9f89'
+    // When the user clicks anywhere outside of the modal, close it
+/*     window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
-      ] 
-    });
-    */
+    } */
 
     calendar.render();
   });
-
+  
 </script>
-
 
 <style>
 
@@ -138,236 +196,63 @@
     max-width: 900px;
     margin: 0 auto;
   }
-  
-  .add-button {
-  	position : absolute;
-  	top : 1px;
-  	right : 230px;
-  	background : #2C#E50;
-  	border:0;
-  	color : white;
-  	hight : 35px;
-  	border-radius:3px;
-  	width:157px;
-  
-  }
+
+	/* The Modal (background) */
+   .modal {
+     display: none; /* Hidden by default */
+     position: fixed; /* Stay in place */
+     z-index: 1; /* Sit on top */
+     left: 0;
+     top: 0;
+     width: 100%; /* Full width */
+     height: 100%; /* Full height */
+     overflow: auto; /* Enable scroll if needed */
+     background-color: rgb(0,0,0); /* Fallback color */
+     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+    /* Modal Content/Box */
+     .modal-content {
+     	background-color: #fefefe;
+     	margin:  15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%; /* Could be more or less, depending on screen size */                          
+     }
+     
+     /* The Close Button */
+      .close {
+         color: #aaa;
+         float: right;
+         font-size: 28px;
+         font-weight: bold;
+       }
+      .close:hover,
+      .close:focus {
+         color: black;
+         text-decoration: none;
+         cursor: pointer;
+     }
 
 </style>
-</head>
-<body>
-<div id=result></div>
-  <div id='calendar' style="position : relative">
-  	<!-- <div>
-  		<button class="add-button" type="button"
-  		onclick="click_add();">일정추가</button>
-  	</div> -->
-  </div>
 
+</head>
+
+<body>
+
+  <div id='calendar'></div>
+  
+  <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span> 
+        <div id="content">
+        </div>
+                                                                     
+      </div>
+ 
+    </div>
 </body>
 </html>
-
-
-
-
-<!-- <html lang="ko">
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FullCalendar Example</title>
-    <link rel=" shortcut icon" href="image/favicon.ico">
-
-    <link rel="stylesheet" href="vendor/css/fullcalendar.min.css" />
-    <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
-    <link rel="stylesheet" href='vendor/css/select2.min.css' />
-    <link rel="stylesheet" href='vendor/css/bootstrap-datetimepicker.min.css' />
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <link rel="stylesheet" href="css/fullcalendar/main.css">
-        
-
-</head>
-
-<body>
-    <div class="container">
-
-        일자 클릭시 메뉴오픈
-        <div id="contextMenu" class="dropdown clearfix">
-            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
-                style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">일정등록</a></li>
-                <li><a tabindex="-1" href="#">입/출금</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
-            </ul>
-        </div>
-
-        <div id="wrapper">
-            <div id="loading"></div>
-            <div id="calendar"></div>
-        </div>
-
-
-        일정 추가 MODAL
-        <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-allDay">하루종일</label>
-                                <input class='allDayNewEvent' id="edit-allDay" type="checkbox"></label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-id">회원ID</label>
-                                <input class="inputId" type="hidden" name="edit-id" id="edit-id"
-                                    required="required" />
-                            </div>
-                        </div>
-                        			
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-title">일정명</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
-                                    required="required" />
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-place">장소	</label>
-                                <input class="inputPlace" type="text" name="edit-place" id="edit-place"/>
-                            </div>
-                        </div>     
-                                           
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-start">시작일</label>
-                                <input class="inputModal" type="text" name="edit-start" id="edit-start" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-end">종료일</label>
-                                <input class="inputModal" type="text" name="edit-end" id="edit-end" />
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-type">구분</label>
-                                <select class="inputModal" type="text" name="edit-type" id="edit-type">
-                                    <option value="카테고리1">카테고리1</option>
-                                    <option value="카테고리2">카테고리2</option>
-                                    <option value="카테고리3">카테고리3</option>
-                                    <option value="카테고리4">카테고리4</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-color">색상</label>
-                                <select class="inputModal" name="color" id="edit-color">
-                                    <option value="#D25565" style="color:#D25565;">빨간색</option>
-                                    <option value="#9775fa" style="color:#9775fa;">보라색</option>
-                                    <option value="#ffa94d" style="color:#ffa94d;">주황색</option>
-                                    <option value="#74c0fc" style="color:#74c0fc;">파란색</option>
-                                    <option value="#f06595" style="color:#f06595;">핑크색</option>
-                                    <option value="#63e6be" style="color:#63e6be;">연두색</option>
-                                    <option value="#a9e34b" style="color:#a9e34b;">초록색</option>
-                                    <option value="#4d638c" style="color:#4d638c;">남색</option>
-                                    <option value="#495057" style="color:#495057;">검정색</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-memo">메모</label>
-                                <textarea rows="4" cols="50" class="inputModal" name="edit-memo"
-                                    id="edit-memo"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer modalBtnContainer-addEvent">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" id="save-event">저장</button>
-                    </div>
-                    <div class="modal-footer modalBtnContainer-modifyEvent">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                        <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-                        <button type="button" class="btn btn-primary" id="updateEvent">저장</button>
-                    </div>
-                </div>/.modal-content
-            </div>/.modal-dialog
-        </div>/.modal
-
-        <div class="panel panel-default">
-
-            <div class="panel-heading">
-                <h3 class="panel-title">필터</h3>
-            </div>
-
-            <div class="panel-body">
-
-           <div class="col-lg-6">
-                    <label for="calendar_view">구분별</label>
-                    <div class="input-group">
-                        <select class="filter" id="type_filter" multiple="multiple">
-                            <option value="카테고리1">카테고리1</option>
-                            <option value="카테고리2">카테고리2</option>
-                            <option value="카테고리3">카테고리3</option>
-                            <option value="카테고리4">카테고리4</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <label for="calendar_view">등록자별</label>
-                    <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkb
-                        ox" value="정연"
-                                checked>정연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="다현"
-                                checked>다현</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="사나"
-                                checked>사나</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="나연"
-                                checked>나연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="지효"
-                                checked>지효</label>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        /.filter panel
-    </div>
-    /.container
-
-    <script src="vendor/js/jquery.min.js"></script>
-    <script src="vendor/js/bootstrap.min.js"></script>
-    <script src="vendor/js/moment.min.js"></script>
-    <script src="vendor/js/fullcalendar.min.js"></script>
-    <script src="vendor/js/ko.js"></script>
-    <script src="vendor/js/select2.min.js"></script>
-    <script src="vendor/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="js/fullcalendar/main.js"></script>
-    <script src="js/fullcalendar/addEvent.js"></script>
-    <script src="js/fullcalendar/editEvent.js"></script>
-    <script src="js/fullcalendar/etcSetting.js"></script>
-</body>
-
-</html> -->

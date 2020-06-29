@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="email">
+	<select id="idFind" resultType="int" parameterType="emailDTO">
+		select count(*) from mwmember where name=#{name} and email1=#{email1} and email2=#{email2}
+	</select>
+	
+	<select id="idWhat" resultType="String" parameterType="emailDTO">
+		select id from mwmember where name=#{name} and email1=#{email1} and email2=#{email2}
+	</select>
+
+	<select id="pwFind" resultType="int" parameterType="emailDTO">
+		select count(*) from mwmember where id=#{id} and name=#{name} and email1=#{email1} and email2=#{email2}
+	</select>
+	
+ 	<update id="pwUpdate" parameterType="emailDTO">
+		update mwmember set pw=#{pw} where id=#{id} and name=#{name} and email1=#{email1} and email2=#{email2}
+	</update> 
+</mapper>

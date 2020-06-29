@@ -18,11 +18,16 @@
 		select distinct company from mwCard
 	</select>
 	
-	<!-- 카드/계좌 DB insert -->
-	<insert id="ac_insert" parameterType="accountCardDTO">
-		insert into mwRegister_CA values(CAregister_seq.nextval,#{ca_set},#{id},#{ca_company},#{ca_name},#{ca_nickname})	
+	<!-- 카드등록 -->
+	<insert id="card_insert" parameterType="reg_cardDTO">
+		insert into mwRegisterCard values(reg_card_seq.nextval,#{id},#{card_company},#{card_name},#{card_nickname},#{account_company},#{account_num},#{balance})
 	</insert>
-
+	
+	<!-- 계좌등록 -->
+	<insert id="account_insert" parameterType="reg_accountDTO">
+		insert into mwRegisterAccount values(reg_account_seq.nextval,#{id},#{account_company},#{account_num},#{balance})
+	</insert>
+	
 	<!-- 카드 정보 이미지 DB insert -->
 	<insert id="card_img_insert" parameterType="card_imgDTO">
 		insert into card_img values(card_seq.nextval,#{img_cnt},#{company},#{path})
@@ -38,15 +43,29 @@
 		select * from card_img;
 	</select>
 	
-	<!-- 나의 카드 및 계좌 정보 -->
-	<select id="my_ac" resultType="accountCardDTO" parameterType="String">
-		select * from mwRegister_CA where id=#{id}
+	<!-- 나의 카드 정보 -->
+	<select id="mycard" resultType="reg_cardDTO" parameterType="String">
+		select * from mwRegisterCard where id=#{id}
+	</select>
+
+	<!-- 나의 계좌 정보 -->
+	<select id="myaccount" resultType="reg_accountDTO" parameterType="String">
+		select * from mwRegisterAccount where id=#{id}
 	</select>
 	
-	<!-- 나의 카드 및 계좌 삭제 -->
-	<delete id="my_ac_del" parameterType="hashmap">
-		delete from mwRegister_CA where id=#{id} and num=#{num}
+	<!-- 나의 카드 삭제 -->
+	<delete id="mycard_del" parameterType="hashmap">
+		delete from mwRegisterCard where id=#{id} and num=#{num}
 	</delete>
 	
+	<!-- 나의 계좌 삭제 -->
+	<delete id="myaccount_del" parameterType="hashmap">
+		delete from mwRegisterAccount where id=#{id} and num=#{num}
+	</delete>
 	
+	<!-- 나의 카드혜택 보기 -->
+	<select id="my_ac_benefit" resultType="cardDTO" parameterType="String">
+		select * from mwCard where card_name in (select card_name from mwRegisterCard where card_name like '%' || #{card_name} || '%') 
+	</select>
+
 </mapper>

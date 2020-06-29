@@ -36,7 +36,6 @@ public class SenseDAO {
 		return url;
 	}
 	
-	
 	//디테일 페이지
 	public SenseDTO senseDetail(int num) {
 		SenseDTO dto = sqlSession.selectOne("sense.select", num);
@@ -46,6 +45,11 @@ public class SenseDAO {
 	//센스 입력 폼에 카테고리 셀렉트 리스트
 	public List<SenseCategoryDTO> category() {
 		return sqlSession.selectList("sense.category"); //카테고리로 선택해서 불러옴
+	}
+	
+	//센스 직접 입력을 위한 senseMaxNum값 출력
+	public int senseMaxNum() {
+		return sqlSession.selectOne("sense.senseMaxNum"); //다음 num값으로 넣기 위해 MaxNum값 출력
 	}
 	
 	//센스 직접 입력
@@ -58,12 +62,6 @@ public class SenseDAO {
 		int check = sqlSession.selectOne("sense.insertCheck", dto);
 		return check;
 	}
-	
-//	//이미지파일 num값 가져오기
-//	public int getMaxNum() {
-//		int num = sqlSession.selectOne("sense.maxNum");
-//		return num;
-//	}
 	
 	// ID confirm	
 	
@@ -79,22 +77,21 @@ public class SenseDAO {
 		return check;
 	}
 	
-	
 	// 센스 수정 페이지 불러오기
 	public SenseDTO senseModifySelect(int num) {
 		SenseDTO dto = (SenseDTO)sqlSession.selectOne("sense.select", num);
 		return dto; //센스 수정 페이지에 해당 정보를 보여줌
 	}
 	
+	//센스 입력 확인
+	public int modifyCheck(SenseDTO dto) {
+		int check = sqlSession.selectOne("sense.check", dto);
+		return check;
+	}
+	
 	// 센스 수정하기
 	public void senseModify(SenseDTO dto) {
 		sqlSession.update("sense.senseModify",dto);
-	}
-	
-	// 센스 수정 확인
-	public int senseModifyCheck(SenseDTO dto) {
-		int check = sqlSession.selectOne("sense.modifyCheck", dto);
-		return check;
 	}
 	
 	// 센스 삭제

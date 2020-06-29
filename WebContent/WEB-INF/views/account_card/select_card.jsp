@@ -4,7 +4,7 @@
 
 		<td>카드명</td>
 		<td>
-			<select name="ca_name" id="card_name">
+			<select name="card_name" id="card_name">
 				<option value="카드명">카드명</option>
 					<c:forEach var="cdto" items="${cardList}">
 						

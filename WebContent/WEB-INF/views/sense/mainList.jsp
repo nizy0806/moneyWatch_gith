@@ -14,14 +14,14 @@
 			<c:forEach items="${ list }" var="list">
 			<table align="center">
 				<tr>
-					<td align="center"><img src="" alt="Page Not Found" width="100" height="110" name="default_image"/></td>
-					<td align="center">${ list.sense_thumbnail }</td> <!-- 썸네일이미지> --> 
-					<td align="center" onclick="detail(${ list.num })">${ list.sense_title }</td>
+					<!-- 썸네일이미지> --> 
+					<td onclick="detail(${ list.num })"><img src="https://img.youtube.com/vi/${ list.sense_thumbnail }/default.jpg" alt="Page Not Found"/></td>
+					<td onclick="detail(${ list.num })">${ list.sense_title }</td>
 				</tr>
 				
 				<!-- ajax를 통해 디테일한 내용을 가져옴  -->
 				<tr>
-					<table align="center" id="detail${list.num }">
+					<table align="center" id="detail${ list.num }">
 					</table>
 				</tr>
 			</table>
