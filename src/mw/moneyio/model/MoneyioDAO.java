@@ -89,4 +89,13 @@ public class MoneyioDAO {
 		
 		return sqlSession.selectOne("moneyio.moneyioListDetail", map);
 	}
+	
+	public List moneyioListRemain(String id) {
+		
+		return sqlSession.selectList("moneyio.moneyioListRemain", id);
+	}
+	
+	
+	
+	
 }
