@@ -6,6 +6,41 @@
 <head>
 <title>FAQ 게시판</title>
 </head>
+<body>
+<center><b>*FAQ*</b>
+<c:if test="${qcount>0}">
+<table width="500" boarder="1" cellpadding="0" cellspacing="0">
+ <tr>
+	<td align="center" width="50">번호</td>
+		<td align="center" width="250">제목</td>
+		<td align="center" width="100">작성자</td>
+		<td align="center" width="150">작성일</td>
+		<td align="center" width="50">조회</td>
+ </tr>
+ 
+ 
+	<c:forEach var="qlist" items="${qList}" >
+	  <tr height="30">
+	  	<td align="center" width="40">${qlist.qnum}</td>
+	  	
+		<td align="center" width="40">
+		<a href = "/moneyWatch/faqMianContentForm.mw?qnum=${qlist.qnum}">${qlist.qsubject}</a></td>
+		<td align="center" width="40">${qlist.nickname}</td>
+		<td align="center" width="40">${qlist.reg}</td>
+		<td align="center" width="40">${qlist.qreadcount}</td>
+	  </tr>
+	
+	</c:forEach>
+</c:if>
+
+
+
+</table>
+</center>
+</body>
+
+
+
 
 <body>
 <center><b>글목록(전체 글:${count})</b>
@@ -44,6 +79,10 @@
 		<td align="center" width="150">작성일</td>
 		<td align="center" width="50">조회</td>
 	</tr>
+	
+	
+	
+	
 	
 	<c:forEach var="article" items="${articleList}" >
 

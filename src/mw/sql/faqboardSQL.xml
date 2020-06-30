@@ -64,5 +64,14 @@
 		insert into mwReply values(#{qno},#{replytext},#{rname},#{replydate},#{step},#{id})
 	</insert>
 	
+	
+	<select id="selectMainFaq" resultType="faqmainboardDTO" parameterType="faqmainboardDTO">
+		<![CDATA[select * from (select qnum,nickname,qsubject,qcontent,reg,qreadcount,rownum r from(select *  from mwfaqMainBoard order by qnum desc) order by qnum desc)]]>
+	</select>
+	
+	<select id="getQcount" resultType="int">
+		select count(*) from mwFaqMainBoard
+	</select>
+	
 </mapper>
 

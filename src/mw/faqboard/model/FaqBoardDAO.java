@@ -111,8 +111,22 @@ public class FaqBoardDAO {
 		public void insertReply(ReplyDTO dto) {
 			sqlSession.insert("faqboard.insertReply", dto);
 		}
+		
+		
+		
+		
+		public List selectMainFaq(FaqMainBoardDTO dto1) {
+			List qList=sqlSession.selectList("faqboard.selectMainFaq",dto1);
+		
+		
+			return qList;
+		}
 
-
+		public int getQcount(FaqMainBoardDTO dto1) {
+			int qcount = sqlSession.selectOne("faqboard.getQcount",dto1);
+			
+			return qcount;
+		}
 }
 		
 		

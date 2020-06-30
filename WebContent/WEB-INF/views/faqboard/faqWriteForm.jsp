@@ -45,7 +45,6 @@ function writeSave(){
 		<input type="hidden" name="re_level" value="${re_level}">
 		<input type="hidden" name="readcount" value="${readcount}">
 		
-		
 		<table width="400" border="1" cellspacing="0" cellpadding="0" align="center">
 		<tr>
 		<td align="right" colspan="2">
@@ -53,9 +52,13 @@ function writeSave(){
 		</tr>
 		
 		<tr>
-		<td width="70" align="center">이름</td>
-		<td width="330">
-		<input type="text" size="10" maxlength="10" name="writer"></td>
+     		<td width="70" align="center">작성자</td>
+     		<td width="330">   ${sessionScope.memId }
+      		  <input type="hidden" size="10" maxlength="10" name="writer" value="${sessionScope.memId}">
+     		<td width="350">${sessionScope.memId}</td>
+    	</tr>
+		
+		
 		</tr>
 		
 		<tr>

@@ -35,9 +35,22 @@ public class FaqBoardBean {
 	
 	
 	@RequestMapping("faqList.mw")
-	public String faq_getArticles(FaqBoardDTO dto,HttpSession session,HttpServletRequest respons,HttpServletRequest request, Model model){ 
-		int pageSize=10;
+	public String faq_getArticles(FaqBoardDTO dto, FaqMainBoardDTO dto1,HttpSession session,HttpServletRequest respons,HttpServletRequest request, Model model){ 
 		
+	
+		List qList=null;
+				
+		qList=dao.selectMainFaq(dto1);
+		int qcount=dao.getQcount(dto1);
+		
+		if(qcount > 0) {
+		
+			model.addAttribute("qList", qList);
+			model.addAttribute("qcount", qcount);
+		}
+		
+	
+		int pageSize=10;
 		
 		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		session.getAttribute("memId");
@@ -68,19 +81,21 @@ public class FaqBoardBean {
 		
 		if (count > 0) {
 			int pageCount = count / pageSize + ( count % pageSize == 0 ? 0 : 1);
-		 
-        	int startPage = (int)(currentPage/10)*10+1;
+			int startPage = (int)(currentPage/10)*10+1;
 			int pageBlock=10;
         	int endPage = startPage + pageBlock -1;
         if (endPage > pageCount){
         	endPage = pageCount;
-    }
+        }
         model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("pageCount",pageCount);
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);   
-	}
+		}
+		
+		
+		
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("start",start);
 		model.addAttribute("end",end);
@@ -177,8 +192,11 @@ public class FaqBoardBean {
 	
 	
 	@RequestMapping("faqWriteForm.mw")
-	public String faqWriteForm(FaqBoardDTO dto, HttpServletRequest request, HttpServletResponse response) {
-		  int faq_num=0,ref=1,re_step=0,re_level=0,readcount=0; 
+	public String faqWriteForm(FaqBoardDTO dto, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		  
+		  String id=(String)session.getAttribute("memId");
+		
+		  int faq_num=0,ref=1,re_step=0,re_level=0,readcount=1; 
 		  try{
 		  if(request.getParameter("num")!=null){
 		  faq_num=Integer.parseInt(request.getParameter("faq_num"));
