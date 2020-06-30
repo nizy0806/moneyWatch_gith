@@ -11,6 +11,7 @@
 <link href='packages/daygrid/main.css' rel='stylesheet' />
 <link href='packages/timegrid/main.css' rel='stylesheet' />
 <link href='packages/list/main.css' rel='stylesheet' />
+<link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src='packages/core/main.js'></script>
 <script src='packages/interaction/main.js'></script>
 <script src='packages/daygrid/main.js'></script>
@@ -203,7 +204,7 @@
     /* Modal Content/Box */
      .modal-content {
      	background-color: #fefefe;
-     	margin:  15% auto; /* 15% from the top and centered */
+     	margin: 5% auto; /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
         width: 30%; /* Could be more or less, depending on screen size */                          
@@ -235,7 +236,7 @@
     <div id="myModal" class="modal">
  
       <!-- Modal content -->
-      <div class="modal-content">
+      <div class="modal-content" style="width:80%;">
         <span class="close">&times;</span> 
         <div id="content">
         </div>

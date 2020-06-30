@@ -29,5 +29,9 @@ public class MainBean {
 		model.addAttribute("video", video); //오늘의 영상 url 보내기
 		return "/main/main";
 	}
+	@RequestMapping("myPage.mw")	
+	public String myPage() {
+		return "/main/myPage";
+	}
 	
 }
