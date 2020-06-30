@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<div class="jumbotron text-center" style="margin-bottom:0; background-color:#b89fe3;">
+<div class="jumbotron text-center" style="margin-bottom:0; background-color:#dfe9eb;">
   <h1>moneyWatch</h1>
   <p>통장이 텅장이 되지 말자!</p> 
 </div>
