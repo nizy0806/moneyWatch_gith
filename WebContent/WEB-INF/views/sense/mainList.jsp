@@ -22,7 +22,7 @@
 				</tr>
 				
 				<!-- ajax를 통해 디테일한 내용을 가져옴  -->
-				<tr class="list-group-item list-group-item-action">
+				<tr>
 					<table id="detail${ list.num }">
 					</table>
 				</tr>
