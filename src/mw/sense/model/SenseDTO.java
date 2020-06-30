@@ -8,6 +8,7 @@ public class SenseDTO {
 	private String sense_content; //내용
 	private String sense_url; //URL
 	private String sense_thumbnail; //섬네일이미지
+	private int readcount; //조회수
 
 	
 	//setter
@@ -32,6 +33,9 @@ public class SenseDTO {
 	public void setSense_thumbnail(String sense_thumbnail) {
 		this.sense_thumbnail = sense_thumbnail;
 	}
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
 
 	
 	//getter
@@ -55,6 +59,9 @@ public class SenseDTO {
 	}
 	public String getSense_thumbnail() {
 		return sense_thumbnail;
+	}
+	public int getReadcount() {
+		return readcount;
 	}
 
 	

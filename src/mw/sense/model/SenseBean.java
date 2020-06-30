@@ -46,6 +46,7 @@ public class SenseBean {
 	@RequestMapping("senseDetail.mw")
 	public String senseDetail(int num, Model model) { //시퀀스 번호를 매개변수로 받음
 		
+		dao.count(num); //조회수를 올림
 		SenseDTO dto = dao.senseDetail(num);
 		model.addAttribute("detail", dto); //디테일 페이지의 정보를 가져옴
 		return "/sense/detail";
@@ -62,6 +63,15 @@ public class SenseBean {
 		
 	}
 	
+	//R - 디테일 조회수 변경
+	@RequestMapping("senseReadcount.mw")
+	public String senseReadcount(int num, Model model) {
+		
+		int readcount = dao.readcount(num);
+		model.addAttribute("count", readcount);		
+		return "/sense/readcount";
+		
+	}	
 	
 	//C - 센스 직접 입력 form - 카테고리 selectbox
 	@RequestMapping("senseWriteForm.mw")

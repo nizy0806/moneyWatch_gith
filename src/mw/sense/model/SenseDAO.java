@@ -42,6 +42,16 @@ public class SenseDAO {
 		return dto; //디테일 페이지에 해당 정보를 보여줌
 	}
 	
+	//조회수 올리기
+	public void count(int num) {
+		sqlSession.update("sense.count", num);
+	} 
+	
+	//조회수 출력
+	public int readcount(int num) {
+		return sqlSession.selectOne("sense.readcount", num);		
+	}
+	
 	//센스 입력 폼에 카테고리 셀렉트 리스트
 	public List<SenseCategoryDTO> category() {
 		return sqlSession.selectList("sense.category"); //카테고리로 선택해서 불러옴

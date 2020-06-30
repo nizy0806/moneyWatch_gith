@@ -9,7 +9,7 @@
 			<!-- DB main_set의 값이 1 일때, 메인 -->
 	<![CDATA[
 		select * from (
-		   select * from mwsense where main_set=${1} and sense_category=(
+		   select * from mwsense where main_set=1 and sense_category=(
 		       select sense_detail_category from 
 		            (select * from mwsense_category order by dbms_random.value)
 		        where rownum <= 1
@@ -20,12 +20,12 @@
 	
 	<!-- 메인 리스트 출력 / 메인페이지-->
 	<select id="mainList" resultType="senseDTO">
-		select num, sense_category, sense_title, sense_content, sense_url, sense_thumbnail from mwsense where main_set=${1} <!-- DB main_set의 값이 1 일때, 메인 -->
+		select num, sense_category, sense_title, sense_content, sense_url, sense_thumbnail, readcount from mwsense where main_set=1 <!-- DB main_set의 값이 1 일때, 메인 -->
 	</select>
 
 	<!-- 카테고리 선택시 / 메인페이지-->	
 	<select id="categorySelect" resultType="senseDTO" parameterType="int">
-		select * from mwsense where main_set=${0} and sense_category=(
+		select * from mwsense where sense_category=(
 				select sense_detail_category from mwsense_category where num=#{num} 
 			)
 		order by num desc
@@ -38,8 +38,19 @@
 	
 	<!-- 디테일 페이지/ 수정 페이지 -->
 	<select id="select" resultType="senseDTO" parameterType="int">
-		select * from mwsense where num=${num}
-	</select>	
+		select * from mwsense where num=#{num}
+	</select>
+	
+	<!-- 조회수 변경 -->
+	<update id="count" parameterType="int">
+		update mwsense set readcount=readcount+1 where num=#{num}
+	</update>	
+	
+	<!-- 조회수 출력-->
+	<select id="readcount" resultType="int" parameterType="int">
+		select readcount from mwsense where num=#{num}
+	</select>
+	
 	
 	<!-- 카테고리 리스트 / 센스 입력시  -->
 	<select id="category" resultType="sensecategoryDTO">
