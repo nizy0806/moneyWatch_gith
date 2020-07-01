@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,17 +109,21 @@
 				</tr>
 				<tr>
 						<td><label for="money">&nbsp;&nbsp;&nbsp;&nbsp;거래 금액</label></td>
-						<td><input type="text" class="form-control" name="io_price" value="${dto.io_price}"
+						<td>
+							<fmt:setLocale value="ko"/>
+							<fmt:formatNumber type="text" value="${dto.io_price}" pattern="#,###" var="io_price"/>
+						<input type="text" class="form-control" name="io_price" value="${io_price}"
 							placeholder="won"></td>
-						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;거래
-								잔액</label></td>
-						<td colspan="2"><input type="text" class="form-control"
-							name="io_remain" value="${dto.io_remain}" placeholder="won"></td>
+						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;거래 잔액</label></td>
+						<td colspan="2">
+							<fmt:setLocale value="ko"/>
+							<fmt:formatNumber type="text" value="${dto.io_remain}" pattern="#,###" var="io_remain"/>							
+						<input type="text" class="form-control" name="io_remain" value="${io_remain}" placeholder="won"></td>
 				</tr>
 				<tr>
 						<td><label for="exampleTextarea">&nbsp;&nbsp;&nbsp;&nbsp;세부내역</label></td>
 						<td colspan="1"><textarea class="form-control"
-								name="io_detail" rows="3" >${dto.io_detail }</textarea></td>
+								name="io_detail" rows="3" >${dto.io_detail}</textarea></td>
 						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;날짜</label>
 							<input type="date" class="form-control" name="io_reg_date" value="${dto.io_reg_date}"></td>
 						<td colspan="2"><div class="custom-control custom-switch">
