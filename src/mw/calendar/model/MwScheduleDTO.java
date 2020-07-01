@@ -1,8 +1,5 @@
 package mw.calendar.model;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 public class MwScheduleDTO {
 	private int num; //번호
 	private String id; //회원ID

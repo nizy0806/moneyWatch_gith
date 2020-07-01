@@ -12,27 +12,36 @@ public class MoneyioDAO {
 	public MoneyioDAO(SqlSessionTemplate sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	
-	public List<My_cardDTO> bankName(String id) {
-		
-		return sqlSession.selectList("moneyio.bankName", id);
+	//나의 카드리스트
+	public List<My_cardDTO> card(String id) {
+		return sqlSession.selectList("moneyio.card", id);
 	}
-	
-	public List<My_cardDTO> bankAccount(My_cardDTO mdto) {
+	//나의 카드 계좌
+	public List<My_cardDTO> card_Account(My_cardDTO mdto) {
 		//System.out.println(ca_company);
-		return sqlSession.selectList("moneyio.bankAccount", mdto);
+		//System.out.println("dao: "+mdto.getId());
+		return sqlSession.selectList("moneyio.card_Account", mdto);
 	}
-
+	//나의 계좌 잔액
+	public int allMoney(MoneyioDTO dto) {
+		return sqlSession.selectOne("moneyio.allMoney", dto);
+	}
+	//mwregistercard balance update
+	public int balanceUpdate(My_cardDTO mdto) {
+		return sqlSession.update("moneyio.balance_update", mdto);
+	}
+	//지출/수입 내역 입력
 	public void insert(MoneyioDTO dto) {
 //		System.out.println("id : " + dto.getId());
+
 		sqlSession.insert("moneyio.insert", dto);
-		
 	}
+	//더치페이 입력
 	public void n_insert(NbreadDTO ndto) {
 
 		sqlSession.insert("moneyio.n_insert", ndto);
 	}
-
+	//지출/수입 내역 수정 페이지
 	public MoneyioDTO ioUpdateForm(int io_num) {
 
 		return sqlSession.selectOne("moneyio.updateForm", io_num);
@@ -42,30 +51,43 @@ public class MoneyioDAO {
 	public void ioUpdatePro(MoneyioDTO dto) {
 		sqlSession.update("moneyio.update", dto);
 	}
-	
-	public void n_UpdatePro(NbreadDTO ndto) {
-		sqlSession.update("moneyio.n_update", ndto);
+	public int delete_select(int io_num) {
+		return sqlSession.selectOne("moneyio.delete_select", io_num);
 	}
+	//지출/수입 내역 삭제
+	public void io_delete(int io_num) {
+		sqlSession.delete("moneyio.io_delete", io_num);
+	}
+	
+	//지출/수입 내역 삭제 or 수정하기 위한 삭제
 	public void n_delete(int io_num) {
 		sqlSession.delete("moneyio.n_delete", io_num);
 	}
+	
+	//더치페이 수정을 위한 재입력
 	public void n_insert2(NbreadDTO ndto) {
 		sqlSession.insert("moneyio.n_insert2", ndto);
 	}
-
 	//연령대별 지출 chart 페이지 -20
-	public List ageChart20() {
+	public List<MoneyioDTO> ageChart20() {
 		return sqlSession.selectList("moneyio.chart20");
 	}
 	
 	//연령대별 지출 chart 페이지 -30
-	public List ageChart30() {
+	public List<MoneyioDTO> ageChart30() {
 		return sqlSession.selectList("moneyio.chart30");
 	}
 	
 	//연령대별 지출 chart 페이지 -40
-	public List ageChart40() {
+	public List<MoneyioDTO> ageChart40() {
 		return sqlSession.selectList("moneyio.chart40");
+	}
+	
+	public List<NbreadDTO> nList(int io_num){
+		return sqlSession.selectList("moneyio.nList", io_num);
+	}
+	public String nSum(int io_num) {
+		return sqlSession.selectOne("moneyio.nSum", io_num);
 	}
 	
 	public List moneyioListAll(String id) {

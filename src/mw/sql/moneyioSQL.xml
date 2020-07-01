@@ -3,12 +3,19 @@
 
 <mapper namespace="moneyio">
 
-	<select id="bankName" resultType="mycardDTO" parameterType="String" >
-		select ca_company from mwRegister_CA where id=#{id} order by ca_name asc
+	<!-- 개인이 등록한 은행만 option으로 select -->
+	<select id="card" resultType="String" parameterType="String"> 
+		select card_name from mwregistercard where id=#{id}
 	</select>
 	
-	<select id="bankAccount" resultType="mycardDTO" parameterType="mycardDTO"  >
-		select ca_name from mwRegister_CA where id=#{id} and ca_company=#{value} 
+	<!-- 개인 은행 option선택 후 해당 계좌 option으로 select -->
+	<select id="card_Account" resultType="mycardDTO" parameterType="mycardDTO" >
+		select account_company, account_num from mwregistercard where id=#{id} and card_name=#{card_name}
+	</select>
+
+	<!-- 계좌 잔액 -->
+	<select id="allMoney" resultType="int" parameterType="moneyioDTO">
+		select io_remain from (select * from mwmoneyio where io_num=(select max(io_num) from mwmoneyio where id=#{id} and io_account=#{io_account}))
 	</select>
 	
 	<!-- 지출/수입 insert -->
@@ -16,12 +23,17 @@
 		insert into mwmoneyio values(mwmoneyio_seq.nextval,#{io_category},#{io_detail},#{io_reg_date},#{io_price},#{io_remain},#{io_bank},
 		#{io_account},#{id},#{io_N_div},#{io_set},(select 2020-Birth_y+1 from mwmember where id=#{id}))
 	</insert>
-	
+
 	<!-- 지출/수입  n빵 내역 insert -->
 	<insert id="n_insert" parameterType="nbreadDTO">
-	insert into mwn_bread values(mwnbread_seq.nextval,(select max(io_num) from mwmoneyio), (select id from mwmoneyio where io_num = (select max(io_num) from mwmoneyio))
+		insert into mwn_bread values(mwnbread_seq.nextval,(select max(io_num) from mwmoneyio), (select id from mwmoneyio where io_num = (select max(io_num) from mwmoneyio))
  		, (select io_category from mwmoneyio where io_num = (select max(io_num) from mwmoneyio)),#{n_debtor},#{n_price})
+
 	</insert>
+	<!-- 계좌 잔액 업데이트 -->
+	<update id="balance_update" parameterType="mycardDTO">
+		update mwregistercard set balance=#{balance} where id=#{id} and account_num=#{account_num}
+	</update>
 	
 	<!-- 지출/수입 내역 수정페이지 데이터 -->	
 	<select id="updateForm" resultType="moneyioDTO" parameterType="int">
@@ -34,11 +46,18 @@
 		io_price = #{io_price},io_remain = #{io_remain}, io_N_div = #{io_N_div}, io_set = #{io_set}
 		where io_num = #{io_num}
 	</update>
-
+	<select id="delete_select" resultType="int" parameterType="int">
+		select io_num from mwmoneyio where io_num=#{io_num}
+	</select>
+	<delete id="io_delete" parameterType="int">
+		delete from mwmoneyio where io_num=#{io_num}
+	</delete>	
+	
+	<!-- n빵 내역 초기화 -->
 	<delete id="n_delete" parameterType="int">
 		delete from mwn_bread where io_num=#{io_num}
 	</delete>
-	
+	<!-- 수정 페이지 n빵 내역 update -->
 	<insert id="n_insert2" parameterType="nbreadDTO">
 		insert into mwn_bread values(mwnbread_seq.nextval,#{io_num}, (select id from mwmoneyio where io_num=#{io_num}), 
 		(select io_category from mwmoneyio where io_num=#{io_num}), #{n_debtor}, #{n_price})
@@ -49,7 +68,7 @@
 	<![CDATA[
 		select * from(
     		select io_category, sum(io_price) as io_price from mwmoneyio where (
-        	io_age between '20' and '29') and io_category not in('n빵비', '기타') and io_set=1
+        	io_age like '2%') and io_category not in('n빵비', '기타') and io_set=1
     		group by io_category
     		order by io_price desc
 		)where rownum <= 5
@@ -61,7 +80,7 @@
 	<![CDATA[
 		select * from(
     		select io_category, sum(io_price) as io_price from mwmoneyio where (
-        	io_age between '30' and '39') and io_category not in('n빵비', '기타') and io_set=1
+        	io_age like '3%') and io_category not in('n빵비', '기타') and io_set=1
     		group by io_category
     		order by io_price desc
 		)where rownum <= 5
@@ -73,12 +92,20 @@
 	<![CDATA[
 		select * from(
     		select io_category, sum(io_price) as io_price from mwmoneyio where (
-        	io_age between '40' and '49') and io_category not in('n빵비', '기타') and io_set=1
+        	io_age like '4%') and io_category not in('n빵비', '기타') and io_set=1
     		group by io_category
     		order by io_price desc
 		)where rownum <= 5
 	]]>
 	</select>
+	
+	<select id="nList" resultType="nbreadDTO" parameterType="int">
+		select n_category, n_debtor, n_price from mwn_bread where io_num = #{io_num} 
+	</select>
+	
+	<select id="nSum" resultType="String" parameterType="int">
+		select sum(n_price) from mwN_Bread where io_num=#{io_num}
+	</select> 
 
 
 	<select id="moneyioListAll" resultType="moneyioDTO" parameterType="String">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,28 @@
 <link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var n_all;
+	
+		jQuery(document).ready(function($){
+			$('#io_price').on('focus', function(){
+				var val = $('#io_price').val();
+				if(!isEmpty(val)){
+					val = val.replace(/,/g,'');
+					$('#io_price').val(val);
+				}
+			});
+			
+			$('#io_price').on('blur', function(){
+				var val = $('#io_price').val();
+				if(!isEmpty(val) && isNumeric(val)){
+					val = currencyFormatter(val);
+					$('#io_price').val(val);
+				}
+			});
+		});
+	
 		function N_divFunction() {
 			var checkBox = document.getElementById("customSwitch1");
 			var text = document.getElementById("io_N_div");
@@ -19,16 +40,13 @@
 			if (checkBox.checked == true) {
 				text.style.display = "block";
 				n_bread.style.display="block";
-				
 			} else {
 				text.style.display = "none";
 				n_bread.style.display="none";
 				n_people.style.display="none";
 				document.getElementById("io_N_div").value = "0";	
 				document.getElementById("n_people").value = "0";	
-			}
-			
-					
+			}			
 		}
 		
 		function n_button(){
@@ -46,7 +64,7 @@
 		function bank(){
 			$.ajax({
 				url : "bankSelect.mw", 
-				data : {ca_company: $("#io_bank").val()},
+				data : {card_name: $("#io_bank").val(), id:$("#id").val()},
 				success : function(data){
 					$("#io_account").html(data);
 				}
@@ -54,19 +72,49 @@
 			});
 		}
 		
+		function remain(){			
+			$.ajax({
+				url : "remain.mw",
+				type : "POST",
+				data : {io_account: $("#io_account").val(), id:$("#id").val()},
+				success : function(data){
+					//alert("success");
+					$("#io_remain").html(data);
+					//alert($("#io_remain").val())
+				},
+				error : function(){
+					alert("error");
+				}
+			});
+		}
 		
 		
-		
+		//Null check
+		function isEmpty(value){
+			if(value.length ==0 || value==null){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		//정규식 표현식으로 숫자 값 여부 체크
+		function isNumeric(value){
+			var regExp = /^[0-9]+$/g;
+			return regExp.test(value);
+		}
+		//숫자 세자리 마다 콤마를 추가하여 금액 표기 형태로 변환
+		function currencyFormatter(amount){
+			return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+		}
 		//$("#io_account option:selected").val();
-
 	</script>
+	
 <body>
-	<form action="/moneyWatch/moneyioPro.mw" >
-	<fieldset>
+	<form action="/moneyWatch/moneyioPro.mw">
 	<div class="form-group">
 		<h1>
 			${id}님 안녕하세요!
-			<input type="hidden" name="id" value="${id}"/>
+			<input type="hidden" name="id" value="${id}" id="id"/>
 		</h1>
 		<table border="1" align="center" width="60%">
 				<tr>
@@ -115,26 +163,24 @@
 						</td>
 				</tr>
 				<tr>
-						<td><label for="exampleSelect1">&nbsp;&nbsp;&nbsp;&nbsp;대상(은행/카드)</label></td>
+						<td><label for="exampleSelect1">&nbsp;&nbsp;&nbsp;&nbsp;카드</label></td>
 						<td><select class="form-control" name="io_bank" id="io_bank" onchange="bank()">
-								<option value="none">--은행/카드--</option>
-								<c:forEach items="${bank_list}" var="bank">
-									<option value="${bank.ca_company}">${bank.ca_company}</option>
+								<option value="none">--카드명--</option>
+								<c:forEach items="${card_list}" var="list">
+									<option value="${list}">${list}</option>
 								</c:forEach>
 						</select></td>
-						<td><label for="exampleSelect1">&nbsp;&nbsp;&nbsp;&nbsp;거래번호(계좌/카드번호)</label></td>
-						<td colspan="2"><select class="form-control" name="io_account" id="io_account">
+						<td><label for="exampleSelect1">&nbsp;&nbsp;&nbsp;&nbsp;계좌</label></td>
+						<td colspan="2"><select class="form-control" name="io_account" id="io_account" onchange="remain()">
 								
 						</select></td>				
 				</tr>
 				<tr>
 						<td><label for="money">&nbsp;&nbsp;&nbsp;&nbsp;거래 금액</label></td>
-						<td><input type="text" class="form-control" name="io_price"
+						<td><input type="text" class="form-control" name="io_price" id="io_price" value="0"
 							placeholder="won"></td>
-						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;거래
-								잔액</label></td>
-						<td colspan="2"><input type="text" class="form-control"
-							name="io_remain" placeholder="won"></td>
+						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;거래잔액</label></td>
+						<td colspan="2"><div id="io_remain" style="align:center;"></div></td>
 				</tr>
 				<tr>
 						<td><label for="exampleTextarea">&nbsp;&nbsp;&nbsp;&nbsp;세부내역</label></td>
