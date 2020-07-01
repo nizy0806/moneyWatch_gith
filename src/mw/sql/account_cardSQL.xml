@@ -79,4 +79,11 @@
 		select count(*) from mwRegisterCard where id=#{id} and card_name=#{card_name} and account_num=#{account_num}
 	</select>
 	
+	<!-- 등록된 카드 이미지 및 이름(혜택페이지 따로 만들기 위함) -->
+	<select id="mycardList" resultType="mycard_imgDTO" parameterType="String">
+		select distinct mwCard.img_cnt,mwCard.company,mwRegisterCard.card_name,path from mwRegisterCard,mwCard,card_img
+		where mwRegisterCard.card_name = mwCard.card_name and card_img.img_cnt = mwCard.img_cnt and card_img.company = mwRegisterCard.card_company 
+		and mwRegisterCard.id=#{id}
+	</select>
+		
 </mapper>

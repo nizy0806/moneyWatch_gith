@@ -209,20 +209,7 @@
         border: 1px solid #888;
         width: 30%; /* Could be more or less, depending on screen size */                          
      }
-     
-     /* The Close Button */
-      .close {
-         color: #aaa;
-         float: right;
-         font-size: 28px;
-         font-weight: bold;
-       }
-      .close:hover,
-      .close:focus {
-         color: black;
-         text-decoration: none;
-         cursor: pointer;
-     }
+
 
 </style>
 
@@ -236,8 +223,8 @@
     <div id="myModal" class="modal">
  
       <!-- Modal content -->
-      <div class="modal-content" style="width:80%;">
-        <span class="close">&times;</span> 
+      <div class="modal-content alert-dismissible alert-light" style="width:80%;">
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <div id="content">
         </div>
                                                                      

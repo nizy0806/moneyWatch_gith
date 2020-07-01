@@ -89,6 +89,15 @@ public class Account_cardDAO {
 		return acmap;
 	}
 	
+	// 나의 카드 이미지 리스트
+	public List myCardList(String id) {
+		
+		List mycard = new ArrayList();
+		mycard = sqlSession.selectList("account_card.mycardList",id);
+		
+		return mycard;
+	}
+	
 	// 나의 카드삭제
 	public void delMyCard(String id, int num) {
 		

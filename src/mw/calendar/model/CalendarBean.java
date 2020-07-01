@@ -101,8 +101,6 @@ public class CalendarBean {
 		String id = "tempid";
 		
 		MwScheduleDTO detail = dao.day_detail(id, title , start_time);
-
-		//MwScheduleDTO mwDTO = (MwScheduleDTO)detail.get(0);
 		
 		model.addAttribute("detail", detail);
 		
@@ -151,7 +149,6 @@ public class CalendarBean {
 		String title = request.getParameter("title");
 		String start_time = request.getParameter("start_time");
 		
-		System.out.println(id+" "+title+" "+start_time);
 		dao.day_delete(id, title, start_time);
 		
 		return "/calendar/day_delete";
