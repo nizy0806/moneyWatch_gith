@@ -51,11 +51,17 @@ public class MoneyioDAO {
 	public void ioUpdatePro(MoneyioDTO dto) {
 		sqlSession.update("moneyio.update", dto);
 	}
-	//더치페이 초기화
+	//지출/수입 내역 삭제
+	public void io_delete(int io_num) {
+		sqlSession.delete("moneyio.io_delete", io_num);
+	}
+	
+	//지출/수입 내역 삭제 or 수정하기 위한 삭제
 	public void n_delete(int io_num) {
 		sqlSession.delete("moneyio.n_delete", io_num);
 	}
-	//더치페이 수정 입력
+	
+	//더치페이 수정을 위한 재입력
 	public void n_insert2(NbreadDTO ndto) {
 		sqlSession.insert("moneyio.n_insert2", ndto);
 	}

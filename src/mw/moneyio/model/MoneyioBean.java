@@ -229,5 +229,11 @@ public class MoneyioBean {
 		return "/moneyio/ioListDetail";
 	}
 	
+	@RequestMapping("ioDeletePro.mw")
+	public String ioDeletePro(int io_num) {
+		dao.io_delete(io_num);
+		return "/moneyio/ioDeletePro";
+	}
+	
 	
 }
