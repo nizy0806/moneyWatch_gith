@@ -111,15 +111,6 @@ public class Account_cardBean {
 		path[5] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_kb";
 		path[6] = "C:\\app\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\moneyWatch\\image\\image_lotte";
 		
-//		path[0] = "C:\\Users\\pc\\Desktop\\image_ibk";
-//		path[1] = "C:\\Users\\pc\\Desktop\\image_samsung";
-//		path[2] = "C:\\Users\\pc\\Desktop\\image_hyundai";
-//		path[3] = "C:\\Users\\pc\\Desktop\\image_shinhan";
-//		path[4] = "C:\\Users\\pc\\Desktop\\image_woori";
-//		path[5] = "C:\\Users\\pc\\Desktop\\image_kb";
-//		path[6] = "C:\\Users\\pc\\Desktop\\image_lotte";
-		
-		//String path="C:\\Users\\pc\\Desktop\\image_ibk";
 		for(int i=0; i<path.length; i++) {
 			dir = new File(path[i]);
 		
@@ -148,8 +139,13 @@ public class Account_cardBean {
 					}else if(i==6) {
 						cdto.setCompany("롯데카드");
 					}
+							
+					String strpath = file.getPath();
 					
-					cdto.setPath(file.getPath());
+					strpath = strpath.substring(87);
+					strpath = strpath.replace("\\", "/");
+					
+					cdto.setPath(strpath);
 				}
 				acdao.card_img_insert(cdto);
 			}
@@ -189,7 +185,7 @@ public class Account_cardBean {
 		
 		List card_benefit_list = acdao.card_benefit_select(cardName); // 선택된 카드에 대한 혜택
 		String card_img = acdao.card_img(cardName);
-		System.out.println(card_img);
+		
 		model.addAttribute("benefitList",card_benefit_list);
 		model.addAttribute("cardImg",card_img); // 카드이미지
 		
@@ -240,9 +236,11 @@ public class Account_cardBean {
 	public String mycardBenefit(String card_name, Model model) {
 		
 		List myBenefit = acdao.mycard_benefit(card_name);
+		String card_img = acdao.card_img(card_name);
 		
 		model.addAttribute("myBenefit",myBenefit); 
 		model.addAttribute("card_name",card_name); // 카드이름
+		model.addAttribute("card_img", card_img);
 		
 		return "/card_benefit/MycardBenefit";
 	}

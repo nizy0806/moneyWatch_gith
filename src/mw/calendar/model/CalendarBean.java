@@ -69,7 +69,7 @@ public class CalendarBean {
 	
 	@RequestMapping("day_insert.mw") // 캘린더일정 데이터 입력
 	public String cal_insert(MwScheduleDTO mwdto, Model model) {
-
+		
 		dao.schedule_insert(mwdto); // 캘린더 일정 DB입력
 
 		return "/calendar/day";

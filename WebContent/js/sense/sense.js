@@ -41,6 +41,17 @@
 			}
 		});
 		
+		$.ajax({
+			
+			type: "POST",
+			url: "senseReadcount.mw",
+			data: {num: num},
+			success: function(data){
+				$("#readcount").html(data); //조회수 변경
+			}
+			
+		});
+		
 	}
 	
 	//sense detail에서 삭제 버튼 선택시 작동

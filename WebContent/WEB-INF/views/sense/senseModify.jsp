@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <title>senseModify page</title>
 </head>
 <body>

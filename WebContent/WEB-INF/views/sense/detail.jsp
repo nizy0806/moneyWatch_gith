@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/sense/sense.js"></script>
  
@@ -17,10 +18,10 @@
 		</tr>
 		<tr>	
 			<td>
-				<input type="button" value="수정" onclick="location.href='/moneyWatch/senseModify.mw?num=${detail.num}'"/>
+				<input type="button" value="수정" class="btn btn-info" onclick="location.href='/moneyWatch/senseModify.mw?num=${detail.num}'"/>
 			</td>	
 			<td>
-				<input type="button" value="삭제" onclick="senseDelete(${detail.num})">      
+				<input type="button" value="삭제" class="btn btn-info" onclick="senseDelete(${detail.num})">      
 			</td>
 		</tr>
 	</table>
