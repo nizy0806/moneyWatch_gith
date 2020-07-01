@@ -91,6 +91,14 @@
 		)where rownum <= 5
 	]]>
 	</select>
+	
+	<select id="nList" resultType="nbreadDTO" parameterType="int">
+		select n_category, n_debtor, n_price from mwn_bread where io_num = #{io_num} 
+	</select>
+	
+	<select id="nSum" resultType="String" parameterType="int">
+		select sum(n_price) from mwN_Bread where io_num=#{io_num}
+	</select> 
 
 
 	<select id="moneyioListAll" resultType="moneyioDTO" parameterType="String">

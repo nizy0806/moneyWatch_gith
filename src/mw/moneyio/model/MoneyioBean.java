@@ -162,6 +162,21 @@ public class MoneyioBean {
 			model.addAttribute("chart_list40", chart_list40);
 			return "/moneyio/ageChart";
 		}
+		
+		@RequestMapping("nbreadList.mw")
+		public String nbreadList(/*int io_num,*/ Model model) {
+			int io_num=911;
+			
+			List<NbreadDTO> nlist = dao.nList(io_num);
+			String category = nlist.get(1).getN_category();
+			String nSum = dao.nSum(io_num);
+			
+			model.addAttribute("category", category);
+			model.addAttribute("nlist", nlist);
+			model.addAttribute("nSum", nSum);
+			
+			return "/moneyio/nbreadList";
+		}
 	
 	
 	@RequestMapping("moneyioList.mw")	

@@ -74,6 +74,13 @@ public class MoneyioDAO {
 		return sqlSession.selectList("moneyio.chart40");
 	}
 	
+	public List<NbreadDTO> nList(int io_num){
+		return sqlSession.selectList("moneyio.nList", io_num);
+	}
+	public String nSum(int io_num) {
+		return sqlSession.selectOne("moneyio.nSum", io_num);
+	}
+	
 	public List moneyioListAll(String id) {
 		
 		return sqlSession.selectList("moneyio.moneyioListAll", id);
