@@ -134,9 +134,9 @@ public class MoneyioBean {
 			System.out.println("dto.getIo_price()"+dto.getIo_price());
 			
 			if(dto.getIo_set()==1) {
-				dto.setIo_remain(dto.getIo_remain()+io_price);
-			}else {
 				dto.setIo_remain(dto.getIo_remain()-io_price);
+			}else {
+				dto.setIo_remain(dto.getIo_remain()+io_price);
 			}
 			
 			
