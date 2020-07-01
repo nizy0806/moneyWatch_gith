@@ -18,5 +18,5 @@
 	
 </c:forEach>
 </table>	
-<center><input type="button" class="btn btn-outline-primary" value="목록으로" onclick="window.location='/moneyWatch/myCard.mw'"></center>
-	
+<%-- <center><input type="button" class="btn btn-outline-primary" value="목록으로" onclick="window.location='/moneyWatch/myCard.mw'"></center> --%>
+<center><input type="button" class="btn btn-outline-primary" value="목록으로" onclick="history.go(-1)"/></center>	
