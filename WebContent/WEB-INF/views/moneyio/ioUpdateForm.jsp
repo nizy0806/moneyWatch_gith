@@ -112,13 +112,14 @@
 						<td>
 							<fmt:setLocale value="ko"/>
 							<fmt:formatNumber type="text" value="${dto.io_price}" pattern="#,###" var="io_price"/>
-						<input type="text" class="form-control" name="io_price" value="${io_price}"
-							placeholder="won"></td>
+							<input type = "hidden" name="io_old_price" value="${dto.io_price}" />
+						<input type="text" class="form-control" name="io_price" placeholder="${io_price}"></td>
 						<td><label for="text">&nbsp;&nbsp;&nbsp;&nbsp;거래 잔액</label></td>
 						<td colspan="2">
 							<fmt:setLocale value="ko"/>
-							<fmt:formatNumber type="text" value="${dto.io_remain}" pattern="#,###" var="io_remain"/>							
-						<input type="text" class="form-control" name="io_remain" value="${io_remain}" placeholder="won"></td>
+							<fmt:formatNumber type="text" value="${dto.io_remain}" pattern="#,###" var="io_remain"/>
+						<input type="hidden" name="io_remain" value="${dto.io_remain}" />		 			
+						<input type="text" class="form-control" placeholder="${io_remain}" disabled></td>
 				</tr>
 				<tr>
 						<td><label for="exampleTextarea">&nbsp;&nbsp;&nbsp;&nbsp;세부내역</label></td>
