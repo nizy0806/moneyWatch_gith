@@ -127,6 +127,12 @@ public class FaqBoardDAO {
 			
 			return qcount;
 		}
+		public FaqMainBoardDTO getQcontent(int qnum) {
+			sqlSession.update("faqboard.upQcount",qnum);
+			FaqMainBoardDTO dto1= sqlSession.selectOne("faqboard.getQcontent", qnum);
+			
+			return dto1;
+		}
 }
 		
 		

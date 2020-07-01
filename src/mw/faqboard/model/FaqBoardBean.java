@@ -69,7 +69,7 @@ public class FaqBoardBean {
 		
 			int count=dao.getCount(dto);
 		
-			System.out.println(count);
+			
 			
 		if(count > 0) {
 			articleList = dao.getArticles(start,end);
@@ -240,7 +240,7 @@ public class FaqBoardBean {
 		String num=request.getParameter("faq_num");
 		int num1=Integer.parseInt(num);
 		
-		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
 		
 		
 		
@@ -287,8 +287,22 @@ public class FaqBoardBean {
 				step=1;
 			}
 			dao.insertReply(dto);
-		
-		
 		}
+	}
+		
+	@RequestMapping("faqContent.mw")
+	
+	public String faqMainContent(FaqMainBoardDTO dto,HttpServletRequest request,Model model,HttpSession session) {
+		int qnum=Integer.parseInt(request.getParameter("qnum"));
+		
+		FaqMainBoardDTO dto1=dao.getQcontent(qnum);
+		
+		
+		model.addAttribute("qlist",dto1);
+		
+	
+		
+		
+		return "/faqboard/faqContent";
 	}
 }

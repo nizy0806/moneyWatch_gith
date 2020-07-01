@@ -65,7 +65,11 @@
     </div>
     </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">게시판</a>
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">게시판</a>
+     <div class="dropdown-menu" style="">
+      <a class="dropdown-item" href="faqList.mw">FAQ</a>
+     </div>
+     </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
     <div class="dropdown-menu" style="">
       <a class="dropdown-item" href="sense.mw">금융 상식</a>
       <a class="dropdown-item" href="#">챌린지</a>

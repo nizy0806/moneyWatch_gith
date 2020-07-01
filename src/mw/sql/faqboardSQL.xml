@@ -65,6 +65,9 @@
 	</insert>
 	
 	
+	
+	
+	
 	<select id="selectMainFaq" resultType="faqmainboardDTO" parameterType="faqmainboardDTO">
 		<![CDATA[select * from (select qnum,nickname,qsubject,qcontent,reg,qreadcount,rownum r from(select *  from mwfaqMainBoard order by qnum desc) order by qnum desc)]]>
 	</select>
@@ -72,6 +75,16 @@
 	<select id="getQcount" resultType="int">
 		select count(*) from mwFaqMainBoard
 	</select>
+	
+	<select id="getQcontent" resultType="faqmainboardDTO" parameterType="int">
+		select * from mwFaqMainBoard where qnum=#{qnum}
+	</select>
+	
+	<update id="upQcount" parameterType="int">
+		update mwFaqMainBoard set qreadcount=qreadcount+1 where qnum=#{qnum}
+	</update> 
+	
+	
 	
 </mapper>
 
