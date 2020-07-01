@@ -231,8 +231,9 @@ public class MoneyioBean {
 	
 	@RequestMapping("ioDeletePro.mw")
 	public String ioDeletePro(int io_num) {
+		System.out.println(io_num);
 		dao.io_delete(io_num);
-		return "/moneyio/moneyioList";
+		return "redirect:moneyioList.mw";
 	}
 	
 	
