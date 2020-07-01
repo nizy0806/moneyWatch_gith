@@ -32,8 +32,8 @@
 	</select>
 	
 	<!-- 디테일 비디오 변경 - 메인 영상을 변경해줌 -->
-	<select id="senseDetailVideo" resultType="String" parameterType="int">
-		select sense_url from mwsense where num=#{num}
+	<select id="senseDetailVideo" resultType="senseDTO" parameterType="int">
+		select * from mwsense where num=#{num}
 	</select>
 	
 	<!-- 디테일 페이지/ 수정 페이지 -->
@@ -116,5 +116,27 @@
 	<select id="senseDeleteCheck" resultType="int" parameterType="int">
 		select count(*) from mwsense where num=#{num}
 	</select>
+	
+	
+	
+	<!-- myscrap main-->
+	<select id="myscrap" resultType="scrapDTO" parameterType="String">
+		select * from mwscrap where id=#{id}
+	</select>
+	
+	<!-- myscrap video -->
+	<select id="myVideo" resultType="scrapDTO" parameterType="hashMap">
+		select * from mwscrap where id=#{id} and num=#{num}
+	</select>
+	
+	<!-- 스크랩 저장 -->
+	<insert id="scrap" parameterType="hashMap">
+		insert into mwscrap values(mwscrap_seq.nextval,#{scrap.num},#{id},#{scrap.sense_category},#{scrap.sense_title},#{scrap.sense_url})
+	</insert>
+	
+	<!-- 스크랩 삭제 -->
+	<delete id="scrapDelete" parameterType="hashMap">
+		delete from mwscrap where num=#{num} and id=#{id}
+	</delete>
 														
 </mapper>
