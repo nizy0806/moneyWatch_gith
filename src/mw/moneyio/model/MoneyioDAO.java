@@ -51,9 +51,7 @@ public class MoneyioDAO {
 	public void ioUpdatePro(MoneyioDTO dto) {
 		sqlSession.update("moneyio.update", dto);
 	}
-	public int delete_select(int io_num) {
-		return sqlSession.selectOne("moneyio.delete_select", io_num);
-	}
+
 	//지출/수입 내역 삭제
 	public void io_delete(int io_num) {
 		sqlSession.delete("moneyio.io_delete", io_num);

@@ -46,9 +46,7 @@
 		io_price = #{io_price},io_remain = #{io_remain}, io_N_div = #{io_N_div}, io_set = #{io_set}
 		where io_num = #{io_num}
 	</update>
-	<select id="delete_select" resultType="int" parameterType="int">
-		select io_num from mwmoneyio where io_num=#{io_num}
-	</select>
+
 	<delete id="io_delete" parameterType="int">
 		delete from mwmoneyio where io_num=#{io_num}
 	</delete>	

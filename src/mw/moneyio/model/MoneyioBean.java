@@ -229,16 +229,10 @@ public class MoneyioBean {
 		return "/moneyio/ioListDetail";
 	}
 	
-	@RequestMapping("ioDeleteForm.mw")
-	public String ioDeleteForm(int io_num, Model model) {
-		io_num = dao.delete_select(io_num);
-		model.addAttribute("io_num", io_num);
-		return "/moneyio/ioDeleteForm";
-	}
 	@RequestMapping("ioDeletePro.mw")
 	public String ioDeletePro(int io_num) {
 		dao.io_delete(io_num);
-		return "/moneyio/ioDeletePro";
+		return "/moneyio/moneyioList";
 	}
 	
 	
