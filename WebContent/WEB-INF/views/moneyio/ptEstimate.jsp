@@ -30,7 +30,7 @@
             "subCaption": "단위 (만)",
             "xAxisName": "Month",
             "yAxisName": "Won",
-            "lineThickness": "2"
+            "lineThickness": "5"
         },
         "data": [{
                 "label": "5",
