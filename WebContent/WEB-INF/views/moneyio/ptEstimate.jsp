@@ -154,7 +154,7 @@ table{
    
    <h5> </h5><br /><br /><br />
   <h2>3개월 지출 차트</h2>
-  <div style="float: left; width: 50%; margin-top:3%;">
+  <div style="float: left; width: 50%; margin-top:5%;">
   	<div id="chart-container">FusionCharts XT will load here!</div>
   </div>
 
