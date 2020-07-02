@@ -37,20 +37,3 @@
 	</div>
 </table>
 </div>
-
-
-<%-- <table>
-	<tr>
-	<td>카드사</td>
-		<td>
-			<select name="ca_company" id="company" onchange="setSelectBox()">
-				<option value="카드사">카드사</option>
-				<c:forEach var = "cdto" items="${card_company_list}" >
-					<option value="${cdto.company}">${cdto.company}</option>
-				</c:forEach>
-			</select>				
-		</td>
-	</tr>
-			
-	<tr id="select_card" ></tr>
-</table> --%>
