@@ -98,30 +98,29 @@ public class FaqBoardDAO {
 		}
 		
 		
-		public int selectReply(String faq_num) {
-			int qno = sqlSession.selectOne("faqboard.selectReply", faq_num);
-			
-			return qno;
-		}
-		public void setQno(int qno) {
-			int into=sqlSession.insert("faqboard.replyCount", qno);
-		
-		}	
-		
-		public void insertReply(ReplyDTO dto) {
-			sqlSession.insert("faqboard.insertReply", dto);
-		}
-		
-		
-		
-		
+	/*
+	 * public int selectReply(String faq_num) { int qno =
+	 * sqlSession.selectOne("faqboard.selectReply", faq_num);
+	 * 
+	 * return qno; } public void setQno(int qno) { int
+	 * into=sqlSession.insert("faqboard.replyCount", qno);
+	 * 
+	 * }
+	 * 
+	 * public void insertReply(ReplyDTO dto) {
+	 * sqlSession.insert("faqboard.insertReply", dto); }
+	 */
 		public List selectMainFaq(FaqMainBoardDTO dto1) {
 			List qList=sqlSession.selectList("faqboard.selectMainFaq",dto1);
 		
 		
 			return qList;
 		}
-
+		
+		public void insertQwrite(FaqMainBoardDTO dto) {
+			sqlSession.insert("faqboard.insertQwrite",dto);
+		}
+		
 		public int getQcount(FaqMainBoardDTO dto1) {
 			int qcount = sqlSession.selectOne("faqboard.getQcount",dto1);
 			
@@ -133,8 +132,52 @@ public class FaqBoardDAO {
 			
 			return dto1;
 		}
-}
 		
+		public void updateQcontnet(FaqMainBoardDTO dto) {
+			sqlSession.update("faqboard.updateQcontnet", dto);
+		
+		}
+		
+		public void DeleteQcontent(int qnum) {
+		
+			sqlSession.delete("faqboard.DeleteQcontent", qnum);
+		}
+
+		public int DeleteQcheck(int qnum,String q_id) {
+			HashMap map = new HashMap();
+			map.put("qnum",qnum);
+			map.put("q_id",q_id);
+			
+			
+			int check=sqlSession.selectOne("faqboard.DeleteQcheck",map);
+			
+			return check;
+		}
+		
+		
+		public List getArticles(int start, int end, String id) {
+			HashMap map=new HashMap();
+			map.put("start",start);
+			map.put("end",end);
+			map.put("id",id);
+			
+			System.out.println(start);
+			System.out.println(end);
+			System.out.println(id);
+			
+			List articleList= sqlSession.selectList("faqboard.mygetArticles", map);
+	
+			return articleList;
+		}
+		
+		
+		public int getCountmy(String id) {
+			int count = (Integer)sqlSession.selectOne("faqboard.mylistboard",id);
+			return count;
+		}
+
+
+}
 		
 		
 	

@@ -5,7 +5,6 @@ import java.lang.Integer;
 
 public class FaqBoardDTO {
 	private int faq_num;
-	private String writer;
 	private String subject;
 	private String faq_email;
 	private String content;
@@ -15,7 +14,7 @@ public class FaqBoardDTO {
 	private int re_level;
 	private Timestamp reg;
 	private int ref;
-	
+	private String id;
 	
 	
 	
@@ -24,12 +23,6 @@ public class FaqBoardDTO {
 	}
 	public void setFaq_num(int faq_num) {
 		this.faq_num = faq_num;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
 	}
 	public String getSubject() {
 		return subject;
@@ -84,5 +77,11 @@ public class FaqBoardDTO {
 	}
 	public void setRef(int ref) {
 		this.ref=ref;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id=id;
 	}
 }

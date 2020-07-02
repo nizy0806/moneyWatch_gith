@@ -3,9 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<title>글 내용</title>
+<title>유저 게시판 Content</title>
 
-<br>
 </head>
 
 
@@ -22,10 +21,16 @@
 		<td align="center" width="125">조회수</td>
 		<td align="center" width="125">${article.readcount}</td>
 	</tr>
+		
+		
+	<tr height="30">	
+		<td align="center" width="125">제 목</td>
+		<td align="center" width="125">${article.subject}</td>
+	</tr>
 	
 	<tr height="30">	
 		<td align="center" width="125">작성자</td>
-		<td align="center" width="125">${article.writer}</td>
+		<td align="center" width="125">${article.id}</td>
 		<td align="center" width="125">작성일</td>
 		<td align="center" width="125">${article.reg}</td>
 	</tr>

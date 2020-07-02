@@ -8,16 +8,32 @@
 </head>
 <body>
 <center><b>*FAQ*</b>
+
+ <tr>
+ 	<td align="right">
+	<c:if test="${sessionScope.memId =='aaa'}">
+	<button><a href="/moneyWatch/faqQwriteForm.mw">글쓰기</a></button>
+	</c:if>
+ 	</td>
+ </tr>
+
 <c:if test="${qcount>0}">
 <table  width="500" border="1" cellpadding="0" cellspacing="0">
+ 
+ 
+ 
+ 
  <tr>
 		<td align="center" width="50">번호</td>
 		<td align="center" width="250">제목</td>
-		<td align="center" width="100">작성자</td>
+		<td align="center" width="250">작성자 ID</td>
+		<td align="center" width="100">닉네임</td>
 		<td align="center" width="400">작성일</td>
 		<td align="center" width="50">조회</td>
  </tr>
  
+ <tr>
+ 	
  
 	<c:forEach var="qlist" items="${qList}" >
 	  <tr height="30">
@@ -25,14 +41,13 @@
 	  	
 		<td align="center" width="40">
 		<a href = "/moneyWatch/faqContent.mw?qnum=${qlist.qnum}">${qlist.qsubject}</a></td>
+		<td align="center" width="40">${qlist.q_id}</td>
 		<td align="center" width="40">${qlist.nickname}</td>
 		<td align="center" width="40">${qlist.reg}</td>
 		<td align="center" width="40">${qlist.qreadcount}</td>
 	  </tr>
-	
 	</c:forEach>
 </c:if>
-
 </table>
 </center>
 </body>
@@ -41,7 +56,7 @@
 
 
 <body>
-<center><b>글목록(전체 글:${count})</b>
+<center><b>전체글 [${count}]</b>
 <table border="1" width="700" cellpadding="0" cellspacing="0" align="center">
 <tr>
 	<td align="right">
@@ -98,7 +113,7 @@
 			<a href="/moneyWatch/content.mw?faq_num=${article.faq_num}&pageNum=${currentPage}&number=${number}">
 			${article.subject}</a></td>
 			
-		<td align="center" width="100">${article.writer}</td>
+		<td align="center" width="100">${article.id}</td>
 		
 		
 		<td align="center" width="150">${article.reg}</td>

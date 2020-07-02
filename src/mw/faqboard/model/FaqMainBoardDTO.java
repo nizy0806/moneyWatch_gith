@@ -10,8 +10,15 @@ public class FaqMainBoardDTO {
 	private String qcontent;
 	private int qreadcount;
 	private Timestamp reg;
+	private String q_id;
 	
 	
+	public String getQ_id() {
+		return q_id;
+	}
+	public void setQ_id(String q_id) {
+		this.q_id = q_id;
+	}
 	public int getQnum() {
 		return qnum;
 	}

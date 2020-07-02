@@ -11,8 +11,8 @@
 <table width="30%" cellspacing="0" cellpadding="0" border="1">
 <tr heigth="700">
 	<td align="center" width="300">글번호</td>
-	<td align="center" width="300">${qlist.qnum}</td>
-
+	<td align="center" width="300">${qlist.qnum}
+	<input type="hidden" value="${qlist.qnum}"></td>
 
 	<td align="center" width="300">제목</td>
 	<td align="center" width="300">${qlist.qsubject}</td>
@@ -26,6 +26,8 @@
 <tr heigth="30%">
 	<td align="center" width="300">작성자</td>
 	<td align="center" width="300">${qlist.nickname}</td>
+	
+	
 	<td align="center" width="300">작성일</td>
 	<td align="center" width="300">${qlist.reg}</td>
 </tr>
@@ -37,13 +39,13 @@
  	<td align="center" width="300">내용</td>
  	<td align="center" width="800">${qlist.qcontent}</td>
  </tr>
-
+		
 		<td colspan="4" align="right">
-	
-		<input type="button" value="글수정" onclick="document.location.href='/moneyWatch/##.mw?faq_num=${faq_num}'" />
+		<c:if test="${sessionScope.memId =='aaa'}">
+		<input type="button" value="글수정" onclick="document.location.href='/moneyWatch/faqMainUpdateForm.mw?qnum=${qlist.qnum}'" />
 		
-		<input type="button" value="글삭제" onclick="document.location.href='/moneyWatch/##.mw?faq_num=${faq_num}'" />
-		
+		<input type="button" value="글삭제" onclick="document.location.href='/moneyWatch/faqMainDelete.mw?qnum=${qlist.qnum}&q_id=${qlist.q_id}'" />
+		</c:if>
 		<input type="button" value="목록보기" onclick="document.location.href='/moneyWatch/faqList.mw'" />
 		
 		</td>
