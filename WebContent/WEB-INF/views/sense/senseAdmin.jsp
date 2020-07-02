@@ -11,12 +11,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/sense/sense.js"></script>
 
-<title>금융 SenseUp Page</title>
+<title>Sense 관리</title>
 
 </head>
 <body>
 &nbsp
-	<h1 align="center">금융 SenseUp!!</h1> <!-- a태그넣기  -->
+	<h1 align="center">Sense관리</h1> <!-- a태그넣기  -->
 &nbsp
 	<div align="center">
 		<div class="left-box" style="float: left; margin-right:10px;">
@@ -34,7 +34,7 @@
 				<table class="btn-group btn-group-toggle" data-toggle="buttons" >
 					<tr>
 						<c:forEach var="category" items="${ category }">
-							<td class="btn btn-primary" align = center onclick="category(${ category.num })">
+							<td class="btn btn-primary" align = center onclick="categoryAdmin(${ category.num })">
 								${ category.sense_detail_category }
 							</td>								
 						</c:forEach>
@@ -52,6 +52,14 @@
 								<td onclick="detail(${ list.num })"><img src="https://img.youtube.com/vi/${ list.sense_thumbnail }/default.jpg" alt="Page Not Found"/></td>
 								<td onclick="detail(${ list.num })">${ list.sense_title }</td>
 								<td class="badge badge-primary badge-pill" id="readcount"> ${ list.readcount } </td>
+							</tr>
+							<tr>	
+								<td>
+									<input type="button" value="수정" class="btn-group btn-group-toggle" data-toggle="buttons" onclick="location.href='/moneyWatch/senseModify.mw?num=${list.num}'"/>
+								</td>	
+								<td>
+									<input type="button" value="삭제" class="btn-group btn-group-toggle" data-toggle="buttons" onclick="senseDelete(${list.num})">      
+								</td>
 							</tr>
 						</table>
 					</c:forEach>	

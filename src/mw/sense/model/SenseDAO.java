@@ -106,13 +106,18 @@ public class SenseDAO {
 	
 	// 센스 삭제
 	public void senseDelete(int num) {
-		sqlSession.delete("senseDelete", num);
+		sqlSession.delete("sense.senseDelete", num);
 	}
 	
 	// 센스 삭제 확인
 	public int senseDeleteCheck(int num) {
-		int deleteCheck = sqlSession.selectOne("senseDeleteCheck", num);
+		int deleteCheck = sqlSession.selectOne("sense.senseDeleteCheck", num);
 		return deleteCheck;
+	}
+	
+	// 메모창에 제목 출력
+	public SenseDTO senseMemo(int num) {
+		return sqlSession.selectOne("sense.senseMemo",num);
 	}
 	
 	// 스크랩 메인페이지
@@ -132,14 +137,25 @@ public class SenseDAO {
 	}
 	
 	// 스크랩 저장
-	public void scrap(int num, String id) {
+	public void scrap(int num, String id, String memo) {
 		
 		SenseDTO dto = (SenseDTO)senseDetail(num); //번호로 검색해 넣을 값을 불러옴
 		HashMap map = new HashMap();
 		map.put("scrap", dto);
 		map.put("id", id);
+		map.put("memo", memo);
 		
 		sqlSession.insert("sense.scrap", map);
+	}
+	
+	// 스크랩 카테고리 선택시 리스트
+	public List<ScrapDTO> myscrapCategory(String id, int num){
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("num", num);
+		return sqlSession.selectList("sense.myscrapCategory", map); //메인페이지 카테고리 선택시 리스트 출력
+		
 	}
 	
 	// 스크랩 삭제

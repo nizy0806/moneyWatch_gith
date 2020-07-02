@@ -6,11 +6,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Memo</title>
+<link href="/moneyWatch/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/sense/sense.js"></script>
+
 </head>
 <body>
-			<iframe width="850" height="478" src="https://www.youtube.com/embed/${dto.sense_url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
-			<input id="memo" type="button" value="메모하기" onclick="scrapmemo(${dto.num})"/>
+	<table>
+		<tr>
+			<td>${ dto.sense_title }</td>
+		</tr>
+		<tr>
+			<td><input type="text" name="memo"/></td>
+		</tr>
+		<tr>
+			<input type="button" value="스크랩" onclick="scrap(${dto.num})"/>
+		</tr>
+	</table>
+
 </body>
 </html>
