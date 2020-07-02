@@ -49,6 +49,7 @@
 		<mapper resource="mw/sql/faqboardSQL.xml" /> <!--F&A게시판 -->
 		<mapper resource="mw/sql/emailSQL.xml"/><!-- 아이디/비번 찾기 -->
 		<mapper resource="mw/sql/mainSQL.xml"/><!-- 메인 -->
+		<mapper resource="mw/sql/adminSQL.xml"/><!-- 관리자 -->
 
 	</mappers>
 	
