@@ -46,6 +46,11 @@
 		io_price = #{io_price},io_remain = #{io_remain}, io_N_div = #{io_N_div}, io_set = #{io_set}
 		where io_num = #{io_num}
 	</update>
+
+	<delete id="io_delete" parameterType="int">
+		delete from mwmoneyio where io_num=#{io_num}
+	</delete>	
+	
 	<!-- n빵 내역 초기화 -->
 	<delete id="n_delete" parameterType="int">
 		delete from mwn_bread where io_num=#{io_num}
@@ -102,15 +107,15 @@
 
 
 	<select id="moneyioListAll" resultType="moneyioDTO" parameterType="String">
-		select * from mwmoneyio where id = #{id} order by io_num desc
+		select * from mwmoneyio where id = #{id} order by io_reg_date desc, io_num desc
 	</select>
 	
 	<select id="moneyioListIn" resultType="moneyioDTO" parameterType="String">
-		select * from mwmoneyio where id = #{id} and io_set = 0 order by io_num desc
+		select * from mwmoneyio where id = #{id} and io_set = 0 order by io_reg_date desc, io_num desc
 	</select>
 	
 	<select id="moneyioListOut" resultType="moneyioDTO" parameterType="String">
-		select * from mwmoneyio where id = #{id} and io_set = 1 order by io_num desc
+		select * from mwmoneyio where id = #{id} and io_set = 1 order by io_reg_date desc, io_num desc
 	</select>
 
 	<select id="moneyioListDetail" resultType="moneyioDTO" parameterType="hashmap">
@@ -118,7 +123,7 @@
 	</select>
 	
 	<select id="moneyioListRemain" resultType="moneyioDTO" parameterType="String">
-		select * from mwmoneyio where io_num in (select max(io_num) from mwmoneyio where id = #{id} group by io_reg_date) order by io_num desc
+		select * from mwmoneyio where io_num in (select max(io_num) from mwmoneyio where id = #{id} group by io_reg_date) order by io_reg_date desc, io_num desc
 	</select>
 	
 </mapper>

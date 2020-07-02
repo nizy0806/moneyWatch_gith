@@ -245,6 +245,18 @@ public class Account_cardBean {
 		return "/card_benefit/MycardBenefit";
 	}
 	
+	// 나의 카드 리스트 - 나의 카드 혜택페이지 따로 만들기 위함
+	@RequestMapping("mycardList.mw")
+	public String mycardList(String card_name,Model model){
+		
+		String id= "nahui068";
+		List mycard = acdao.myCardList(id); // 나의 카드목록에 대한 카드이미지
+		
+		model.addAttribute("mycard",mycard);
+		//List myBenefit = acdao.mycard_benefit(card_name);
+		
+		return "/card_benefit/mycardList";
+	}
 	
 	
 	

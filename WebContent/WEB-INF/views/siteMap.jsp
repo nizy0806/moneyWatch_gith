@@ -16,6 +16,11 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
+<style type="text/css">
+ a:link { color: balck; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: balck; text-decoration: none;}
+</style>
 <body>
 	<div class="jumbotron text-center">
 		<h1>사이트맵</h1>
@@ -24,28 +29,29 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
-				<h3>회원관리 (심수민, 백종솔)</h3>
+				<h3>고객</h3>
 				<br />
-				<li>회원가입</li> <br />
-				<li>로그인</li> <br />
-				<li>마이페이지</li> <br />
-				<li>회원탈퇴</li> <br />
+			
+				<li><a href="">회원가입</a></li> <br />
+				<li><a href="">로그인</a></li> <br />
+				<li><a href="">마이페이지</a></li> <br />
+				<li><a href="">회원탈퇴</a></li> <br />
+				
 			</div>
 			<div class="col-sm-4">
 				<h3>서비스</h3>
 				<br />
-				<li>챗봇 (전민기, 이수진)</li> <br />
-
-				<li>캘린더 (김마로, 김나희)</li> <br />
-				<li>지출 내역 (전민기, 이수진)</li> <br />
-				<li>소비패턴 분석 (together ^^)</li> <br />
-				<li>연령별 지출 비교 (together ^^)</li> <br />
+				<li><a href="">챗봇</a></li> <br />
+				<li><a href="">캘린더</a></li> <br />
+				<li><a href="">지출 내역</a></li> <br />
+				<li><a href="">개인 소비패턴</a> </li> <br />
+				<li><a href="">연령별 지출 비교</a></li> <br />
 			</div>
 			<div class="col-sm-4">
-				<h3>카드/계좌 (김마로, 김나희)</h3>
+				<h3>카드/계좌 </h3>
 				<br />
-				<li>등록</li> <br />
-				<li>목록 및 혜택보기</li> <br />
+				<li><a href="">등록</a></li> <br />
+				<li><a href="">목록 및 혜택보기</a></li> <br />
 			</div>
 
 		</div>
@@ -55,21 +61,22 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
-				<h3>게시판(김마로)</h3>
+				<h3>게시판</h3>
 				<br />
-				<li>금융상식</li> <br />
-				<li>챌린지</li> <br />
+				<li><a href="">금융지식 게시판</a></li> <br />
+				<li><a href="">FAQ 및 질문 게시판</a></li> <br />
 			</div>
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
 				<h3>관리자</h3>
 				<br />
-				<li>게시판 관리 (김마로)</li> <br />
-				<li>회원 관리 (심수민, 백종솔)</li> <br />
-				<li>연령별 지출 관리 (together ^^)</li> <br />
-				<li>소비패턴 분석 관리 (together ^^)</li> <br />
-				<li>DB 챗봇 관리 (전민기, 이수진)</li> <br />
-				<li>DB 카드 목록/혜택 관리 (김나희)</li> <br />
+				<li>고객 관리</li> <br />
+				<li>DB 카드/계좌 목록 및 혜택 관리</li> <br />
+				<li>연령별 지출 관리</li> <br />
+				<li>소비패턴 분석 관리</li> <br />
+				<li>게시판 관리</li> <br />
+				<li>DB 챗봇 관리</li> <br />
+				
 			</div>
 		</div>
 	</div>

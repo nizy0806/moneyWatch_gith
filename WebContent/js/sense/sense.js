@@ -69,3 +69,46 @@
 			}
 		});
 	}
+	
+	
+	//senseMain에서 스크랩 버튼 작동
+	function scrap(num){
+		$.ajax({
+			type: "POST",
+			url: "scrap.mw",
+			data: {num: num},
+			success: function(){
+				alert("스크랩 되었습니다.");
+			}
+		});
+	}
+	
+	
+	//마이 스크랩 삭제
+	function deletescrap(num){
+		$.ajax({
+			type: "POST",
+			url: "scrapDelete.mw",
+			data: {num: num},
+			success: function(data){
+				$("#myScrapList").html(data);
+				alert("삭제되었습니다.");
+			}
+		});
+	}
+	
+	//myscrap에서 리스트 클릭시 비디오 호출
+	function mydetail(num){
+		$.ajax({
+			
+			type: "POST",
+			url: "myVideo.mw",
+			data : {num: num},
+			success: function(data){
+				$("#my_video").html(data); //영상변경을 위한 url 호출
+			}
+		});
+		
+
+		
+	}

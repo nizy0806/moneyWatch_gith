@@ -11,20 +11,18 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/sense/sense.js"></script>
 
-<title>금융 SenseUp Page</title>
+<title>My scrap page</title>
 
 </head>
 <body>
 &nbsp
-	<h1 align="center">금융 SenseUp!!</h1> <!-- a태그넣기  -->
+	<h1 align="center">My Scrap</h1> <!-- a태그넣기  -->
 &nbsp
 	<div align="center">
 		<div class="left-box" style="float: left; margin-right:10px;">
-			<h2 align="center" >오늘의 영상</h2>
 &nbsp
-			<div id="video_url">
-				<iframe width="850" height="478" src="https://www.youtube.com/embed/${video.sense_url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/>
-				<input type="button" value="스크랩하기" onclick="scrap(${video.num})"/>${video.num}
+			<div id="my_video">
+				<iframe width="850" height="478" allowfullscreen><h3>영상을 선택하세요!!</h3></iframe><br/>
 			</div>
 		</div>
 		
@@ -43,20 +41,14 @@
 			</div>
 			&nbsp
 			<div>
-				<div id="mainList" style="overflow:auto; width:800px; height:500px;"> <!-- 기본 메인에서 리스트를 가져오고/ 카테고리 선택 시 ajax를 통해 리스트를 가져옴 -->
-					<c:forEach items="${ list }" var="list">	
+				<div id="myScrapList" style="overflow:auto; width:800px; height:500px;"> <!-- 기본 메인에서 리스트를 가져오고/ 카테고리 선택 시 ajax를 통해 리스트를 가져옴 -->
+					<c:forEach items="${ myscrap }" var="list">	
 						<table class="list-group">
 							<!-- 첫 페이지일 경우 : category=null -->
 							<tr class="list-group-item d-flex justify-content-between align-items-center">
-							<!-- 썸네일이미지> --> 
-								<td onclick="detail(${ list.num })"><img src="https://img.youtube.com/vi/${ list.sense_thumbnail }/default.jpg" alt="Page Not Found"/></td>
-								<td onclick="detail(${ list.num })">${ list.sense_title }</td>
-								<td class="badge badge-primary badge-pill" id="readcount"> ${ list.readcount } </td>
-							</tr>
-							<!-- ajax를 통해 디테일한 내용을 가져옴  -->
-							<tr>
-								<table id="detail${ list.num }">
-								</table>
+								<td onclick="mydetail(${ list.num })"><img src="https://img.youtube.com/vi/${ list.sense_url }/default.jpg" alt="Page Not Found"/></td>
+								<td onclick="mydetail(${ list.num })">${ list.sense_title }</td>
+								<td><input type="button" value="삭제" onclick="deletescrap(${list.num})"/></td>
 							</tr>
 						</table>
 					</c:forEach>	

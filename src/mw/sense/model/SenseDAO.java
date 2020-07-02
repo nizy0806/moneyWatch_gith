@@ -31,9 +31,9 @@ public class SenseDAO {
 	}
 	
 	//디테일 메인 비디오
-	public String senseDetailVideo(int num) {
-		String url = sqlSession.selectOne("sense.senseDetailVideo", num); //메인 리스트에서 선택시 비디오 url 변경
-		return url;
+	public SenseDTO senseDetailVideo(int num) {
+		SenseDTO dto = sqlSession.selectOne("sense.senseDetailVideo", num); //메인 리스트에서 선택시 비디오 url 변경
+		return dto;
 	}
 	
 	//디테일 페이지
@@ -110,10 +110,47 @@ public class SenseDAO {
 	}
 	
 	// 센스 삭제 확인
-	
 	public int senseDeleteCheck(int num) {
 		int deleteCheck = sqlSession.selectOne("senseDeleteCheck", num);
 		return deleteCheck;
+	}
+	
+	// 스크랩 메인페이지
+	public List<ScrapDTO> myScrap(String id) {
+		return sqlSession.selectList("sense.myscrap", id);
+	}
+	
+	// 스크랩 비디오
+	public ScrapDTO myVideo(int num, String id) {
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("num", num);
+		
+		ScrapDTO video = (ScrapDTO)sqlSession.selectOne("sense.myVideo", map);
+		return video;
+	}
+	
+	// 스크랩 저장
+	public void scrap(int num, String id) {
+		
+		SenseDTO dto = (SenseDTO)senseDetail(num); //번호로 검색해 넣을 값을 불러옴
+		HashMap map = new HashMap();
+		map.put("scrap", dto);
+		map.put("id", id);
+		
+		sqlSession.insert("sense.scrap", map);
+	}
+	
+	// 스크랩 삭제
+	public void scrapDelete(int num, String id) {
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("num", num);
+		
+		sqlSession.delete("sense.scrapDelete", map);
+		
 	}
 	
 }

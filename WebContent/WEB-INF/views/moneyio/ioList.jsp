@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
@@ -36,8 +36,8 @@
 					<td align = right width="100" onclick="detail(${ioListval.io_num})">
 						거래 금액
 					</td>
-					<td align = right width="100" onclick="detail(${ioListval.io_num})">
-						${ioListval.io_price} 원
+					<td align = right width="100" onclick="detail(${ioListval.io_num})">					
+						<fmt:formatNumber value="${ioListval.io_price}" pattern="#,###"/> 원
 					</td>
 				</tr>
 				<tr>
@@ -48,7 +48,7 @@
 						남은 잔액
 					</td>
 					<td align = right width="100" onclick="detail(${ioListval.io_num})">
-						${ioListval.io_remain} 원
+						<fmt:formatNumber value="${ioListval.io_remain}" pattern="#,###"/> 원
 					</td>
 				</tr>
 				<tr>

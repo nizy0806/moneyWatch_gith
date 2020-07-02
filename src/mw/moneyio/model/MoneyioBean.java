@@ -105,10 +105,12 @@ public class MoneyioBean {
 
 		//지출/수입 입력 페이지 수정 페이지
 		@RequestMapping("ioUpdateForm.mw")
-		public String ioUpdateForm(Model model) {
+		public String ioUpdateForm(Model model, HttpServletRequest request) {
 			
-			String id="nahui068";
-			int io_num=905;
+			//String id="nahui068";
+			String id = "minmingk1";
+			//int io_num=905;
+			int io_num = Integer.parseInt(request.getParameter("ioNum"));
 
 			MoneyioDTO dto = dao.ioUpdateForm(io_num);
 			if(dto.getIo_N_div() == 0) {
@@ -125,6 +127,19 @@ public class MoneyioBean {
 		@RequestMapping("ioUpdatePro.mw")
 		public String ioUpdatePro(MoneyioDTO dto, NbreadDTO ndto, HttpServletRequest request) {
 			//int io_num = 905;
+			int io_old_price = Integer.parseInt(request.getParameter("io_old_price"));
+			int io_price = dto.getIo_price() - io_old_price; 
+						// 39000 - 40000 // 지출 // -1000
+			System.out.println("dto.getIo_remain()"+dto.getIo_remain());
+			System.out.println("dto.getIo_price()"+dto.getIo_price());
+			
+			if(dto.getIo_set()==1) {
+				dto.setIo_remain(dto.getIo_remain()-io_price);
+			}else {
+				dto.setIo_remain(dto.getIo_remain()+io_price);
+			}
+			
+			
 			dao.ioUpdatePro(dto);
 			
 			if(dto.getIo_N_div()>0) {
@@ -225,6 +240,13 @@ public class MoneyioBean {
 		model.addAttribute("dto", dto);
 		
 		return "/moneyio/ioListDetail";
+	}
+	
+	@RequestMapping("ioDeletePro.mw")
+	public String ioDeletePro(int io_num) {
+		System.out.println(io_num);
+		dao.io_delete(io_num);
+		return "redirect:moneyioList.mw";
 	}
 	
 	

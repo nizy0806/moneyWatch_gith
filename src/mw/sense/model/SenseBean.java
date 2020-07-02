@@ -1,5 +1,6 @@
 package mw.sense.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -57,8 +58,8 @@ public class SenseBean {
 	@RequestMapping("senseDetailVideo.mw")
 	public String senseDetailVideo(int num, Model model) {
 		
-		String url = dao.senseDetailVideo(num);		
-		model.addAttribute("url", url);
+		SenseDTO dto = dao.senseDetailVideo(num);		
+		model.addAttribute("dto", dto);
 		return "/sense/video_url";
 		
 	}
@@ -153,6 +154,63 @@ public class SenseBean {
 		}
 		
 		return "/sense/senseDeletePro";
+	}
+	
+	
+	
+	//R - 스크랩 메인페이지
+	@RequestMapping("myscrap.mw")
+	public String myScrap(HttpSession session, Model model) {
+		String id = "crong";
+		//String id = session.getAttribute("memId");
+		
+		List<ScrapDTO> dto = dao.myScrap(id); //스크랩 리스트
+		List<SenseCategoryDTO> category = dao.category(); //카테고리 리스트
+
+		model.addAttribute("myscrap", dto); //마이 스크랩리스트
+		model.addAttribute("category", category); //카테고리 리스트
+		
+		return "/sense/myScrap"; 
+	}
+	
+	//R - 스크랩 비디오변경
+	@RequestMapping("myVideo.mw")
+	public String myVideo(HttpSession session, int num, Model model) {
+		String id = "crong";
+		//String id = session.getAttribute("memId");
+
+		ScrapDTO dto = (ScrapDTO)dao.myVideo(num, id);
+		model.addAttribute("dto",dto);
+		return "/sense/myVideo";
+		
+	}
+	
+	
+	//C - 스크랩 저장
+	@RequestMapping("scrap.mw")
+	public String scrapInsert(HttpSession session, int num) {
+		
+		String id = "crong";
+		//String id = session.getAttribute("memId");
+		
+		dao.scrap(num, id);		
+		
+		return "/sense/senseMain";
+	}
+	
+	
+	//D - 스크랩 삭제
+	@RequestMapping("scrapDelete.mw")
+	public String scrapDelete(HttpSession session, int num, Model model) {
+		String id = "crong";
+		//String id = session.getAttribute("memId");
+		
+		dao.scrapDelete(num, id);
+		
+		List<ScrapDTO> dto = dao.myScrap(id);
+		
+		model.addAttribute("myscraplist", dto);		
+		return "/sense/myScrapList";
 	}
 	
 }
