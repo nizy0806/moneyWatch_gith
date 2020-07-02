@@ -253,12 +253,9 @@ public class Account_cardBean {
 		List mycard = acdao.myCardList(id); // 나의 카드목록에 대한 카드이미지
 		
 		model.addAttribute("mycard",mycard);
-		//List myBenefit = acdao.mycard_benefit(card_name);
 		
 		return "/card_benefit/mycardList";
 	}
 	
-	
-	
-	
+
 }

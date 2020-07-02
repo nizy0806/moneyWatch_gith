@@ -32,11 +32,8 @@ public class FaqBoardBean {
 	
 	
 	
-	
-	
-	@RequestMapping("faqList.mw")
+	@RequestMapping("faqList.mw") //FAQ , 유저 게시판 리스트 출력
 	public String faq_getArticles(FaqBoardDTO dto, FaqMainBoardDTO dto1,HttpSession session,HttpServletRequest respons,HttpServletRequest request, Model model){ 
-		
 	
 		List qList=null;
 				
@@ -69,7 +66,7 @@ public class FaqBoardBean {
 		
 			int count=dao.getCount(dto);
 		
-			System.out.println(count);
+			
 			
 		if(count > 0) {
 			articleList = dao.getArticles(start,end);
@@ -106,7 +103,7 @@ public class FaqBoardBean {
 		return "/faqboard/faqList"; 
 	}
 	
-	@RequestMapping("faqDeleteForm.mw")
+	@RequestMapping("faqDeleteForm.mw") // 유저게시글 삭제
 	public String faqDeleteForm(HttpServletRequest respons,ServletRequest request,Model model) {
 		String pageNum=request.getParameter("pageNum");
 		String faq_num=request.getParameter("faq_num");
@@ -134,20 +131,16 @@ public class FaqBoardBean {
 		model.addAttribute("faq_num", faq_num);
 		model.addAttribute("pw", pw);
 		
-		
-		
-		
 		if(check==1) {
 		
 		dao.DeleteWriting(faq_num);
-		
 		}
 		
 		return "/faqboard/faqDeletePro";
 	}
 	
 	
-	@RequestMapping("faqUpdateForm.mw")
+	@RequestMapping("faqUpdateForm.mw") //유저게시글 수정
 	public String faqUpdateForm(FaqBoardDTO dto,HttpSession session, ServletRequest request,Model model) {
 		
 		String faq_num=request.getParameter("faq_num");
@@ -160,8 +153,6 @@ public class FaqBoardBean {
 		model.addAttribute("faq_num",faq_num);
 		model.addAttribute("dto1", dto1);
 		
-		
-		
 		return "/faqboard/faqUpdateForm";
 	}
 	
@@ -170,12 +161,7 @@ public class FaqBoardBean {
 		String faq_num=request.getParameter("faq_num");
 		String pw=request.getParameter("pw");
 		
-		
-		
-		
 		int check=dao.updateCheck(faq_num, pw);
-		
-		
 		
 		model.addAttribute("check", check);
 		model.addAttribute("faq_num", faq_num);
@@ -189,33 +175,32 @@ public class FaqBoardBean {
 		return "/faqboard/faqUpdatePro";
 	}
 	
-	
-	
-	@RequestMapping("faqWriteForm.mw")
+	@RequestMapping("faqWriteForm.mw") //유저게시판 글쓰기
 	public String faqWriteForm(FaqBoardDTO dto, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		  
 		  String id=(String)session.getAttribute("memId");
 		
-		  int faq_num=0,ref=1,re_step=0,re_level=0,readcount=1; 
+		  int faq_num=0,ref=1,re_step=0,re_level=0,readcount=0; 
 		  try{
 		  if(request.getParameter("num")!=null){
 		  faq_num=Integer.parseInt(request.getParameter("faq_num"));
 		  ref=Integer.parseInt(request.getParameter("ref"));
 		  re_step=Integer.parseInt(request.getParameter("re_step"));
 		  re_level=Integer.parseInt(request.getParameter("re_level"));
-		  readcount=Integer.parseInt(request.getParameter("readcount")); 
+		  readcount=Integer.parseInt(request.getParameter("readcount"));
+		  id=request.getParameter("id");
 		  }
 		  request.setAttribute("faq_num",faq_num); 
 		  request.setAttribute("ref",ref);
 		  request.setAttribute("re_step", re_step);
 		  request.setAttribute("re_level",re_level); 
-		  request.setAttribute("readcount",readcount); 
+		  request.setAttribute("readcount",readcount);
+		  request.setAttribute("id",id);
 		  }catch(Exception e) {
 		  e.printStackTrace(); 
 		  }
 		return "/faqboard/faqWriteForm";
 	}
-	
 	
 	@RequestMapping("faqWritePro.mw")
 		public String faqWritePro(FaqBoardDTO dto, HttpServletRequest request) {
@@ -224,15 +209,58 @@ public class FaqBoardBean {
 	}
 	
 	
-	@RequestMapping("myList.mw")
-	public String myList() {
-		
-		return "/faqboard/myList";
-		
-	}
 	
 	
-	@RequestMapping("content.mw")
+	@RequestMapping("myList.mw") //자신이 쓴 글 내역
+		public String myList(HttpSession
+			  session,HttpServletRequest respons,HttpServletRequest request, Model model) {
+			  
+			  int pageSize=10;
+			  
+			  String pageNum=request.getParameter("pageNum");
+			  String id =(String)session.getAttribute("memId");
+			  
+			  if(pageNum==null) { 
+				  pageNum="1"; 
+			  } 
+			  int currentPage=Integer.parseInt(pageNum);
+			  int start=(currentPage -1)*pageSize +1; 
+			  int end=currentPage*pageSize; 
+			 // int count = 0;
+			  int number=0;
+			  
+			  List articleList=null;
+			  
+			 
+			  int count = dao.getCountmy(id);
+			  if(count > 0) { 
+				  articleList = dao.getArticles(start, end, id);
+			  }
+			  number=count-(currentPage -1)*pageSize; 
+			  
+			  int pageCount = count / pageSize + ( count % pageSize == 0 ? 0 : 1); 
+			  int startPage = (int)(currentPage/10)*10+1; 
+			  int pageBlock=10; 
+			  int endPage = startPage + pageBlock -1; 
+			  if (endPage > pageCount){ 
+				  endPage = pageCount; 
+				  }
+			  request.setAttribute("memId",id);
+			  request.setAttribute("count",count);
+			  request.setAttribute("articleList", articleList);
+			  request.setAttribute("currentPage", currentPage);
+			  request.setAttribute("startPage", startPage);
+			  request.setAttribute("endPage", endPage );
+			  request.setAttribute("pageCount", pageCount);
+			  request.setAttribute("number", number);
+				
+			  return "/member/myList"; 
+			  }
+	
+	
+	
+	
+	@RequestMapping("content.mw") //유저 게시판 게시글세부 내역
 	public String faqContent(FaqBoardDTO dto,HttpServletRequest request, Model model,HttpSession session) {
 		String pageNum=request.getParameter("pageNum");
 		String number=request.getParameter("number");
@@ -240,7 +268,7 @@ public class FaqBoardBean {
 		String num=request.getParameter("faq_num");
 		int num1=Integer.parseInt(num);
 		
-		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
 		
 		
 		
@@ -265,30 +293,98 @@ public class FaqBoardBean {
 		
 		return "/faqboard/content";
 	}
+
+	@RequestMapping("faqQwriteForm.mw") //FAQ(admin)글쓰기
+	public String faqQwriteForm(FaqMainBoardDTO dto,HttpServletRequest request,Model model,HttpSession session) {
+		
+		int qnum=0,qreadcount=1;
+		
+		model.addAttribute("qnum", qnum);
+		model.addAttribute("qreadcount", qreadcount);
+		
+		
+		
+		return "/faqboard/faqQwriteForm";
+	}
+	
+	
+	@RequestMapping("faqQwritePro.mw")
+	public String faqQwritePro(FaqMainBoardDTO dto) {
+		dao.insertQwrite(dto);
+		
+		
+		
+		
+		return "/faqboard/faqQwritePro";
+	}
+	
+	@RequestMapping("faqContent.mw") //FAQ 게시글 상세
+	
+	public String faqMainContent(FaqMainBoardDTO dto,HttpServletRequest request,Model model,HttpSession session) {
+		session.getAttribute("memId");
+		
+		int qnum=Integer.parseInt(request.getParameter("qnum"));
+		
+		FaqMainBoardDTO dto1=dao.getQcontent(qnum);
+		
+		
+		model.addAttribute("qlist",dto1);
+		
+		return "/faqboard/faqContent";
+	}
+	
+
+	@RequestMapping("faqMainUpdateForm.mw") //FAQ 게시글 수정
+	public String faqMainUpdateForm(FaqMainBoardDTO dto1,HttpServletRequest request,Model model,HttpSession session) {
+		
+		
+		String id=(String)session.getAttribute("memId");
+		String q_id=(String)request.getParameter("q_id");
+		int qnum=(Integer.parseInt(request.getParameter("qnum")));
+		
+		FaqMainBoardDTO list=dao.getQcontent(qnum); 
+	
+		
+		model.addAttribute("memId", id);
+		model.addAttribute("q_id", q_id);
+		model.addAttribute("list", list);
+		
+	return "/faqboard/faqMainUpdateForm";
+	}
+	@RequestMapping("faqMainUpdatePro.mw")
+	public String faqMainUpdatePro(FaqMainBoardDTO dto,HttpServletRequest request,Model model,HttpSession session) {
+		
+		dao.updateQcontnet(dto);
+		
+	return "/faqboard/faqMainUpdatePro";
+	}
 	
 	
 	
-	@RequestMapping("replyPro.mw")
 	
-	public void faqReply(ReplyDTO dto,HttpServletRequest request, Model model,HttpSession session) {
-		String num=request.getParameter("faq_num");
+	@RequestMapping("faqMainDelete.mw") //FAQ 게시글 삭제
+	public String faqMainDelete(FaqMainBoardDTO dto,HttpServletRequest request,Model model,HttpSession session) {
+		int qnum=(Integer.parseInt(request.getParameter("qnum")));
+		String q_id=(String)session.getAttribute("memId");
+
+		model.addAttribute("qnum", qnum);
+		model.addAttribute("q_id", q_id);
+		
+		return "/faqboard/faqMainDelete";
+	}
+	@RequestMapping("faqMainDeletePro.mw")
+	public String faqMainDeletePro(FaqMainBoardDTO dto,HttpServletRequest request,Model model,HttpSession session) {
+		
+		int qnum=(Integer.parseInt(request.getParameter("qnum")));
+		String q_id=(String)session.getAttribute("memId");
+		
+		int check=dao.DeleteQcheck(qnum, q_id);
+		model.addAttribute("check", check);
 		
 		
-		int qno=dao.selectReply(num);
-		
-		if(qno!=1) {
-			dao.setQno(qno);
-			int step=0;
-			if(step > 0) {
-				step = step+1;
-				
-			}
-			else {
-				step=1;
-			}
-			dao.insertReply(dto);
-		
-		
+		if(check==1) {
+		dao.DeleteQcontent(qnum);
 		}
+		return "/faqboard/faqMainDeletePro";
 	}
 }

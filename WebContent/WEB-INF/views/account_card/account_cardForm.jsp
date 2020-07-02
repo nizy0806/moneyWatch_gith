@@ -10,7 +10,6 @@
 		$.ajax({
 			type : "POST",
 			url : "card.mw",
-			//data : {card_num:$("#ca_set1").val()},
 			data : {card_num:$("input[name=ca_set]").val()},
 			success : function(data){
 				$("#select").html(data);
@@ -23,7 +22,6 @@
 		$.ajax({
 			type : "POST",
 			url : "bank.mw",
-			//data : {bank_num:$("#ca_set2").val()},
 			data : {bank_num:$("input[name=ca_set]").val()},
 			success : function(data){
 				$("#select").html(data);
@@ -39,6 +37,7 @@
 <br><br><br>
 <div class="form-group">
 <center><h1>카드/계좌 등록</h1></center>
+<br>
 <form name = "card_info" method="post" action="account_cardPro.mw">
 
 	<input type="hidden" name="id" value="${memId}">
@@ -60,18 +59,9 @@
     		</div>
     		</td>			
   		</tr>	
-<!--   		<tr>	
-			<td>카드/계좌</td>
-			<td>
-				<input type="radio" name="ca_set"  id = "ca_set1" value="0" onclick="selectCard()">카드
-				<input type="radio" name="ca_set" id = "ca_set2" value="1" onclick="selectBank()">계좌				
-			</td>
-		</tr> -->
-		
-		<!-- <tr id="select"></tr> -->
 		
 		<div class="form-group">
-			<table align="center" width="50%" id="select">
+			<table align="center" width="80%" id="select">
 
 			</table>
 		</div>
@@ -80,9 +70,6 @@
 			<td colspan="4" align="center"><center><input type="submit" value="등록" class="btn btn-outline-primary"></center></td>
 		</tr>
 		
-		<!-- <tr >
-			<td align="center" colspan="3"><input type="submit" value="등록" /></td>
-		</tr> -->	
 </div>
 </table>
 </form>

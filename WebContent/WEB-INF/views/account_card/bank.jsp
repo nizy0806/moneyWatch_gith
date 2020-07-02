@@ -11,12 +11,17 @@
 				<option value="신한은행">신한은행</option>
 				<option value="농협은행">농협은행</option>
 				<option value="하나은행">하나은행</option>
+				<option value="국민은행">국민은행</option>
 				<option value="수협">수협</option>
 	    </select>
 	    </td>
-		  <td><label class="col-form-label" for="inputDefault">계좌번호</label></td>
-		  <td><input type="text" name="account_num" class="form-control" id="inputDefault"></td>
+	    
+	    
+		<td><label class="col-form-label" for="inputDefault">계좌번호</label></td>
+		<td><input type="text" name="account_num" class="form-control" id="inputDefault"></td>
+	  	
 	  		
 		<td><label class="col-form-label" for="inputDefault">잔고</label></td>
 		<td><input type="text"  name="balance" class="form-control" id="inputDefault"></td>
+		
 		</div>

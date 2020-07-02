@@ -39,7 +39,7 @@ function writeSave(){
   <tr>
     <td  width="70"   align="center">이 름</td>
     <td align="left" width="330">
-       <input type="text" size="10" maxlength="10" name="writer" value="${dto1.getWriter()}"></td>
+       <input type="text" size="10" maxlength="10" name="id" value="${dto1.getId()}"></td>
 	   <input type="hidden" name="faq_num" value="${dto1.getFaq_num()}" />
   </tr>
   <tr>

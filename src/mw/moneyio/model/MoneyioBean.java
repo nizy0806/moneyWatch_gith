@@ -178,6 +178,63 @@ public class MoneyioBean {
 			return "/moneyio/ageChart";
 		}
 		
+		//개인소비패턴분석
+		@RequestMapping("ptEstimate.mw")
+		public String ptEstimate(/*String id,*/ Model model) {
+
+			String id = "nahui068";
+			int sum = 0;
+			int sum1 = dao.sum5(id);
+			int sum2 = dao.sum6(id);
+			int sum3 = dao.sum7(id);
+			
+			List<MoneyioDTO> list1 = dao.ptEstimate5(id);
+			List<MoneyioDTO> list2 = dao.ptEstimate6(id);
+			List<MoneyioDTO> list3 = dao.ptEstimate7(id);
+			
+			List<MoneyioDTO> next_list = dao.nextMonth(id);
+			for(int i=0; i<next_list.size();i++) {
+				if(next_list.get(i).getCount3()==3) {
+					int next = next_list.get(i).getIo_price()/3;
+					//System.out.println("next3: "+next);
+					sum = sum+next;
+					//System.out.println("sum3: "+sum);
+				}
+				System.out.println();
+				if(next_list.get(i).getCount3()==2) {
+					int next = next_list.get(i).getIo_price()/2;
+					//System.out.println("next2: "+next);
+					sum = sum + next;
+					//System.out.println("sum2: "+sum);
+				}
+				if(next_list.get(i).getCount3()==1) {
+					int next = next_list.get(i).getIo_price();
+					sum = sum + next;
+					//System.out.println("sum1"+sum);
+				}
+			}
+			
+			if(sum3-sum2 > 0) {
+				int differ = sum3- sum2;
+				sum = sum+ differ;
+			}
+			int estimate  = sum;
+			System.out.println("sum_all: "+ estimate);
+			//MoneyioDTO dtoT = next_list.get(next_list.size()-1);
+			//System.out.println("next_list: "+ dtoT.getCount3());
+			
+			model.addAttribute("id", id);
+			model.addAttribute("list1", list1);
+			model.addAttribute("sum1", sum1);
+			model.addAttribute("list2", list2);
+			model.addAttribute("sum2", sum2);
+			model.addAttribute("list3", list3);
+			model.addAttribute("sum3", sum3);
+			model.addAttribute("estimate", estimate);
+			
+			return "/moneyio/ptEstimate";
+		}
+		
 		@RequestMapping("nbreadList.mw")
 		public String nbreadList(/*int io_num,*/ Model model) {
 			int io_num=911;

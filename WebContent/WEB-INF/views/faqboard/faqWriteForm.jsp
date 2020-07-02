@@ -54,8 +54,7 @@ function writeSave(){
 		<tr>
      		<td width="70" align="center">작성자</td>
      		<td width="330">   ${sessionScope.memId }
-      		  <input type="hidden" size="10" maxlength="10" name="writer" value="${sessionScope.memId}">
-     		<td width="350">${sessionScope.memId}</td>
+      		  <input type="hidden" name="id" value="${sessionScope.memId}"></td>
     	</tr>
 		
 		
@@ -64,14 +63,9 @@ function writeSave(){
 		<tr>
     <td  width="70"  bgcolor="${value_c}" align="center" >제 목</td>
     <td  width="330">
-    <c:if test="${faq_num == 0}">
-   
+     
        <input type="text" size="40" maxlength="50" name="subject"></td>
-    </c:if>
-	<c:if test="${faq_num != 0}">
-	   <input type="text" size="40" maxlength="50" name="subject" value="[답변]">
-	</c:if>
-
+  
   </tr>
 		
 		<tr>

@@ -4,13 +4,13 @@
 <mapper namespace="faqboard">
 
 	<insert id="insertBoard" parameterType="faqboardDTO">
-		insert into mwFaQBoard values(mwFaQBoard_seq.nextval,#{writer},#{subject},#{faq_email},#{content},#{pw},#{readcount},#{re_step},#{re_level},sysdate,#{ref})
+		insert into mwFaQBoard values(mwFaQBoard_seq.nextval,#{subject},#{faq_email},#{content},#{pw},#{readcount},#{re_step},#{re_level},sysdate,#{ref},#{id})
 	</insert>
 	
 	
 	
 	<select id="getArticles" resultType="faqboardDTO" parameterType="hashmap" >
-		<![CDATA[select * from (select faq_num,writer,subject,faq_email,content,pw,readcount ,re_step,re_level,reg,ref,rownum r from(select *  from mwFaQBoard order by faq_num desc) order by faq_num desc) where r >= #{start} and r <= #{end} ]]>
+		<![CDATA[select * from (select id,faq_num,subject,faq_email,content,pw,readcount ,re_step,re_level,reg,ref,rownum r from(select *  from mwFaQBoard order by faq_num desc) order by faq_num desc) where r >= #{start} and r <= #{end} ]]>
 	</select>
 	
 	
@@ -49,29 +49,77 @@
 	</select>
 	
 	<update id="updateContent" parameterType="faqboardDTO">
-		update mwFaQBoard set writer=#{writer},faq_email=#{faq_email},subject=#{subject},content=#{content} where faq_num=#{faq_num}
+		update mwFaQBoard set faq_email=#{faq_email},subject=#{subject},content=#{content} where faq_num=#{faq_num}
 	</update>
 	
 	<select id="selectReply" resultType="int" parameterType="String">
 		select * from mwFaQBoard where faq_num=#{faq_num}
 	</select>
 	
-	<insert id="setQno" parameterType="int">
+	
+	
+	
+	
+	<!-- <insert id="setQno" parameterType="int">
 		select into mwReply value qno=#{qno}
 	</insert>
 	
 	<insert id="insertReply" parameterType="replyDTO">
 		insert into mwReply values(#{qno},#{replytext},#{rname},#{replydate},#{step},#{id})
+	</insert> -->
+	
+	
+	
+	
+	
+	<insert id="insertQwrite" parameterType="faqmainboardDTO">
+		insert into mwFaqMainBoard values(mwFaqMainBoard_seq.nextval,#{nickname},#{qsubject},#{qcontent},sysdate,#{qreadcount},#{q_id})
 	</insert>
 	
 	
+	
 	<select id="selectMainFaq" resultType="faqmainboardDTO" parameterType="faqmainboardDTO">
-		<![CDATA[select * from (select qnum,nickname,qsubject,qcontent,reg,qreadcount,rownum r from(select *  from mwfaqMainBoard order by qnum desc) order by qnum desc)]]>
+		<![CDATA[select * from (select qnum,nickname,qsubject,qcontent,reg,qreadcount,q_id,rownum r from(select *  from mwfaqMainBoard order by qnum desc) order by qnum desc)]]>
 	</select>
 	
 	<select id="getQcount" resultType="int">
 		select count(*) from mwFaqMainBoard
 	</select>
+	
+	<select id="getQcontent" resultType="faqmainboardDTO" parameterType="int">
+		select * from mwFaqMainBoard where qnum=#{qnum}
+	</select>
+	
+	<update id="upQcount" parameterType="int">
+		update mwFaqMainBoard set qreadcount=qreadcount+1 where qnum=#{qnum}
+	</update> 
+	
+	<update id="updateQcontnet" parameterType="faqmainboardDTO">
+		update mwFaqMainBoard set qsubject=#{qsubject},qcontent=#{qcontent} where qnum=#{qnum}
+	</update>
+	
+	<delete id="DeleteQcontent" parameterType="int">
+		delete from mwFaqMainBoard where qnum=#{qnum}
+	</delete>
+	
+	
+	<select id="DeleteQcheck" resultType="int" parameterType="hashmap">
+		select count(*) from mwFaqMainBoard where qnum=#{qnum} and q_id=#{q_id}
+	</select>
+	
+	
+	
+	<select id="mylistboard" resultType="int" >
+		select count(*) from mwFaQBoard where id=#{id}
+	</select>
+	                                                                                                                                                                                     
+	
+	<select id="mygetArticles" resultType="faqboardDTO" parameterType="hashmap">                                                                                                      
+		<![CDATA[select * from (select faq_num,id,subject,faq_email,content,pw,readcount ,re_step,re_level,reg,ref,rownum r from
+							   (select *  from mwFaQBoard where id=#{id} order by faq_num desc,re_step asc) 
+							   order by ref desc, re_step asc ) where r >= #{start} and r <= #{end} ]]>
+	</select>
+	
 	
 </mapper>
 

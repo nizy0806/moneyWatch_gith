@@ -3,9 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<title>글 내용</title>
+<title>유저 게시판 Content</title>
 
-<br>
 </head>
 
 
@@ -13,30 +12,32 @@
 
 
 <body>
-<table width="500" boarder="1" cellspacing="0" cellpadding="0" >
+<table width="50%" border="1" cellspacing="0" cellpadding="0" >
 	<tr height="30">
 		<td align="center" width="125">글번호</td>
-		<td align="center" width="125" align="center">${number+1}
+		<td align="center" width="125">${number+1}
 		<input type="hidden" value="${article.faq_num}"/> </td>
 		
 		<td align="center" width="125">조회수</td>
-		<td align="center" width="125" align="center">
-			${article.readcount}</td>
+		<td align="center" width="125">${article.readcount}</td>
+	</tr>
+		
+		
+	<tr height="30">	
+		<td align="center" width="125">제 목</td>
+		<td align="center" width="125">${article.subject}</td>
 	</tr>
 	
 	<tr height="30">	
 		<td align="center" width="125">작성자</td>
-		<td align="center" width="125" align="center">
-			${article.writer}</td>
+		<td align="center" width="125">${article.id}</td>
 		<td align="center" width="125">작성일</td>
-		<td align="center" width="125" align="center">
-			${article.reg}</td>
+		<td align="center" width="125">${article.reg}</td>
 	</tr>
 	
 	<tr height="30">	
 		<td align="center" width="125">글내용</td>
-		<td align="left" width="380" colspan="3">
-			${article.content}</td>
+		<td align="left" width="380" colspan="3">${article.content}</td>
 	</tr>
 	
 
@@ -55,19 +56,26 @@
 	</tr>
 	
 	<form action="replyPro.mw">
-		<table width="400" boarder="1" cellspacing="0" cellpadding="0" align="center">
+		<table border="1" width="400" cellspacing="0" cellpadding="0" align="left">
+		
 		<tr>
 			<td align="center" width="125">${SessionScope.memId}
 			<input type="hidden" name="rname" value="${writer}"></td>
-			<td><textarea rows="5" cols="50" name="replytext" placeholder="댓글을 작성하세요" ></textarea></td>
 		</tr>
+			<br />
+			<td><textarea rows="5" cols="50" name="replytext" placeholder="댓글을 작성하세요" ></textarea></td>
+		
 		</table>
-			<input type="hidden" name="qno" value="${dto.getQno()}">
-			<input type="hidden" name="step" value="${dto.getStep()}">
-			<input type="hidden" name="id" value="${SessionScope.memId}">
-			<input type="submit" value="댓글작성">
-			
-	
+		
+		
+		<tr height="30">
+		<td colspan="4" align="right">
+			<input type="hidden" name="qno" value="${dto.getQno()}" />
+			<input type="hidden" name="step" value="${dto.getStep()}" />
+			<input type="hidden" name="id" value="${SessionScope.memId}" />
+			<input type="submit" value="댓글작성" />
+		</td>
+		</tr>
 	</form>
 	
 </table>
