@@ -272,13 +272,14 @@ public class MoneyioBean {
 			
 		String id = "minmingk1";
 		/* String id = session.getAttribute("memId"); */
+		List list = new ArrayList();
 		
 		if(filter.equals("all")) {
-			List list = dao.moneyioListAll(id);
+			list = dao.moneyioListAll(id);
 		}else if (filter.equals("inMoney")) {
-			List list = dao.moneyioListIn(id);
+			list = dao.moneyioListIn(id);
 		}else {
-			List list = dao.moneyioListOut(id);
+			list = dao.moneyioListOut(id);
 		}
 
 		model.addAttribute("id",id);
