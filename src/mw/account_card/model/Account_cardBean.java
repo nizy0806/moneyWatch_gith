@@ -257,5 +257,14 @@ public class Account_cardBean {
 		return "/card_benefit/mycardList";
 	}
 	
+	@RequestMapping("card_rank.mw")
+	public String rank_20(Reg_CardDTO cdto, Model model) {
+		
+		List rankList = acdao.card_rank(cdto);
+		model.addAttribute("rankList",rankList);
+		
+		return "/account_card/20card_rank";
+	}
+	
 
 }
