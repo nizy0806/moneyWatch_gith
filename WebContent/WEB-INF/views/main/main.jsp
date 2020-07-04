@@ -60,8 +60,8 @@
             <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">카드/계좌</a>
     <div class="dropdown-menu" style="">
-      <a class="dropdown-item" href="#">등록</a>
-      <a class="dropdown-item" href="#">목록 및 혜택 보기</a>
+      <a class="dropdown-item" href="account_cardForm.mw">등록</a>
+      <a class="dropdown-item" href="card_benefit.mw">목록 및 혜택 보기</a>
     </div>
     </li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <li class="nav-item dropdown">
